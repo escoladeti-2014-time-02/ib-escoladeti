@@ -1,3 +1,7 @@
+.settings/
+.classpath
+.project
+jdbc.properties
 target/
 pom.xml.tag
 pom.xml.releaseBackup

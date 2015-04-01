@@ -1,0 +1,14 @@
+<!-- top navbar-->
+<div ng-include="'app/views/partials/top-navbar.html'"></div>
+<!-- sidebar-->
+<aside ng-include="'app/views/partials/sidebar.html'" ng-controller="SidebarController" class="aside"></aside>
+<!-- offsidebar-->
+<aside ng-include="'app/views/partials/offsidebar.html'" class="offsidebar"></aside>
+<!-- Main section-->
+<section>
+   <!-- Page content-->
+   <toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+   <div ui-view="" autoscroll="false" ng-class="app.viewAnimation" class="content-wrapper"></div>
+</section>
+<!-- Page footer-->
+<footer ng-include="'app/views/partials/footer.html'"></footer>

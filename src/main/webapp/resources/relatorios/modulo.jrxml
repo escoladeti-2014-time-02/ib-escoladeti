@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Modulos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b02197e2-61c6-48cc-b4e2-0a1ca76e4711">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="d3198669-f4fb-49bf-b477-a8947dd560af"/>
+	<parameter name="diretorio" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+	M.NOME,
+	M.DESCRICAO
+	FROM MODULO M
+	ORDER BY M.NOME]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<image>
+				<reportElement x="3" y="11" width="102" height="67" uuid="30f93233-0807-48a9-9abb-34c12b256b62"/>
+				<imageExpression><![CDATA[$P{diretorio}+"../img/logo-isis-bruder.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="129" y="21" width="359" height="31" uuid="cd6960c8-1617-4b84-8fdf-ac01195a4d4d"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="20" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Relatório de Módulos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="22" width="554" height="1" uuid="025a6ee6-11b2-48d2-bac8-e826e5db088a"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="1" width="311" height="20" uuid="331fce1d-c8f8-42c7-8351-11fdb9634549"/>
+				<text><![CDATA[Módulos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="312" y="0" width="243" height="20" uuid="541bea29-6cad-46ee-87e2-d8bfb68b6165"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="0" width="311" height="20" uuid="c9708013-91f6-4786-9731-56ca4b4cbe5d"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="17" width="554" height="1" uuid="b2dba005-c255-4122-83e6-8aab2adc266d"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="312" y="0" width="243" height="20" uuid="8784b2c0-4779-40f6-8198-b43abb8b1f2a"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="34" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="53" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="532" y="10" width="40" height="20" uuid="c5c98796-7008-40a6-bfa9-d1c0c7174559"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="452" y="10" width="80" height="20" uuid="28283014-6ed1-4e04-a460-13190a68bafd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,211 @@
+h3 Form Extended
+  small New elements to extend the classic functions
+// START panel
+.panel.panel-default
+    .panel-heading  Form elements 
+    .panel-body
+      form.form-horizontal(method='get')
+
+        fieldset
+          legend New Components
+          .form-group
+            label.col-sm-2.control-label
+              | Slider
+              br
+              small Classic, range and vertical
+            .col-sm-4
+              input.slider.slider-vertical.form-control(ui-slider="", type='text', value='', data-slider-min='5', data-slider-max='35', data-slider-step='1', data-slider-value='5', data-slider-orientation='vertical')
+              input.slider.slider-vertical.form-control(ui-slider="", type='text', value='', data-slider-min='5', data-slider-max='35', data-slider-step='1', data-slider-value='10', data-slider-orientation='vertical')
+              input.slider.slider-vertical.form-control(ui-slider="", type='text', value='', data-slider-min='5', data-slider-max='35', data-slider-step='1', data-slider-value='15', data-slider-orientation='vertical')
+              input.slider.slider-vertical.form-control(ui-slider="", type='text', value='', data-slider-min='5', data-slider-max='35', data-slider-step='1', data-slider-value='20', data-slider-orientation='vertical')
+              input.slider.slider-vertical.form-control(ui-slider="", type='text', value='', data-slider-min='5', data-slider-max='35', data-slider-step='1', data-slider-value='25', data-slider-orientation='vertical')
+              input.slider.slider-vertical.form-control(ui-slider="", type='text', value='', data-slider-min='5', data-slider-max='35', data-slider-step='1', data-slider-value='30', data-slider-orientation='vertical')
+              br
+              br
+              input.slider.slider-horizontal.form-control(ui-slider="", type='text', value='', data-slider-min='5', data-slider-max='20', data-slider-step='1', data-slider-value='10', data-slider-orientation='horizontal')
+              br
+              br
+              input#sl2.slider.form-control(ui-slider="", type='text', value='', data-slider-min='10', data-slider-max='1000', data-slider-step='5', data-slider-value='[250,750]')
+
+        fieldset
+          .form-group
+            label.col-sm-2.control-label Switch Small
+            .col-sm-10
+              label.switch.switch-sm
+                input(type='checkbox', checked="checked")
+                span
+          .form-group
+            label.col-sm-2.control-label Switch
+            .col-sm-10
+              label.switch
+                input(type='checkbox', checked="checked")
+                span
+          .form-group
+            label.col-sm-2.control-label Switch Large
+            .col-sm-10
+              label.switch.switch-lg
+                input(type='checkbox', checked="checked")
+                span
+          .form-group
+            label.col-sm-2.control-label Switch Radio
+            .col-sm-10
+              label.switch.switch-lg
+                input(type='radio', checked="checked", name="radioSwitch")
+                span
+              label.switch.switch-lg
+                input(type='radio', name="radioSwitch")
+                span
+        fieldset
+          .form-group
+            label.col-sm-2.control-label Chosen
+            .col-sm-10
+              select.chosen-select.input-md(chosen="")
+                optgroup(label='Alaskan/Hawaiian Time Zone')
+                  option(value='AK') Alaska
+                  option(value='HI') Hawaii
+                optgroup(label='Pacific Time Zone')
+                  option(value='CA') California
+                  option(value='NV') Nevada
+                  option(value='OR') Oregon
+                  option(value='WA') Washington
+                optgroup(label='Mountain Time Zone')
+                  option(value='AZ') Arizona
+                  option(value='CO') Colorado
+                  option(value='ID') Idaho
+                  option(value='MT') Montana
+                  option(value='NE') Nebraska
+                  option(value='NM') New Mexico
+                  option(value='ND') North Dakota
+                  option(value='UT') Utah
+                  option(value='WY') Wyoming
+                optgroup(label='Central Time Zone')
+                  option(value='AL') Alabama
+                  option(value='AR') Arkansas
+                  option(value='IL') Illinois
+                  option(value='IA') Iowa
+                  option(value='KS') Kansas
+                  option(value='KY') Kentucky
+                  option(value='LA') Louisiana
+                  option(value='MN') Minnesota
+                  option(value='MS') Mississippi
+                  option(value='MO') Missouri
+                  option(value='OK') Oklahoma
+                  option(value='SD') South Dakota
+                  option(value='TX') Texas
+                  option(value='TN') Tennessee
+                  option(value='WI') Wisconsin
+                optgroup(label='Eastern Time Zone')
+                  option(value='CT') Connecticut
+                  option(value='DE') Delaware
+                  option(value='FL') Florida
+                  option(value='GA') Georgia
+                  option(value='IN') Indiana
+                  option(value='ME') Maine
+                  option(value='MD') Maryland
+                  option(value='MA') Massachusetts
+                  option(value='MI') Michigan
+                  option(value='NH') New Hampshire
+                  option(value='NJ') New Jersey
+                  option(value='NY') New York
+                  option(value='NC') North Carolina
+                  option(value='OH') Ohio
+                  option(value='PA') Pennsylvania
+                  option(value='RI') Rhode Island
+                  option(value='SC') South Carolina
+                  option(value='VT') Vermont
+                  option(value='VA') Virginia
+                  option(value='WV') West Virginia
+
+        fieldset
+          .form-group
+            label.col-sm-2.control-label Chosen multiple
+            .col-sm-10
+              select.chosen-select.input-md(multiple='', chosen="")
+                option(value='AK') Alaska
+                option(value='HI') Hawaii
+                option(value='CA') California
+                option(value='NV') Nevada
+                option(value='OR') Oregon
+                option(value='WA') Washington
+        fieldset
+          .form-group
+            label.col-sm-2.control-label Datepicker
+            .col-sm-10.col-lg-4
+              //input.datepicker.form-control(size='16', type='text', value='12-02-2013', data-date-format='dd-mm-yyyy')
+              .datetimepicker.input-group.date.mb-lg(datetimepicker="")
+                  input.form-control(type='text')
+                  span.input-group-addon
+                    span.fa.fa-calendar
+              .datetimepicker.input-group.date.mb-lg(data-pick-date="false", datetimepicker="")
+                  input.form-control(type='text')
+                  span.input-group-addon
+                    span.fa.fa-calendar
+              .datetimepicker.input-group.date.mb-lg(data-pick-time="false", datetimepicker="")
+                  input.form-control(type='text')
+                  span.input-group-addon
+                    span.fa.fa-calendar
+
+        fieldset
+          .form-group
+            label.col-sm-2.control-label Masked input
+            .col-sm-10
+              .row
+                .col-sm-6
+                  input.form-control(type='text', masked="", data-inputmask="'mask': '999-99-999-9999-9'", placeholder="ISBN") 
+                  span.help-block data-inputmask="'mask': '999-99-999-9999-9"'
+                .col-sm-6
+                  input.form-control(type='text', masked="", data-inputmask="'mask': '99/99/9999'", placeholder="Date") 
+                  span.help-block data-inputmask="'mask': '99/99/9999"'
+                .col-sm-6
+                  input.form-control(type='text', masked="", data-inputmask="'mask': '(999) 999-9999'", placeholder="Phone number") 
+                  span.help-block data-inputmask="'mask': '(999) 999-9999"'
+                .col-sm-6
+                  input.form-control(type='text', masked="", data-inputmask="'mask': 'aaaa-9999-aa99-9999'", placeholder="Custom Key") 
+                  span.help-block data-inputmask="'mask': 'aaaa-9999-aa99-9999"'
+                .col-sm-6
+                  input.form-control(type='text', masked="", data-inputmask="'mask': '$ 999.999.999,99'", placeholder="Currency Dolar") 
+                  span.help-block data-inputmask="'mask': '$ 999.999.999,99"'
+                .col-sm-6
+                  input.form-control(type='text', masked="", data-inputmask="'mask': '€ 999.999.999,99'", placeholder="Currency Euro") 
+                  span.help-block data-inputmask="'mask': '€ 999.999.999,99"'
+
+        fieldset
+          .form-group
+            label.col-sm-2.control-label Tags input
+            .col-sm-10
+              input.form-control(type='text', tagsinput, value="Amsterdam,Washington,Sydney,Beijing,Cairo") 
+
+        fieldset
+          .form-group
+            label.col-sm-2.control-label File input
+            .col-sm-10
+              input.form-control(filestyle="", type='file', data-classbutton='btn btn-default', data-classinput="form-control inline")
+
+        fieldset
+          .form-group
+            label.col-sm-2.control-label Markdown area
+              br
+              small (live preview editor)
+            .col-sm-10
+              textarea(markdownarea="{mode:'tab'}") # Type here
+        fieldset(ng-controller="FileUploadController")
+          .form-group
+            label.col-sm-2.control-label Drag and Drop
+              br
+              small This demo version doesn't store files on the server. Works only on Latest Chrome, Firefox, Safari, Opera &amp; IE +10
+            .col-sm-10
+              #upload-drop.box-placeholder.text-center
+                  p: em.fa.fa-cloud-upload.fa-2x
+                  |  Upload files by dropping them here or 
+                  .btn-link.form-file
+                    | selecting one
+                    input#upload-select(type='file', name="upfile")
+              #progressbar.progress.hidden
+                  .progress-bar(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
+
+        fieldset
+          .form-group
+            .col-sm-4.col-sm-offset-2
+              button.btn.btn-default(type='submit') Cancel
+              button.btn.btn-primary(type='submit') Save changes
+// END panel

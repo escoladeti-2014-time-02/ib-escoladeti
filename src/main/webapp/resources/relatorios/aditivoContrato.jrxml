@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="aditivoContrato" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dfd503ea-1651-46d4-9890-003ab054143b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="432"/>
+	<queryString>
+		<![CDATA[SELECT P.ID,
+       P.NOME NOMEAPRENDIZ,
+       DR.NUMERO RG,
+       DC.NUMERO CPF, CN.DATANASCIMENTO, NI.NUMERO CTPS,
+       TL.NOME || ' '|| L.NOME ||', '||E.NUMERO ENDERECOAPRENDIZ,
+       PJ.RAZAOSOCIAL NOMEEMPRESA, TLE.NOME || ' '|| LE.NOME ||', '||EE.NUMERO ENDERECOEMPRESA,
+       PJ.CNPJ, T.NUMERO TELEFONE
+  FROM PESSOA            P
+  JOIN PESSOAFISICA     PF ON (PF.ID = P.ID)
+  JOIN CANDIDATO         C ON (C.ID = P.ID)
+  JOIN PESSOA_DOCUMENTO PC ON (P.ID = PC.PESSOA_ID)
+  JOIN DOCUMENTO        DC ON (DC.ID = PC.DOCUMENTOS_ID)
+  JOIN CPF               F ON (F.ID = DC.ID)
+  JOIN PESSOA_DOCUMENTO PR ON (P.ID = PR.PESSOA_ID)
+  JOIN DOCUMENTO        DR ON (DR.ID = PR.DOCUMENTOS_ID)
+  JOIN RG                R ON (R.ID = DR.ID)
+  JOIN PESSOA_DOCUMENTO PD ON (P.ID = PD.PESSOA_ID)
+  JOIN CERTIDAONASCIMENTO CN ON (CN.ID = PD.DOCUMENTOS_ID)
+  JOIN PESSOA_DOCUMENTO PN ON (P.ID = PN.PESSOA_ID)
+  JOIN DOCUMENTO        NI ON (NI.ID = PN.DOCUMENTOS_ID)
+  JOIN CARTEIRATRABALHO CT ON (CT.ID = NI.ID)
+  JOIN CONTRATO         CR ON (to_number(convert_from(CR.APRENDIZ, 'UTF8'),'9999999') = P.ID)
+  JOIN PESSOAJURIDICA   PJ ON (PJ.ID = to_number(convert_from(CR.EMPRESA, 'UTF8'),'9999999'))
+  JOIN PESSOA_ENDERECO  PE ON (PE.PESSOA_ID = P.ID)
+  JOIN ENDERECO          E ON (PE.ENDERECOS_ID = E.ID)
+  JOIN LOGRADOURO        L ON (L.ID = E.LOGRADOURO_ID)
+  JOIN TIPOLOGRADOURO   TL ON (TL.ID = L.TIPOLOGRADOURO_ID)
+  JOIN PESSOA_ENDERECO PEE ON (PEE.PESSOA_ID = PJ.ID)
+  JOIN ENDERECO         EE ON (PEE.ENDERECOS_ID = EE.ID)
+  JOIN LOGRADOURO       LE ON (LE.ID = EE.LOGRADOURO_ID)
+  JOIN TIPOLOGRADOURO  TLE ON (TLE.ID = LE.TIPOLOGRADOURO_ID)
+  JOIN PESSOA_TELEFONE  PT ON (PT.PESSOA_ID = PJ.ID)
+  JOIN TELEFONE          T ON (T.ID = PT.TELEFONES_ID)
+ WHERE P.ATIVO = 't'
+   AND P.ID = 550]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nomeaprendiz" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="datanascimento" class="java.sql.Date"/>
+	<field name="ctps" class="java.lang.String"/>
+	<field name="enderecoaprendiz" class="java.lang.String"/>
+	<field name="nomeempresa" class="java.lang.String"/>
+	<field name="enderecoempresa" class="java.lang.String"/>
+	<field name="cnpj" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="211" y="13" width="100" height="20" uuid="8acf1223-e182-464c-97bc-a50a833f3175"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nomeempresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="33" width="311" height="20" uuid="9d71eaf8-6509-476a-8556-1eb9b125383f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TERMO ADITIVO Nº 01, AO CONTRATO DE APRENDIZAGEM"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="726" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="18" width="515" height="142" uuid="dee1bfcc-9b33-4a8c-b686-eb18804c2fb5"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pelo presente instrumento particular e na melhor forma de direito que entre si celebram, de um lado a empresa empregadora "+$F{nomeempresa}+", CNPJ "+$F{cnpj}+", "+$F{enderecoempresa}+", "+$F{telefone}+", representada pelo colaborador ____________________________________________, de outro o (a) Jovem Aprendiz "+$F{nomeaprendiz}+", _______________ , "+$F{datanascimento}+", RG "+$F{rg}+", CTPS "+$F{ctps}+", "+$F{enderecoaprendiz}+", devidamente assistido pelo seu representante legal o (a) Sr (a)____________________________________________, RG ________________ tendo ainda como anuente/interveniente e FUNDAÇÃO ISIS BRUDER, sediado na Avenida Laguna, 1507, Maringá, Paraná, com CNPJ 04.606.402/0001-95, representado por seu presidente, Sr. Ribamar Alves Rodrigues, acordam e ajustamo presente <b>TERMO ADITIVO Nº 01 AO CONTRATO DE APRENDIZAGEM POR TEMPO DETERMINADO</b>, celebrado entre as partes em "+ (new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format(java.util.Calendar.getInstance().getTime()))+":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="190" width="515" height="41" uuid="f5498eb3-8a09-4cca-b7f6-01ed3d71f43c"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No período de ......./......../.......... a ......./......../.......... o aprendiz desenvolverá as atividades práticas, na "+$F{nomeempresa}+", no horário das ........... h às ........... h."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="317" width="515" height="18" uuid="aa8a7256-d2c3-42c3-bb2c-6d9e77c3a9b9"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CLÁUSULA SEGUNDA"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="345" width="515" height="55" uuid="b7cd0047-6c8c-46dd-bcd7-a335a700cd05"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["Para todos os fins e efeitos de direito permanecem inalteradas as cláusulas do Contrato de Aprendizagem por Tempo Determinado, que celebram entre si a empresa "+$F{nomeempresa}+", o (a) aprendiz "+$F{nomeaprendiz}+" e a entidade Fundação Isis Bruder."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="248" width="515" height="42" uuid="3ea653a2-698e-4af4-8047-74be326d3a4e"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No período de ....../......./ .......... a ......./......../.......... o aprendiz desenvolverá as atividades práticas, na "+$F{nomeempresa}+", no endereço "+$F{enderecoempresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="230" width="515" height="18" uuid="7663abcb-85e7-4a53-97c5-85acbd2ea4d2"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ou"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="160" width="515" height="18" uuid="29e2b256-e200-41d1-b1ca-086150ea27db"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CLÁUSULA PRIMEIRA"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="404" width="515" height="31" uuid="9318a0c1-2db4-4a9c-8bc9-9d129270b65c"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["E, por estarem justos e contratados, assinam o presente TERMO ADITIVO CONTRATUAL Nº 01, em 03 (três) vias de igual teor, na presença de duas testemunhas abaixo nomeadas e qualificadas."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="457" width="515" height="31" uuid="7ca9e308-0549-4293-9ca8-7a3de0d7a8d3"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["Maringá " + (new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format(java.util.Calendar.getInstance().getTime()))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="504" width="515" height="31" uuid="c4ae31fd-3e91-4388-8748-8837b34f9363"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["_____________________________________                                    _____________________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="565" width="515" height="31" uuid="65b63e4c-6640-45c4-86b4-6045964c8788"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["_____________________________________                                    _____________________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="516" width="224" height="31" uuid="9aa1906f-70d1-47fd-ad34-c689c4bd21b9"/>
+				<textElement textAlignment="Justified" markup="html"/>
+				<textFieldExpression><![CDATA[$F{nomeaprendiz}+" <br> Função: _____________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="516" width="224" height="31" uuid="75356396-9a95-4e53-910d-5063da8068d8"/>
+				<textElement textAlignment="Justified" markup="html"/>
+				<textFieldExpression><![CDATA["__________________________________ <br>Responsável legal pelo aprendiz"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="577" width="224" height="31" uuid="19faf73c-fae5-419e-8aa7-12f040095d5c"/>
+				<textElement textAlignment="Justified" markup="html"/>
+				<textFieldExpression><![CDATA["Empregador <br>"+$F{nomeempresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="577" width="224" height="31" uuid="0d573e21-b8aa-44bc-a1e2-e8edaa2fe16e"/>
+				<textElement textAlignment="Justified" markup="html"/>
+				<textFieldExpression><![CDATA["Terezinha NaiverthSezini<br>Fundação Isis Bruder"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="622" width="515" height="18" uuid="cb364419-8c16-4792-913e-fab9c4059086"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TESTEMUNHAS"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="656" width="515" height="70" uuid="13c5c87a-0994-4d81-9374-82ca00c18f0d"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["_____________________________________<br>Nome primeira testemunha.<br><br>_____________________________________<br>Nome segunda testemunha."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

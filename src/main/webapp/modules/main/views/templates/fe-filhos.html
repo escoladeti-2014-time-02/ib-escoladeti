@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right" ng-show='temFilhos'>
+      <button class="btn btn-info" ng-click="novoFilho()" ng-if="!visualizar">
+        Cadastrar Dependente
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="help-error" ng-show="!filhos[0]&&temFilhos">
+      <p class="text-center text-warning"><strong>O candidato ainda não possui nenhum dependente cadastrado.</strong></p>
+    </div> 
+    <div class="table-responsive" ng-show='filhos[0]'>
+      <table class="table  table-striped">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Data de nascimento</th>
+            <th>Mora junto</th>
+            <th ng-if="!visualizar"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="filho in filhos">
+            <td>{{filho.nome}}</td>
+            <td>{{filho.dataNascimento | date:'dd/MM/yyyy' }}</td>
+            <td>{{filho.moraJunto && 'Sim' || 'Não'}}</td>
+            <td ng-if="!visualizar">
+              <div class="pull-right">
+                <button ng-click="editarFilho(filho)" class="btn btn-sm btn-warning">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <a ng-click="removerFilho(filho)" class="btn btn-sm btn-danger">
+                  <i class="fa fa-times"></i>
+                </a>  
+              </div>              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div><!--/row-->

@@ -1,0 +1,61 @@
+<!--Início do conteúdo do Form-->
+<h3>
+  Cadastro de Unidade Federativa (UF) 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div id="viewForm" class="row" >
+  <div class="col-lg-4 col-lg-offset-4 col-md-10 col-md-offset-1">
+    <form name="formUf">
+      <div class="panel panel-blue panel-form">
+        <div class="panel-heading panel-form-pessoais">
+          <h1 class="panel-title">
+            Unidade Federativa
+          </h1>
+        </div><!--/div panel-->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 form-group {{(formUf.nomeInput.$invalid&&!formUf.nomeInput.$pristine)&&'has-error'||(!formUf.nomeInput.$pristine&&'has-success'||'')}}">
+              <label class="control-label">Nome da Unidade Federativa (UF) <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="uf.nome" type="text" name="nomeInput" class="form-control" placeholder="Ex: Paraná" ng-minlength="2" ng-maxlength="72" ng-required="true" ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formUf.nomeInput.$error.required&&!formUf.nomeInput.$pristine">O campo <strong>Nome da Unidade Federativa</strong> é obrigatório.</p>
+                <p ng-show="formUf.nomeInput.$error.minlength">O <strong>Nome da Unidade Federativa</strong> informado deve ter mais de 2 caracteres.</p>
+                <p ng-show="formUf.nomeInput.$error.maxlength">O <strong>Nome da Unidade Federativa</strong> informado deve ter menos que 72 caracteres.</p>
+              </div> 
+            </div>
+          </div><!--/row--> 
+          <div class="row">
+            <div class="col-md-6 form-group {{(formUf.siglaInput.$invalid&&!formUf.siglaInput.$pristine)&&'has-error'||(!formUf.siglaInput.$pristine&&'has-success'||'')}}">
+              <label class="control-label">Sigla <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="uf.sigla" type="text" name="siglaInput" placeholder="Ex: PR" class="form-control" maxlength="2" ng-pattern="/[A-Z]{2}/" ng-required="Uf.sigla" ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formUf.siglaInput.$error.required&&!formUf.siglaInput.$pristine">O campo <strong>Sigla</strong> é obrigatório.</p>
+                <p ng-show="formUf.siglaInput.$error.maxlength">A <strong>Sigla</strong> informado deve ter menos de 2 caracteres.</p>
+                <p ng-show="formUf.siglaInput.$error.pattern">A <strong>Sigla</strong> informado deve ter caracteres entre A e Z.</p>
+              </div> 
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label class="control-label">País <strong class="text-danger form-obrigatorio">*</strong></label>
+              <select ng-model="uf.pais" ng-options="p.nome for p in paises track by p.id" class="form-control" required ng-disabled="visualizar">
+                <option value="">-- Selecione um País --</option>
+              </select>          
+            </div>
+          </div><!--/row-->      
+        </div>
+      </div>
+      <div class="row pull-right">
+        <div class="col-md-12">
+          <a href="./#/endereco/uf" class="btn btn-info">
+            Voltar
+          </a>
+          <fe-resetform re-origem="objetoOrigem" re-reset="uf" re-form="formUf"></fe-resetform>
+          <button  ng-disabled="formUf.$invalid" ng-click="salvarUf(uf)" class="btn btn-success" ng-if="!visualizar">
+            Salvar
+          </button>         
+        </div>
+      </div><!--/row-->
+    </form> 
+  </div>
+</div><!--/row-->
+<!--Fim do conteúdo do Form-->

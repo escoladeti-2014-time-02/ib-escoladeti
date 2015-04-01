@@ -1,0 +1,249 @@
+<!--Início do conteúdo do Form-->
+<style type="text/css">
+  
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="center">Cadastro de Pessoa</h2>
+    <hr/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <form name="formPessoa" role="form">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="radio-inline">
+            <label>
+              <input ng-model="pessoa.tipo" type="radio" name="tipoPessoa"  value="fisica">
+              Pessoa Física 
+            </label>
+          </div>
+          <div class="radio-inline">
+            <label>
+              <input ng-model="pessoa.tipo" type="radio" name="tipoPessoa" value="juridica">
+              Pessoa Juridica
+            </label>
+          </div>    
+        </div>  
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="radioAtivo">Ativo</label>
+          <div id="radioAtivo">
+            <div class="radio-inline">
+              <label>
+                <input ng-model="pessoa.ativo" type="radio" name="ativo" ng-value="true">
+                Sim
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input ng-model="pessoa.ativo" type="radio" name="ativo" ng-value="false" >
+                Não
+              </label>
+            </div>  
+          </div>      
+        </div>  
+      </div>
+      <div ng-show="pessoa.tipo=='fisica'">
+        <div class="row">
+          <div class="col-md-12 form-group {{(formPessoa.nomeInput.$invalid&&!formPessoa.nomeInput.$pristine)&&'has-error'||(!formPessoa.nomeInput.$pristine&&'has-success'||'')}}">
+              <label for="nomeInput" class="control-label">Nome</label>
+              <input ng-model="pessoa.fisica.nome" type="text" class="form-control" name="nomeInput" placeholder="Nome" ng-minlength="5" ng-maxlength="72" ng-required="pessoa.tipo=='fisica'">
+              <div class="help-error bg-danger">
+                <p ng-show="formPessoa.nomeInput.$error.required&&!formPessoa.nomeInput.$pristine" class=" text-danger">O campo <strong>Nome</strong> é obrigatório.</p>
+                <p ng-show="formPessoa.nomeInput.$error.minlength"  class="text-danger">O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+                <p ng-show="formPessoa.nomeInput.$error.maxlength"  class="text-danger">O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+              </div>              
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="radioSexo">Sexo</label>
+            <div id="radioSexo">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="pessoa.fisica.sexo" type="radio" name="sexo" value="Masculino">
+                  Masculino
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="pessoa.fisica.sexo" type="radio" name="sexo" value="Feminino" >
+                  Feminino
+                </label>
+              </div>  
+            </div>      
+          </div>  
+        </div>
+        <div class="row">
+          <div class="col-md-5 form-group">
+            <label class="control-label" for="cpfInput">CPF</label>
+              <input ng-model="pessoa.fisica.cpf" type="text" class="form-control" name="cpfInput" placeholder="CPF" ng-minlength="11" ng-maxlength="14" ng-required="pessoa.tipo=='fisica'">
+              <div class="help-error bg-danger">
+                <p ng-show="formPessoa.cpfInput.$error.required&&!formPessoa.cpfInput.$pristine" class=" text-danger">O campo <strong>CPF</strong> é obrigatório.</p>
+                <p ng-show="formPessoa.cpfInput.$error.minlength"  class="text-danger">O <strong>CPF</strong> informado deve ter mais de 11 caracteres.</p>
+                <p ng-show="formPessoa.cpfInput.$error.maxlength"  class="text-danger">O <strong>CPF</strong> informado deve ter menos que 14 caracteres.</p>
+              </div>
+          </div>
+          <div class="col-md-5 form-group">
+            <label for="nomeInput">RG</label>
+              <input ng-model="pessoa.fisica.rg" type="text" class="form-control" id="rgInput" placeholder="RG">
+          </div>
+        </div>  
+      </div>
+      <div ng-show="pessoa.tipo=='juridica'">
+        <div class="row">
+          <div class="col-md-12 form-group">
+              <label for="razaoInput">Razão Social</label>
+              <input ng-model="pessoa.juridica.razao" type="text" class="form-control" id="razaoInput" placeholder="Razão Social" ng-required="pessoa.tipo=='juridica'">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 form-group">
+              <label for="razaoInput">Nome Fantasia</label>
+              <input ng-model="pessoa.juridica.fantasia" type="text" class="form-control" id="fantasiaInput" placeholder="Nome Fantasia" ng-required="pessoa.tipo=='juridica'">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 form-group">
+            <label for="cnpjInput">CNPJ</label>
+              <input ng-model="pessoa.juridica.cnpj" type="text" class="form-control" id="cnpjInput" placeholder="CNPJ">
+          </div>
+          <div class="col-md-5">
+            <label for="ieInput">Inscrição Estadual</label>
+              <input ng-model="pessoa.juridica.ie" type="text" class="form-control" id="ieInput" placeholder="Inscrição Estadual">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Endereço</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 form-group">
+          <label for="tipoEnderecoSelect">Tipo do Endereço</label>
+          <select ng-model="pessoa.endereco.tipoEndereco" name="tipoEnderecoSelect" class="form-control">
+            <option value=""></option>
+            <option>Residencial</option>
+            <option>Cobrança</option>
+            <option>Entrega</option>
+            <option>Comercial</option>
+          </select>
+        </div>
+        <div class="col-md-5   form-group">
+          <label for="nomeInput">CEP</label>
+            <input ng-model="pessoa.endereco.cep" type="text" class="form-control" id="cepInput" placeholder="CEP">
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label class="control-label">País</label>
+          <select ng-model="pessoa.endereco.logradouro.bairro.cidade.uf.pais" ng-options="p.nome for p in paises track by p.idPais" class="form-control">
+            <option value="">Selecione um País</option>
+          </select>  
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label">Unidade Federativa</label>
+          <select ng-model="pessoa.endereco.logradouro.bairro.cidade.uf" ng-options="u.nome for u in ufs track by u.idUf" class="form-control">
+            <option value="">Selecione uma Uf</option>
+          </select> 
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label class="control-label">Cidade</label>
+          <select ng-model="pessoa.endereco.logradouro.bairro.cidade" ng-options="c.nome for c in cidades track by c.idCidade" class="form-control">
+            <option value="">Selecione uma Cidade</option>
+          </select> 
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label">Bairro</label>
+          <select ng-model="pessoa.endereco.logradouro.bairro" ng-options="b.nome for b in bairros track by b.idBairro" class="form-control">
+            <option value="">Selecione um Bairro</option>
+          </select> 
+        </div>
+      </div>
+          <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="tipoLogradouroSelect">Tipo do Logradouro</label>
+          <select ng-model="pessoa.endereco.tipoLogradouro" name="tipoLogradouroSelect" class="form-control">
+            <option value=""></option>
+            <option value="">Outros</option>                    
+            <option value = "Aeroporto">Aeroporto</option>
+            <option value = "Alameda">Alameda</option>
+            <option value = "Área">Área</option>
+            <option value = "Avenida">Avenida</option>                            
+            <option value = "Campo">Campo</option>
+            <option value = "Chácara">Chácara</option>
+            <option value = "Colônia">Colônia</option>
+            <option value = "Condomínio">Condomínio</option>
+            <option value = "Conjunto">Conjunto</option>
+            <option value = "Distrito">Distrito</option>
+            <option value = "Esplanada">Esplanada</option>
+            <option value = "Estação">Estação</option>
+            <option value = "Estrada">Estrada</option>
+            <option value = "Favela">Favela</option>
+            <option value = "Fazenda">Fazenda</option>
+            <option value = "Feira">Feira</option>
+            <option value = "Jardim">Jardim</option>
+            <option value = "Ladeira">Ladeira</option>
+            <option value = "Lago">Lago</option>
+            <option value = "Lagoa">Lagoa</option>
+            <option value = "Largo">Largo</option>
+            <option value = "Loteamento">Loteamento</option>
+            <option value = "Morro">Morro</option>
+            <option value = "Núcleo">Núcleo</option>
+            <option value = "Parque">Parque</option>
+            <option value = "Passarela">Passarela</option>
+            <option value = "Pátio">Pátio</option>
+            <option value = "Praça">Praça</option>
+            <option value = "Quadra">Quadra</option>
+            <option value = "Recanto">Recanto</option>
+            <option value = "Residencial">Residencial</option>
+            <option value = "Rodovia">Rodovia</option>
+            <option value = "Rua">Rua</option>
+            <option value = "Setor">Setor</option>
+            <option value = "Sítio">Sítio</option>
+            <option value = "Travessa">Travessa</option>
+            <option value = "Trecho">Trecho</option>
+            <option value = "Trevo">Trevo</option>
+            <option value = "Vale">Vale</option>
+            <option value = "Vereda">Vereda</option>
+            <option value = "Via">Via</option>
+            <option value = "Viaduto">Viaduto</option>
+            <option value = "Viela">Viela</option>
+            <option value = "Vila">Vila</option>
+          </select>
+        </div>
+        <div class="col-md-7 form-group">
+          <label class="control-label">Logradouro</label>
+          <select ng-model="pessoa.endereco.logradouro" ng-options="l.nome for l in logradouros track by l.idLogradouro" class="form-control">
+            <option value="">Selecione um Logradouro</option>
+          </select> 
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="complementoInput">Número</label>
+            <input ng-model="pessoa.endereco.numero" type="text" class="form-control" id="numeroInput" placeholder="Número">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 form-group">
+          <label for="complementoInput">Complemento</label>
+            <input ng-model="pessoa.endereco.complemento" type="text" class="form-control" id="complementoInput" placeholder="Complemento">
+        </div>
+      </div>
+      <div class="row pull-right">
+        <div class="col-md-12">
+          <a href="./#/pessoa" class="btn btn-info" >Voltar</a>
+          <button type="button" class="btn btn-warning" >Limpar</button>
+          <button ng-disabled="formPessoa.$invalid" ng-click="salvarPessoa(pessoa)"   type="button" class="btn btn-success" >Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>  
+<!--Fim do conteúdo do Form-->

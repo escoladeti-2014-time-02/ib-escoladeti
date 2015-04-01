@@ -1,0 +1,114 @@
+<h3>
+  Configura&ccedil;&atilde;o de Parametros
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigat&oacute;rio</p></small>
+</h3>
+
+<div class="row" >
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+		<form name="formParametro" role="form">
+
+      <div class="panel panel-blue panel-form">
+        <div class="panel-heading panel-form-pessoais">
+          <h1 class="panel-title">
+            Dados do Presidente da Institui&ccedil;&atilde;o
+          </h1>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-12 form-group {{(formParametro.nomeInput.$invalid&&!formParametro.nomeInput.$pristine)&&'has-error'||(!formParametro.nomeInput.$pristine&&'has-success'||'')}}">
+                    <label for="nomeInput" class="control-label">Nome do Representante<strong class="text-danger form-obrigatorio">*</strong></label>
+                    <input ng-model="parametro.nomePresidente" type="text" class="form-control" name="nomeInput" placeholder="Ex: Jo&atilde;o Pedro" ng-minlength="5" ng-maxlength="72" ng-required="true"  ng-disabled="visualizar" ng-pattern="/^[A-zÃ€-Ãº ]+$/">
+                    <div class="help-error bg-danger">
+                      <p ng-show="formParametro.nomeInput.$error.pattern" >O <strong>Nome</strong> informado é invalido.</p>
+                      <p ng-show="formParametro.nomeInput.$error.required&&!formParametro.nomeInput.$pristine" >O campo <strong>Nome</strong> é obrigatório</p>
+                      <p ng-show="formParametro.nomeInput.$error.minlength">O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+                      <p ng-show="formParametro.nomeInput.$error.maxlength">O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+                    </div>              
+                  </div>
+                </div><!--/row -->
+                <div class="row">
+              </div>
+            </div>
+            
+             <div class="col-md-4 form-group {{(formParametro.nacionalidadeInput.$invalid&&!formParametro.nacionalidadeInput.$pristine)&&'has-error'||(!formParametro.nacionalidadeInput.$pristine&&'has-success'||'')}}">
+              <label for="nacionalidadeInput" class="control-label">Nacionalidade</label>
+                    <input ng-model="parametro.nacionalidadePresidente" type="text" class="form-control" placeholder="Brasileiro" name='nacionalidadeInput'   ng-disabled="visualizar">              
+            </div>
+            
+            <div class="col-md-4 form-group {{(formParametro.estadoCivilInput.$invalid&&!formParametro.estadoCivilInput.$pristine)&&'has-error'||(!formParametro.estadoCivilInput.$pristine&&'has-success'||'')}}">
+              <label for="EstadoCivil" class="control-label">Estado civil</label>
+              <select ng-model="parametro.estadoCivilPresidente" name="estadoCivilInput" class="form-control"  ng-disabled="visualizar">
+                <option value="" selected="selected"> Selecione um estado cvil</option>
+                <option value="Casado">Casado</option>
+                <option value="Solteiro">Solteiro</option>
+                <option value="Divorciado">Divorciado</option>
+                <option value="Separado">Separado</option>
+                <option value="Viúvo">Viúvo</option>
+              </select>
+            </div>
+            
+           	<div class="col-md-4">
+              <label for="profissao" class="control-label">Profiss&atilde;o</label>
+                    <input ng-model="parametro.profissaoPresidente" type="text" class="form-control" placeholder="Empres&aacute;rio" name='profissaoInput'   ng-disabled="visualizar">   
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-dark-green panel-form">
+        <div class="panel-heading panel-form-documentos">
+          <h1 class="panel-title">
+            Documentos do Presidente
+          </h1>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-5 form-group {{(formParametro.cpfInput.$invalid&&!formParametro.cpfInput.$pristine)&&'has-error'||(!formParametro.cpfInput.$pristine&&'has-success'||'')}}">
+              <label class="control-label" for="cpf">CPF <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="parametro.cpfPresidente" ng-cpf ui-mask="999.999.999-99" type="text" class="form-control" name="cpfInput"  ng-disabled="visualizar">
+            <div class="help-error bg-danger">
+                <p ng-show="formParametro.cpfInput.$error.cpf&&!formParametro.cpfInput.$pristine"  class="text-danger">O <strong>CPF</strong> é inválido.</p>
+                <p ng-show="formParametro.cpfInput.$error.required&&!formParametro.cpfInput.$pristine"  class="text-danger">O <strong>CPF</strong> é obrigatório.</p>
+            </div>  
+            </div>
+            <div class="col-md-4 form-group {{(formParametro.rgInput.$invalid&&!formParametro.rgInput.$pristine)&&'has-error'||(!formParametro.rgInput.$pristine&&'has-success'||'')}}">
+              <label for="rg" class="control-label">RG</label>
+              <input ng-model="parametro.rgPresidente" name='rgInput' type="text" class="form-control" id="rg" placeholder="Ex: 330491345" ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formParametro.rgInput.$error.number" class="text-danger">O campo <strong>RG</strong> só aceita números</p>
+              </div>  
+            </div>
+            <div class="col-md-3 form-group {{(formParametro.orgExpInput.$invalid&&!formParametro.orgExpInput.$pristine)&&'has-error'||(!formParametro.orgExpInput.$pristine&&'has-success'||'')}}">
+              <label for="orgaoExpedidor" class="control-label">Org&atilde;o expedidor </label>
+              <input ng-model="parametro.orgaoExpedidorPresidente" type="text" class="form-control" id="orgaoExpedidor" placeholder="Ex: SSP" name='orgExpInput' ng-minlength="1"  ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+              </div>  
+            </div>
+          </div> <!--/row --> 
+        </div>
+      </div>
+      <div class="panel panel-deep-purple panel-form">
+        <div class="panel-heading panel-form-enderecos">
+          <h1 class="panel-title">
+            Endere&ccedil;o da Institui&ccedil;&atilde;o Isis Bruder
+          </h1>
+        </div>
+        <div class="panel-body">
+          <fe-enderecos enderecos="parametro.enderecos" visualizar='visualizar'>
+          </fe-enderecos>
+        </div>
+      </div>
+			<div class="row">
+		     <div class="col-md-12">
+		     <div class="pull-right">
+		      <fe-resetform re-origem="objetoOrigem" re-reset="parametro" re-form="formParametro"></fe-resetform>
+		       <button ng-click="salvarParametro(parametro)" class="btn btn-success" ng-disabled="formParametro.$invalid" ng-if="!visualizar">
+		         Salvar
+		       </button>
+		       </div>       
+		     </div>
+		    </div><!-- buttons -->
+	   </form>
+	</div>
+</div><!--/row-->

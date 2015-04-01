@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <button class="btn btn-info" ng-click="novoEndereco()" ng-if='!visualizar'>
+        Cadastrar Endereço
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="help-error" ng-show="!enderecos[0]">
+      <p class="text-center text-danger"><strong>É obrigatório o cadastro de pelo menos um endereço.<strong></p>
+    </div>  
+    <div class="table-responsive" ng-show="enderecos[0]">
+      <table class="table  table-striped">
+        <thead>
+          <tr>
+            <th>Cidade</th>
+            <th>Bairro</th>
+            <th>Logradouro</th>
+            <th>CEP</th>
+            <th>Número</th>
+            <th ng-if="!visualizar"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="endereco in enderecos">
+            <td>{{endereco.bairro.cidade.nome}}</td>             
+            <td>{{endereco.bairro.nome}}</td>
+            <td>{{endereco.logradouro.nome}}</td>
+            <td>{{endereco.logradouro.faixasDeCep[0].cep | cep}}</td>
+            <td>{{endereco.numero}}</td>
+            <td ng-if="!visualizar">
+              <div class="pull-right">
+                <button ng-click="editarEnderecos(endereco)" class="btn btn-sm btn-warning">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <a ng-click="removerEnderecos(endereco)" class="btn btn-sm btn-danger">
+                  <i class="fa fa-times"></i>
+                </a>  
+              </div>              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

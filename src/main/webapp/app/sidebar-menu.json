@@ -1,0 +1,62 @@
+﻿[
+  {
+    "text": "Menu",
+    "heading": "true"
+  },
+  {
+    "text": "Candidato",
+    "sref": "app.candidatoListar",
+    "icon": "icon-users"
+  },
+  {
+    "text": "Processo Seletivo",
+    "sref": "app.processoSeletivoListar",
+    "icon": "fa fa-gears"
+  },
+  {
+    "text": "Empresa",
+    "sref": "app.empresaListar",
+    "icon": "fa fa-building"
+  }, 
+  {
+    "text": "Instituição de Ensino",
+    "sref": "app.instituicaoEnsinoListar",
+    "icon": "icon-graduation"
+  }, 
+  {
+    "text": "Programa de Aprendizagem",
+    "sref": "#",
+    "icon": "icon-book-open",
+    "submenu": [
+      {"text": "Disciplina",       "sref": "app.disciplinaListar" },
+      {"text": "Colaborador", "sref": "app.colaboradorListar" },
+      {"text": "Módulo",   "sref": "app.moduloListar" },
+      {"text": "Curso",      "sref": "app.cursoListar" },
+      {"text": "Turma",    "sref": "app.turmaListar" },
+      {"text": "Contrato",    "sref": "app.contratoListar" },
+      {"text": "Aula",    "sref": "app.aulaListar" }
+    ]
+  },
+  {
+    "text": "Endereço",
+    "sref": "#",
+    "icon": "icon-pointer",
+    "submenu": [
+      {"text": "Logradouro",       "sref": "app.logradouroListar" },
+      {"text": "Bairro", "sref": "app.bairroListar" },
+      {"text": "Cidade",   "sref": "app.cidadeListar" },
+      {"text": "Unidade Federativa",      "sref": "app.ufListar" },
+      {"text": "País",    "sref": "app.paisListar" }
+    ]
+  },
+  {
+    "text": "Acesso",
+    "sref": "#",
+    "icon": "icon-settings",
+    "submenu": [
+      {"text": "Usuário",       "sref": "app.usuarioListar" },
+      {"text": "Perfil de Acesso", "sref": "app.perfildeacessoListar" },
+      {"text": "Parâmetros", "sref": "app.parametro" }
+    ]
+  }
+]

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet author="Heidi (generated)" id="1407975312075-6">
+		<insert tableName="pais">
+			<column name="id" valueNumeric="1" />
+			<column name="ddi" valueNumeric="55" />
+			<column name="nome" value="Brasil" />
+			<column name="sigla" value="BR" />
+		</insert>
+	</changeSet>
+	<changeSet author="Heidi (generated)" id="1407975312075-10">
+		<insert tableName="unidadefederativa">
+			<column name="id" valueNumeric="100" />
+			<column name="nome" value="Paraná" />
+			<column name="sigla" value="PR" />
+			<column name="pais_id" valueNumeric="1" />
+		</insert>
+	</changeSet>
+	<changeSet author="Heidi (generated)" id="1407975312075-2">
+		<insert tableName="cidade">
+			<column name="id" valueNumeric="100" />
+			<column name="datafundacao" valueDate="1947-05-10" />
+			<column name="ddd" valueNumeric="44" />
+			<column name="nome" value="Maringá" />
+			<column name="sigla" value="MGA" />
+			<column name="unidadefederativa_id" valueNumeric="100" />
+		</insert>
+	</changeSet>
+	<changeSet author="Heidi (generated)" id="1407975312075-8">
+		<insert tableName="tipologradouro">
+			<column name="id" valueNumeric="1" />
+			<column name="nome" value="Rua" />
+		</insert>
+		<insert tableName="tipologradouro">
+			<column name="id" valueNumeric="2" />
+			<column name="nome" value="Beco" />
+		</insert>
+		<insert tableName="tipologradouro">
+			<column name="id" valueNumeric="3" />
+			<column name="nome" value="Túnel" />
+		</insert>
+		<insert tableName="tipologradouro">
+			<column name="id" valueNumeric="4" />
+			<column name="nome" value="Avenida" />
+		</insert>
+	</changeSet>
+	<changeSet author="Heidi (generated)" id="1407975312075-1">
+		<insert tableName="bairro">
+			<column name="id" valueNumeric="150" />
+			<column name="nome" value="Vila Nova" />
+			<column name="cidade_id" valueNumeric="100" />
+		</insert>
+		<insert tableName="bairro">
+			<column name="id" valueNumeric="151" />
+			<column name="nome" value="Alvorada" />
+			<column name="cidade_id" valueNumeric="100" />
+		</insert>
+		<insert tableName="bairro">
+			<column name="id" valueNumeric="152" />
+			<column name="nome" value="Centro" />
+			<column name="cidade_id" valueNumeric="100" />
+		</insert>
+	</changeSet>
+	<changeSet author="Heidi (generated)" id="1407975312075-5">
+		<insert tableName="logradouro">
+			<column name="id" valueNumeric="200" />
+			<column name="nome" value="Avenida Brasil" />
+			<column name="tipologradouro_id" valueNumeric="4" />
+		</insert>
+		<insert tableName="logradouro">
+			<column name="id" valueNumeric="201" />
+			<column name="nome" value="Neo Alves Martins" />
+			<column name="tipologradouro_id" valueNumeric="1" />
+		</insert>
+	</changeSet>
+	<changeSet author="Heidi (generated)" id="1407975312075-3">
+		<insert tableName="faixadecep">
+			<column name="id" valueNumeric="250" />
+			<column name="cep" value="87000001" />
+			<column name="numeroinferior" valueNumeric="200" />
+			<column name="numerosuperior" valueNumeric="500" />
+			<column name="bairro_id" valueNumeric="152" />
+			<column name="logradouro_id" valueNumeric="200" />
+		</insert>
+		<insert tableName="faixadecep">
+			<column name="id" valueNumeric="251" />
+			<column name="cep" value="87109999" />
+			<column name="numeroinferior" valueNumeric="1346" />
+			<column name="numerosuperior" valueNumeric="3214" />
+			<column name="bairro_id" valueNumeric="151" />
+			<column name="logradouro_id" valueNumeric="200" />
+		</insert>
+		<insert tableName="faixadecep">
+			<column name="id" valueNumeric="252" />
+			<column name="cep" value="87013060" />
+			<column name="numeroinferior" valueNumeric="1034" />
+			<column name="numerosuperior" valueNumeric="3045" />
+			<column name="bairro_id" valueNumeric="152" />
+			<column name="logradouro_id" valueNumeric="201" />
+		</insert>
+	</changeSet>
+	<changeSet author="Heidi (generated)" id="1407975312075-7">
+		<insert tableName="tipoevento">
+			<column name="id" valueNumeric="1" />
+			<column name="cor" value="#3f903f" />
+			<column name="descricao" value="Candidato Aprovado" />
+			<column name="icone" value="fa-thumbs-up" />
+		</insert>
+		<insert tableName="tipoevento">
+			<column name="id" valueNumeric="2" />
+			<column name="cor" value="#f0ad4e" />
+			<column name="descricao" value="Candidato Selecionado" />
+			<column name="icone" value="fa-file-o" />
+		</insert>
+		<insert tableName="tipoevento">
+			<column name="id" valueNumeric="3" />
+			<column name="cor" value="#5bc0de" />
+			<column name="descricao" value="Informação" />
+			<column name="icone" value="fa-question" />
+		</insert>
+		<insert tableName="tipoevento">
+			<column name="id" valueNumeric="4" />
+			<column name="cor" value="#d9534f" />
+			<column name="descricao" value="Advertência" />
+			<column name="icone" value="fa-exclamation-triangle" />
+		</insert>
+		<insert tableName="tipoevento">
+			<column name="id" valueNumeric="5" />
+			<column name="cor" value="#f0ad4e" />
+			<column name="descricao" value="Encaminhamento" />
+			<column name="icone" value="fa-bell" />
+		</insert>
+		<insert tableName="tipoevento">
+			<column name="id" valueNumeric="6" />
+			<column name="cor" value="#3f903f" />
+			<column name="descricao" value="Contato" />
+			<column name="icone" value="fa-phone" />
+		</insert>
+	</changeSet>
+	<changeSet author="Heidi (generated)" id="1407975312075-9">
+		<insert tableName="tipotelefone">
+			<column name="id" valueNumeric="1" />
+			<column name="descricaotipo" value="Comercial" />
+		</insert>
+		<insert tableName="tipotelefone">
+			<column name="id" valueNumeric="2" />
+			<column name="descricaotipo" value="Residencial" />
+		</insert>
+		<insert tableName="tipotelefone">
+			<column name="id" valueNumeric="3" />
+			<column name="descricaotipo" value="Celular" />
+		</insert>
+	</changeSet>
+	</databaseChangeLog>

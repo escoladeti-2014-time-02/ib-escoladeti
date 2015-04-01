@@ -1,0 +1,145 @@
+
+<h3>
+  Controle de Presença
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+ <div class="row" id="rowForm">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <form name="formCadastroAula" role="form">
+      <div class="panel panel-blue panel-form">
+        <div class="panel-heading panel-form-filiacao">
+          <h1 class="panel-title">
+            Aula
+          </h1>
+        </div><!--/div panel-->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group {{(formCadastroAula.selectColaborador.$invalid&&!formCadastroAula.selectColaborador.$pristine)&&'has-error'||(!formCadastroAula.selectColaborador.$pristine&&'has-success'||'')}}">
+                <label for="selectColaborador" class="control-label">
+                  Colaborador
+                  <strong class="text-danger form-obrigatorio">*</strong>
+                </label>
+                <select ng-model="selectAux.colaborador" ng-options="c.pessoaFisica.nome for c in colaboradores track by c.id" name="selectColaborador" id="selectColaborador" class="form-control" ng-disabled="visualizar" ng-required="true">
+                  <option value="" selected="selected">Selecione uma colaborador</option>-->
+                </select>
+              </div>
+            </div><!--/aula -->
+            <div class="col-md-6">
+              <div class="form-group {{(formCadastroAula.selectTurma.$invalid&&!formCadastroAula.selectTurma.$pristine)&&'has-error'||(!formCadastroAula.selectTurma.$pristine&&'has-success'||'')}}">
+                <label for="selectTurma" class="control-label">
+                  Turma
+                  <strong class="text-danger form-obrigatorio">*</strong>
+                </label>
+                <select ng-model="selectAux.turma" ng-options="t.nome for t in turmas track by t.id" name="selectTurma" id="selectTurma" class="form-control" ng-change="getModulosTurma(selectAux.turma)" ng-disabled="visualizar" ng-required="true">
+                  <option value="" selected="selected">Selecione uma turma</option>-->
+                </select>
+              </div>
+            </div><!--/aula -->
+                         
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group {{(formCadastroAula.selectModulo.$invalid&&!formCadastroAula.selectModulo.$pristine)&&'has-error'||(!formCadastroAula.selectModulo.$pristine&&'has-success'||'')}}">                    
+                <label for="selectModulo" class="control-label">
+                  Modulo
+                  <strong class="text-danger form-obrigatorio">*</strong>
+                </label>
+                <select ng-model="selectAux.modulo" ng-options="m.nome for m in  moduloAux.modulos track by m.id" name="selectModulo" id="selectModulo" class="form-control" ng-change="getDisciplinaTurma(selectAux.modulo)" ng-disabled="visualizar || !selectAux.turma" ng-required="true">                      <option value="" selected="selected">Selecione um modulo</option>-->
+                </select>
+              </div> 
+            </div>
+            <div class="col-md-4">
+              <div class="form-group {{(formCadastroAula.selectDisciplina.$invalid&&!formCadastroAula.selectDisciplina.$pristine)&&'has-error'||(!formCadastroAula.selectDisciplina.$pristine&&'has-success'||'')}}">
+                <label for="selectDisciplina" class="control-label">
+                  Disciplina
+                  <strong class="text-danger form-obrigatorio">*</strong>
+                </label>
+                <select ng-model="selectAux.disciplina" ng-options="m.nome for m in disciplinasAux track by m.id" name="selectDisciplina" id="selectDisciplina" class="form-control" ng-change= "getAlunosTurma(selectAux.turma)" ng-disabled="visualizar || !selectAux.modulo" ng-required="true">
+                  <option value="" selected="selected">Selecione uma disciplina</option>-->
+                </select>
+              </div>
+            </div><!--/curso -->  
+            
+            <div class="col-md-3">
+              <div class="form-group {{(formCadastroAula.dataInicio.$invalid&&!formCadastroAula.dataInicio.$pristine)&&'has-error'||(!formCadastroAula.dataInicio.$pristine&&'has-success'||'')}}">
+                <label for="dataInicio" class="control-label">
+                  Data
+                  <strong class="text-danger form-obrigatorio">*</strong>
+                </label>
+                  <input id="dataInicio" type="text" name="dataInicio" datepicker-popup="dd/MM/yyyy" ng-model="aula.dataAula" ng-disabled="visualizar" is-open="datePicker.opened" ng-click = "datePicker.opened = true" datepicker-options="datePicker.config" date-disabled="disabled(date, mode)" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" placeholder="__/__/__" class="form-control"/>
+              </div>
+              <div class="help-error bg-danger" >
+                <p ng-show="modalConfig.dataInicio.$error.required&&!modalConfig.dataInicio.$pristine" class=" text-danger">
+                 O campo <strong>Data de início Início</strong> é obrigatório.
+               </p>
+              </div> 
+            </div>            
+          </div><!--/curso -->
+        </div>          
+      </div><!-- panel -->
+      <div class="panel panel-teal panel-form">
+        <div class="panel-heading panel-form-pessoais"> 
+          <h1 class="panel-title">
+            Presença 
+          </h1>
+        </div><!--/div panel-->
+        <div class="panel-body">
+          <div class="col-md-12">
+            <div class="help-error" ng-if='aula.alunoAula.length<1 && selectAux.turma'>
+              <p class="text-center text-warning"><strong>Não contem alunos cadastrados nessa turma.</strong></p>
+            </div>
+            <div class="help-error" ng-if='aula.alunoAula.length<1'>
+              <p class="text-center text-warning"><strong>Selecione uma turma para carregar os alunos.</strong></p>
+            </div>
+            <div class="table-responsive">
+              <table class="table  table-striped" ng-show="aula.alunoAula.length>1">
+                <thead>
+                  <tr>
+                    <th><input ng-model='checkAux' ng-click="checkAll(checkAux)" type='checkbox' style="width:16px;height:16px;" ng-disabled="visualizar"></th>
+                    <th class="text-center">Matrícula</th>
+                    <th>Aluno</th>
+                    <th>Empresa</th>
+                    <th ng-if="!visualizar"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="alunoAula in aula.alunoAula">
+                    <td><input ng-model='alunoAula.presenca' type='checkbox'style="width:16px;height:16px;" ng-disabled="visualizar"></td>
+                    <td class="text-center">{{alunoAula.aluno.id}}</td>
+                    <td> 
+                      {{alunoAula.aluno.candidato.nome}}
+                    </td>
+                    <td>
+                      {{alunoAula.aluno.empresa.fantasia}}
+                    </td>
+                    <td>
+                      <div class="pull-right">
+                        <a ng-click="openEventoModal(alunoAula.aluno)" class="btn btn-sm btn-info" ng-if="!visualizar">
+                          <i class="fa fa-puzzle-piece"></i>
+                        </a>
+                      </div>                
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div> <!-- table alunos -->
+          </div>
+        </div><!-- body -->  
+      </div><!-- /col-md-12 -->
+    </form>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <a href="./#/programaaprendizagem/aula" class="btn btn-info">
+            Voltar
+          </a>
+          <!-- <fe-resetform re-origem="objetoOrigem" re-reset="turma" re-form="formCadastroAula"></fe-resetform> -->
+          <button ng-click="salvarAula(aula)" class="btn btn-success" ng-disabled="formCadastroAula.$invalid"  ng-if="!visualizar">
+            Salvar
+          </button>  
+        </div>                 
+      </div>
+    </div><!-- /div Botões -->
+  </div>
+</div>

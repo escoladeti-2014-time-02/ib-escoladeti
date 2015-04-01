@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <form name="form.evento">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">
+                    Cadastro de Evento
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted text-center"><strong class="text-danger form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p>   
+            </div>              
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center">Tipo do Evento <strong class="text-danger form-obrigatorio">*</strong></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="text-center">
+                    <div class="modal-legends">
+                        <div ng-repeat="(indice, mTipoEvento) in tiposEvento" ng-style="eventoModal.tipoEvento.id == mTipoEvento.id || tipoEventoHover==mTipoEvento ? {'background-color':mTipoEvento.cor} : {'background-color': '#999999'}" ng-click="eventoModal.tipoEvento = mTipoEvento" class="grow modal-legend" tooltip="{{mTipoEvento.descricao}}" ng-mouseover="tipoEventoHover=mTipoEvento" ng-mouseleave="tipoEventoHover={}">
+                            <a >
+                                <i class="fa {{mTipoEvento.icone}}"></i>
+                            </a>                        
+                        </div> 
+                    </div>    
+                </div>                        
+            </div>               
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center tipo-label">{{eventoModal.tipoEvento ? eventoModal.tipoEvento.descricao : 'Selecione um tipo de evento'}}</h4>          
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1">
+                <div class="form-group  {{(form.evento.dataInput.$invalid&&!form.evento.dataInput.$pristine)&&'has-error'||'has-success'}}">
+                    <label class="control-label">Data do Evento <strong class="text-danger form-obrigatorio">*</strong></label>
+                    <input name="dataInput" type="date" placeholder="yyyy-MM-dd" class="form-control" ng-model="eventoModal.dataEvento" ng-required="true"/>
+                </div>
+                <div class="help-error bg-danger" >
+                    <p ng-show="form.evento.dataInput.$error.required&&!form.evento.dataInput.$pristine">O campo <strong>Data do Evento</strong> é obrigatório.</p>
+                </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="form-group  {{(form.evento.tituloInput.$invalid&&!form.evento.tituloInput.$pristine)&&'has-error'||(!form.evento.tituloInput.$pristine&&'has-success'||'')}}">
+                    <label class="control-label">Título do Evento <strong class="text-danger form-obrigatorio">*</strong></label>
+                    <input name="tituloInput" type="text" class="form-control" ng-model="eventoModal.titulo" ng-minlength="3" ng-maxlength="72" ng-required="true"/>
+                </div>
+                <div class="help-error bg-danger" >
+                    <p ng-show="form.evento.tituloInput.$error.required&&!form.evento.tituloInput.$pristine">O campo <strong>Título do Evento</strong> é obrigatório.</p>
+                    <p ng-show="form.evento.tituloInput.$error.minlength" >O <strong>Título do Evento</strong> informado deve ter mais de 2 caracteres.</p>
+                    <p ng-show="form.evento.tituloInput.$error.maxlength" >O <strong>Título do Evento</strong> informado deve ter menos que 72 caracteres.</p>
+                </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="form-group  {{(form.evento.descricaoInput.$invalid&&!form.evento.descricaoInput.$pristine)&&'has-error'||(!form.evento.descricaoInput.$pristine&&'has-success'||'')}}">
+                    <label class="control-label">Descrição do Evento <strong class="text-danger form-obrigatorio">*</strong></label>
+                    <textarea name="descricaoInput" class="form-control" rows="4"  ng-model="eventoModal.descricaoEvento"  ng-minlength="11" ng-maxlength="200" ng-required="true"></textarea>
+                </div>
+                <div class="help-error bg-danger" >
+                    <p ng-show="form.evento.descricaoInput.$error.required&&!form.evento.descricaoInput.$pristine">O campo <strong>Descrição do Evento</strong> é obrigatório.</p>
+                    <p ng-show="form.evento.descricaoInput.$error.minlength" >O <strong>Descrição do Evento</strong> informado deve ter mais de 10 caracteres.</p>
+                    <p ng-show="form.evento.descricaoInput.$error.maxlength" >O <strong>Descrição do Evento</strong> informado deve ter menos que 200 caracteres.</p>
+                </div> 
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="pull-right">
+                    <button class="btn btn-warning"  ng-click="cancelar()">Fechar</button>
+                    <button class="btn btn-success" ng-click="adicionarEvento(eventoModal)" ng-disabled="form.evento.$invalid||!eventoModal.tipoEvento">Salvar</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">&nbsp;</div>
+        </div>
+    </form>
+</div>

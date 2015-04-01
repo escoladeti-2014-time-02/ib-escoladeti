@@ -1,0 +1,485 @@
+<style type="text/css">
+  .candidatoModalFoto {
+    height: 500px;
+  }
+</style>
+<h3>
+  Cadastro de Candidato 
+  <small><p class="text-muted"><strong class="text-danger form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <form name="formCandidatoSimplificado" role="form">
+      <div class="panel panel-blue panel-form">
+        <div class="panel-heading panel-form-pessoais">
+          <h1 class="panel-title">
+            Dados Pessoais
+          </h1>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="text-center">
+                  <img ng-src="{{candidatoSimplificado.foto.base64 ? candidatoSimplificado.foto.base64 : './resources/img/user-image.png'}}" class="img-circle" style="width:140px;" ng-if="visualizar">
+                  <a ng-if="!visualizar" class='fotoCandidato'  ng-click="alterarFoto()">
+                    <img ng-src="{{candidatoSimplificado.foto.base64 ? candidatoSimplificado.foto.base64 : './resources/img/user-image.png'}}" class="img-circle" style="width:140px;">
+                    <div class="text-center">
+                      <span ng-if="!visualizar" class="img-circle" style="width:140px;"><i class="fa fa-edit"></i></span>                      
+                    </div>                    
+                  </a>
+                </div>                
+              </div>
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-12 form-group {{(formCandidatoSimplificado.nomeInput.$invalid&&!formCandidatoSimplificado.nomeInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.nomeInput.$pristine&&'has-success'||'')}}">
+                    <label for="nomeInput" class="control-label">Nome <strong class="text-danger form-obrigatorio">*</strong></label>
+                    <input ng-model="candidatoSimplificado.nome" type="text" class="form-control" name="nomeInput" placeholder="Ex: João Pedro" ng-minlength="5" ng-maxlength="72" ng-required="true"  ng-disabled="visualizar" ng-pattern="/^[A-zÀ-ú ]+$/">
+                    <div class="help-error bg-danger">
+                      <p ng-show="formCandidatoSimplificado.nomeInput.$error.required&&!formCandidatoSimplificado.nomeInput.$pristine">O campo <strong>Nome</strong> é obrigatório</p>
+                      <p ng-show="formCandidatoSimplificado.nomeInput.$error.pattern"  >O <strong>Nome</strong> informado é invalido.</p>
+                      <p ng-show="formCandidatoSimplificado.nomeInput.$error.minlength"  >O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+                      <p ng-show="formCandidatoSimplificado.nomeInput.$error.maxlength"  >O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+                    </div>              
+                  </div>
+                </div><!--/row -->
+                <div class="row">
+                  <div class="col-md-12 form-group {{(formCandidatoSimplificado.emailInput.$invalid&&!formCandidatoSimplificado.emailInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.emailInput.$pristine&&'has-success'||'')}}">
+                    <label for="email" class="control-label">E-mail</label>
+                    <input ng-model="candidatoSimplificado.email" type="email" class="form-control" placeholder="email@exemplo.com" name='emailInput'   ng-disabled="visualizar" ng-minlength="5" ng-maxlength="72" >              
+                    <div class="help-error bg-danger">
+                      <p ng-show="formCandidatoSimplificado.emailInput.$error.email&&!formCandidatoSimplificado.emailInput.$pristine"  >O <strong>E-mail</strong> é inválido.</p>
+                      <p ng-show="formCandidatoSimplificado.emailInput.$error.minlength"  >O <strong>E-mail</strong> informado deve ter mais de 4 caracteres.</p>
+                      <p ng-show="formCandidatoSimplificado.emailInput.$error.maxlength"  >O <strong>E-mail</strong> informado deve ter menos que 72 caracteres.</p>
+                    </div>     
+                  </div>
+                </div><!--/row -->
+                <div class="row">
+              </div>
+            </div>
+            
+             <div class="col-md-4 form-group {{(formCandidatoSimplificado.dtNascumentoInput.$invalid&&!formCandidatoSimplificado.dtNascumentoInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.dtNascumentoInput.$pristine&&'has-success'||'')}}">
+              <label for="dataNascimento" class="control-label">Data de Nascimento <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="candidatoSimplificado.documentos[3].dataNascimento" type="date" class="form-control" id="dataNascimento" name='dtNascumentoInput' ng-required='true'  ng-disabled="visualizar">
+            </div>
+            <div class="col-md-4 form-group {{(formCandidatoSimplificado.etniaInput.$invalid&&!formCandidatoSimplificado.etniaInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.etniaInput.$pristine&&'has-success'||'')}}">
+              <label for="tipoEnderecoSelect" class="control-label">Etnia</label>
+              <select ng-model="candidatoSimplificado.etnia" name="etniaInput" class="form-control"  ng-disabled="visualizar">
+                <option value="" selected="selected"> Selecione uma etnia </option>
+                <option value="Amarela">Amarela</option>
+                <option value="Branca">Branca</option>
+                <option value="Negra">Negra</option>
+                <option value="Parda">Parda</option>
+                <option value="Indígena">Indígena</option>
+              </select>           
+            </div>
+            <div class="col-md-4 form-group {{(formCandidatoSimplificado.estadoCivilInput.$invalid&&!formCandidatoSimplificado.estadoCivilInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.estadoCivilInput.$pristine&&'has-success'||'')}}">
+              <label for="EstadoCivil" class="control-label">Estado civil</label>
+              <select ng-model="candidatoSimplificado.estadoCivil" name="estadoCivilInput" class="form-control"  ng-disabled="visualizar">
+                <option value="" selected="selected"> Selecione um estado cvil</option>
+                <option value="Casado">Casado</option>
+                <option value="Solteiro">Solteiro</option>
+                <option value="Divorciado">Divorciado</option>
+                <option value="Separado">Separado</option>
+                <option value="Viúvo">Viúvo</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="radioHabilidadeManual" class="control-label">Habilidade Manual</label>
+              <div id="radioHabilidadeManual">
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.habilidadeManual" type="radio" name="habilidadeManual" value="Destro"  ng-disabled="visualizar">
+                    Destro
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.habilidadeManual" type="radio" name="habilidadeManual" value="Canhoto"   ng-disabled="visualizar">
+                    Canhoto
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.habilidadeManual" type="radio" name="habilidadeManual" value="Ambidestro"  ng-disabled="visualizar">
+                    Ambidestro
+                  </label>
+                </div>      
+              </div>  
+            </div>
+            <div class="col-md-6">
+              <label for="radioSexo" class="control-label">Sexo <strong class="text-danger form-obrigatorio">*</strong></label>
+              <div id="radioSexo">
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.sexo" type="radio" name="sexoInput" value="Masculino" ng-required='true'  ng-disabled="visualizar">
+                    Masculino
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.sexo" type="radio" name="sexoInput" value="Feminino" ng-required='true'>
+                    Feminino
+                  </label>
+                </div>
+            </div>      
+            </div>  
+          </div><!--/row -->
+        </div>
+      </div>
+      <div class="panel panel-dark-green panel-form">
+        <div class="panel-heading panel-form-documentos">
+          <h1 class="panel-title">
+            Documentos
+          </h1>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-5 form-group {{(formCandidatoSimplificado.cpfInput.$invalid&&!formCandidatoSimplificado.cpfInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.cpfInput.$pristine&&'has-success'||'')}}">
+              <label class="control-label" for="cpf">CPF <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="candidatoSimplificado.documentos[0].numero" ng-cpf ui-mask="999.999.999-99" type="text" class="form-control" name="cpfInput"  ng-disabled="visualizar">
+            <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.cpfInput.$error.cpf&&!formCandidatoSimplificado.cpfInput.$pristine"  >O <strong>CPF</strong> é inválido.</p>
+                <p ng-show="formCandidatoSimplificado.cpfInput.$error.required&&!formCandidatoSimplificado.cpfInput.$pristine"  >O <strong>CPF</strong> é obrigatório.</p>
+            </div>  
+            </div>
+            <div class="col-md-4 form-group {{(formCandidatoSimplificado.rgInput.$invalid&&!formCandidatoSimplificado.rgInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.rgInput.$pristine&&'has-success'||'')}}">
+              <label for="rg" class="control-label">RG <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="candidatoSimplificado.documentos[1].numero" name='rgInput' type="text" class="form-control" id="rg" placeholder="Ex: 330491345" ng-disabled="visualizar" ng-maxlength="30" ng-minlength="4">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.rgInput.$error.minlength"  >O <strong>RG</strong> informado deve ter mais que 3 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.rgInput.$error.maxlength"  >O <strong>RG</strong> informado deve ter menos que 30 caracteres.</p>
+              </div>  
+            </div>
+            <div class="col-md-3 form-group {{(formCandidatoSimplificado.orgExpInput.$invalid&&!formCandidatoSimplificado.orgExpInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.orgExpInput.$pristine&&'has-success'||'')}}">
+              <label for="orgaoExpedidor" class="control-label">Orgão expedidor </label>
+              <input ng-model="candidatoSimplificado.documentos[1].orgaoExpedidor" type="text" class="form-control" id="orgaoExpedidor" placeholder="Ex: SSP" name='orgExpInput' ng-minlength="2" ng-maxlength="12"  ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.orgExpInput.$error.minlength"  >O <strong>Orgão expedidor</strong> informado deve ter mais que 1 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.orgExpInput.$error.maxlength"  >O <strong>Orgão expedidor</strong> informado deve ter menos que 12 caracteres.</p>
+              </div>  
+            </div>
+          </div> <!--/row --> 
+          <div class="row">
+            <div class="col-md-6 form-group {{(formCandidatoSimplificado.ctpsInput.$invalid&&!formCandidatoSimplificado.ctpsInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.ctpsInput.$pristine&&'has-success'||'')}}">
+              <label for="carteiraProfissional" class="control-label">Carteira profissional(CTPS)</label>
+              <input ng-model="candidatoSimplificado.documentos[2].numero" type="text" class="form-control" id="carteiraProfissional" placeholder="Carteira Profissional" name='ctpsInput'  ng-disabled="visualizar" ng-minlength="2" ng-maxlength="14"  ng-pattern="/^[0-9\-\.]+$/">
+               <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.ctpsInput.$error.pattern">O <strong>CTPS</strong> informado é inválido.</p>
+                <p ng-show="formCandidatoSimplificado.ctpsInput.$error.minlength"  >O <strong>CTPS</strong> informado deve ter mais que 1 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.ctpsInput.$error.maxlength"  >O <strong>CTPS</strong> informado deve ter menos que 15 caracteres.</p>
+              </div>  
+            </div>
+            <div class="col-md-6 form-group {{(formCandidatoSimplificado.pisInput.$invalid&&!formCandidatoSimplificado.pisInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.pisInput.$pristine&&'has-success'||'')}}">
+              <label for="pis" class="control-label">PIS</label>
+              <input ng-model="candidatoSimplificado.documentos[2].pis" type="text" class="form-control" id="pis" name='pisInput' ng-disabled="visualizar" ui-mask="999.99999.99-9">
+               <div class="help-error bg-danger">
+              </div>  
+            </div>
+          </div><!--/row -->
+        </div>
+      </div>
+      <div class="panel panel-teal panel-form">
+        <div class="panel-heading panel-form-telefones">
+          <h1 class="panel-title">
+            Telefones
+          </h1>
+        </div>
+        <div class="panel-body">
+          <fe-telefones telefones="candidatoSimplificado.telefones" visualizar='visualizar'>
+          </fe-telefones>
+        </div>
+      </div>
+      <div class="panel panel-deep-purple panel-form">
+        <div class="panel-heading panel-form-enderecos">
+          <h1 class="panel-title">
+            Endereços
+          </h1>
+        </div>
+        <div class="panel-body">
+          <fe-enderecos enderecos="candidatoSimplificado.enderecos"  visualizar='visualizar'>
+          </fe-enderecos>
+        </div>
+      </div>
+      <div class="panel panel-cyan panel-form">
+        <div class="panel-heading panel-form-filiacao">
+          <h1 class="panel-title">
+            Filiação
+          </h1>
+        </div>
+        <div class="panel-body">
+        	<div class="row">
+            <div class="col-md-8 form-group {{(formCandidatoSimplificado.maeInput.$invalid&&!formCandidatoSimplificado.maeInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.maeInput.$pristine&&'has-success'||'')}}">
+              <label for="maeNome" class="control-label">Mãe (Responsavel) <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="candidatoSimplificado.mae.nome" type="text" class="form-control" name="maeInput" placeholder="Ex: Maria" ng-minlength="5" ng-maxlength="72" ng-disabled="visualizar" ng-pattern="/^[A-zÀ-ú ]+$/">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.maeInput.$error.minlength"  >O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.maeInput.$error.maxlength"  >O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.maeInput.$error.pattern"  >O <strong>Nome</strong> informado é inválido</p>
+              </div>              
+            </div>
+            <div class="col-md-4 form-group {{(formCandidatoSimplificado.profissaoMaeInput.$invalid&&!formCandidatoSimplificado.profissaoMaeInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.profissaoMaeInput.$pristine&&'has-success'||'')}}">
+              <label for="profissaoMae" class="control-label">Profissão</label>
+              <input ng-model="candidatoSimplificado.mae.profissao" type="text" class="form-control" placeholder="Profissão" name='profissaoMaeInput' ng-minlength="4" ng-maxlength="72" ng-disabled="visualizar" ng-pattern="/^[A-zÀ-ú ]+$/">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.profissaoMaeInput.$error.minlength"  >A <strong>Profissão</strong> informado deve ter mais de 3 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.profissaoMaeInput.$error.maxlength"  >A <strong>Profissão</strong> informado deve ter menos que 72 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.profissaoMaeInput.$error.pattern"  >A <strong>Profissão</strong> informado é inválida.</p>
+              </div>  
+            </div>
+	 <!--          <div class="col-md-5 form-group {{(formCandidatoSimplificado.cpfMaeInput.$invalid&&!formCandidatoSimplificado.cpfMaeInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.cpfMaeInput.$pristine&&'has-success'||'')}}">
+	              <label class="control-label" for="cpf">CPF <strong class="text-danger form-obrigatorio">*</strong></label>
+	              <input ng-model="candidatoSimplificado.mae.documentos[0].numero" ng-cpf ui-mask="999.999.999-99" type="text" class="form-control" name="cpfMaeInput"  ng-disabled="visualizar">
+	            <div class="help-error bg-danger">
+	                <p ng-show="formCandidatoSimplificado.cpfMaeInput.$error.cpf&&!formCandidatoSimplificado.cpfMaeInput.$pristine"  >O <strong>CPF</strong> é inválido.</p>
+	                <p ng-show="formCandidatoSimplificado.cpfMaeInput.$error.required&&!formCandidatoSimplificado.cpfMaeInput.$pristine"  >O <strong>CPF</strong> é obrigatório.</p>
+	            </div>  
+	           </div>
+	          <div class="col-md-4 form-group {{(formCandidatoSimplificado.rgMaeInput.$invalid&&!formCandidatoSimplificado.rgMaeInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.rgMaeInput.$pristine&&'has-success'||'')}}">
+	            <label for="maeRg" class="control-label">RG <strong class="text-danger form-obrigatorio">*</strong></label>
+	            <input ng-model="candidatoSimplificado.mae.documentos[1].numero" name='rgMaeInput' type="text" class="form-control" id="maeRg" placeholder="Ex: 330491345" ng-disabled="visualizar" ng-maxlength="30" ng-minlength="4">
+	            <div class="help-error bg-danger">
+	              <p ng-show="formCandidatoSimplificado.rgMaeInput.$error.minlength"  >O <strong>RG</strong> informado deve ter mais que 3 caracteres.</p>
+	              <p ng-show="formCandidatoSimplificado.rgMaeInput.$error.maxlength"  >O <strong>RG</strong> informado deve ter menos que 30 caracteres.</p>
+	            </div>  
+	          </div>
+	          <div class="col-md-3 form-group {{(formCandidatoSimplificado.maeOrgExpInput.$invalid&&!formCandidatoSimplificado.maeOrgExpInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.maeOrgExpInput.$pristine&&'has-success'||'')}}">
+              <label for="maeOrgaoExpedidor" class="control-label">Orgão expedidor </label>
+              <input ng-model="candidatoSimplificado.mae.documentos[1].orgaoExpedidor" type="text" class="form-control" id="maeOrgaoExpedidor" placeholder="Ex: SSP" name='maeOrgExpInput' ng-minlength="2" ng-maxlength="12"  ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.maeOrgExpInput.$error.minlength"  >O <strong>Orgão expedidor</strong> informado deve ter mais que 1 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.maeOrgExpInput.$error.maxlength"  >O <strong>Orgão expedidor</strong> informado deve ter menos que 12 caracteres.</p>
+              </div>  
+            </div>
+	         </div><!-- row mae -->
+          </div>
+          <div class="row">
+            <div class="col-md-8 form-group {{(formCandidatoSimplificado.paiInput.$invalid&&!formCandidatoSimplificado.paiInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.paiInput.$pristine&&'has-success'||'')}}">
+              <label for="nome" class="control-label">Pai</label>
+              <input ng-model="candidatoSimplificado.pai.nome" type="text" class="form-control" name="paiInput" placeholder="Ex: Pedro" ng-minlength="5" ng-maxlength="72" ng-disabled="visualizar" ng-pattern="/^[A-zÀ-ú ]+$/">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.paiInput.$error.minlength"  >O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.paiInput.$error.maxlength"  >O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.paiInput.$error.pattern"  >O <strong>Nome</strong> informado é inválido</p>
+              </div>
+            </div>
+            <div class="col-md-4 form-group {{(formCandidatoSimplificado.profissaoPaiInput.$invalid&&!formCandidatoSimplificado.profissaoPaiInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.profissaoPaiInput.$pristine&&'has-success'||'')}}">
+              <label for="profissaoPai" class="control-label">Profissão</label>
+              <input ng-model="candidatoSimplificado.pai.profissao" type="text" class="form-control" placeholder="Profissão" name='profissaoPaiInput' ng-minlength="4" ng-maxlength="72" ng-disabled="visualizar" ng-pattern="/^[A-zÀ-ú ]+$/">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidatoSimplificado.profissaoPaiInput.$error.minlength"  >A <strong>Profissão</strong> informado deve ter mais de 3 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.profissaoPaiInput.$error.maxlength"  >A <strong>Profissão</strong> informado deve ter menos que 72 caracteres.</p>
+                <p ng-show="formCandidatoSimplificado.profissaoPaiInput.$error.pattern"  >A <strong>Profissão</strong> informado é inválida.</p>
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-deep-orange panel-form">
+        <div class="panel-heading panel-form-socio-economico">
+          <h1 class="panel-title">
+            Dados Sócio-Econômicos
+          </h1>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-8">
+              <label for="moraComResponsavel" class="control-label">Mora com a mãe ou outro responsável? <strong class="text-danger form-obrigatorio">*</strong></label>
+              <div id="moraComResponsavel">
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.dadosSocioEconomicos.moraComResponsavel" ng-value="true"  type="radio" name="moraComMae" ng-required='true' ng-disabled="visualizar">
+                    Sim
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.dadosSocioEconomicos.moraComResponsavel" ng-value="false" type="radio" name="moraComMae" ng-required='true' ng-disabled="visualizar">
+                    Não
+                  </label>
+                </div>
+              </div>  
+            </div>
+            <div ng-show="candidatoSimplificado.dadosSocioEconomicos.moraComResponsavel">
+              <div class="col-md-8 form-group {{(formCandidatoSimplificado.qtdMoramInput.$invalid&&!formCandidatoSimplificado.qtdMoramInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.qtdMoramInput.$pristine&&'has-success'||'')}}">
+                <label for="pessoasResidentes" class="control-label">Quantas pessoas residem na sua casa? <strong class="text-danger form-obrigatorio">*</strong></label>
+                <input ng-model="candidatoSimplificado.dadosSocioEconomicos.numeroResidentesNaCasa" ng-change="calculoRendaPercapta()" type="number" class="form-control" id="pessoasResidentes" placeholder="Ex: 4" name='qtdMoramInput' ng-disabled="visualizar" min="1">
+                <div class="help-error bg-danger error">
+                  <p ng-show="formCandidatoSimplificado.qtdMoramInput.$error.number" >Este campo <strong>só</strong> aceita <strong>números</strong></p>
+                  <p ng-show="formCandidatoSimplificado.qtdMoramInput.$error.required&&!formCandidatoSimplificado.qtdMoramInput.$pristine" >Este é obrigatório.</p>
+                  <p ng-show="formCandidatoSimplificado.qtdMoramInput.$error.min" >O valor deve ser maior que 0.</p>
+                </div> 
+              </div>
+              <div class="col-md-4 form-group {{(formCandidatoSimplificado.qtdTrampaInput.$invalid&&!formCandidatoSimplificado.qtdTrampaInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.qtdTrampaInput.$pristine&&'has-success'||'')}}">
+                <label for="residentesTrabalham" class="control-label">Quantas dessas trabalham <strong class="text-danger form-obrigatorio">*</strong></label>
+                <input ng-model="candidatoSimplificado.dadosSocioEconomicos.quantasPessoasTrabalham"  type="number" class="form-control" id="residentesTrabalham" placeholder="Ex: 2" name='qtdTrampaInput' min="1" ng-disabled="visualizar">
+                <div class="help-error bg-danger error">
+                  <p ng-show="formCandidatoSimplificado.qtdTrampaInput.$error.number" >Este campo <strong>só</strong> aceita <strong>números</strong></p>
+                  <p ng-show="formCandidatoSimplificado.qtdTrampaInput.$error.required&&!formCandidatoSimplificado.qtdTrampaInput.$pristine" >Este campo é obrigatório.</p>                  
+                  <p ng-show="formCandidatoSimplificado.qtdTrampaInput.$error.min&&!formCandidatoSimplificado.qtdTrampaInput.$pristine" >O valor deve ser maior que 0.</p>
+                </div> 
+              </div>
+            </div><!--/row -->
+          </div><!--/row -->
+          <div class="row">
+            <div class="col-md-12">
+              <label for="auxilioGovernamental" class="control-label">Alguém da família recebe algum axílio do governo?  <strong class="text-danger form-obrigatorio">*</strong> Ex. Bolsa família, Aposentadoria etc.</label>
+                <div id="auxilioGovernamental">
+                  <div class="radio-inline">
+                    <label class="control-label">
+                      <input ng-model="candidatoSimplificado.dadosSocioEconomicos.auxilioGovernamental" type="radio" name="auxilioGovernamental" ng-required='true' ng-value="true" ng-disabled="visualizar">
+                      Sim
+                    </label>
+                  </div>
+                  <div class="radio-inline">
+                    <label class="control-label">
+                      <input ng-model="candidatoSimplificado.dadosSocioEconomicos.auxilioGovernamental" type="radio" name="auxilioGovernamental" ng-required='true' ng-value="false" ng-disabled="visualizar">
+                      Não
+                    </label>
+                  </div>
+                </div>  
+              </div>
+            </div><!--/row -->
+          <div class="row" ng-show="candidatoSimplificado.dadosSocioEconomicos.auxilioGovernamental">
+             <div class="col-md-6 form-group {{(formCandidatoSimplificado.auxGovInput.$invalid&&!formCandidatoSimplificado.auxGovInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.auxGovInput.$pristine&&'has-success'||'')}}">
+              <label for="beneficioGovernamental" class="control-label">Qual? <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="candidatoSimplificado.dadosSocioEconomicos.beneficioSocial" type="text" class="form-control" id="beneficioGovernamental" name='auxGovInput' ng-required='candidatoSimplificado.dadosSocioEconomicos.auxilioGovernamental' ng-disabled="visualizar">
+              <div class="help-error bg-danger error">
+                <p ng-show="formCandidatoSimplificado.auxGovInput.$error.required&&!formCandidatoSimplificado.auxGovInput.$pristine" >Este campo é obrigatório.</p>
+              </div> 
+            </div>
+            <div class="col-md-6 form-group {{(formCandidatoSimplificado.beneficioInput.$invalid&&!formCandidatoSimplificado.beneficioInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.beneficioInput.$pristine&&'has-success'||'')}}">
+              <label for="valorBeneficioGovernamental" class="control-label">Valor do beneficio R$ <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="candidatoSimplificado.dadosSocioEconomicos.valorBeneficio" type="number" min="1" step="0.10" class="form-control" id="valorBeneficioGovernamental" placeholder="Ex: 300,00" name='beneficioInput' ng-required='candidatoSimplificado.dadosSocioEconomicos.auxilioGovernamental' ng-disabled="visualizar">
+              <div class="help-error bg-danger error">
+                <p ng-show="formCandidatoSimplificado.beneficioInput.$error.number" >Este campo <strong>só</strong> aceita <strong>números</strong></p>
+                <p ng-show="formCandidatoSimplificado.beneficioInput.$error.required&&!formCandidatoSimplificado.beneficioInput.$pristine" >Este campo é obrigatório.</p>
+                <p ng-show="formCandidatoSimplificado.beneficioInput.$error.min&&!formCandidatoSimplificado.beneficioInput.$pristine" >O valor deve ser maior que 0.</p>
+              </div> 
+            </div>
+          </div><!--/row -->
+           <div class="row">
+            <div class="col-md-6 form-group {{(formCandidatoSimplificado.rendaFamiliarImput.$invalid&&!formCandidatoSimplificado.rendaFamiliarImput.$pristine)&&'has-error'||(!formCandidatoSimplificado.rendaFamiliarImput.$pristine&&'has-success'||'')}}">
+              <label for="valorrendaFamiliarImput" class="control-label">Renda Familiar R$ <!-- <strong class="text-danger form-obrigatorio">*</strong> --></label>
+              <input ng-model="candidatoSimplificado.dadosSocioEconomicos.rendaFamiliar" ng-change="calculoRendaPercapta()" type="number" min="1" step="0.10" class="form-control" id="valorrendaFamiliarImput" placeholder="Ex: 1.200,00" name='rendaFamiliarImput' ng-disabled="visualizar">
+              <div class="help-error bg-danger error">
+                <p ng-show="formCandidatoSimplificado.rendaFamiliarImput.$error.number" >Este campo <strong>só</strong> aceita <strong>números</strong></p>
+                <p ng-show="formCandidatoSimplificado.rendaFamiliarImput.$error.required&&!formCandidatoSimplificado.rendaFamiliarImput.$pristine" >Este campo é obrigatório.</p>
+                <p ng-show="formCandidatoSimplificado.rendaFamiliarImput.$error.min&&!formCandidatoSimplificado.rendaFamiliarImput.$pristine" >O valor deve ser maior que 0.</p>
+              </div> 
+            </div>
+            <div class="col-md-6 form-group {{(formCandidatoSimplificado.rendaPerCapitaInput.$invalid&&!formCandidatoSimplificado.rendaPerCapitaInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.rendaPerCapitaInput.$pristine&&'has-success'||'')}}">
+              <label for="valorBeneficioGovernamental" class="control-label">Renda per Capta R$ <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="candidatoSimplificado.dadosSocioEconomicos.rendaPerCapita" readonly="readonly" type="number" min="1" step="0.10" class="form-control" id="valorBeneficioGovernamental"  name='rendaPerCapitaInput' ng-disabled="visualizar">
+              <div class="help-error bg-danger error">
+                <p ng-show="formCandidatoSimplificado.rendaPerCapitaInput.$error.number" >Este campo <strong>só</strong> aceita <strong>números</strong></p>
+                <p ng-show="formCandidatoSimplificado.rendaPerCapitaInput.$error.required&&!formCandidatoSimplificado.rendaPerCapitaInput.$pristine" >Este campo é obrigatório.</p>
+                <p ng-show="formCandidatoSimplificado.rendaPerCapitaInput.$error.min&&!formCandidatoSimplificado.rendaPerCapitaInput.$pristine" >O valor deve ser maior que 0.</p>
+              </div> 
+            </div>
+          </div><!--/row -->
+        </div>
+      </div>
+      <div class="panel panel-indigo panel-form">
+        <div class="panel-heading panel-form-escolares">
+          <h1 class="panel-title">
+            Dados Escolares
+          </h1>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6 form-group {{(formCandidatoSimplificado.colegioInput.$invalid&&!formCandidatoSimplificado.colegioInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.colegioInput.$pristine&&'has-success'||'')}}">
+              <label for="escolaColegio" class="control-label">Escola / Colégio <strong class="text-danger form-obrigatorio">*</strong></label>
+              <select ng-model="candidatoSimplificado.instituicaoEnsino"  ng-options="i.nome for i in instituicoes track by i.id" type="text" class="form-control" id="escolaColegio" ng-required='true' name='colegioInput' ng-disabled="visualizar">               
+              </select>
+              <div class="help-error bg-danger error">
+                <p ng-show="formCandidatoSimplificado.colegioInput.$error.required&&!formCandidatoSimplificado.colegioInput.$pristine" >O campo <strong>Colégio</strong> é obrigatório.</p>
+              </div> 
+            </div>
+            <div class="col-md-6 form-group {{(formCandidatoSimplificado.serieInput.$invalid&&!formCandidatoSimplificado.serieInput.$pristine)&&'has-error'||(!formCandidatoSimplificado.serieInput.$pristine&&'has-success'||'')}}">
+              <label for="serieAno" class="control-label">Série / Ano <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="candidatoSimplificado.serieEscolar" type="text" class="form-control" id="serieEscolar" placeholder="Série/ Ano" name='serieInput' ng-disabled="visualizar" ng-maxlength="5">
+              <div class="help-error bg-danger error">
+                <p ng-show="formCandidatoSimplificado.serieInput.$error.required&&!formCandidatoSimplificado.serieInput.$pristine" >O campo <strong>Série</strong> é obrigatório.</p>
+                <p ng-show="formCandidatoSimplificado.serieInput.$error.maxlength&&!formCandidatoSimplificado.serieInput.$pristine" >O campo <strong>Série</strong> deve ter menos que 6 caracteres.</p>
+              </div> 
+            </div>
+          </div><!--/row -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="turno" class="control-label">Turno</label>
+              <div id="turno">
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.turno" type="radio" name="turno" value="Manha" ng-disabled="visualizar">
+                    Manhã
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.turno" type="radio" name="turno" value="Tarde" ng-disabled="visualizar">
+                    Tarde
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.turno" type="radio" name="turno" value="Noite" ng-disabled="visualizar">
+                    Noite
+                  </label>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-blue-grey panel-form">
+        <div class="panel-heading panel-form-filhos">
+          <h1 class="panel-title">
+            Dependentes
+          </h1>          
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="temFilhos" class="control-label">Tem filho(s)? <strong class="text-danger form-obrigatorio">*</strong></label>
+              <div id="temFilhos">
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.temFilhos" type="radio" name="temFilhos" ng-value="true" ng-required='true' ng-disabled="visualizar">
+                    Sim
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label class="control-label">
+                    <input ng-model="candidatoSimplificado.temFilhos" type="radio" name="temFilhos" ng-value="false" ng-required='true' ng-disabled="visualizar">
+                    Não
+                  </label>
+                </div>
+              </div>  
+            </div>
+          </div>
+          <fe-filhos filhos="candidatoSimplificado.filhos" tem-filhos="candidatoSimplificado.temFilhos" visualizar='visualizar'>
+          </fe-filhos>
+        </div>
+      </div>
+      <div class="row pull-right">
+        <div class="col-md-12">
+          <a href="./#/candidato" class="btn btn-info" >Voltar</a>
+          <button type="button" class="btn btn-warning"  ng-if="!visualizar">Limpar</button>
+          <button ng-click="salvarCandidato(candidatoSimplificado)" ng-disabled="formCandidatoSimplificado.$invalid||candidatoSimplificado.telefones.length==0" type="button" class="btn btn-success"  ng-if="!visualizar">Salvar</button>    
+        </div>
+      </div><!--/row -->
+     <!-- <div class="row">
+        <div class="col-md-12">
+          <pre>
+            {{candidatoSimplificado}}
+          </pre>
+        </div>
+      </div> -->
+    </form>
+  </div>
+</div>  
+<!--Fim do conteÃƒÂºdo do Form-->
+
+

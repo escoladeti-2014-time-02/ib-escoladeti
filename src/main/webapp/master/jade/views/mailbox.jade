@@ -1,0 +1,259 @@
+h3 MailBox
+
+.table-grid
+  .col.col-md
+    .pr
+      .clearfix.mb
+        button.btn.btn-sm.btn-default.mb-toggle-button.pull-right(type="button", ng-click="mailboxMenuCollapsed = !mailboxMenuCollapsed", ng-init="mailboxMenuCollapsed = true")
+          em.fa.fa-bars.fa-fw.fa-lg
+        button.btn.btn-purple.btn-sm.mb-compose-button(type="button") 
+          em.fa.fa-pencil
+          span Compose
+      // START mailbox list
+      .mb-boxes(collapse="mailboxMenuCollapsed")
+        .panel.panel-default
+          .panel-body
+            ul.nav.nav-pills.nav-stacked
+              li.p
+                small.text-muted MAILBOXES
+              li.active
+                a(href='#')
+                  span.label.label-primary.pull-right 42
+                  em.fa.fa-inbox.fa-fw.fa-lg
+                  span Inbox
+              li
+                a(href='#') 
+                  span.label.label-success.pull-right 10
+                  em.fa.fa-star.fa-fw.fa-lg
+                  span Starred
+              li
+                a(href='#') 
+                  span.label.label-danger.pull-right 2
+                  em.fa.fa-paper-plane-o.fa-fw.fa-lg
+                  span Sent
+              li
+                a(href='#') 
+                  span.label.label-warning.pull-right 5
+                  em.fa.fa-edit.fa-fw.fa-lg
+                  span Drafts
+              li
+                a(href='#') 
+                  span.label.label-green.pull-right 12
+                  em.fa.fa-trash-o.fa-fw.fa-lg
+                  span Trash
+              li.p
+                small.text-muted Labels
+              li.p-h
+                a.pv-sm(href='#') 
+                  span.circle.circle-danger
+                  span Red
+              li
+                a.pv-sm(href='#') 
+                  span.circle.circle-pink
+                  span Pink
+              li
+                a.pv-sm(href='#') 
+                  span.circle.circle-info
+                  span Blue
+              li
+                a.pv-sm(href='#') 
+                  span.circle.circle-warning
+                  span Yellow
+      // END mailbox list
+  
+  .col
+    // START action buttons
+    .clearfix.mb
+      .btn-group.pull-left
+        button.btn.btn-default.btn-sm(type="button")
+          em.fa.fa-mail-reply.text-gray-dark
+        button.btn.btn-default.btn-sm(type="button")
+          em.fa.fa-mail-reply-all.text-gray-dark
+        button.btn.btn-default.btn-sm(type="button")
+          em.fa.fa-mail-forward.text-gray-dark
+      .btn-group.pull-right
+        button.btn.btn-default.btn-sm(type="button")
+          em.fa.fa-exclamation.text-gray-dark
+        button.btn.btn-default.btn-sm(type="button")
+          em.fa.fa-times.text-gray-dark
+    // END action buttons
+    // START Mails
+    .panel.panel-default
+      .panel-body
+        table.table.table-hover.mb-mails
+          //-
+            thead
+              tr
+                th.check-all
+                  .checkbox.c-checkbox(data-toggle="tooltip",data-title="Check All")
+                    label
+                      input(type='checkbox')
+                      span.fa.fa-check
+                th Details
+          tbody
+            tr.mb-mail-active
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox', checked="checked")
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star.fa-lg.text-warning
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/01.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Antonio Griffin
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/02.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Bernard Elliott
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/03.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Alfredo Fletcher
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/04.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Mitchell Burke
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/05.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Joel Miles
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/06.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Alyssa Kim
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/07.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Jim Cruz
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/08.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Rebecca Griffin
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/09.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Gwendolyn Wood
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/10.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Bobbie Fox
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+            tr
+              td
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox')
+                    span.fa.fa-check
+              td.text-center
+                em.fa.fa-star-o.fa-lg.text-muted
+              td 
+                .mb-mail-date 10:30pm
+                img.mb-mail-avatar(src="app/img/user/11.jpg", alt="Mail Avatar")
+                .pull-left
+                  .mb-mail-from Elizabeth Castillo
+                  .mb-mail-subject Sed fringilla molestie convallis. 
+                .mb-mail-preview Mauris hendrerit nibh eu nisi congue dapibus. Quisque pharetra, arcu a consectetur aliquet, mi enim porta enim, quis sodales nisl justo et justo...
+    // END Mails

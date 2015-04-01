@@ -1,0 +1,117 @@
+<!--Início do conteúdo do Form-->
+<h3>
+  Cadastro de Cidade 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div class="row" >
+  <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+    
+    <form name="formCidade" role="form">
+      <div class="panel panel-blue panel-form">
+        <div class="panel-heading panel-form-pessoais">
+          <h1 class="panel-title">
+            Cidade
+          </h1>
+        </div><!--/div panel-->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-muted text-center"><strong class="text-danger form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p> 
+            </div>        
+          </div>
+          <div class="row">
+            <div class="col-md-12 form-group {{(formCidade.nomeInput.$invalid&&!formCidade.nomeInput.$pristine)&&'has-error'||(!formCidade.nomeInput.$pristine&&'has-success'||'')}}">
+              <label for="nomeInput" class="control-label">Nome da Cidade <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="cidade.isDistrito" type="checkbox" id="cbDistrito" ng-disabled="visualizar"></input>
+              <label class="control-label">Distrito</label>
+              <input ng-model="cidade.nome" type="text" name="nomeInput" class="form-control" placeholder="Ex: Maringá"  ng-minlength="4" ng-maxlength="72" required="true" ng-disabled="visualizar">
+                <div class="help-error bg-danger">
+                   <p ng-show="formCidade.nomeInput.$error.required&&!formCidade.nomeInput.$pristine">O campo <strong>Nome da Cidade</strong> é obrigatório.</p>
+                   <p ng-show="formCidade.nomeInput.$error.minlength" >O <strong>Nome da Cidade</strong> informado deve ter mais de 3 caracteres.</p>
+                   <p ng-show="formCidade.nomeInput.$error.maxlength" >O <strong>Nome da Cidade</strong> informado deve ter menos que 72 caracteres.</p>
+                </div>
+            </div>
+          </div><!--/row-->
+          <div class="row">
+            <div class="col-md-3 form-group {{(formCidade.siglaInput.$invalid&&!formCidade.siglaInput.$pristine)&&'has-error'||(!formCidade.siglaInput.$pristine&&'has-success'||'')}}">
+              <label for="siglaInput" class="control-label">Sigla <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="cidade.sigla" type="text" name="siglaInput" class="form-control" placeholder="Ex: MGA" required="true" ng-disabled="visualizar">
+                  <div class="help-error bg-danger">
+                    <p ng-show="formCidade.siglaInput.$error.required&&!formCidade.siglaInput.$pristine">O campo <strong>Sigla</strong> é obrigatório.</p> 
+                  </div>
+            </div>
+            <div class="col-md-3 form-group {{(formCidade.dddInput.$invalid&&!formCidade.dddInput.$pristine)&&'has-error'||(!formCidade.dddInput.$pristine&&'has-success'||'')}}">
+              <label for="dddInput" class="control-label">DDD <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="cidade.ddd" type="number" name="dddInput" class="form-control" placeholder="Ex: 44" required="true" ng-disabled="visualizar">
+                <div class="help-error bg-danger">
+                    <p ng-show="formCidade.dddInput.$error.required&&!formCidade.dddInput.$pristine">O campo <strong>DDD</strong> é obrigatório.</p>                    
+                </div>
+            </div>
+            <div class="col-md-6 form-group {{(formCidade.dataFundacaoInput.$invalid&&!formCidade.dataFundacaoInput.$pristine)&&'has-error'||(!formCidade.dataFundacaoInput.$pristine&&'has-success'||'')}}">
+              <label for="dataFundacaoInput" class="control-label">Data de Fundação <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input type="date" ng-model="cidade.dataFundacao" name="dataFundacaoInput" class="form-control" placeholder="__/__/____" required="true" ng-disabled="visualizar">
+                <div class="help-error bg-danger">
+                    <p ng-show="formCidade.dataFundacaoInput.$error.required&&!formCidade.dataFundacaoInput.$pristine">O campo <strong>Data de Fundação</strong> é obrigatório.</p>                    
+                </div>
+            </div>
+          </div><!--/row-->
+
+          <div class="row">
+            <div class="col-md-6 form-group {{(formCidade.paisSelect.$invalid&&!formCidade.paisSelect.$pristine)&&'has-error'||(!formCidade.paisSelect.$pristine&&'has-success'||'')}}">
+              <label for="paisSelect" class="control-label">País <strong class="text-danger form-obrigatorio">*</strong></label>
+              <select ng-model="cidade.filtro.pais"  name="paisSelect" ng-options="p.nome for p in paises track by p.id"  class="form-control" required="true" ng-change="getUfs(cidade.filtro.pais.id)" ng-disabled="visualizar">
+              <option value="">Selecione um país</option>
+                <div class="help-error bg-danger">
+                    <p ng-show="formCidade.paisSelect.$error.required&&!formCidade.paisSelect.$pristine">O campo <strong>País</strong> é obrigatório.</p>                    
+                </div>
+              </select>
+            </div>
+            <div class="col-md-6 form-group {{(formCidade.ufSelect.$invalid&&!formCidade.ufSelect.$pristine)&&'has-error'||(!formCidade.ufSelect.$pristine&&'has-success'||'')}}">
+              <label for="ufSelect" class="control-label">Unidade Federativa <strong class="text-danger form-obrigatorio">*</strong></label>
+              <select ng-model="cidade.unidadeFederativa" name="ufSelect" ng-options="u.nome for u in ufs track by u.id" class="form-control" required="true" ng-change="getCidades(cidade.unidadeFederativa.id)" ng-disabled="!ufs || visualizar">
+              <option value="">Selecione uma unidade federativa</option>
+                <div class="help-error bg-danger">
+                    <p ng-show="formCidade.ufSelect.$error.required&&!formCidade.ufSelect.$pristine">O campo <strong>Unidade Federativa</strong> é obrigatório.</p>                    
+                </div>
+              </select>
+            </div>
+          </div><!--/row-->
+          <div ng-show="cidade.isDistrito">
+            <div class="row">
+            <!--ESTES DADOS DEVERÃO SER MOSTRADOS APENAS AO SELECIONAR DISTRITO-->
+              <div class="col-md-6 form-group" >
+                <label for="inicioVigenciaInput" class="control-label">Inicio Vigência <strong class="text-danger form-obrigatorio">*</strong></label>
+                <input ng-model="cidade.inicioVigencia" type="date" name="inicioVigenciaInput" class="form-control" placeholder="__/__/____" ng-required="cidade.isDistrito" ng-disabled="visualizar">
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="fimVigenciaInput" class="control-label">Fim Vigência <strong class="text-danger form-obrigatorio">*</strong></label>
+                <input ng-model="cidade.fimVigencia" type="date" name="fimVigenciaInput" class="form-control" placeholder="__/__/____" ng-required="cidade.isDistrito" ng-disabled="visualizar">
+              </div>
+            </div><!--/row-->
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="selectCidadeSede" class="control-label">Cidade sede <strong class="text-danger form-obrigatorio">*</strong></label> 
+                <select ng-model="cidade.cidade" name="selectCidadeSede" ng-options="p.nome for p in cidades track by p.id" class="form-control" ng-required="cidade.isDistrito" ng-disabled="visualizar">
+                 <option value="">-- Selecione uma cidade --</option>
+                </select>
+              </div>
+            </div><!--/row-->
+          </div>
+        </div>
+      </div>
+      
+      <div class="row pull-right">
+        <div class="col-md-12">
+          <a href="./#/endereco/cidade" class="btn btn-info">
+            Voltar
+          </a>
+            <fe-resetform re-origem="objetoOrigem" re-reset="cidade" re-form="formCidade"></fe-resetform>
+          <button  ng-disabled="formCidade.$invalid" ng-click="salvarCidade(cidade)" class="btn btn-success" ng-if="!visualizar">
+            Salvar
+          </button>         
+        </div>
+      </div><!--/row-->
+    </form> 
+  </div>
+</div><!--/row-->
+<!--Fim do conteúdo do Form-->

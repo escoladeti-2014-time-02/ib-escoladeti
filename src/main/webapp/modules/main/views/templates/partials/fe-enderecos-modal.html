@@ -1,0 +1,138 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Cadastro de Endereço</h3>
+    </div>
+  </div>
+  <ng-form name='form.endereco' novalidate>
+    <div class="row">      
+      <div class="col-md-6 form-group {{(form.endereco.cepInput.$invalid&&!form.endereco.cepInput.$pristine)&&'has-error'||(!form.endereco.cepInput.$pristine&&'has-success'||'')}}">
+        <label for="nomeInput" class="control-label">CEP <strong class="text-danger form-obrigatorio">*</strong></label>
+        <input ng-model="modalEnd.cep" type="text" class="form-control" id="cepInput" ui-mask="99999-999" ng-required='true' name='cepInput' ng-change="getEndereco(modalEnd.cep, modalEnd, modalFiltro)">
+        <div class="help-error bg-danger">
+          <p ng-show="formCandidatoSimplificado.cepInput.$error.required&&!formCandidatoSimplificado.cepInput.$pristine">O campo <strong>CEP</strong> é obrigatório</p>
+        </div> 
+      </div> 
+    </div>
+    <div class="row">  
+      <div class="col-md-4 form-group {{(form.endereco.numInput.$invalid&&!form.endereco.numInput.$pristine)&&'has-error'||(!form.endereco.numInput.$pristine&&'has-success'||'')}}">
+        <label for="complementoInput" class="control-label">Número <strong class="text-danger form-obrigatorio">*</strong></label>
+        <input ng-model="modalEnd.numero" type="text" class="form-control" id="numeroInput" placeholder="9900" ng-required='true' name='numInput'>
+        <div class="help-error bg-danger">
+          <p ng-show="form.endereco.numInput.$error.required&&!form.endereco.numInput.$pristine">O campo <strong>Número</strong> é obrigatório.</p>
+        </div> 
+      </div>
+      <div class="col-md-8 form-group {{(form.endereco.complementoInput.$invalid&&!form.endereco.complementoInput.$pristine)&&'has-error'||(!form.endereco.complementoInput.$pristine&&'has-success'||'')}}">
+        <label for="complementoInput" class="control-label">Complemento</label>
+        <input ng-model="modalEnd.complemento" type="text" class="form-control" id="complementoInput" placeholder="Complemento" name="complementoInput" ng-maxlength="72" ng-minlength="4">
+        <div class="help-error bg-danger">
+          <p ng-show="form.endereco.complementoInput.$error.minlength">O <strong>Complemento</strong> informado deve ter mais de 3 caracteres.</p>
+          <p ng-show="form.endereco.complementoInput.$error.maxlength">O <strong>Complemento</strong> informado deve ter menos que 72 caracteres.</p>
+        </div>      
+      </div>
+    </div><!--/row -->   
+    <div class="row">
+      <div class="col-md-6 form-group {{(form.endereco.tipoEnderecoSelectInput.$invalid&&!form.endereco.tipoEnderecoSelectInput.$pristine)&&'has-error'||(!form.endereco.tipoEnderecoSelectInput.$pristine&&'has-success'||'')}}">
+        <label for="tipoEnderecoSelect" class="control-label">Tipo do Endereço</label>
+        <select ng-model="modalEnd.tipoEndereco"  class="form-control" name="tipoEnderecoSelectInput">
+          <option value="" selected="selected"> Selecione o tipo do endereço </option>
+          <option value="Principal">Principal</option>
+          <option value="Cobranca">Cobrança</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="areaResidencia" class="control-label">Área</label>
+        <div id="areaResidencia">
+          <div class="radio-inline">
+            <label class="control-label">
+              <input ng-model="modalEnd.areaResidencia" type="radio" name="areaResidencia" value="Rural" name='areaInput'>
+              Rural
+            </label>
+          </div>
+          <div class="radio-inline">
+            <label class="control-label">
+              <input ng-model="modalEnd.areaResidencia" type="radio" name="areaResidencia" value="Urbana" name='areaInput'>
+              Urbana
+            </label>
+          </div>      
+        </div>  
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group {{(form.endereco.paisInput.$invalid&&!form.endereco.paisInput.$pristine)&&'has-error'||(!form.endereco.paisInput.$pristine&&'has-success'||'')}}">
+        <label class="control-label">País <strong class="text-danger form-obrigatorio">*</strong></label>
+        <select ng-model="modalFiltro.endereco.pais" ng-options="p.nome for p in paises track by p.id" ng-change='getUfs(modalFiltro.endereco.pais.id)' ng-disabled="visualizar" class="form-control" ng-required='true' name='paisInput'>
+          <option value="">Selecione um País</option>
+        </select> 
+        <div class="help-error bg-danger">
+            <p ng-show="form.endereco.paisInput.$error.required&&!form.endereco.paisInput.$pristine">O campo <strong>País</strong> é obrigatório.</p>
+          </div> 
+      </div>
+      <div class="col-md-6 form-group {{(form.endereco.ufInput.$invalid&&!form.endereco.ufInput.$pristine)&&'has-error'||(!form.endereco.ufInput.$pristine&&'has-success'||'')}}">
+        <label class="control-label">Unidade Federativa <strong class="text-danger form-obrigatorio">*</strong></label>
+        <select ng-model="modalFiltro.endereco.unidadeFederativa" ng-options="u.nome for u in ufs track by u.id" ng-disabled="visualizar||!modalFiltro.endereco.pais" ng-change='getCidades(modalFiltro.endereco.unidadeFederativa.id)'ng-required="true" ng-disabled="visualizar||!modalEnd.endereco.pais" class="form-control" name='ufInput'>
+          <option value="">Selecione uma Uf</option>
+        </select> 
+        <div class="help-error bg-danger">
+          <p ng-show="form.endereco.ufInput.$error.required&&!form.endereco.ufInput.$pristine">O campo <strong>UF</strong> é obrigatório.</p>
+        </div> 
+      </div>
+    </div><!--/row -->    
+    <div class="row">
+      <div class="col-md-6 form-group {{(form.endereco.cidadeInput.$invalid&&!form.endereco.cidadeInput.$pristine)&&'has-error'||(!form.endereco.cidadeInput.$pristine&&'has-success'||'')}}">
+        <label class="control-label">Cidade <strong class="text-danger form-obrigatorio">*</strong></label>
+        <select ng-model="modalFiltro.endereco.cidade" ng-options="c.nome for c in cidades track by c.id"  ng-required='true' ng-change='getBairros(modalFiltro.endereco.cidade.id)' ng-disabled="visualizar||!modalFiltro.endereco.unidadeFederativa" class="form-control" name='cidadeInput'>
+          <option value="">Selecione uma Cidade</option>
+        </select>
+        <div class="help-error bg-danger">
+          <p ng-show="form.endereco.cidadeInput.$error.required&&!form.endereco.cidadeInput.$pristine">O campo <strong>Cidade</strong> é obrigatório.</p>
+        </div>  
+      </div>
+      <div class="col-md-6 form-group {{(form.endereco.bairroInput.$invalid&&!form.endereco.bairroInput.$pristine)&&'has-error'||(!form.endereco.bairroInput.$pristine&&'has-success'||'')}}">
+        <label class="control-label">Bairro <strong class="text-danger form-obrigatorio">*</strong></label>
+        <select ng-model="modalEnd.bairro" ng-options="b.nome for b in bairros track by b.id" ng-change='getLogradouros(modalEnd.bairro.id)' ng-disabled="visualizar||!modalFiltro.endereco.cidade" class="form-control" ng-required='true' name='bairroInput'>
+          <option value="">Selecione um Bairro</option>
+        </select>
+        <div class="help-error bg-danger">
+          <p ng-show="form.endereco.bairroInput.$error.required&&!form.endereco.bairroInput.$pristine">O campo <strong>Bairro</strong> é obrigatório.</p>
+        </div>   
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group {{(form.endereco.tipoLogInput.$invalid&&!form.endereco.tipoLogInput.$pristine)&&'has-error'||(!form.endereco.tipoLogInput.$pristine&&'has-success'||'')}}">
+        <label for="tipoLogradouroSelect">Tipo do Logradouro <strong class="text-danger form-obrigatorio">*</strong></label>
+        <select ng-model="modalFiltro.tipoLogradouro" ng-options="tl.nome for tl in tiposLogradouro track by tl.id" ng-disabled="visualizar||!modalEnd.bairro" class="form-control" ng-required='true' name='tipoLogInput'>
+          <option value="">Selecione um Tipo de Logradouro</option>
+        </select>
+        <div class="help-error bg-danger">
+          <p ng-show="form.endereco.tipoLogInput.$error.required&&!form.endereco.tipoLogInput.$pristine">O campo <strong>Tipo do logradouro</strong> é obrigatório.</p>
+        </div> 
+      </div>
+      <div class="col-md-6 form-group {{(form.endereco.logradouroInput.$invalid&&!form.endereco.logradouroInput.$pristine)&&'has-error'||(!form.endereco.logradouroInput.$pristine&&'has-success'||'')}}">
+        <label class="control-label">Logradouro <strong class="text-danger form-obrigatorio">*</strong></label>
+        <select ng-model="modalEnd.logradouro" ng-options="l.nome for l in logradouros track by l.id" class="form-control"  ng-disabled="visualizar||!modalFiltro.tipoLogradouro" ng-required='true' name='logradouroInput'>
+          <option value="">Selecione um Logradouro</option>
+        </select> 
+        <div class="help-error bg-danger">
+          <p ng-show="form.endereco.logradouroInput.$error.required&&!form.endereco.logradouroInput.$pristine">O campo <strong>Logradouro</strong> é obrigatório.</p>
+        </div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <hr/>
+        <div class="pull-right">
+          <a class="btn btn-warning"  ng-click="fecharModal()">Fechar</a>
+          <button ng-click="salvarEnderecos(modalEnd)" class="btn btn-success" ng-disabled="form.endereco.$invalid">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-form>
+  <div class="row">
+    <div class="col-md-12">
+      &nbsp;
+    </div>
+  </div>
+</div>

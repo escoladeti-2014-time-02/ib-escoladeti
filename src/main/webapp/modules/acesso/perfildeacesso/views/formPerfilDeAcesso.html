@@ -1,0 +1,82 @@
+<!--InÃ­cio do conteÃºdo do Form-->
+<h3>
+  Perfil de Acesso
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div id="viewForm" class="row" >
+  <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
+    <form name="formPerfilDeAcesso">
+      <div class="panel panel-blue">
+        <div class="panel-heading panel-form-pessoais">
+          <h1 class="panel-title">
+            Perfil de Acesso
+          </h1>
+        </div><!--/div panel-->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 form-group {{(formPerfilDeAcesso.nomeInput.$invalid&&!formPerfilDeAcesso.nomeInput.$pristine)&&'has-error'||(!formPerfilDeAcesso.nomeInput.$pristine&&'has-success'||'')}}">
+              <label class="control-label">Nome do Perfil<strong class="text-danger form-obrigatorio">*</strong></label>
+              <input type="text" ng-model="perfilDeAcesso.nome" name="nomeInput" class="form-control" required placeholder="Ex: Administrador" ng-maxlength="40" ng-minlength="5" ng-required="true" ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formPerfilDeAcesso.nomeInput.$error.required&&!formPerfilDeAcesso.nomeInput.$pristine">O campo <strong>Nome do Perfil</strong> É Obrigatorio!</p>
+                <p ng-show="formPerfilDeAcesso.nomeInput.$error.maxlength"  >O <strong>Nome do Perfil</strong> informado deve ter menos que 40 caracteres.</p>
+                <p ng-show="formPerfilDeAcesso.nomeInput.$error.minlength"  >O <strong>Nome do Perfil</strong> informado deve ter mais que 4 caracteres.</p>
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div>      
+      <div class="panel panel-teal">
+        <div class="panel-heading panel-form-pessoais">
+          <h1 class="panel-title">
+            Itens de Acesso
+          </h1>
+        </div><!--/div panel-->
+        <div class="panel-body">
+          <div class="center">
+            <span class="glyphicon glyphicon-hand-up">
+            </span>
+            <strong>&nbsp;Selecione quais itens o pefil terá acesso: </strong>
+            <label style="pull-right">
+              <input type="checkbox" ng-model="perfilDeAcesso.marcar" ng-click="marcarTodos()" class="btn btn-default btn-xs" ng-disabled="visualizar"> {{perfilDeAcesso.marcar && 'Desmarcar' || 'Marcar'}} todos
+            </label>
+          </div>    
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Item de acesso</th>
+                <th>Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="(index, itemPerfilDeAcesso) in perfilDeAcesso.itensPerfilDeAcesso">
+                <td>{{itemPerfilDeAcesso.itemDeAcesso.nome}}</td>
+                <td>
+                  <label ng-repeat="(indexNivelDeAcesso, nivelDeAcesso) in itemPerfilDeAcesso.niveisDeAcesso">
+                    <input ng-model="nivelDeAcesso.selected"
+                     type="checkbox" ng-disabled="visualizar">
+                     &nbsp;{{nivelDeAcesso.nivel}}&nbsp;&nbsp;&nbsp;
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>  
+      </div>
+      <br/>
+      <div class="row pull-right">
+        <div class="col-md-12">
+          <a href="./#/acesso/perfildeacesso" class="btn btn-info">
+            Voltar
+          </a>
+          <fe-resetform re-origem="objetoOrigem" re-reset="perfilDeAcesso" re-form="formPerfilDeAcesso"></fe-resetform>
+          <button ng-click="salvarPerfilDeAcesso(perfilDeAcesso)" ng-disabled="formPerfilDeAcesso.$invalid" ng-if="!visualizar" class="btn btn-success">
+            Salvar
+          </button>    
+        </div>
+      </div><!--/row-->
+    </form> 
+  </div>
+</div><!--/row-->
+<!--Fim do conteÃºdo do Form-->

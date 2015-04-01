@@ -1,0 +1,15 @@
+body{
+	background-color: #f8f8f8;
+}
+.login-painel {
+	margin-top: 60px;
+	background-color: #ffffff;
+	padding: 50px;
+	border: 1px #ecf0f1 solid;
+}
+.login-logo img {
+	margin-bottom: 25px;
+}
+.login-botao button {
+	margin-top: 19px;
+}

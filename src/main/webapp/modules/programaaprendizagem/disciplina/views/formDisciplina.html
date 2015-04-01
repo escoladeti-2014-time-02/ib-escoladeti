@@ -1,0 +1,57 @@
+<h3>
+  Cadastro de Disciplina 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+
+<div class="row" >
+	<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+		<form name="formDisciplina" role="form">
+		    <div class="panel panel-blue panel-form">
+			    	<div class="panel-heading panel-form-pessoais">
+			    		<h1 class="panel-title">
+			    		  Disciplina
+			    		</h1>
+			    	</div><!--/div panel-->
+			        <div class="panel-body">
+
+				       	<div class="col-md-12 col-lg-12">
+				          	<div class="form-group {{(formDisciplina.nomeInput.$invalid&&!formDisciplina.nomeInput.$pristine)&&'has-error'||(!formDisciplina.nomeInput.$pristine&&'has-success'||'')}}">
+				          		<label for="nomeInput" class="control-label">Nome da Disciplina  <strong class=" form-obrigatorio">*</strong></label>
+				          		<input ng-model="disciplina.nome" type="text" name="nomeInput" class="form-control" placeholder="Ex: Administração"  ng-minlength="4" ng-maxlength="72" required="true" ng-disabled="visualizar">
+					           	<div class="help-error bg-danger">
+					           		<p ng-show="formDisciplina.nomeInput.$error.required&&!formDisciplina.nomeInput.$pristine">O campo <strong>Nome da disciplina</strong> é obrigatório.</p>
+						            <p ng-show="formDisciplina.nomeInput.$error.minlength" >O <strong>Nome da disciplina</strong> informado deve ter mais de 3 caracteres.</p>
+					           		<p ng-show="formDisciplina.nomeInput.$error.maxlength" >O <strong>Nome da disciplina</strong> informado deve ter menos que 72 caracteres.</p>
+					           	</div>
+				            </div>
+				        
+					    
+							<div class="form-group {{(formDisciplina.descricaoInput.$invalid&&!formDisciplina.descricaoInput.$pristine)&&'has-error'||(!formDisciplina.descricaoInput.$pristine&&'has-success'||'')}}">
+								<label for="descricaoInput" class="control-label">Descrição da Disciplina <strong class=" form-obrigatorio">*</strong></label>
+								<textarea class="form-control" name="descricaoInput" rows="3" ng-model="disciplina.descricao" placeholder="..." ng-minlength="4" ng-maxlength="200" required="true" ng-disabled="visualizar"></textarea>
+								<div class="help-error bg-danger" >
+							      	<p ng-show="formDisciplina.descricaoInput.$error.required&&!formDisciplina.descricaoInput.$pristine" class=" ">O campo <strong>Descrição da Disciplina</strong> é obrigatório.</p>
+							      	<p ng-show="formDisciplina.descricaoInput.$error.minlength" >O <strong>Descrição da Disciplina</strong> informado deve ter mais de 2 caracteres.</p>
+							       	<p ng-show="formDisciplina.descricaoInput.$error.maxlength" >O <strong>Descrição da Disciplina</strong> informado deve ter menos que 200 caracteres.</p>
+							    </div> 
+							</div>
+						</div><!--/row-->
+			   	    </div>
+		    </div>
+
+			<div class="row">
+		     <div class="col-md-12">
+		     <div class="pull-right">
+		       <a href="./#/programaaprendizagem/disciplina" class="btn btn-info">
+		         Voltar
+		       </a>
+		      <fe-resetform re-origem="objetoOrigem" re-reset="disciplina" re-form="formDisciplina"></fe-resetform>
+		       <button ng-click="salvarDisciplina(disciplina)" class="btn btn-success" ng-disabled="formDisciplina.$invalid" ng-if="!visualizar">
+		         Salvar
+		       </button>
+		       </div>       
+		     </div>
+		    </div><!-- buttons -->
+	   </form>
+	</div>
+</div><!--/row-->

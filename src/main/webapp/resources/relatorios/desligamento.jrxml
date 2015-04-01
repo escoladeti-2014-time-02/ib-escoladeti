@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pedidodesligamento" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d727bd6e-3b90-4b37-9326-576a7d4ab6ba">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT P.ID,
+       P.NOME,
+       DR.NUMERO RG,
+       CR.DATAADMISSAO
+  FROM PESSOA            P
+  JOIN PESSOAFISICA     PF ON (PF.ID = P.ID)
+  JOIN CANDIDATO         C ON (C.ID = P.ID)
+  JOIN PESSOA_DOCUMENTO PR ON (P.ID = PR.PESSOA_ID)
+  JOIN DOCUMENTO        DR ON (DR.ID = PR.DOCUMENTOS_ID)
+  JOIN RG                R ON (R.ID = DR.ID)
+  JOIN CONTRATO         CR ON (to_number(convert_from(CR.APRENDIZ, 'UTF8'),'9999999') = P.ID)
+ WHERE P.ATIVO = 't'
+   AND P.ID = $P{id}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="dataadmissao" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="12" width="311" height="20" uuid="d60e870c-3e70-4063-9cf5-f90002b4e0da"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Desligamento"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="264">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="30" width="542" height="50" uuid="e3974e41-5fbf-4ff4-8095-13971d3b189a"/>
+				<textFieldExpression><![CDATA["\tEu, " + $F{nome} + " portador(a) do RG" + $F{rg} + ", aprendiz admitido(a) em " + (new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format($F{dataadmissao})) + ", venho através desta, por motivo de ordem particular e de livre e espontânea vontade, solicitar, em caráter definitivo, o meu pedido de desligamento do programa de aprendizagem, a partir desta data."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="542" height="20" uuid="edbf387a-f0d1-4e07-a204-bd00c1759c6d"/>
+				<textFieldExpression><![CDATA["\tMaringá, "+ (new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format(java.util.Calendar.getInstance().getTime()))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="90" width="542" height="20" uuid="60d9167d-e3e8-43f2-b510-ca7a8d3ba410"/>
+				<textFieldExpression><![CDATA["Sem mais,"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="166" width="100" height="1" uuid="3707a0b7-6727-4aff-bb96-2637c05a1f9c"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="167" width="542" height="20" uuid="a39bf0fa-4160-43a3-8770-3409e80a6f24"/>
+				<textFieldExpression><![CDATA["Nome Completo do Adolescente"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="222" width="100" height="1" uuid="d17eee3b-f1b8-41ba-8636-dd039571db46"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="223" width="542" height="20" uuid="8b72ca6b-0130-435e-b410-0480dd5b49f4"/>
+				<textFieldExpression><![CDATA["Nome Completo do Responsável legal"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

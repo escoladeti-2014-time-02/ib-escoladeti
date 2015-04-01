@@ -1,0 +1,47 @@
+<!--Início do conteúdo do Form-->
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="center">Cadastro de Usuário</h2>
+    <hr/>
+  </div>
+</div><!--/row-->
+<div id="viewForm" class="row" >
+  <div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+    <form name="form">
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label class="control-label">Login</label>
+          <input ng-model="usuario.login" type="text" name="nomeInput" class="form-control">
+        </div>
+      </div><!--/row--> 
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label class="control-label">Senha</label>
+          <input ng-model="usuario.senha" type="password" name="siglaInput" class="form-control">
+        </div>
+      </div><!--/row-->
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label class="control-label">Perfil de Acesso</label>
+          <select ng-model="usuario.perfilDeAcesso" ng-options="p.nome for p in perfilDeAcesso track by p.idPerfilDeAcesso" class="form-control" required>
+            <option value="">-- Selecione um Perfil de Acesso --</option>
+          </select>          
+        </div>
+      </div><!--/row-->
+      <div class="row pull-right">
+        <div class="col-md-12">
+          <a href="./acesso/usuario" class="btn btn-danger">
+            Voltar
+          </a>
+          <button ng-click="usuario = ''" class="btn btn-warning">
+            Limpar
+          </button>
+          <button  ng-disabled="formUsuario.$invalid" ng-click="salvarUsuario(usuario)" class="btn btn-success">
+            Salvar
+          </button>         
+        </div>
+      </div><!--/row-->
+    </form> 
+  </div>
+</div><!--/row-->
+<!--Fim do conteúdo do Form-->

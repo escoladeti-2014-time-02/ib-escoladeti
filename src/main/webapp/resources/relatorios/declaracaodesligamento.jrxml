@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="declaracaodesligamento" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1cdeeb57-e1f9-4841-ae0f-eb29081bc4bf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT P.ID,
+       P.NOME,
+       DR.NUMERO RG
+  FROM PESSOA            P
+  JOIN PESSOAFISICA     PF ON (PF.ID = P.ID)
+  JOIN CANDIDATO         C ON (C.ID = P.ID)
+  JOIN PESSOA_DOCUMENTO PR ON (P.ID = PR.PESSOA_ID)
+  JOIN DOCUMENTO        DR ON (DR.ID = PR.DOCUMENTOS_ID)
+  JOIN RG                R ON (R.ID = DR.ID)
+ WHERE P.ATIVO = 't'
+   AND P.ID = 550]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch"/>
+	</title>
+	<detail>
+		<band height="226">
+			<textField isStretchWithOverflow="true" pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="555" height="20" uuid="ce060342-46a6-465e-aa26-0ae2cfec0cca"/>
+				<textFieldExpression><![CDATA["\tMaringá, "+ (new SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format(java.util.Calendar.getInstance().getTime()))]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="30" width="555" height="43" uuid="6f27bbb3-068a-4a30-a4f8-b68b27d3a5f5"/>
+				<textFieldExpression><![CDATA["A Fundação Isis Bruder declara para devidos fins que o(a) aprendiz " + $F{nome} + ", RG " + $F{rg} + " foi desligado(a) do Programa de Aprendizagem por motivos de ordem particular."]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="114" width="100" height="1" uuid="7b41bc8d-1d2f-4ddf-a2a7-f70f1c1dfc48"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="115" width="555" height="20" uuid="b42b7ccc-967f-4998-9f1c-3776892f1173"/>
+				<textFieldExpression><![CDATA["Nome Completo do Adolescente"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="175" width="100" height="1" uuid="483aae0d-da0c-4ec3-8635-48b600e6cafe"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="178" width="204" height="20" uuid="5789386b-8a32-4b94-915b-70a2f27f027c"/>
+				<textFieldExpression><![CDATA["Nome Completo do Responsável Legal"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="363" y="177" width="100" height="1" uuid="d2e59805-fee1-4bce-8d42-c2d1f7be278a"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="363" y="178" width="192" height="20" uuid="8862c370-f502-481b-8938-2d4c99519e79"/>
+				<textFieldExpression><![CDATA["Coordenador(a) do Programa de Aprendizagem"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

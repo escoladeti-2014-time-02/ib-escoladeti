@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<property name="create_turmaaluno_sequence"
+		value="CREATE SEQUENCE turmaaluno_sequence INCREMENT BY 1 START 1" />
+
+	<property name="create_empresaturma_sequence"
+		value="CREATE SEQUENCE empresaturma_sequence INCREMENT BY 1 START 1" />
+
+	<changeSet id="Gardin-1020" author="Eduardo">
+		<sql dbms="postgresql">
+			${create_turmaaluno_sequence}
+		</sql>
+		<sql dbms="postgresql">
+			${create_empresaturma_sequence}
+		</sql>
+	</changeSet>
+
+	<changeSet id="Gardin-1030" author="Eduardo">
+		<dropTable tableName="turma_aluno" cascadeConstraints="true" />
+		<dropTable tableName="turma" cascadeConstraints="true" />
+
+		<createTable tableName="turma">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="curso_id" type="INT8">
+				<constraints foreignKeyName="fk_turma_cursoid"
+					referencedColumnNames="id" referencedTableName="curso" />
+			</column>
+
+			<column name="nome" type="${descricaolonga}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="observacao" type="${descricaoextralonga}">
+			</column>
+
+			<column name="datainicio" type="DATE">
+			</column>
+
+			<column name="dataencerramento" type="DATE">
+			</column>
+		</createTable>
+
+		<createTable tableName="turma_aluno">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="turma_id" type="INT8">
+				<constraints foreignKeyName="fk_turmaaluno_turmaid"
+					referencedColumnNames="id" referencedTableName="turma" />
+			</column>
+
+			<column name="aluno_id" type="INT8">
+				<constraints foreignKeyName="fk_turmaaluno_alunoid"
+					referencedColumnNames="id" referencedTableName="aluno" />
+			</column>
+		</createTable>
+
+		<createTable tableName="empresaturma">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="empresa_id" type="INT8">
+				<constraints foreignKeyName="fk_empresaturma_empresaid"
+					referencedColumnNames="id" referencedTableName="empresa" />
+			</column>
+
+			<column name="turma_id" type="INT8">
+				<constraints foreignKeyName="fk_empresaturma_turmaid"
+					referencedColumnNames="id" referencedTableName="turma" />
+			</column>
+
+			<column name="vagas" type="INT8" defaultValue="0">
+			</column>
+		</createTable>
+
+		<createTable tableName="empresaturma_turma">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+
+			</column>
+
+			<column name="turma_id" type="INT8">
+				<constraints foreignKeyName="fk_empresaturmaturma_turmaid"
+					referencedColumnNames="id" referencedTableName="turma" />
+			</column>
+
+			<column name="empresaturma_id" type="INT8">
+				<constraints foreignKeyName="fk_empresaturmaturma_empresaturmaid"
+					referencedColumnNames="id" referencedTableName="empresaturma" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-1040" author="Eduardo">
+		<addDefaultValue columnName="id" tableName="turma_aluno"
+			defaultValueSequenceNext="turmaaluno_sequence" />
+
+		<addDefaultValue columnName="id" tableName="empresaturma_turma"
+			defaultValueSequenceNext="empresaturma_sequence" />
+	</changeSet>
+
+</databaseChangeLog>

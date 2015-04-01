@@ -1,0 +1,58 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Gerar Candidatos</h2>
+			<hr/>
+		</div>
+	</div>
+	<div ng-show='logradouros.length==0'>
+		<div class="help-error bg-warning">
+		  <p class="text-warning text-center">Aguarde enquanto os dados são carregados...</p>
+		</div>
+	</div>
+	<div ng-show='logradouros.length>0&&!gerandoCandidatos'>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				    <label class="control-label">Quantidade <strong class="text-danger form-obrigatorio">*</strong></label>
+				    <input name="descricaoInput" type="number" class="form-control" ng-model="gerarCandidato.quantidade" ng-required="true"/>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<hr />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="pull-right">
+					<button ng-click="gerarCandidatos(gerarCandidato.quantidade)" class="btn btn-success">Gerar Candidatos</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="gerandoCandidatos">
+		<div class="row">
+			<div class="col-md-12">
+				Gerando canidatos...
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="progress">
+				  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{{(quantGerados*100)/quantGerar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(quantGerados*100)/quantGerar}}%;">
+				    {{(quantGerados*100)/quantGerar}}%
+				  </div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<br />
+		</div>
+	</div>	
+
+</div>
+

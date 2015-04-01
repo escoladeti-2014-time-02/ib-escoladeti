@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet author="Erik (adição dos eventos Cadastro e Início das atividades escolares)" id="qual id?">
+		 <insert tableName="tipoevento">
+   			 <column name="id" valueNumeric="7" />
+   			 <column name="cor" value="#34495e" />
+   			 <column name="descricao" value="Cadastro" />
+   			 <column name="icone" value="fa-check-circle" />
+  		</insert>
+ 
+		 <insert tableName="tipoevento">
+   			<column name="id" valueNumeric="8" />
+   	 		<column name="cor" value="#2ecc71" />
+   		 	<column name="descricao" value="Início das atividades escolares" />
+    		<column name="icone" value="fa-book" />
+  		</insert>
+
+		 <insert tableName="tipoevento">
+   			<column name="id" valueNumeric="9" />
+   	 		<column name="cor" value="#FF5722" />
+   		 	<column name="descricao" value="Encerramento" />
+    		<column name="icone" value="fa-times-circle" />
+  		</insert>  	
+  		
+  		 <insert tableName="tipoevento">
+   			<column name="id" valueNumeric="10" />
+   	 		<column name="cor" value="#FFEB3B" />
+   		 	<column name="descricao" value="Falta" />
+    		<column name="icone" value="fa-exclamation" />
+  		</insert> 	  		
+	</changeSet>
+        
+</databaseChangeLog>

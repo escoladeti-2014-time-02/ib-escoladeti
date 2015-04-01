@@ -1,0 +1,110 @@
+<h3>
+  Contratos
+  <div class="pull-right">
+    <a href="./#/programaaprendizagem/contrato/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2 col-md-12">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+				   <div class="panel-heading">
+				      <h1 class="panel-title">
+				        Listagem de Contratos
+				        <div class="pull-right">
+	   				          <a href="rest/contrato/imprimirContratoPorDataDesligamento" title="Gerar relatório" target="_blank">
+					            <em class="icon-printer"></em>             
+					          </a>
+						  <!-- <button ng-click="filtrar()" class="btn btn-success">Filtrar</button> -->
+				        </div> 
+				      </h1>
+				   </div>
+				   <div class="panel-body">
+				   			<div class="row">
+					            <div class="col-md-3 form-group">
+					              <label>In&iacute;cio Desligamento</label>
+					              <input id="dataInicio"
+											style="background: white; cursor: pointer;"
+											readonly="readonly" type="text" name="datePrevistaInicio"
+											datepicker-popup="dd/MM/yyyy" ng-model="filtroData.dataInicio"
+											ng-disabled="visualizar" is-open="datePicker.opened[0]"
+											ng-click="datePicker.opened[0] = true"
+											datepicker-options="datePicker.config"
+											date-disabled="disabled(date, mode)" ng-required="true"
+											close-text="Fechar" current-text="Hoje" clear-text="Limpar"
+											placeholder="__/__/__" class="form-control" />
+					            </div>
+       					         <div class="col-md-3 form-group">
+					              <label>T&eacute;rmino Desligamento</label>
+					              <input id="dataEncerramento"
+										style="background: white; cursor: pointer;"
+										readonly="readonly" type="text"
+										name="datePrevistaEncerramento" datepicker-popup="dd/MM/yyyy"
+										ng-model="filtroData.dataTermino" ng-disabled="visualizar"
+										is-open="datePicker.opened[1]"
+										ng-click="datePicker.opened[1] = true"
+										datepicker-options="datePicker.config"
+										date-disabled="disabled(date, mode)" ng-required="true"
+										close-text="Fechar" current-text="Hoje" clear-text="Limpar"
+										placeholder="__/__/__" min-date="contrato.dataInicio"
+										class="form-control" />
+					            </div>
+					            <div class="col-md-4 col-md-offset-2">
+					              <div class="pull-right" ng-if="filtroData.dataInicio || filtroData.dataTermino">
+					                <a href="#"  ng-click="filtrarPorData(1)" class="btn btn-sm btn-info">
+					                  Filtrar per&iacute;odo
+					                </a>
+					                <a href="#" ng-click="limparFiltro()"  class="btn btn-sm btn-warning">
+					                  Limpar Filtro
+					                </a>
+					              </div>
+					            </div>
+					          </div>
+				   		<div class="row">
+				   		<div class="table-responsive" ng-show="contratos">
+				   			<table class="table table-stripped">
+				   				<thead>
+				   					<tr>
+				   						<th>Contrato</th>
+				   						<th>Data In&iacute;cio</th>
+				   						<th>Data T&eacute;rmino</th>
+				   						<th width="150px"></th>
+				   					</tr>
+				   				</thead>
+				   				<tbody>
+				   					<tr ng-repeat="contrato in contratos | filter:app.busca">
+				   					  <td>{{contrato.aluno.candidato.nome}}</td>
+				   					  <td>{{contrato.dataInicio  | date:'dd/MM/yyyy'}}</td>
+				   					  <td>{{contrato.dataTermino | date:'dd/MM/yyyy'}}</td>
+				   					  <td >
+				   					  	<div class="pull-right">
+				   					  		<a href="./#/programaaprendizagem/contrato/visualizar/{{contrato.id}}" class="btn btn-sm btn-info">
+				   					  		  <i class="fa fa-eye"></i>
+				   					  		</a>
+				   					  		<a href="./#/programaaprendizagem/contrato/editar/{{contrato.id}}" class="btn btn-sm btn-warning">
+				   					  		  <i class="fa fa-edit"></i>
+				   					  		</a>
+		  		                            <a ng-click="removerContato(contrato)"class="btn btn-sm btn-danger">
+                            					<i class="fa fa-times"></i>
+                          					</a>
+				   					  	</div>				   					    
+				   					  </td>
+				   					</tr>
+				   				</tbody>
+				   			</table>
+				   		</div><!--/responsive-table-->
+				   </div>
+				   <div class="panel-footer"  ng-show="contratos">
+				   		<div class="row">
+				   		  <div class="col-md-12">
+				   		    <fe-paginator page="page" load="load(pagina)">
+				   		    </fe-paginator>
+				   		  </div>
+				   		</div>
+				   </div>
+				</div>				
+			</div>
+		</div><!--/row-->	 	  
+	</div>
+</div> <!--row principal-->

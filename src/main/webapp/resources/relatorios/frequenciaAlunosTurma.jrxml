@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="frequenciaAlunosTurma" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b02197e2-61c6-48cc-b4e2-0a1ca76e4711">
+	<property name="ireport.zoom" value="1.6934217901613318"/>
+	<property name="ireport.x" value="235"/>
+	<property name="ireport.y" value="46"/>
+	<subDataset name="dataset1" uuid="d3198669-f4fb-49bf-b477-a8947dd560af"/>
+	<parameter name="diretorio" class="java.lang.String"/>
+	<parameter name="turmaid" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select p2.nome nomealuno, t.nome turma, m.nome modulo, d.nome disciplina, t.datainicio, cu.descricao curso, t.dataencerramento,
+(select count(aa.*)
+  from turma_aluno ta
+  join aluno a on (a.id = ta.aluno_id)
+  join turma t on (t.id = ta.turma_id)
+  join candidato c on (a.candidato_id = c.id)
+  join pessoafisica pf on (pf.id = c.id)
+  join pessoa p on (p.id = pf.id)
+  join aula au on (au.turma_id = t.id)
+  join alunoaula aa on (aa.aluno_id = a.id)
+  join aula_alunoaula aaa on (aaa.aula_id = au.id and aaa.alunoaula_id = aa.id)
+ where p2.id = p.id ) qtdaulasministradas,
+ (select count(aa.*)
+  from turma_aluno ta
+  join aluno a on (a.id = ta.aluno_id)
+  join turma t on (t.id = ta.turma_id)
+  join candidato c on (a.candidato_id = c.id)
+  join pessoafisica pf on (pf.id = c.id)
+  join pessoa p on (p.id = pf.id)
+  join aula au on (au.turma_id = t.id)
+  join alunoaula aa on (aa.aluno_id = a.id)
+  join aula_alunoaula aaa on (aaa.aula_id = au.id and aaa.alunoaula_id = aa.id)
+ where presenca = 't' and p2.id = p.id ) qtdpresenca,
+ (select count(aa.*)
+  from turma_aluno ta
+  join aluno a on (a.id = ta.aluno_id)
+  join turma t on (t.id = ta.turma_id)
+  join candidato c on (a.candidato_id = c.id)
+  join pessoafisica pf on (pf.id = c.id)
+  join pessoa p on (p.id = pf.id)
+  join aula au on (au.turma_id = t.id)
+  join alunoaula aa on (aa.aluno_id = a.id)
+  join aula_alunoaula aaa on (aaa.aula_id = au.id and aaa.alunoaula_id = aa.id)
+ where presenca = 'f' and p2.id = p.id) qtdfaltas
+  from modulo m
+  join curso_modulo cm on (cm.modulo_id = m.id)
+  join curso cu on (cm.curso_id = cu.id )
+  join turma t on (t.curso_id = cu.id)
+  join turma_aluno ta on (ta.turma_id = t.id)
+  join aluno a on (a.id = ta.aluno_id)
+  join candidato c on (a.candidato_id = c.id)
+  join pessoafisica pf on (pf.id = c.id)
+  join pessoa p2 on (p2.id = pf.id)
+  join aula au on (au.turma_id = t.id)
+  join alunoaula aa on (aa.aluno_id = a.id)
+  join aula_alunoaula aaa on (aaa.aula_id = au.id and aaa.alunoaula_id = aa.id)
+  join disciplinamodulo dm on (dm.modulo_id = m.id)
+  join disciplina d on (d.id = dm.disciplina_id)
+ where t.id = $P{turmaid}
+ group by p2.nome, t.nome, m.nome, d.nome, p2.id, t.datainicio, t.dataencerramento, cu.descricao
+ order by p2.nome]]>
+	</queryString>
+	<field name="nomealuno" class="java.lang.String"/>
+	<field name="turma" class="java.lang.String"/>
+	<field name="modulo" class="java.lang.String"/>
+	<field name="disciplina" class="java.lang.String"/>
+	<field name="datainicio" class="java.sql.Date"/>
+	<field name="curso" class="java.lang.String"/>
+	<field name="dataencerramento" class="java.sql.Date"/>
+	<field name="qtdaulasministradas" class="java.lang.Long"/>
+	<field name="qtdpresenca" class="java.lang.Long"/>
+	<field name="qtdfaltas" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="115" splitType="Stretch">
+			<image>
+				<reportElement x="3" y="11" width="102" height="67" uuid="30f93233-0807-48a9-9abb-34c12b256b62"/>
+				<imageExpression><![CDATA[$P{diretorio}+"../img/logo-isis-bruder.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="140" y="11" width="606" height="31" uuid="cd6960c8-1617-4b84-8fdf-ac01195a4d4d"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="20" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Relatório da frequência de todos os alunos por Turma]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="187" y="43" width="433" height="15" uuid="00d6aea6-eda1-4560-87b8-f81462ae45af"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{disciplina}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="43" width="47" height="15" uuid="ee1550ce-7109-4326-abc7-a88b6e26cf1f"/>
+				<text><![CDATA[Disciplina:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="528" y="99" width="92" height="15" uuid="87b1ca88-868c-4883-b87a-6860759c9376"/>
+				<textFieldExpression><![CDATA[$F{dataencerramento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="57" width="47" height="15" uuid="d10d9927-4396-465d-bb6e-114b38afb6f4"/>
+				<text><![CDATA[Modulo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="462" y="99" width="66" height="15" uuid="a14a1e62-c8a3-4515-b7d8-e7044dc91fbd"/>
+				<text><![CDATA[Encerramento:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="187" y="57" width="433" height="15" uuid="0b81edfa-a213-4814-975f-157a5f65bc68"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{modulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="99" width="47" height="15" uuid="297eb6a2-f396-42b7-b424-6f569ce9f5d0"/>
+				<text><![CDATA[Início:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="187" y="99" width="67" height="15" uuid="21c41ef3-a60f-4197-bffc-dcd0f947611a"/>
+				<textFieldExpression><![CDATA[$F{datainicio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="187" y="71" width="433" height="15" uuid="ed1e4ebd-3ef1-4a26-a4ce-e4ec3c79b632"/>
+				<textFieldExpression><![CDATA[$F{turma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="71" width="47" height="15" uuid="002815f7-50ce-4fd6-bab8-1ab881435f38"/>
+				<text><![CDATA[Turma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="85" width="47" height="15" uuid="912b9b92-7be5-42b4-96e1-7e95b7b8b290"/>
+				<text><![CDATA[Curso:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="187" y="85" width="433" height="15" uuid="0945bdd8-3020-417e-9bd9-19b9cf1713f2"/>
+				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="22" width="801" height="1" uuid="025a6ee6-11b2-48d2-bac8-e826e5db088a"/>
+			</line>
+			<staticText>
+				<reportElement x="342" y="1" width="95" height="20" uuid="e0c7da09-64e5-4b77-87f8-1890cba9ba73"/>
+				<text><![CDATA[Aulas Ministradas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1" width="341" height="20" uuid="331fce1d-c8f8-42c7-8351-11fdb9634549"/>
+				<text><![CDATA[Nome do Aluno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="568" y="1" width="113" height="20" uuid="f2afef05-4aa1-491d-9ac9-a8f6bc760fe7"/>
+				<text><![CDATA[Faltas Computadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="681" y="1" width="113" height="20" uuid="2cb10e92-49b5-4eb5-a83d-6173278fc64b"/>
+				<text><![CDATA[Percentual de faltas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="1" width="113" height="20" uuid="bdbcc9e9-25df-4a39-ba27-1484b81c69a2"/>
+				<text><![CDATA[Presenças Computadas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="0" width="341" height="20" uuid="c9708013-91f6-4786-9731-56ca4b4cbe5d"/>
+				<textFieldExpression><![CDATA[$F{nomealuno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="342" y="0" width="95" height="20" uuid="89866d2b-8d75-4afe-a7c8-980c392aefd1"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{qtdaulasministradas}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="17" width="801" height="1" uuid="b2dba005-c255-4122-83e6-8aab2adc266d"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="681" y="0" width="113" height="20" uuid="65c56bfa-9186-4b2c-ad31-9f32cabe599f"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[100*$F{qtdfaltas}/$F{qtdaulasministradas}+"%"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="447" y="0" width="113" height="20" uuid="3cf0f821-83f9-4019-af42-240b974f2aa7"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{qtdpresenca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="568" y="0" width="113" height="20" uuid="6843d237-b292-449c-82c7-761f1a256de7"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{qtdfaltas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="34" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="53" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="757" y="12" width="40" height="20" uuid="c5c98796-7008-40a6-bfa9-d1c0c7174559"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="677" y="12" width="80" height="20" uuid="28283014-6ed1-4e04-a460-13190a68bafd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

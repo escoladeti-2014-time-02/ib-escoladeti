@@ -1,0 +1,81 @@
+<h3>
+  Logradouros
+  <div class="pull-right">
+    <a href="./#/endereco/logradouro/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+<!--Início do conteúdo da Grid-->
+<div class="row" >
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-blue">
+           <div class="panel-heading">
+              <h1 class="panel-title">
+                Listagem de Logradouros
+                <!-- <div class="pull-right">
+                  <a href="#" title="Gerar relatório">               
+                    <em class="icon-printer"></em>             
+                  </a>
+                </div> -->
+              </h1>
+           </div>
+           <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <input class="form-control" ng-model="busca" type="search" placeholder="Buscar" ng-change="buscar()">
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped"  ng-show="logradouros">
+                  <thead>
+                    <tr>
+                      <th>Nome do Logradouro</th>
+                      <th>Bairro</th>
+                      <th>Cidade</th>
+                      <th>Estado</th>
+                      <th>País</th>
+                      <th width="150px"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="logradouro in logradouros">
+                      <td>{{logradouro.tipoLogradouro.nome}} {{logradouro.nome}}</td>
+                      <td>{{logradouro.faixasDeCep[0].bairro.nome}}</td>
+                      <td>{{logradouro.faixasDeCep[0].bairro.cidade.nome}}</td>
+                      <td>{{logradouro.faixasDeCep[0].bairro.cidade.unidadeFederativa.nome}}</td>
+                      <td>{{logradouro.faixasDeCep[0].bairro.cidade.unidadeFederativa.pais.nome}}</td>
+                      <td >
+                        <div class="pull-right">
+                          <a href="#/endereco/logradouro/visualizar/{{logradouro.id}}" class="btn btn-sm btn-info">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                          <a href="#/endereco/logradouro/editar/{{logradouro.id}}" class="btn btn-sm btn-warning">
+                            <i class="fa fa-edit"></i>
+                          </a>
+                          <a ng-click="removerLogradouro(logradouro)" class="btn btn-sm btn-danger">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>                        
+                      </td>
+                    </tr>
+                  </tbody>                
+                </table>
+              </div><!--/responsive-table-->
+           </div>
+           <div class="panel-footer" ng-show="logradouros">
+             <div class="row" >
+               <div class="col-md-12">
+                 <fe-paginator page="page" load="load(pagina)">
+                 </fe-paginator>
+               </div>
+             </div>
+           </div>
+        </div>
+        
+      </div>    
+    </div><!--/row-->
+    
+  </div>
+</div><!--/row--> 
+<!--Fim do conteúdo da Grid-->

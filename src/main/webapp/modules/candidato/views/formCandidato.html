@@ -1,0 +1,1161 @@
+﻿<style type="text/css">
+  
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="center">Cadastro de Candidato</h2>
+    <hr/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <form name="formCandidato" role="form">
+        <div class="row">
+          <div class="col-md-12 form-group {{(formCandidato.nomeInput.$invalid&&!formCandidato.nomeInput.$pristine)&&'has-error'||(!formCandidato.nomeInput.$pristine&&'has-success'||'')}}">
+              <label for="nomeInput" class="control-label">Nome</label>
+              <input ng-model="candidato.nome" type="text" class="form-control" name="nomeInput" placeholder="Ex: João Pedro" ng-minlength="5" ng-maxlength="72" ng-required="">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidato.nomeInput.$error.required&&!formCandidato.nomeInput.$pristine" class=" text-danger">O campo <strong>Nome</strong> não obrigatório.</p>
+                <p ng-show="formCandidato.nomeInput.$error.minlength"  class="text-danger">O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+                <p ng-show="formCandidato.nomeInput.$error.maxlength"  class="text-danger">O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+              </div>              
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6 form-group">
+          <label for="tipoEnderecoSelect">Etnia</label>
+            <select ng-model="candidato.entia" name="Etnia" class="form-control">
+              <option value="">Selecione uma etnia</option>
+              <option>Amarela</option>
+              <option>Branca</option>
+              <option>Negra</option>
+              <option>Parda</option>
+              <option>Indígena</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="radioSexo">Sexo</label>
+            <div id="radioSexo">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.sexo" type="radio" name="sexo" value="Masculino">
+                  Masculino
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.sexo" type="radio" name="sexo" value="Feminino">
+                  Feminino
+                </label>
+              </div>
+            </div>      
+          </div>  
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6 form-group">
+          <label for="EstadoCivil">Estado civil</label>
+            <select ng-model="candidato.estadoCivil" name="estadoCivil" class="form-control">
+              <option value="">Selecione um estado civil</option>
+              <option>Casado</option>
+              <option>Solteiro</option>
+              <option>Divorciado</option>
+              <option>Separado</option>
+              <option>Viúvo</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="radioHabilidadeManual">Habilidade Manual</label>
+            <div id="radioHabilidadeManual">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.habilidadeManual" type="radio" name="habilidadeManual" value="Destro">
+                  Destro
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.habilidadeManual" type="radio" name="habilidadeManual" value="Canhoto">
+                  Canhoto
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.habilidadeManual" type="radio" name="habilidadeManual" value="Ambidestro">
+                  Ambidestro
+                </label>
+              </div>      
+          </div>  
+        </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-4">
+            <label for="radioDeficiencia">Portador de deficiência</label>
+            <div id="radioDeficiencia">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.deficiencia" type="radio" name="portadorDeficiencia" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.deficiencia" type="radio" name="portadorDeficiencia" value="Não">
+                  Não
+                </label>
+              </div>      
+            </div>  
+          </div>
+          <div class="col-md-8 form-group" ng-show="candidato.deficiencia == Sim">
+            <label for="deficiencia">Se sim, Qual</label>
+              <input ng-model="candidato.tipoDeficiencia" type="text" class="form-control" id="tipoDeficienciaInput">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-4">
+            <label for="dificudadeLocomocao">Dificuldade locomoção</label>
+            <div id="dificudadeLocomocao">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.dificudadeLocomocao" type="radio" name="dificudadeLocomocao" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.dificudadeLocomocao" type="radio" name="dificudadeLocomocao" value="Não">
+                  Não
+                </label>
+              </div>      
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12">
+            <label for="meididaSocioEducativa">Está cumprindo medidas sócio-educativas (Liberdade assistida ou Semi-liberdade)</label>
+            <div id="meididaSocioEducativa">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.medidaSocioEducativa" type="radio" name="meididaSocioEducativa" value="Cumpriu">
+                  Cumpriu
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.medidaSocioEducativa" type="radio" name="meididaSocioEducativa" value="JaCumpriu">
+                  Já cumpriu
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.medidaSocioEducativa" type="radio" name="meididaSocioEducativa" value="EstaCumprindo">
+                  Está cumprindo
+                </label>
+              </div>      
+            </div>  
+          </div>
+        </div><!--/row -->
+        <hr>
+        <h2 class="center">Filiação</h2> 
+        <!--Caso o nome do Pai seja preenchido os campos abaixo serão obrigatóriamente preenchidos -->
+        <div class="row">
+          <div class="col-md-12 form-group {{(formCandidato.pai.nome.$invalid&&!formCandidato.pai.nome.$pristine)&&'has-error'||(!formCandidato.pai.nome.$pristine&&'has-success'||'')}}">
+              <label for="paiNome" class="control-label">Pai</label>
+              <input ng-model="candidato.pai.nome" type="text" class="form-control" name="pai.nome" placeholder="Ex: João Pedro" ng-minlength="5" ng-maxlength="72" ng-required="">
+              <div class="help-error bg-danger">
+                <p ng-show="formCandidato.pai.nome.$error.required&&!formCandidato.pai.nome.$pristine" class=" text-danger">O campo <strong>Nome</strong> é obrigatório.</p>
+                <p ng-show="formCandidato.pai.nome.$error.minlength"  class="text-danger">O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+                <p ng-show="formCandidato.pai.nome.$error.maxlength"  class="text-danger">O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+              </div>              
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="profissaoPai">Profissão</label>
+              <input ng-model="candidato.pai.profissao" type="text" class="form-control" id="profissaoPai" placeholder="Profissão">
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="control-label" for="paiCpf">CPF</label>
+              <input ng-model="candidato.documento.numero" type="text" class="form-control" name="formCandidato.documento.numero" placeholder="Ex: 087.531.577-35">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="rgPai">RG</label>
+              <input ng-model="candidato.pai.rg.numero" type="text" class="form-control" id="rgPai" placeholder="EX: 083091314">
+          </div>
+        </div><!--/row -->
+        <hr>
+        <div class="row">
+          <div class="col-md-12 form-group">
+              <label for="maeNome" class="control-label">Mãe</label>
+              <input ng-model="candidato.mae.nome" type="text" class="form-control" name="mae.nome" placeholder="EX: Maria Joana" >
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="profissaoMae">Profissão</label>
+              <input ng-model="candidato.mae.profissao" type="text" class="form-control" id="profissaoMae" placeholder="Profissão">
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="control-label" for="maaeCpf">CPF</label>
+              <input ng-model="candidato.mae.cpf" type="text" class="form-control" name="mae.cpf" placeholder="Ex: 087.531.577-35">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="rgMae">RG</label>
+              <input ng-model="candidato.mae.rg.numero" type="text" class="form-control" id="rgMae" placeholder="EX: 083091314">
+          </div>
+        </div> <!--/row --> 
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Endereços</h3>
+          </div>
+          <div class="col-md-6">
+            <div class="pull-right">
+              <button class="btn btn-info" ng-click="novoEndereco()">
+                Cadastrar Endereço
+              </button>
+            </div>
+          </div>
+        </div><!--/row-->
+        <div class="row">
+          <div class="col-md-12">
+            <hr/>
+          </div>
+        </div><!--/row-->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table  table-striped">
+                <thead>
+                  <tr>
+                    <th>Cidade</th>
+                    <th>Bairro</th>
+                    <th>Logradouro</th>
+                    <th>CEP</th>
+                    <th>Número</th>
+                    <th ng-if="!visualizar"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="endereco in enderecos">
+                    <td>{{endereco.cidade}}</td>
+                    <td>{{endereco.bairro}}</td>
+                    <td>{{endereco.logradouro}}</td>
+                    <td>{{endereco.cep}}</td>
+                    <td>{{endereco.numero}}</td>
+                    <td ng-if="!visualizar">
+                      <button ng-click="editarEnderecos(endereco)" class="btn btn-sm btn-warning">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                      </button>
+                      <a ng-click="removerEnderecos(endereco)" class="btn btn-sm btn-danger">
+                        <i class="glyphicon glyphicon-remove"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+        </div><!--/row-->
+
+        <!-- Modal -->
+        <fe-dialog id-modal="modalEnderecos" titulo="Cadastrar um endereço">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="tipoLogradouroSelect">Tipo do Logradouro</label>
+            <select ng-model="modalEnd.tipoLogradouro" name="tipoLogradouroSelect" class="form-control">
+              <option value="">Selecione um tipo de logradouro</option>
+              <option value="">Outros</option>                    
+              <option value = "Aeroporto">Aeroporto</option>
+              <option value = "Alameda">Alameda</option>
+              <option value = "Area">Área</option>
+              <option value = "Avenida">Avenida</option>                            
+              <option value = "Campo">Campo</option>
+              <option value = "Chácara">Chácara</option>
+              <option value = "Colônia">Colônia</option>
+              <option value = "Condomínio">Condomínio</option>
+              <option value = "Conjunto">Conjunto</option>
+              <option value = "Distrito">Distrito</option>
+              <option value = "Esplanada">Esplanada</option>
+              <option value = "EstaÃ§ão">EstaÃ§ão</option>
+              <option value = "Estrada">Estrada</option>
+              <option value = "Favela">Favela</option>
+              <option value = "Fazenda">Fazenda</option>
+              <option value = "Feira">Feira</option>
+              <option value = "Jardim">Jardim</option>
+              <option value = "Ladeira">Ladeira</option>
+              <option value = "Lago">Lago</option>
+              <option value = "Lagoa">Lagoa</option>
+              <option value = "Largo">Largo</option>
+              <option value = "Loteamento">Loteamento</option>
+              <option value = "Morro">Morro</option>
+              <option value = "Núcleo">Núcleo</option>
+              <option value = "Parque">Parque</option>
+              <option value = "Passarela">Passarela</option>
+              <option value = "Pátio">Pátio</option>
+              <option value = "Praça">Praça</option>
+              <option value = "Quadra">Quadra</option>
+              <option value = "Recanto">Recanto</option>
+              <option value = "Residencial">Residencial</option>
+              <option value = "Rodovia">Rodovia</option>
+              <option value = "Rua">Rua</option>
+              <option value = "Setor">Setor</option>
+              <option value = "Sítio">Sítio</option>
+              <option value = "Travessa">Travessa</option>
+              <option value = "Trecho">Trecho</option>
+              <option value = "Trevo">Trevo</option>
+              <option value = "Vale">Vale</option>
+              <option value = "Vereda">Vereda</option>
+              <option value = "Via">Via</option>
+              <option value = "Viaduto">Viaduto</option>
+              <option value = "Viela">Viela</option>
+              <option value = "Vila">Vila</option>
+            </select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="control-label">Logradouro</label>
+            <select ng-model="modalEnd.nome" ng-options="l.nome for l in logradouros track by l.idLogradouro" class="form-control">
+              <option value="">Selecione um Logradouro</option>
+            </select> 
+          </div>
+        <div class="row">  
+          <div class="col-md-2 form-group">
+            <label for="complementoInput">Número</label>
+              <input ng-model="modalEnd.numero" type="text" class="form-control" id="numeroInput" placeholder="9900">
+          </div>
+        </div><!--/row -->
+        
+          <div class="col-md-12">
+            <label for="areaMoradia">Área</label>
+            <div id="areaMoradia">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="modalEnd.areaMoradia" type="radio" name="areaMoradia" value="Rural">
+                  Rural
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="modalEnd.areaMoradia" type="radio" name="areaMoradia" value="Urbana">
+                  Urbana
+                </label>
+              </div>      
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label class="control-label">Cidade</label>
+            <select ng-model="modalEnd.cidade" ng-options="c.nome for c in cidades track by c.idCidade" class="form-control">
+              <option value="">Selecione uma Cidade</option>
+            </select> 
+          </div>
+          <div class="col-md-6 form-group">
+          <!-- Todo das funÃ§Ãµes com arrays -->
+            <label class="control-label">Bairro</label>
+            <select ng-model="modalEnd.bairro" ng-options="b.nome for b in bairros track by b.idBairro" class="form-control">
+              <option value="">Selecione um Bairro</option>
+            </select> 
+          </div>
+        </div>        
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="complementoInput">Complemento</label>
+              <input ng-model="modalEnd.complemento" type="text" class="form-control" id="complementoInput" placeholder="Complemento">
+          </div>
+          <div class="col-md-5 form-group">
+            <label for="tipoEnderecoSelect">Tipo do Endereço</label>
+            <select ng-model="modalEnd.tipoEndereco" name="tipoEnderecoSelect" class="form-control">
+              <option value="Ex: Residencial"></option>
+              <option>Residencial</option>
+              <option>Cobrança</option>
+              <option>Entrega</option>
+              <option>Comercial</option>
+            </select>
+          </div>
+          <div class="col-md-3   form-group">
+            <label for="nomeInput">CEP</label>
+              <input ng-model="modalEnd.cep" type="text" class="form-control" id="cepInput" placeholder="87.393-409">
+          </div>
+        </div> <!--/row --> 
+        <div class="row">
+          <div class="col-md-6 form-group">
+          <!-- TODO -->
+            <label class="control-label">País</label>
+            <select ng-model="modalEnd.endereco.pais.nome" ng-options="p.nome for p in paises track by p.idPais" class="form-control">
+              <option value="">Selecione um País</option>
+            </select>  
+          </div>
+          <!-- TODO -->
+          <div class="col-md-6 form-group">
+            <label class="control-label">Unidade Federativa</label>
+            <select ng-model="modalEnd.endereco.unidadeFederativa.nome" ng-options="u.nome for u in ufs track by u.idUf" class="form-control">
+              <option value="">Selecione uma Uf</option>
+            </select> 
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="email">E-mail</label>
+              <input ng-model="modalEnd.email" type="text" class="form-control" id="Ex: email@exemplo.com">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12">
+            <hr/>
+            <div class="pull-right">
+              <button ng-click="salvarEnderecos(modalEnd)" class="btn btn-success">
+                Salvar
+              </button>
+            </div>
+          </div>
+        </div>
+      </fe-dialog>
+
+        <hr>
+        <h2 class="center">Documentos</h2>
+        <div class="row">
+          <div class="col-md-5 form-group">
+            <label class="control-label" for="cpf">CPF</label>
+              <input ng-model="candidato.documento.numero" type="text" class="form-control" name="cpf" placeholder="Ex: 087.531.577-35">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="rg">RG</label>
+              <input ng-model="candidato.rg.numero" type="text" class="form-control" id="rg" placeholder="Ex: 330491345">
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="orgaoExpedidor">órgão expedidor</label>
+              <input ng-model="candidato.rg.orgaoExpedidor" type="text" class="form-control" id="orgaoExpedidor" placeholder="Ex: SSP">
+          </div>
+        </div> <!--/row --> 
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="carteiraProfissional">Carteira profissional(CTPS) NIS</label>
+              <input ng-model="candidato.carteiraDeTrabalho.nis" type="text" class="form-control" id="carteiraProfissional" placeholder="Carteira Profissional">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="pis">PIS</label>
+              <input ng-model="candidato.carteiraDeTrabalho.pis" type="text" class="form-control" id="pis" placeholder="PIS">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="dataNascimento">Data de Nascimento</label>
+              <input ng-model="candidato.certidaoNascimento.dataNascimento" type="date" class="form-control" id="dataNascimento">
+          </div>
+          <div class="col-md-8 form-group">
+            <label for="cartorio">Cartório</label>
+              <input ng-model="candidato.certidaoNascimento.cartorio" type="text" class="form-control" id="cartorio" placeholder="Cartório">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="livro">Livro</label>
+              <input ng-model="candidato.certidaoNascimento.livro" type="text" class="form-control" id="livro" placeholder="Livro">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="folha">Folha</label>
+              <input ng-model="candidato.certidaoNascimento.folha" type="text" class="form-control" id="folha" placeholder="Folha">
+          </div>
+        </div><!--/row -->
+         <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="naturalidadeUF">Naturalidade UF</label>
+              <input ng-model="candidato.certidaoNascimento.ufOrigem" type="text" class="form-control" id="naturalidadeUf" placeholder="Naturalidade UF">
+          </div>
+          <div class="col-md-8 form-group">
+            <label for="cidadeNatal">Cidade Natal</label>
+              <input ng-model="candidato.certidaoNascimento.cidadeOrigem" type="text" class="form-control" id="cidadeNatal" placeholder="Ex: Curitiba">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12">
+            <label for="nacionalidade">Nacionalidade</label>
+            <div id="nacionalidade">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.nacionalidade" type="radio" name="nacionalidade" value="Brasileira">
+                  Brasileira
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.nacionalidade" type="radio" name="nacionalidade" value="BrasileiroNaturalizado">
+                  Brasileiro naturalizado
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.nacionalidade" type="radio" name="nacionalidade" value="Estrangeiro">
+                  Estrangeiro
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-8 form-group">
+            <label for="naoBrasileiro">Se Brasileiro Naturalizado ou Estrangeiro: NRE</label>
+              <input ng-model="candidato.naoBrasileiro" type="text" class="form-control" id="naoBrasileiro" placeholder="Ex: Estrangeiro nascido nos EUA">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-3">
+            <label for="tituloEleitor">Titulo de eleitor</label>
+            <div id="tituloEleitor">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.tituloDeEleitor" type="radio" name="tituloEleitor" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.tituloEleitor" type="radio" name="tituloEleitor" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="numeroTituloEleitor">Número título</label>
+              <input ng-model="candidato.tituloDeEleitor.numero" type="text" class="form-control" id="numeroTituloEleitor" placeholder="Número">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="zonaTitulo">Zona</label>
+              <input ng-model="candidato.tituloDeEleitor.zona" type="text" class="form-control" id="zonaTitulo" placeholder="Cidade Natal">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="seccaoEleitoral">Secção</label>
+              <input ng-model="candidato.tituloDeEleitor.secao" type="text" class="form-control" id="seccaoEleitoral" placeholder="Secção eleitoral">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-5">
+            <label for="cnh">Possui Carteira de Habilitação (CNH)? </label>
+            <div id="cnh">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.cnh" type="radio" name="cnh" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.cnh" type="radio" name="cnh" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+           <div class="col-md-3 form-group">
+            <label for="numeroCNH">Número CNH</label>
+              <input ng-model="candidato.carteiraDeHabilitacao.numero" type="text" class="form-control" id="numeroCNH" placeholder="Número da CNH">
+            </div>
+          <div class="col-md-4 form-group">
+            <label for="tipoEnderecoSelect">Tipo</label>
+            <select ng-model="candidato.categoriaHabilitacao.tipo" name="tipoCNH" class="form-control">
+              <option value="">Selecione uma categoria</option>
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+            </select>
+          </div>
+        </div><!--/row -->
+      <!-- <div class="row">
+        <div class="col-md-8">
+            <label for="servicoMilitar">Já se alistou no ServiÃ§o Militar Obrigatório</label>
+            <div id="servicoMilitar">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.situacaoReservista" type="radio" name="servicoMilitar" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.situacaoReservista" type="radio" name="servicoMilitar" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="numeroDispensaMilitar">NÃºmero dispensa Militar</label>
+              <input ng-model="candidato.reservista.numero" type="text" class="form-control" id="numeroDispensaMilitar" placeholder="NÃºmero">
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label for="convocadoServicoMilitar">Já foi convocado</label>
+          <select ng-model="candidato.situacaoReservista" name="convocadoServicoMilitar" class="form-control">
+            <option value="">Selecione a situação</option>
+            <option>Não</option>
+            <option>Sim, estou Servindo</option>
+            <option>Sim, já servi</option>
+            <option>Sim, fui dispensado</option>
+            <option>Sim, estou aguardando</option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <h2 class="center">Dados Escolares</h2>
+      <div class="row">
+        <div class="col-md-8 form-group">
+          <label for="escolaColegio">Escola/Colégio</label>
+            <input ng-model="candidato.instituicaoEnsino.nome" type="text" class="form-control" id="escolaColegio" placeholder="Ex: Colégio ...">
+        </div>
+        <div class="col-md-4 form-group">
+          <label for="telefoneEscola">Telefone</label>
+            <input ng-model="candidato.telefoneEscola" type="text" class="form-control" id="telefoneEscola" placeholder="(XX)0000-0000">
+        </div>
+      </div><!--/row -->
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="curso">Curso</label>
+          <select ng-model="candidato.curso" name="curso" class="form-control">
+            <option value="">Selecione o curso</option>
+            <option>Fundamental Incompleto</option>
+            <option>Médio Incompleto</option>
+            <option>Médio Técnico Completo</option>
+            <option>Supletivo Fundamental Incompleto</option>
+            <option>Supletivo Médio Incompleto</option>
+            <option>Superior Incompleto</option>
+          </select>
+        </div>
+         <div class="col-md-6">
+           <label for="turno">Turno</label>
+              <div id="turno">
+                <div class="radio-inline">
+                  <label>
+                    <input ng-model="candidato.turno" type="radio" name="turno" value="Manha">
+                    Manhã
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label>
+                    <input ng-model="candidato.turno" type="radio" name="turno" value="Tarde">
+                    Tarde
+                  </label>
+                </div>
+                <div class="radio-inline">
+                  <label>
+                    <input ng-model="candidato.turno" type="radio" name="turno" value="Noite">
+                    Noite
+                  </label>
+                </div>
+              </div>  
+            </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="serieAno">Série/ Ano</label>
+              <input ng-model="candidato.serie" type="text" class="form-control" id="serie" placeholder="Série/ Ano">
+          </div>
+          <div class="col-md-6">
+           <label for="basicoEmInformatica">Sabe usar programa básico de informática</label>
+            <div id="basicoEmInformatica">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.basicoEmInformatica" type="radio" name="experienciaInfoBasica" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.basicoEmInformatica" type="radio" name="experienciaInfoBasica" value="Não">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12">
+           <label for="interesseCurso">Tem interesse em um curso gratuito de Informática</label>
+            <div id="interesseCurso">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.interesseCurso" type="radio" name="interesseCurso" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.interesseCurso" type="radio" name="interesseCurso" value="Não">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6">
+            <label for="outroIdioma">Possui conhecimentos em outras línguas</label>
+            <div id="outroIdioma">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.outroIdioma" type="radio" name="linguaExtrangeira" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.outroIdioma" type="radio" name="linguaExtrangeira" value="Não">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="qualLinguaExtrangeira">Qual?</label>
+              <input ng-model="candidato.idioma.descricao" type="text" class="form-control" id="qualLinguaExtrangeira">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6 form-group">
+          <label for="fluenciaIdioma">Fluência no Idioma</label>
+            <select ng-model="candidato.idioma" name="fluenciaIdioma" class="form-control">
+              <option value="">Selecione a fluência</option>
+              <option>Lê</option>
+              <option>Fala</option>
+              <option>Lê e fala</option>
+              <option>Lê e escreve</option>
+              <option>Lê, escreve e fala</option>
+            </select>
+          </div>
+        </div><!--/row -->
+        <hr>
+        <h2 class="center">Dados Profissionais</h2>
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="pretencaoProfissional">Pretensão Profissional (Qual carreira que gostaria de seguir no futuro)</label>
+             <input ng-model="candidato.primeiraPretensaoProfissional" type="text" class="form-control" id="pretencaoProfissional" placeholder="Engenheiro">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="pretencaoProfissional">Pretensão Profissional (Qual carreira que gostaria de seguir no futuro)</label>
+             <input ng-model="candidato.segundaPretensaoProfissional" type="text" class="form-control" id="pretencaoProfissional" placeholder="Médico">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="pretencaoProfissional">Pretensão Profissional (Qual carreira que gostaria de seguir no futuro)</label>
+             <input ng-model="candidato.terceiraPretensaoProfissional" type="text" class="form-control" id="pretencaoProfissional" placeholder="Desenvolvedor de Sistemas">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+          <label for="jaTrabalhou">Já trabalhou</label>
+            <div id="jaTrabalhou">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.jaTrabalhou" type="radio" name="jaTrabalhou" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.jaTrabalhou" type="radio" name="jaTrabalhou" value="Não">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+          <div class="col-md-5">
+          <label for="isTrabalhoRemunerado">Este trabalho era remunerado</label>
+            <div id="isTrabalhoRemunerado">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.isTrabalhoRemunerado" type="radio" name="jaTrabalhouRemunerado" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.isTrabalhoRemunerado" type="radio" name="jaTrabalhouRemunerado" value="Não">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-5">
+          <label for="trabalhoComCtps">Este trabalho era com CTPS assinada</label>
+            <div id="trabalhoComCtps">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.trabalhoComCtps" type="radio" name="jaTrabalhouCTAssinada" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.trabalhoComCtps" type="radio" name="jaTrabalhouCTAssinada" value="Não">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+          <div class="col-md-7">
+          <label for="trabalhoVoluntario">Já exerceu trabalho voluntário não remunerado</label>
+            <div id="trabalhoVoluntario">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.trabalhoVoluntario" type="radio" name="voluntarioRemunerado" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.trabalhoVoluntario" type="radio" name="voluntarioRemunerado" value="Não">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <hr>
+        <h2 class="center">Dados Sócio-Económicos</h2>
+        <div class="row">
+          <div class="col-md-8">
+          <label for="moraComResponsavel">Mora com a mãe ou outro responsável</label>
+            <div id="moraComResponsavel">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.moraComResponsavel" type="radio" name="moraComMae" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.moraComResponsavel" type="radio" name="moraComMae" value="Não">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-8 form-group">
+            <label for="escolaridadeResponsavel">Qual a escolaridade da Mãe ou Principal responsável</label>
+            <select ng-model="candidato.escolaridadeResponsavel" name="escolaridadeResponsavel" class="form-control">
+              <option value="">Selecione a escolaridade</option>
+              <option>Analfabeto </option>
+              <option>Fundamental Incompleto</option>
+              <option>Supletivo Fundamental Incompleto</option>
+              <option>Médio Incompleto</option>
+              <option>Supletivo Médio Incompleto</option>
+              <option>Médio Técnico Incompleto</option>
+              <option>Superior Incompleto</option>
+              <option>Pré-vestibular</option>
+              <option>AlfabetizaÃ§ão de adultos</option>
+              <option>Fundamental Completo</option>
+              <option>Supletivo Fundamental Completo</option>
+              <option>Médio Completo</option>
+              <option>Supletivo Médio Completo</option>
+              <option>Médio Técnico Completo</option>
+              <option>Superior Completo</option>            
+            </select>
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="serieAnoResponsavel">Série/ Ano</label>
+              <input ng-model="candidato.serieAnoResponsavel" type="text" class="form-control" id="serieAnoResponsavel" placeholder="Série/ Ano">
+          </div>
+          <div class="col-md-6">
+          <label for="situacaoEscolaridadeResponsavel">Situação</label>
+            <div id="situacaoEscolaridadeResponsavel">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.situacaoEscolaridadeResponsavel" type="radio" name="situacaoEscolaridadeResponsavel" value="Concluido">
+                  Concluido
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.situacaoEscolaridadeResponsavel" type="radio" name="situacaoEscolaridadeResponsavel" value="NaoConcluido">
+                  Não Concluido
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-8 form-group">
+            <label for="pessoasResidentes">Quantas pessoas residem na sua casa(contando com você)</label>
+              <input ng-model="candidato.numeroResidentesNaCasa" type="text" class="form-control" id="pessoasResidentes" placeholder="Ex: 4">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="residentesTrabalham">Quantas dessas trabalham</label>
+              <input ng-model="candidato.quantasPessoasTrabalham" type="text" class="form-control" id="residentesTrabalham" placeholder="Ex: 2">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12">
+          <label for="auxilioGovernamental">Alguém da família recebe algum auxílio do governo?* 
+Ex. Bolsa família, Aposentadoria etc. </label>
+            <div id="auxilioGovernamental">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.auxilioGovernamental" type="radio" name="auxilioGovernamental" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.auxilioGovernamental" type="radio" name="auxilioGovernamental" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+         <div class="col-md-6 form-group">
+            <label for="beneficioGovernamental">Qual?</label>
+              <input ng-model="candidato.beneficioSocial" type="text" class="form-control" id="beneficioGovernamental">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="valorBeneficioGovernamental">Valor do beneficio R$</label>
+              <input ng-model="candidato.valorBeneficio" type="text" class="form-control" id="valorBeneficioGovernamental" placeholder="Ex: 300,00">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12">
+          <label for="isResponsavelCartaoBeneficio">Você é responsável pelo cartão do benefício</label>
+            <div id="isResponsavelCartaoBeneficio">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.isResponsavelCartaoBeneficio" type="radio" name="proprietarioBeneficio" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.isResponsavelCartaoBeneficio" type="radio" name="proprietarioBeneficio" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+         <div class="col-md-6 form-group">
+            <label for="rendaPropria">Renda própria</label>
+              <input ng-model="candidato.rendaPropria" type="text" class="form-control" id="rendaPropria">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="rendaTotalFamilia">Renda total da familia Per capita (para o sistema calcular) R$</label>
+              <input ng-model="candidato.rendaTotal" type="text" class="form-control" id="rendaTotalFamilia">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6">
+          <label for="temFilhos">Tem filhos?</label>
+            <div id="temFilhos">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.temFilhos" type="radio" name="temFilhos" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.temFilhos" type="radio" name="temFilhos" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+          <div class="col-md-6">
+          <label for="moraJunto">vive com o filho no mesmo domicílio?</label>
+            <div id="moraJunto">
+              <div class="radio-inline">
+                <label>
+                <!-- array de filhos[0] -->
+                  <input ng-model="candidato.filho.moraJunto" type="radio" name="moraComFilho" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.filho.moraJunto" type="radio" name="moraComFilho" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-8 form-group">
+            <label for="nomeFilho">Nome do Filho</label>
+              <input ng-model="candidato.filho.nome" type="text" class="form-control" id="nomeFilho" placeholder="Nome">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="dtNascimentoFilho">Data de nascimento</label>
+              <input ng-model="candidato.filho.dataNascimento" type="date" class="form-control" id="dtNascimentoFilho">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12">
+          <label for="responsavelPeloSustento">Qual o principal responsável pelo sustento da família?</label>
+            <div id="responsavelPeloSustento">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.responsavelPeloSustento" type="radio" name="responsavelFinanceiro" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.responsavelPeloSustento" type="radio" name="responsavelFinanceiro" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="comoFicouSabendoDoPrograma">Como ficou sabendo do programa de Aprendizagem</label>
+            <select ng-model="candidato.comoFicouSabendoDoPrograma" name="conhecePrograma" class="form-control">
+              <option value="">Selecione uma opção</option>
+              <option>TV </option>
+              <option>Rádio</option>
+              <option>Amigos/Família</option>
+              <option>Cartaz</option>
+              <option>Escola</option>
+              <option>Outros</option> 
+            </select>
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="motivoPataParticipar">Qual o principal motivo que o levou a participar do programa</label>
+            <select ng-model="candidato.motivoPataParticipar" name="motivoParticipacao" class="form-control">
+              <option value="">Selecione uma opção</option>
+              <option>Aprender/Iniciar uma profissão</option>
+              <option>Abri seu prnumero.prio negnumero.cio</option>
+              <option>Conseguir emprego</option>
+              <option>Auxílio Financeiro</option>
+              <option>Ajudar a comunidade com trabalho voluntário</option>
+              <option>Outros</option> 
+            </select>
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-12">
+          <label for="programaDigitandoFuturo">Participa do Programa DIGITANDO O FUTURO?</label>
+            <div id="programaDigitandoFuturo">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.programaDigitandoFuturo" type="radio" name="participouDigitandoFuturo" value="Sim">
+                  Sim
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.programaDigitandoFuturo" type="radio" name="participouDigitandoFuturo" value="Nao">
+                  Não
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-8 form-group">
+            <label for="empresa">Empresa</label>
+              <input ng-model="candidato.empresa.nome" type="text" class="form-control" id="empresa" placeholder="Nome da empresa">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <label for="dtAdmissao">Data de Admissão</label>
+              <input ng-model="candidato.contrato.dataAdmissao" type="date" class="form-control" id="dtAdmissao">
+          </div>
+           <div class="col-md-4 form-group">
+            <label for="dtFimContrato">Fim de Contrato</label>
+              <input ng-model="candidato.contrato.fimContrato" type="date" class="form-control" id="dtFimContrato">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="dtTerminoContrato">Termino do Contrato</label>
+              <input ng-model="candidato.contrato.terminoContrato" type="date" class="form-control" id="dtTerminoContrato">
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <label>Horário de trabalho:8:00 às 12:00, 8:30 às 12:30, 13:00 às 17:00 ou 13:30 às 17:30</label>
+        </div><!--/row -->
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="diasAulaTeoriaca">Dias de aula teórica<label>
+            <div id="diasAulaTeoriaca">
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.contrato.diasAulaTeoriaca" type="radio" name="diasAulasTeoricas" value="Segunda">
+                  Segunda
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.diasAulaTeoriaca" type="radio" name="diasAulasTeoricas" value="Terca">
+                  Terça
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.diasAulaTeoriaca" type="radio" name="diasAulasTeoricas" value="Quarta">
+                  Quarta
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.diasAulaTeoriaca" type="radio" name="diasAulasTeoricas" value="Quinta">
+                  Quinta
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.diasAulaTeoriaca" type="radio" name="diasAulasTeoricas" value="Sexta">
+                  Sexta
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.diasAulaTeoriaca" type="radio" name="diasAulasTeoricas" value="Sabado">
+                  Sábado
+                </label>
+              </div>
+              <div class="radio-inline">
+                <label>
+                  <input ng-model="candidato.diasAulaTeoriaca" type="radio" name="diasAulasTeoricas" value="Domingo">
+                  Domingo
+                </label>
+              </div>
+            </div>  
+          </div>
+        </div><!--/row -->
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="salario">Salário</label>
+              <input ng-model="candidato.contrato.salario" type="text" class="form-control" id="salario" placeholder="Salário">
+          </div>
+        </div><!--/row -->
+        <div class="row pull-right">
+          <div class="col-md-12">
+            <a href="./#/candidato" class="btn btn-info" >Voltar</a>
+            <button type="button" class="btn btn-warning" >Limpar</button>
+            <button ng-disabled="formCandidato.$invalid" ng-click="slvarCandidato(candidato)"   type="button" class="btn btn-success" >Salvar</button>
+          </div>
+        </div><!--/row -->
+    </form>
+  </div>
+</div>  
+<!--Fim do conteÃºdo do Form-->

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProcessoSeletivo" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b02197e2-61c6-48cc-b4e2-0a1ca76e4711">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="d3198669-f4fb-49bf-b477-a8947dd560af"/>
+	<parameter name="diretorio" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+	P.NOME,
+	PJ.FANTASIA,
+	T.NUMERO TELEFONE,
+	CR.DATAADMISSAO,
+	CR.TERMINOCONTRATO
+FROM PESSOA P
+	JOIN PESSOAFISICA PF ON (PF.ID = P.ID)
+	JOIN CANDIDATO C ON (C.ID = P.ID)
+	JOIN PESSOA_DOCUMENTO PR ON (P.ID = PR.PESSOA_ID)
+	JOIN DOCUMENTO DR ON (DR.ID = PR.DOCUMENTOS_ID)
+	JOIN RG R ON (R.ID = DR.ID)
+	JOIN CONTRATO CR ON (to_number(convert_from(CR.APRENDIZ, 'UTF8'),'9999999') = P.ID)
+	JOIN PESSOAJURIDICA PJ ON (PJ.ID = to_number(convert_from(CR.EMPRESA, 'UTF8'),'9999999'))
+	JOIN PESSOA_TELEFONE PT ON (PT.PESSOA_ID = PJ.ID)
+	JOIN TELEFONE T ON (T.ID = PT.TELEFONES_ID)
+WHERE P.ATIVO = 't'
+AND CR.DATAADMISSAO >= ( CURRENT_TIMESTAMP - interval '1 year' )
+AND ( CR.TERMINOCONTRATO >= CURRENT_TIMESTAMP - interval '1 DAY' OR CR.TERMINOCONTRATO IS NULL )]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String"/>
+	<field name="dataadmissao" class="java.sql.Timestamp"/>
+	<field name="terminocontrato" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<image>
+				<reportElement x="3" y="11" width="102" height="67" uuid="30f93233-0807-48a9-9abb-34c12b256b62"/>
+				<imageExpression><![CDATA[$P{diretorio}+"../img/logo-isis-bruder.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="200" y="24" width="482" height="31" uuid="cd6960c8-1617-4b84-8fdf-ac01195a4d4d"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="20" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Relatório de Alunos por Data de Desligamento]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="22" width="801" height="1" uuid="025a6ee6-11b2-48d2-bac8-e826e5db088a"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="1" width="251" height="20" uuid="331fce1d-c8f8-42c7-8351-11fdb9634549"/>
+				<text><![CDATA[Aluno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="1" width="85" height="20" uuid="7df0d118-fcc8-43a9-9197-39c7f4e03d6d"/>
+				<text><![CDATA[Data Admissão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="717" y="0" width="85" height="20" uuid="e31f300c-ddb4-4096-8909-ac2c46dff16d"/>
+				<text><![CDATA[Término Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="547" y="1" width="85" height="20" uuid="1de7e3b4-7f48-4f6e-9f1a-65d4d581e2e9"/>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="2" width="193" height="20" uuid="5221e423-b7a1-4826-82d9-3ef50a585d56"/>
+				<text><![CDATA[Nome da Empresa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="0" width="251" height="20" uuid="c9708013-91f6-4786-9731-56ca4b4cbe5d"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="18" width="801" height="1" uuid="b2dba005-c255-4122-83e6-8aab2adc266d"/>
+			</line>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="632" y="0" width="85" height="20" uuid="485481e5-2b3c-482c-a4ca-45ad42cdcb25"/>
+				<textFieldExpression><![CDATA[(new SimpleDateFormat("dd'/'MM'/'yyyy").format($F{dataadmissao}))]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="277" y="0" width="193" height="20" uuid="e8580428-f0e7-413f-8c3b-c01345d06889"/>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="717" y="0" width="85" height="20" uuid="5eedc4a1-a0a5-4a71-9319-847752afad0f"/>
+				<textFieldExpression><![CDATA[(new SimpleDateFormat("dd'/'MM'/'yyyy").format($F{terminocontrato}))]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="547" y="0" width="85" height="20" uuid="14c62f58-2c92-44d0-aae0-4ca1cbf676be"/>
+				<textFieldExpression><![CDATA['(' + $F{telefone}.substring(0,2) + ')' +
+$F{telefone}.substring(2,6) + '-' +
+$F{telefone}.substring(6,10)]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="34" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="53" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="762" y="0" width="40" height="20" uuid="c5c98796-7008-40a6-bfa9-d1c0c7174559"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="682" y="0" width="80" height="20" uuid="28283014-6ed1-4e04-a460-13190a68bafd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

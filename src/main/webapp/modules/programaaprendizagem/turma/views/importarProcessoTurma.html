@@ -1,0 +1,130 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Importar Candidatos do Processo Seletivo</h3>
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info panel-form">
+			  <div class="panel-heading panel-form-pessoais">
+			    Empresas
+			  </div><!--/div panel-->
+			  <div class="panel-body">
+			  	<div class="row">
+			  		<div class="col-md-12">
+			  			<div class="table-responsive">
+			  				<table class="table table-striped">
+			  					<thead>
+			  					  <tr>
+			  					    <th>Nome Fantasia</th>
+			  					    <th>Vagas Totais</th>
+			  					    <th>Vagas Disponíveis</th>
+			  					    <th>Início da Vigência</th>
+			  					    <th>Fim da Vigência</th>
+			  					  </tr>
+			  					</thead>
+			  					<tbody>
+			  					  <tr ng-repeat="turmaEmpresa in turmaEmpresas">
+			  					  	<td>{{turmaEmpresa.empresa.fantasia}}</td>
+			  					  	<td class="text-center">{{turmaEmpresa.vagas}}</td>
+			  					  	<td>{{getVagas(turmaEmpresa)}}</td>
+			  					  	<td><input type="date" class="form-control" ng-model="datas[$index].inicioVigencia "></td>
+			  					  	<td><input type="date" class="form-control" ng-model="datas[$index].fimVigencia"></td>
+			  					  </tr>
+			  					</tbody>
+			  				</table>
+			  			</div>
+			  		</div>
+			  	</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-indigo panel-form">
+			  <div class="panel-heading panel-form-enderecos">
+			    Alunos
+			  </div><!--/div panel-->
+			  <div class="panel-body">
+			  	<div class="container-fluid">
+				  	<div class="row">
+				  		<div class="col-md-8 form-group">
+				  			<label>Processo Seletivo</label>
+				  			<select class="form-control" type="text" ng-model="selectProcessoSeletivo" ng-change="getCandidatos(selectProcessoSeletivo)">
+				  				<option></option>
+				  				<option value="{{processo.id}}" ng-repeat="processo in processosSeletivos">{{processo.descricao}}</option>
+				  			</select>
+				  		</div>
+				  	</div>
+				  	<div class="row">
+				  		<div class="col-md-12">
+				  			<div class="col-md-12">
+				  			  <div class="help-error" ng-show="candidatos.length<=0">
+				  			    <p class="text-warning text-center"><strong>Selecione um Processo Seletivo para importar os Candidatos.</strong></p>
+				  			  </div>
+				  			</div>
+				  		</div>
+				  	</div>
+				  	<div class="row" ng-show="candidatos.length>0">
+				  		<div class="col-md-12">
+	  					  	<tabset>
+	  					  		<tab ng-repeat="(indexEmpresa, turmaEmpresa) in turmaEmpresas" >
+	  					  			<tab-heading>
+	  			  			        	{{turmaEmpresa.empresa.fantasia}}&nbsp;&nbsp;<span class="label label-{{getVagas(turmaEmpresa)>0?'success':'warning'}}">{{getVagas(turmaEmpresa)}}</span>
+	  			  			      	</tab-heading>
+	  					  			<div class="container-fluid">
+	  					  				<div class="row" >
+	  					  					<div class="col-md-12">
+	  					  				    	<div class="table-responsive">
+	  					  				    	  	<table class="table table-striped">
+	  					  					    	    <thead>
+	  					  					    	      <tr>
+	  					  					    	      	<th></th>
+	  					  					    	        <th>Nome</th>
+	  					  					    	        <th>Escola</th>
+	  					  					    	        <th>Turno</th>
+	  					  					    	        <th>Início da Vigência</th>
+	  					  					    	        <th>Fim da Vigência</th>
+	  					  					    	      </tr>
+	  					  					    	    </thead>
+	  					  					    	    <tbody>
+	  					  					    	      <tr ng-repeat="(indexCandidato, candidato) in candidatos">
+	  					  					    	      	<td><input type="checkbox" ng-click="setCandidatoVinculo(candidato, turmaEmpresa)" ng-disabled="getCandidatoVinculadoEmpresa(candidato, turmaEmpresa.empresa) || ((getVagas(turmaEmpresa)< 1)&&!getCandidatoVinculado(candidato))" ng-checked="getCandidatoVinculado(candidato)"></td>
+	  					  					    	      	<td ng-class="getCandidatoVinculadoEmpresa(candidato, turmaEmpresa.empresa)?'text-muted':''">{{candidato.nome}}</td>
+	  					  					    	      	<td ng-class="getCandidatoVinculadoEmpresa(candidato, turmaEmpresa.empresa)?'text-muted':''">{{candidato.instituicaoEnsino.nome}}</td>
+	  					  					    	      	<td ng-class="getCandidatoVinculadoEmpresa(candidato, turmaEmpresa.empresa)?'text-muted':''">{{candidato.turno}}</td>
+	  					  					    	      	<td><input type="date"  class="form-control" ng-change="setVigenciaCandidato(datasCandidatos[indexCandidato], candidato)" ng-model="datasCandidatos[indexCandidato].inicioVigencia" ng-disabled="getCandidatoVinculadoEmpresa(candidato, turmaEmpresa.empresa) || !getCandidatoVinculado(candidato)"></td>
+	  					  					    	      	<td><input type="date"  class="form-control" ng-change="setVigenciaCandidato(datasCandidatos[indexCandidato])" ng-model="datasCandidatos[indexCandidato].fimVigencia" ng-disabled="getCandidatoVinculadoEmpresa(candidato, turmaEmpresa.empresa) || !getCandidatoVinculado(candidato)"></td>
+	  					  					    	      </tr>
+	  					  					    	    </tbody>
+	  					  				    		</table>
+	  					  				    	</div>
+	  					  					</div>
+	  					  				</div>
+	  					  			</div>			  	    	
+	  					  	    </tab>
+	  					  	</tabset>
+				  		</div>
+				  	</div>
+			  	</div>			  				  	
+			  </div>
+			</div>				
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="pull-right">
+				<button class="btn btn-warning" ng-click="cancelar()">Cancelar</button>
+				<button class="btn btn-success" ng-click="salvarAlunos()" ng-disabled="alunos.length<1">Salvar</button>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			&nbsp;
+		</div>
+	</div>
+</div>

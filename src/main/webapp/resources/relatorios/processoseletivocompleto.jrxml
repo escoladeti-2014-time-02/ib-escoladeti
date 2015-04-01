@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProcessoSeletivo" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b02197e2-61c6-48cc-b4e2-0a1ca76e4711">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="d3198669-f4fb-49bf-b477-a8947dd560af"/>
+	<parameter name="diretorio" class="java.lang.String"/>
+	<parameter name="processoid" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT PS.DESCRICAO AS DESCRICAO, PS.DATAINICIO AS DATAINICIO, PS.DATAFIM AS DATAFIM,
+       PES.NOME AS NOME_CANDIDATO, CPS.NIVELCANDIDATOPROCESSO AS NIVEL,
+       SUM(EPS.QUANTIDADEVAGAS) AS QTD,
+       (CASE  WHEN DAD.auxiliogovernamental = TRUE then 'Sim' else 'Não' end) as AUXILIO,
+       BENEFICIOSOCIAL,
+       DAD.RENDAFAMILIAR RENDA, DAD.rendapercapita PERCAPTA
+FROM PROCESSOSELETIVO PS
+	JOIN EMPRESAPROCESSOSELETIVO EPS ON EPS.PROCESSOSELETIVO_ID = PS.ID
+	JOIN PESSOAJURIDICA PJ ON PJ.ID = EPS.EMPRESA_ID
+	JOIN CANDIDATOPROCESSOSELETIVO CPS ON CPS.PROCESSOSELETIVO_ID = PS.ID
+	JOIN PESSOA PES ON PES.ID = CPS.CANDIDATO_ID
+	JOIN CANDIDATO CAN ON CAN.ID = PES.ID
+	JOIN DADOSSOCIOECONOMICOS DAD ON DAD.ID = CAN.dadossocioeconomicos_id
+where ps.id = $P{processoid}
+GROUP BY DESCRICAO, DATAINICIO, DATAFIM, NOME_CANDIDATO, NIVEL, RENDA, PERCAPTA, auxilio, beneficiosocial
+order by nivel desc ]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="datainicio" class="java.sql.Date"/>
+	<field name="datafim" class="java.sql.Date"/>
+	<field name="nome_candidato" class="java.lang.String"/>
+	<field name="nivel" class="java.lang.Integer"/>
+	<field name="qtd" class="java.lang.Long"/>
+	<field name="auxilio" class="java.lang.String"/>
+	<field name="beneficiosocial" class="java.lang.String"/>
+	<field name="renda" class="java.lang.Double"/>
+	<field name="percapta" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<image>
+				<reportElement x="3" y="11" width="102" height="67" uuid="30f93233-0807-48a9-9abb-34c12b256b62"/>
+				<imageExpression><![CDATA[$P{diretorio}+"../img/logo-isis-bruder.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="217" y="24" width="465" height="31" uuid="cd6960c8-1617-4b84-8fdf-ac01195a4d4d"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="20" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Relatório de Processo Seletivo Completo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="249" y="0" width="58" height="20" uuid="43a61a76-eca9-44db-aebb-4e1eeb1d399d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="0" width="133" height="20" uuid="67573f5a-8230-417a-80a9-c42cab3fda3c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade Total de Vagas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="0" width="62" height="20" uuid="c7ceae08-6f7b-4da8-b6fd-6bba482f1022"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="1" width="160" height="20" uuid="b1559e6c-0c09-4c66-bb91-7bb3d247a450"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Processo]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="324" y="20" width="133" height="15" uuid="1ea5d951-d0f0-42df-a47d-de451521b535"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{qtd}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="249" y="20" width="58" height="15" uuid="9a333cab-a06d-49ab-b8da-232f324b4087"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{datafim}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="3" y="20" width="160" height="15" uuid="2cf208dd-9de2-4d06-95a3-b74817202742"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement x="184" y="20" width="62" height="15" uuid="6b7a925b-fc09-486c-a72b-bcedcee56a35"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{datainicio}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="801" height="1" uuid="adc0bfda-0f04-46c4-b4bb-98f37d8181bc"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="16" width="801" height="1" uuid="025a6ee6-11b2-48d2-bac8-e826e5db088a"/>
+			</line>
+			<staticText>
+				<reportElement x="184" y="0" width="123" height="15" uuid="331fce1d-c8f8-42c7-8351-11fdb9634549"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel Processo Seletivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="597" y="0" width="85" height="15" uuid="7df0d118-fcc8-43a9-9197-39c7f4e03d6d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Renda Familiar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="707" y="0" width="95" height="15" uuid="e31f300c-ddb4-4096-8909-ac2c46dff16d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Percapita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="1" width="160" height="15" uuid="b70d60d6-0a0e-4315-b4e0-ecb349f80b01"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Candidato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="2" width="90" height="15" uuid="38e9efff-0dda-48a2-bf0d-aeb38af358a3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Auxilio Governo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="457" y="1" width="84" height="15" uuid="59275dbd-bc72-44fb-99b5-f074e7f7c976"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Beneficio Social]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="184" y="0" width="123" height="15" uuid="c9708013-91f6-4786-9731-56ca4b4cbe5d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="597" y="0" width="85" height="15" uuid="485481e5-2b3c-482c-a4ca-45ad42cdcb25"/>
+				<textFieldExpression><![CDATA[$F{renda}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="707" y="0" width="95" height="15" uuid="5eedc4a1-a0a5-4a71-9319-847752afad0f"/>
+				<textFieldExpression><![CDATA[$F{percapta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="3" y="0" width="160" height="15" uuid="4c210071-6149-4762-9d88-5d1b4909a9be"/>
+				<textFieldExpression><![CDATA[$F{nome_candidato}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="324" y="0" width="90" height="15" uuid="7837961c-d07f-4593-9c96-9f7c8835d96b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{auxilio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="457" y="0" width="84" height="15" uuid="815b08a3-a652-4219-8da8-9923124fb89b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{beneficiosocial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="34" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="53" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="762" y="0" width="40" height="20" uuid="c5c98796-7008-40a6-bfa9-d1c0c7174559"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="682" y="0" width="80" height="20" uuid="28283014-6ed1-4e04-a460-13190a68bafd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

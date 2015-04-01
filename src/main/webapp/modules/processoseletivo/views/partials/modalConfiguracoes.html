@@ -1,0 +1,192 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Configurações do Processo Seletivo</h3>
+      <hr/>
+    </div>
+  </div>
+  <ng-form name="modalConfig" novalidation>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group  {{(modalConfig.descricaoInput.$invalid&&!modalConfig.descricaoInput.$pristine)&&'has-error'||(!modalConfig.descricaoInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Descrição <strong class=" form-obrigatorio">*</strong></label>
+            <input name="descricaoInput" type="text" class="form-control" ng-model="configModal.descricao" ng-minlength="3" ng-maxlength="72" ng-required="true"/>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalConfig.descricaoInput.$error.required&&!modalConfig.descricaoInput.$pristine" class=" ">O campo <strong>Descrição</strong> é obrigatório.</p>
+            <p ng-show="modalConfig.descricaoInput.$error.minlength"  class="">O <strong>Descrição</strong> informado deve ter mais de 2 caracteres.</p>
+            <p ng-show="modalConfig.descricaoInput.$error.maxlength"  class="">O <strong>Descrição</strong> informado deve ter menos que 72 caracteres.</p>
+        </div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group  {{(modalConfig.dataInicioInput.$invalid&&!modalConfig.dataInicioInput.$pristine)&&'has-error'||(!modalConfig.dataInicioInput.$pristine&&'has-success'||'')}}">  
+          <label class="control-label">Data Inicio<strong class=" form-obrigatorio">*</strong></label>
+          <div class="input-group">
+            <input 
+              type="text" 
+              style="background:white; cursor: pointer;"
+              name="dataInicioInput" 
+              class="form-control" 
+              datepicker-popup="dd/MM/yyyy" 
+              ng-model="configModal.dataInicio" 
+              is-open="datePicker.opened[0]" 
+              ng-click = "datePicker.opened[0] = true" 
+              datepicker-options="datePicker.config" 
+              date-disabled="disabled(date, mode)" 
+              ng-required="true" 
+              close-text="Fechar" 
+              current-text="Hoje"
+              clear-text="Limpar"
+              placeholder="__/__/__"
+              readonly="readonly"
+            />
+          </div>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalConfig.dataInicioInput.$error.required&&!modalConfig.dataInicioInput.$pristine" class=" ">O campo <strong>Data Inicio</strong> é obrigatório.</p>
+        </div> 
+      </div>
+      <div class="col-md-4 col-md-offset-2">
+        <div class="form-group  {{(modalConfig.dataTerminoInput.$invalid&&!modalConfig.dataTerminoInput.$pristine)&&'has-error'||(!modalConfig.dataTerminoInput.$pristine&&'has-success'||'')}}">  
+          <label class="control-label">Data Fim<strong class=" form-obrigatorio">*</strong></label>
+          <div class="input-group">
+            <input 
+              style="background:white; cursor: pointer;"
+              type="text" 
+              name="dataTerminoInput" 
+              class="form-control" 
+              datepicker-popup="dd/MM/yyyy" 
+              ng-model="configModal.dataFim" 
+              is-open="datePicker.opened[1]" 
+              ng-click = "datePicker.opened[1] = true" 
+              datepicker-options="datePicker.config" 
+              date-disabled="disabled(date, mode)" 
+              ng-required="true" 
+              close-text="Fechar" 
+              current-text="Hoje"
+              clear-text="Limpar"
+              min-date="configModal.dataInicio"
+              placeholder="__/__/__"
+              readonly="readonly"
+            />
+          </div>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalConfig.dataTerminoInput.$error.required&&!modalConfig.dataTerminoInput.$pristine" class=" ">O campo <strong>Data do Evento</strong> é obrigatório.</p>
+        </div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Perfil do Candidato</h4>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group  {{(modalConfig.idadeMinInput.$invalid&&!modalConfig.idadeMinInput.$pristine)&&'has-error'||(!modalConfig.idadeMinInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Idade Mínima</label>
+            <div class="input-group">
+              <input name="idadeMinInput" type="number" ng-blur="getCandidatosPre(configModal.perfilCandidato)" class="form-control" ng-model="configModal.perfilCandidato.idadeMinima" min="1" max="{{configModal.perfilCandidato.idadeMaxima?configModal.perfilCandidato.idadeMaxima:99}}" />
+              <span class="input-group-addon">anos</span>              
+            </div>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalConfig.idadeMinInput.$error.number" class=" ">O campo <strong>Idade Mínima</strong> aceita apenas números.</p>
+            <p ng-show="modalConfig.idadeMinInput.$error.max" class=" ">A <strong>Idade Mínima</strong> não pode ser maior que a <strong>Idade Máxima</strong>.</p>
+            <p ng-show="modalConfig.idadeMinInput.$error.min" class=" ">A <strong>Idade Mínima</strong> não pode ser menor que 1.</p>
+        </div>       
+      </div>
+      <div class="col-md-4 col-md-offset-2">
+        <div class="form-group  {{(modalConfig.idadeMaxInput.$invalid&&!modalConfig.idadeMaxInput.$pristine)&&'has-error'||(!modalConfig.idadeMaxInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Idade Máxima</label>
+            <div class="input-group">
+              <input name="idadeMaxInput" type="number" class="form-control"  ng-blur="getCandidatosPre(configModal.perfilCandidato)" ng-model="configModal.perfilCandidato.idadeMaxima" min="{{configModal.perfilCandidato.idadeMinima?configModal.perfilCandidato.idadeMinima:1}}" />
+              <span class="input-group-addon">anos</span>
+            </div>
+        </div> 
+        <div class="help-error bg-danger" >
+            <p ng-show="modalConfig.idadeMaxInput.$error.number" class=" ">O campo <strong>Idade Máxima</strong> aceita apenas números.</p>
+            <p ng-show="modalConfig.idadeMaxInput.$error.min" class=" ">A <strong>Idade Máxima</strong> não pode ser menor que a <strong>Idade Mínima</strong> ou menor que 1.</p>
+        </div>     
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group  {{(modalConfig.rendaMinInput.$invalid&&!modalConfig.rendaMinInput.$pristine)&&'has-error'||(!modalConfig.rendaMinInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Renda Mínima</label>
+            <div class="input-group">
+              <span class="input-group-addon">R$</span>
+              <input name="rendaMinInput" type="number" step="10" class="form-control" ng-blur="getCandidatosPre(configModal.perfilCandidato)" ng-model="configModal.perfilCandidato.rendaMinima" min="1" max="{{configModal.perfilCandidato.rendaMaxima?configModal.perfilCandidato.rendaMaxima:99999}}"/>
+            </div>                            
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalConfig.rendaMinInput.$error.number" class=" ">O campo <strong>Renda Mínima</strong> aceita apenas números.</p>
+            <p ng-show="modalConfig.rendaMinInput.$error.max" class=" ">A <strong>Renda Mínima</strong> não pode ser maior que a <strong>Renda Máxima</strong>.</p>
+            <p ng-show="modalConfig.rendaMinInput.$error.min" class=" ">A <strong>Renda Mínima</strong> não pode ser menor que 1.</p>
+        </div>      
+      </div>
+      <div class="col-md-4 col-md-offset-2">
+        <div class="form-group  {{(modalConfig.rendaMaxInput.$invalid&&!modalConfig.rendaMaxInput.$pristine)&&'has-error'||(!modalConfig.rendaMaxInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Renda Máxima</label>
+            <div class="input-group">
+              <span class="input-group-addon">R$</span>
+              <input name="rendaMaxInput" type="number" step="10" class="form-control"  ng-blur="getCandidatosPre(configModal.perfilCandidato)" ng-model="configModal.perfilCandidato.rendaMaxima" min="{{configModal.perfilCandidato.rendaMinima?configModal.perfilCandidato.rendaMinima:1}}"/>
+            </div>
+        </div> 
+        <div class="help-error bg-danger" >
+            <p ng-show="modalConfig.rendaMaxInput.$error.number" class=" ">O campo <strong>Renda Máxima</strong> aceita apenas números.</p>
+            <p ng-show="modalConfig.rendaMaxInput.$error.min" class=" ">A <strong>Renda Máxima</strong> não pode ser menor que a <strong>Renda Mínima</strong> ou menor que 1.</p>
+        </div>     
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <h4>Distancia máxima</h4>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group  {{(modalConfig.distanciaEscolaInput.$invalid&&!modalConfig.distanciaEscolaInput.$pristine)&&'has-error'||(!modalConfig.distanciaEscolaInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Escola</label>
+            <div class="input-group">
+              <input name="distanciaEscolaInput" type="number" class="form-control" ng-model="configModal.perfilCandidato.distanciaMaximaInstituicao" />
+              <span class="input-group-addon">km</span>
+            </div>
+            
+        </div>      
+      </div>
+      <div class="col-md-4 col-md-offset-2">
+        <div class="form-group  {{(modalConfig.distanciaEmpresaInput.$invalid&&!modalConfig.distanciaEmpresaInput.$pristine)&&'has-error'||(!modalConfig.distanciaEmpresaInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Empresa</label>
+            <div class="input-group">
+              <input name="distanciaEmpresaInput" type="number" class="form-control" ng-model="configModal.perfilCandidato.distanciaMaximaEmpresa" />
+              <span class="input-group-addon">km</span>
+            </div>
+        </div>      
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <button class="btn btn-warning">Limpar</button>
+          <button class="btn btn-success" ng-disabled="modalConfig.$invalid" ng-click="salvarProcessoSeletivo(configModal);">Salvar</button>
+        </div>
+      </div>
+    </div>  
+    <div class="row">
+      <div class="col-md-12">
+        &nbsp;
+      </div>
+    </div>  
+  </ng-form>
+</div>
+      

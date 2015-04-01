@@ -1,0 +1,169 @@
+*{
+	font-family: "HelveticaNeue-CondensedBold", "HelveticaNeueBoldCondensed", "HelveticaNeue-Bold-Condensed", "Helvetica Neue Bold Condensed", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", sans-serif; font-stretch:condensed;
+}
+
+.logo-menu {
+	position: absolute;
+	margin: 10px 0px 20px 20px;
+}
+.navbar{
+	border: none;
+}
+.navbar-static-side hr {
+	margin: 0;
+}
+
+.center {
+	text-align: center;
+}
+.help-error {
+	margin-top: 5px;
+}
+.help-error p {
+	padding: 5px;
+	margin: 0;
+}
+
+.alert{
+	text-align: center;
+}
+
+.form-obrigatorio {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+  	content: "\f069";
+	font-size: 18px;
+}
+
+.panel.panel-form {
+	border-radius: 0px !important;
+	border: 1px solid #d8d8d8 !important;
+}
+
+.panel.panel-form .panel-form-pessoais {
+	background-color: #81CFE0 !important;
+	color: #ffffff;
+}
+
+.panel.panel-form .panel-form-documentos {
+	background-color: #F4B350 !important;
+	color: #FFFFFF;
+}
+
+.panel.panel-form .panel-heading {
+	background-color: #ffffff;
+	font-size: 20px;
+}
+
+.panel.panel-form .panel-form-telefones {
+	background-color: #90C695 !important;
+	color: #FFFFFF;
+}
+
+.panel.panel-form .panel-form-enderecos {
+	background-color: #C0392B !important;
+	color: #FFFFFF;
+}
+
+.panel.panel-form .panel-form-filiacao {
+	background-color: #34495e !important;
+	color: #FFFFFF;
+}
+
+.panel.panel-form .panel-form-socio-economico {
+	background-color: #D35400 !important;
+	color: #FFFFFF;
+}
+
+.panel.panel-form .panel-form-escolares {
+	background-color: #1E824C !important;
+	color: #FFFFFF;
+}
+
+.panel.panel-form .panel-form-filhos {
+	background-color: #674172 !important;
+	color: #FFFFFF;
+}
+
+.panel.panel-form .panel-form-processo-selecionado {
+	background-color: #27ae60 !important;
+	color: #FFFFFF;
+}
+.panel.panel-form .panel-form-processo-nao-selecionado {
+	background-color: #e67e22 !important;
+	color: #FFFFFF;
+}
+
+.panel.panel-form .panel-form-processo-seletivo {
+	background-color: #34495e !important;
+	color: #FFFFFF;
+}
+
+.panel-turma .panel-heading {
+	height: 55px;
+  font-size: 18px;
+  color: #EBEBEB;
+  background-color: #34495e;
+	background-color: #738088 !important;
+}
+
+.fotoCandidato:hover {
+	cursor: pointer;
+}
+
+.fotoCandidato:hover span {
+	background-color: rgba(0,0,0,0.4);
+	}
+
+.fotoCandidato span{
+	position: absolute;
+	display: block;
+	width: 140px;
+	height: 140px;
+	top: 0;
+	left: 50%;
+	margin-left: -70px;
+	background-color: rgba(0,0,0,0);
+	color: #ffffff;
+	text-align: center;
+	font-size: 42px;
+}
+
+.fotoCandidato span i {
+	margin-top: 50px;
+	display: none;
+}
+
+.fotoCandidato:hover span i {
+	display: block;
+}
+
+.botao-selecionar-foto {
+	margin-top: 10px;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+

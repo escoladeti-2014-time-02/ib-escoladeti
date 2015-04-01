@@ -1,0 +1,145 @@
+<link rel="stylesheet" type="text/css" href="./resources/css/processoSeletivo.css">
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-indigo panel-form" id="panelMapa">
+		  <div class="panel-heading panel-form-processo-mapa">
+		  	<h1 class="panel-title">Mapa
+		  	<div class="pull-right">
+		  		<label style="margin-left: 10px;" class="switch">
+		  		   <input type="checkbox" ng-model="exibirMapa" ng-change="scrollMapa(exibirMapa)" />
+		  		   <span></span>
+		  		</label>
+		  	</div>	  	
+		  	</h1>
+		  </div>
+		  <div class="panel-body" ng-init="exibirMapa = false" ng-if="exibirMapa">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Distancia {{filtro.raioEmpresa}} km</label>
+                                <input type="range" min="0" max="10" ng-model="filtro.raioEmpresa">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                        	<div class="form-group">
+                        		<label>Exibir Candidatos</label>
+                        		<div class="checkbox">
+                        		    <label>
+                        		      <input type="checkbox" ng-model="filtro.candidatoSelecionados" ng-change="atualizarMapa()"> Selecionados
+                        		    </label>
+                        		</div>
+                        		<div class="checkbox">
+                        		    <label>
+                        		      <input type="checkbox" ng-model="filtro.candidatoNaoSelecionados" ng-change="atualizarMapa()"> Não selecionados
+                        		    </label>
+                        		</div>
+                        	</div>                        	
+                        </div>
+                        <div class="col-md-7">
+                        	<div class="pull-right">
+                        		<a class="" href="#" ng-click="novaCorCandidatos()">
+                        			<i class="fa fa-paint-brush"></i> Trocar Cores
+                        		</a>
+                        	</div>
+                        	
+                        </div>
+                    </div>
+                </div>
+            </div>
+		  	<div class="row">
+		  		<div class="col-md-9">
+		  			<div gm-info-window="infoWindow"  gm-info-window-options="{position: {lat: -34, lng: 151}}" class="candidato-info">
+		  				<div class="candidato-info">
+		  					<h4>{{candidatoInfoWindow.candidato.nome}}</h4>
+		  					<h5>{{candidatoInfoWindow.candidato.instituicaoEnsino.nome}}</h5>
+		  					<h5>{{candidatoInfoWindow.candidato.enderecos[0].logradouro.tipoLogradouro.nome}} {{candidatoInfoWindow.candidato.enderecos[0].logradouro.nome}}, {{candidatoInfoWindow.candidato.enderecos[0].numero}} - {{candidatoInfoWindow.candidato.enderecos[0].bairro.nome}}</h5>
+		  				</div>		  				
+		  			</div>
+		  			<gm-map gm-map-id="'mapaProcessoSeletivo'" gm-center="center" gm-zoom="zoom" gm-map-options="options.map" class="map">
+		  				<gm-markers
+		  					gm-id="object.id"
+		  					gm-objects="candidatosMapaNaoSelecionados"
+		  					gm-events="markerEvents"
+		  					gm-position="{ lat: object.candidato.enderecos[0].geoLocalizacao.latitude, lng: object.candidato.enderecos[0].geoLocalizacao.longitude }"
+		  					gm-on-click="candidatoInfoWindow = object; infoWindow.open(marker.getMap(), marker);  candidatoGoLegend(object.candidato.id);"
+		  					gm-on-openinfowindow="candidatoInfoWindow = object; infoWindow.open(marker.getMap(), marker);"
+		  					gm-marker-options="getConfigMarkerCandidatoNaoSelecionado(object.candidato, filtro.candidatoNaoSelecionados)">
+		  				</gm-markers>
+		  				<gm-markers
+		  					gm-id="object.id"
+		  				    gm-objects="candidatosMapaSelecionados"
+		  					gm-events="markerEvents"
+		  					gm-position="{ lat: object.candidato.enderecos[0].geoLocalizacao.latitude, lng: object.candidato.enderecos[0].geoLocalizacao.longitude }"
+		  					gm-on-click="candidatoInfoWindow = object; infoWindow.open(marker.getMap(), marker); candidatoGoLegend(object.candidato.id);"
+		  					gm-on-openinfowindow="candidatoInfoWindow = object; infoWindow.open(marker.getMap(), marker);"
+		  					gm-marker-options="getConfigMarkerCandidato(object.candidato, filtro.candidatoSelecionados)">
+		  				</gm-markers>
+		  				<gm-markers gm-objects="escolas"
+		  					gm-id="object.id"
+		  					gm-position="{ lat: object.enderecos[0].geoLocalizacao.latitude, lng: object.enderecos[0].geoLocalizacao.longitude }"
+		  					gm-marker-options="getConfigMarkerEscola(object)">
+		  				</gm-markers>
+		  				<gm-markers gm-objects="empresasProcesso"
+		  					gm-id="object.id"
+		  					gm-position="{ lat: object.empresa.enderecos[0].geoLocalizacao.latitude, lng: object.empresa.enderecos[0].geoLocalizacao.longitude }"
+		  					gm-marker-options="getConfigMarkerEmpresa(object)">
+		  				</gm-markers>
+		  			</gm-map> 
+		  		</div>
+		  		<div class="col-md-3 hidden-xs" >
+		  			<ul class="candidatos-legend" id="candidatos-legend">
+		  				<li ng-repeat='candidatoProcesso in candidatosMapaSelecionados' ng-style="getBorderLegendColor(candidatoProcesso.candidato)"  ng-click="triggerOpenInfoWindow(candidatoProcesso.candidato);">
+		  					<div id="{{candidatoProcesso.candidato.id}}">
+		  						<div class="row">
+		  							<div class="col-sm-6 col-sm-offset-3 col-lg-offset-0 col-lg-3">
+		  								<img ng-src="{{candidatoProcesso.candidato.foto.base64 ? candidatoProcesso.candidato.foto.base64 : './resources/img/user-image.png'}}" class="img-circle" style="width:100%;" alt="{{candidatoProcesso.candidato.nome}}">
+		  							</div>
+		  							<div class="col-sm-12 col-lg-9">
+		  								<span class="legend-nome">
+		  									<span class="legend-icon" ng-style="getIconLegendColor(candidatoProcesso.candidato)"><i class="fa fa-user"></i></span> {{candidatoProcesso.candidato.nome}}
+		  								</span>	
+		  								<span class="legend-escola">
+		  									{{candidatoProcesso.candidato.instituicaoEnsino.nome}}
+		  								</span>
+		  								<span class="legend-endereco">
+		  									{{candidatoProcesso.candidato.enderecos[0].logradouro.tipoLogradouro.nome}} {{candidatoProcesso.candidato.enderecos[0].logradouro.nome}}, {{candidatoProcesso.candidato.enderecos[0].numero}} - {{candidatoProcesso.candidato.enderecos[0].bairro.nome}}
+		  								</span>
+		  								<button class="btn btn-warning" ng-click="checkCandidatoDown(candidatoProcesso)">Retirar Seleção</button>
+		  							</div>
+		  						</div>
+		  					</div>		  					
+		  				</li>
+		  				<li ng-repeat='candidatoProcesso in candidatosMapaNaoSelecionados' ng-style="getBorderLegendColor(candidatoProcesso.candidato)"  ng-click="triggerOpenInfoWindow(candidatoProcesso.candidato)">
+		  					<div id="{{candidatoProcesso.candidato.id}}">
+			  					<div class="row">
+			  						<div class="col-sm-6 col-sm-offset-3 col-lg-offset-0 col-lg-3">
+			  							<img ng-src="{{candidatoProcesso.candidato.foto.base64 ? candidatoProcesso.candidato.foto.base64 : './resources/img/user-image.png'}}" class="img-circle" style="width:100%;" alt="{{candidatoProcesso.candidato.nome}}">
+			  						</div>
+			  						<div class="col-sm-12 col-lg-9">
+			  							<span class="legend-nome">
+			  								<span class="legend-icon" ng-style="getIconLegendColor(candidatoProcesso.candidato)"><i class="fa fa-user"></i></span> {{candidatoProcesso.candidato.nome}} {{corIcon}}
+			  							</span>	
+			  							<span class="legend-escola">
+			  								{{candidatoProcesso.candidato.instituicaoEnsino.nome}}
+			  							</span>
+			  							<span class="legend-endereco">
+			  								{{candidatoProcesso.candidato.enderecos[0].logradouro.tipoLogradouro.nome}} {{candidatoProcesso.candidato.enderecos[0].logradouro.nome}}, {{candidatoProcesso.candidato.enderecos[0].numero}} - {{candidatoProcesso.candidato.enderecos[0].bairro.nome}}
+			  							</span>
+			  							<button class="btn btn-success" ng-click="checkCandidatoUp(candidatoProcesso)">Selecionar</button>
+			  						</div>
+			  					</div>
+			  				</div>
+
+		  					
+		  				</li>
+		  				
+		  			</ul>
+		  		</div>
+		  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+

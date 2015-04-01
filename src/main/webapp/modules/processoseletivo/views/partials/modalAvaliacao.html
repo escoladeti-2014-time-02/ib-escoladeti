@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Cadastro de Avaliação</h3>
+      <hr />
+    </div>
+  </div>
+  <form name="modalAvaliacao">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group  {{(modalAvaliacao.dataInicioInput.$invalid&&!modalAvaliacao.dataInicioInput.$pristine)&&'has-error'||(!modalAvaliacao.dataInicioInput.$pristine&&'has-success'||'')}}">  
+          <label class="control-label">Data da avaliação<strong class="text-danger form-obrigatorio">*</strong></label>
+          <div class="input-group">
+            <input 
+              type="text" 
+              name="dataInicioInput" 
+              class="form-control" 
+              datepicker-popup="dd/MM/yyyy" 
+              ng-model="avaliacaoModal.avaliacao.dataAvaliacao" 
+              is-open="datePicker.opened[3]" 
+              ng-click = "datePicker.opened[3] = true" 
+              datepicker-options="datePicker.config" 
+              date-disabled="disabled(date, mode)" 
+              ng-required="true" 
+              close-text="Fechar" 
+              current-text="Hoje"
+              clear-text="Limpar"
+              placeholder="__/__/__"
+            />
+          </div>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalAvaliacao.dataInicioInput.$error.required&&!modalAvaliacao.dataInicioInput.$pristine" class=" text-danger">O campo <strong>Data Inicio</strong> é obrigatório.</p>
+        </div> 
+      </div>
+      <div class="col-md-8">
+        <div class="form-group  {{(modalAvaliacao.localInput.$invalid&&!modalAvaliacao.localInput.$pristine)&&'has-error'||(!modalAvaliacao.localInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Local</label>
+            <input name="localInput" type="text" class="form-control" ng-model="avaliacaoModal.avaliacao.local" ng-minlength="3" ng-maxlength="72"/>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalAvaliacao.localInput.$error.required&&!modalAvaliacao.localInput.$pristine" class=" text-danger">O campo <strong>Local</strong> é obrigatório.</p>
+            <p ng-show="modalAvaliacao.localInput.$error.minlength"  class="text-danger">O <strong>Local</strong> informado deve ter mais de 2 caracteres.</p>
+            <p ng-show="modalAvaliacao.localInput.$error.maxlength"  class="text-danger">O <strong>Local</strong> informado deve ter menos que 72 caracteres.</p>
+        </div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group  {{(modalAvaliacao.notaInput.$invalid&&!modalAvaliacao.notaInput.$pristine)&&'has-error'||(!modalAvaliacao.notaInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Nota <strong class=" form-obrigatorio">*</strong></label>
+            <input name="notaInput" type="number" class="form-control" ng-model="avaliacaoModal.avaliacao.nota" ng-required="true"/>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalAvaliacao.notaInput.$error.required&&!modalAvaliacao.notaInput.$pristine" class=" ">O campo <strong>Nota</strong> é obrigatório.</p>
+        </div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <button class="btn btn-warning" ng-click="fecharModal()">Cancelar</button>
+          <button class="btn btn-danger" ng-if="avaliacaoModal.avaliacao.id" ng-click="avaliacaoModal.avaliacao = null; deletarAvaliacao(avaliacaoModal)">Excluir</button>
+          <button ng-disabled="modalAvaliacao.$invalid" ng-click="salvarAvaliacao(avaliacaoModal)" class="btn btn-success">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-md-12">
+      &nbsp;
+    </div>
+  </div>  
+</div>

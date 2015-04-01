@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+<!-- ITEMS DE ACESSO --> 
+<changeSet author="Matcher" id="Matheus-001">
+	<!-- Candidato --> 
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="001" />
+		<column name="nome" value="Candidato" />
+	</insert>
+	
+	<!-- Processo Seletivo -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="002" />
+		<column name="nome" value="Processo Seletivo" />
+	</insert>
+	
+	<!-- Empresa -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="003" />
+		<column name="nome" value="Empresa" />
+	</insert>
+	
+	<!-- Instituição de Ensino -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="004" />
+		<column name="nome" value="Instituicao de Ensino" />
+	</insert>
+	
+	<!-- Disciplina -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="005" />
+		<column name="nome" value="Disciplina" />
+	</insert>
+	
+	<!-- Colaborador -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="006" />
+		<column name="nome" value="Colaborador" />
+	</insert>
+	
+	<!-- Módulo -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="007" />
+		<column name="nome" value="Módulo" />
+	</insert>
+	
+	<!-- Curso -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="008" />
+		<column name="nome" value="Curso" />
+	</insert>
+		
+	<!-- Turma -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="009" />
+		<column name="nome" value="Turma" />
+	</insert>
+		
+	<!-- Aula -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="010" />
+		<column name="nome" value="Aula" />
+	</insert>
+
+	<!-- País -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="011" />
+		<column name="nome" value="País" />
+	</insert>
+		
+	<!-- Logradouro -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="012" />
+		<column name="nome" value="Logradouro" />
+	</insert>
+		
+	<!-- Bairro -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="013" />
+		<column name="nome" value="Bairro" />
+	</insert>
+		
+	<!-- Usuário -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="014" />
+		<column name="nome" value="Usuario" />
+	</insert>		
+	
+	<!-- Perfil de Acesso -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="015" />
+		<column name="nome" value="Perfil de Acesso" />
+	</insert>		
+		
+	<!-- Parametros -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="016" />
+		<column name="nome" value="Parametro" />
+	</insert>
+	
+	<!-- Cidade -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="017" />
+		<column name="nome" value="Cidade" />
+	</insert>
+	
+	<!-- Unidade Federativa -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="018" />
+		<column name="nome" value="Unidade Federativa" />
+	</insert>	
+	
+	<!-- Contrato -->
+	<insert tableName="itemdeacesso">
+		<column name="id" valueNumeric="019" />
+		<column name="nome" value="Contrato" />
+	</insert>	
+</changeSet>      
+  
+<!-- PERFIL DE ACESSO --> 
+<changeSet author="Matcher" id="Matheus-002">
+	<insert tableName="perfildeacesso">
+		<column name="id" valueNumeric="001" />
+		<column name="nome" value="Administrador" />
+	</insert>
+</changeSet>
+
+<!-- ITEMS DO PERFIL DE ACESSO ADMINISTRADOR -->    
+<changeSet author="Matcher" id="Matheus-003">
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="100" />
+		<column name="itemperfildeacesso_id" valueNumeric="001" />
+		<column name="perfildeacesso_id" valueNumeric="001" />
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="101" />
+		<column name="itemperfildeacesso_id" valueNumeric="002" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="102" />
+		<column name="itemperfildeacesso_id" valueNumeric="003" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="103" />
+		<column name="itemperfildeacesso_id" valueNumeric="004" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="104" />
+		<column name="itemperfildeacesso_id" valueNumeric="005" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="105" />
+		<column name="itemperfildeacesso_id" valueNumeric="006" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="106" />
+		<column name="itemperfildeacesso_id" valueNumeric="007" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="107" />
+		<column name="itemperfildeacesso_id" valueNumeric="008" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="108" />
+		<column name="itemperfildeacesso_id" valueNumeric="009" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="109" />
+		<column name="itemperfildeacesso_id" valueNumeric="010" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="110" />
+		<column name="itemperfildeacesso_id" valueNumeric="011" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>	
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="111" />
+		<column name="itemperfildeacesso_id" valueNumeric="012" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="112" />
+		<column name="itemperfildeacesso_id" valueNumeric="013" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="113" />
+		<column name="itemperfildeacesso_id" valueNumeric="014" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="114" />
+		<column name="itemperfildeacesso_id" valueNumeric="015" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>		
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="115" />
+		<column name="itemperfildeacesso_id" valueNumeric="016" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>	
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="116" />
+		<column name="itemperfildeacesso_id" valueNumeric="017" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>
+		
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="117" />
+		<column name="itemperfildeacesso_id" valueNumeric="018" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>		
+	
+	<insert tableName="itemperfildeacesso">
+		<column name="id" valueNumeric="118" />
+		<column name="itemperfildeacesso_id" valueNumeric="019" />
+		<column name="perfildeacesso_id" valueNumeric="001"/>
+	</insert>			
+</changeSet>
+
+
+<!-- NÍVEIS DE ACESSO DO PERFIL PADRÃO ADM -->         
+<changeSet author="Matcher" id="Matheus-004">
+	<!-- Nível Candidato --> 
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="150" />
+		<column name="nivel" value="LISTAR" />
+ 		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="100"/>
+		</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="151" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="100"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="152" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="100"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="153" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="100"/>
+	</insert>
+
+	<!-- Nível Processo Seletivo -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="154" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="101"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="155" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="101"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="156" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="101"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="157" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="101"/>
+	</insert>
+
+	<!-- Nível Empresa -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="158" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="102"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="159" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="102"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="160" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="102"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="161" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="102"/>
+	</insert>
+
+	<!-- Nível Instituição de Ensino -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="162" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="103"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="163" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="103" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="164" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="103"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="165" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="103"/>
+	</insert>
+
+	<!-- Nível Disciplina -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="166" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="104"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="167" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="104" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="168" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="104"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="169" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="104"/>
+	</insert>
+
+	<!-- Nível Colaborador -->	
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="170" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="105"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="171" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="105" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="172" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="105"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="173" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="105"/>
+	</insert>
+
+	<!-- Nível Módulo -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="174" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="106"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="175" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="106" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="176" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="106"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="177" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="106"/>
+	</insert>
+	
+	<!-- Nível Curso -->	
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="178" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="107"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="179" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="107" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="180" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="107"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="181" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="107"/>
+	</insert>
+
+	<!-- Nível Turma -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="182" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="108"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="183" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="108" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="184" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="108"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="185" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="108"/>
+	</insert>
+
+	<!-- Nível Aula -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="186" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="109"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="187" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="109" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="188" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="109"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="189" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="109"/>
+	</insert>
+
+	<!-- Nível País -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="190" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="110"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="191" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="110" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="192" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="110"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="193" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="110"/>
+	</insert>
+
+	<!-- Nível Logradouro -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="194" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="111"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="195" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="111" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="196" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="111"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="197" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="111"/>
+	</insert>							
+	
+	<!-- Nível Bairro -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="198" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="112"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="199" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="112" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="200" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="112"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="201" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="112"/>
+	</insert>							
+
+	<!-- Nível Usuário -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="202" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="113"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="203" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="113" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="204" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="113"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="205" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="113"/>
+	</insert>							
+
+	<!-- Nível Perfil de Acesso -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="206" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="114"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="207" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="114" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="208" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="114"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="209" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="114"/>
+	</insert>							
+
+	<!-- Nível Parametros -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="210" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="115"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="211" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="115" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="212" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="115"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="213" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="115"/>
+	</insert>							
+
+	<!-- Nível Cidade -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="214" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="116"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="215" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="116" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="216" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="116"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="217" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="116"/>
+	</insert>	
+	
+	<!-- Nível Unidade Federativa -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="218" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="117"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="219" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="117" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="220" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="117"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="221" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="117"/>
+	</insert>	
+	
+	<!-- Nível Contrato -->
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="222" />
+		<column name="nivel" value="LISTAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="118"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="223" />
+		<column name="nivel" value="ADICIONAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="118" />
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="224" />
+		<column name="nivel" value="EDITAR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="118"/>
+	</insert>
+	<insert tableName="niveldeacesso">
+		<column name="id" valueNumeric="225" />
+		<column name="nivel" value="EXCLUIR" />
+		<column name="selected" valueBoolean="true" />
+		<column name="itemperfildeacesso_id" valueNumeric="118"/>
+	</insert>									
+</changeSet>
+
+<!-- Itemperfildeacesso Niveldeacesso -->  
+<changeSet author="Matcher" id="Matheus-005">
+	
+	<!-- Nível Acesso Candidato --> 
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="100" />
+		<column name="niveisdeacesso_id" valueNumeric="150" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="100" />
+		<column name="niveisdeacesso_id" valueNumeric="151" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="100" />
+		<column name="niveisdeacesso_id" valueNumeric="152" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="100" />
+		<column name="niveisdeacesso_id" valueNumeric="153" />
+	</insert>
+
+	<!-- Nível Acesso Processo Seletivo -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="101" />
+		<column name="niveisdeacesso_id" valueNumeric="154" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="101" />
+		<column name="niveisdeacesso_id" valueNumeric="155" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="101" />
+		<column name="niveisdeacesso_id" valueNumeric="156" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="101" />
+		<column name="niveisdeacesso_id" valueNumeric="157" />
+	</insert>
+	
+	<!-- Nível Acesso Empresa -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="102" />
+		<column name="niveisdeacesso_id" valueNumeric="158" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="102" />
+		<column name="niveisdeacesso_id" valueNumeric="159" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="102" />
+		<column name="niveisdeacesso_id" valueNumeric="160" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="102" />
+		<column name="niveisdeacesso_id" valueNumeric="161" />
+	</insert>
+	
+	<!-- Nível Acesso Instituição de Ensino -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="103" />
+		<column name="niveisdeacesso_id" valueNumeric="162" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="103" />
+		<column name="niveisdeacesso_id" valueNumeric="163" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="103" />
+		<column name="niveisdeacesso_id" valueNumeric="164" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="103" />
+		<column name="niveisdeacesso_id" valueNumeric="165" />
+	</insert>
+
+	<!-- Nível Acesso Disciplina -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="104" />
+		<column name="niveisdeacesso_id" valueNumeric="166" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="103" />
+		<column name="niveisdeacesso_id" valueNumeric="167" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="103" />
+		<column name="niveisdeacesso_id" valueNumeric="168" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="103" />
+		<column name="niveisdeacesso_id" valueNumeric="169" />
+	</insert>
+
+	<!-- Nível Colaborador -->	
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="105" />
+		<column name="niveisdeacesso_id" valueNumeric="170" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="105" />
+		<column name="niveisdeacesso_id" valueNumeric="171" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="105" />
+		<column name="niveisdeacesso_id" valueNumeric="172" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="105" />
+		<column name="niveisdeacesso_id" valueNumeric="173" />
+	</insert>
+
+	<!-- Nível Acesso Modulo -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="106" />
+		<column name="niveisdeacesso_id" valueNumeric="174" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="106" />
+		<column name="niveisdeacesso_id" valueNumeric="175" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="106" />
+		<column name="niveisdeacesso_id" valueNumeric="176" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="106" />
+		<column name="niveisdeacesso_id" valueNumeric="177" />
+	</insert>
+
+	<!-- Nível Acesso Curso -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="107" />
+		<column name="niveisdeacesso_id" valueNumeric="178" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="107" />
+		<column name="niveisdeacesso_id" valueNumeric="179" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="107" />
+		<column name="niveisdeacesso_id" valueNumeric="180" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="107" />
+		<column name="niveisdeacesso_id" valueNumeric="181" />
+	</insert>
+
+	<!-- Nível Acesso Turma -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="108" />
+		<column name="niveisdeacesso_id" valueNumeric="182" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="108" />
+		<column name="niveisdeacesso_id" valueNumeric="183" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="108" />
+		<column name="niveisdeacesso_id" valueNumeric="184" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="108" />
+		<column name="niveisdeacesso_id" valueNumeric="185" />
+	</insert>
+
+	<!-- Nível Acesso Aula -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="109" />
+		<column name="niveisdeacesso_id" valueNumeric="186" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="109" />
+		<column name="niveisdeacesso_id" valueNumeric="187" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="109" />
+		<column name="niveisdeacesso_id" valueNumeric="188" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="109" />
+		<column name="niveisdeacesso_id" valueNumeric="189" />
+	</insert>
+
+	<!-- Nível Acesso Pais -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="110" />
+		<column name="niveisdeacesso_id" valueNumeric="190" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="110" />
+		<column name="niveisdeacesso_id" valueNumeric="191" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="110" />
+		<column name="niveisdeacesso_id" valueNumeric="192" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="110" />
+		<column name="niveisdeacesso_id" valueNumeric="193" />
+	</insert>
+
+	<!-- Nível Acesso Logradouro -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="111" />
+		<column name="niveisdeacesso_id" valueNumeric="194" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="111" />
+		<column name="niveisdeacesso_id" valueNumeric="195" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="111" />
+		<column name="niveisdeacesso_id" valueNumeric="196" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="111" />
+		<column name="niveisdeacesso_id" valueNumeric="197" />
+	</insert>
+
+	<!-- Nível Acesso Bairro -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="112" />
+		<column name="niveisdeacesso_id" valueNumeric="198" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="112" />
+		<column name="niveisdeacesso_id" valueNumeric="199" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="112" />
+		<column name="niveisdeacesso_id" valueNumeric="200" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="112" />
+		<column name="niveisdeacesso_id" valueNumeric="201" />
+	</insert>
+
+	<!-- Nível Acesso Usuário-->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="113" />
+		<column name="niveisdeacesso_id" valueNumeric="202" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="113" />
+		<column name="niveisdeacesso_id" valueNumeric="203" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="113" />
+		<column name="niveisdeacesso_id" valueNumeric="204" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="113" />
+		<column name="niveisdeacesso_id" valueNumeric="205" />
+	</insert>
+
+	<!-- Nível Acesso Perfil de Acesso -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="114" />
+		<column name="niveisdeacesso_id" valueNumeric="206" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="114" />
+		<column name="niveisdeacesso_id" valueNumeric="207" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="114" />
+		<column name="niveisdeacesso_id" valueNumeric="208" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="114" />
+		<column name="niveisdeacesso_id" valueNumeric="209" />
+	</insert>
+
+	<!-- Nível Acesso Parametro -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="115" />
+		<column name="niveisdeacesso_id" valueNumeric="210" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="115" />
+		<column name="niveisdeacesso_id" valueNumeric="211" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="115" />
+		<column name="niveisdeacesso_id" valueNumeric="212" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="115" />
+		<column name="niveisdeacesso_id" valueNumeric="213" />
+	</insert>
+
+	<!-- Nível Acesso Cidade -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="116" />
+		<column name="niveisdeacesso_id" valueNumeric="214" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="116" />
+		<column name="niveisdeacesso_id" valueNumeric="215" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="116" />
+		<column name="niveisdeacesso_id" valueNumeric="216" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="116" />
+		<column name="niveisdeacesso_id" valueNumeric="217" />
+	</insert>
+	
+	<!-- Nível Acesso Unidade Federativa -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="117" />
+		<column name="niveisdeacesso_id" valueNumeric="218" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="117" />
+		<column name="niveisdeacesso_id" valueNumeric="219" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="117" />
+		<column name="niveisdeacesso_id" valueNumeric="220" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="117" />
+		<column name="niveisdeacesso_id" valueNumeric="221" />
+	</insert>
+	
+	<!-- Nível Acesso Contrato -->
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="118" />
+		<column name="niveisdeacesso_id" valueNumeric="222" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="118" />
+		<column name="niveisdeacesso_id" valueNumeric="223" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="118" />
+		<column name="niveisdeacesso_id" valueNumeric="224" />
+	</insert>
+	<insert tableName="itemperfildeacesso_niveldeacesso">
+		<column name="itemperfildeacesso_id" valueNumeric="118" />
+		<column name="niveisdeacesso_id" valueNumeric="225" />
+	</insert>	
+	
+		
+</changeSet>
+
+<!-- perfildeacesso itemperfildeacesso -->     
+<changeSet author="Matcher" id="Matheus-006">
+
+	<!-- Candidato --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="100" />
+	</insert>
+	<!-- Processo Seletivo --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="101" />
+	</insert>
+	<!-- Empresa --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="102" />
+	</insert>
+	<!-- Instituição de Ensino --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="103" />
+	</insert>
+	<!-- Disciplina --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="104" />
+	</insert>
+	<!-- Colaborador--> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="105" />
+	</insert>
+	<!-- Modulo --> 	
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="106" />
+	</insert>
+	<!-- Curso --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="107" />
+	</insert>
+	<!-- Turma --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="108" />
+	</insert>
+	<!-- Aula --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="109" />
+	</insert>
+	<!-- Pais --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="110" />
+	</insert>
+	<!-- Logradouro --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="111" />
+	</insert>
+	<!-- Bairro --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="112" />
+	</insert>
+	<!-- Usuário --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="113" />
+	</insert>
+	<!-- Perfil de Acesso --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="114" />
+	</insert>
+	<!-- Parametro --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="115" />
+	</insert>
+	<!-- Cidade --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="116" />
+	</insert>	
+	<!-- Unidade Federativa --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="117" />
+	</insert>	
+	<!-- Contrato --> 
+	<insert tableName="perfildeacesso_itemperfildeacesso">
+		<column name="perfildeacesso_id" valueNumeric="001" />
+		<column name="itensperfildeacesso_id" valueNumeric="118" />
+	</insert>																	
+</changeSet>
+<!-- USUÁRIO PADRÃO ADM -->         
+<changeSet author="Matcher" id="Matheus-007">
+	<insert tableName="usuario">
+		<column name="id" valueNumeric="1" />
+		<column name="ativo" valueBoolean="true" />
+		<column name="datacadastro" valueDate="2014-08-13" />
+		<column name="login" value="adm" />
+		<column name="senha" value="202cb962ac59075b964b07152d234b70" />
+		<column name="perfildeacesso_id" value="001"/>
+	</insert>
+</changeSet>
+</databaseChangeLog>

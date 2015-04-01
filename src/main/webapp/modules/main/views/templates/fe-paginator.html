@@ -1,0 +1,27 @@
+<div class="text-center">
+	<ul class="pagination">
+		<li class="{{page.pageNumber == 1 ? 'disabled' : ''}}">
+			<a ng-click="load({pagina: 1})"><span class="fa fa-fast-backward"/></a>
+		</li>
+		<li class="{{page.pageNumber == 1 ? 'disabled' : ''}}">
+			<a ng-click="previousPage()">
+				<span class="fa fa-backward"/>
+			</a>
+		</li>
+		
+		<li ng-repeat="numeroPagina in page.pagesAround" class="{{numeroPagina == page.pageNumber ? 'active' : ''}}">
+			<a ng-click="load({pagina:numeroPagina})">{{numeroPagina}}</a>
+		</li>
+		
+		<li class="{{page.pageNumber == page.pageCount ? 'disabled' : ''}}">
+			<a ng-click="nextPage()">
+				<span class="fa fa-forward"/>
+			</a>
+		</li>
+		<li class="{{page.pageNumber == page.pageCount ? 'disabled' : ''}}">
+			<a ng-click="load({pagina:page.pageCount})">
+				<span class="fa fa-fast-forward"/>
+			</a>
+		</li>
+	</ul>	
+</div>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<security:global-method-security
+		secured-annotations="enabled" />
+
+	<security:http use-expressions="true">
+
+		<security:intercept-url pattern="/rest/**" access="permitAll" />
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		<security:intercept-url pattern="/vendor/**" access="permitAll" />
+		<security:intercept-url pattern="/modules/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/app/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/public/**" access="permitAll" />
+		<security:intercept-url pattern="/private/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/login" access="isAnonymous()" />
+		<security:intercept-url pattern="/login-error" access="isAnonymous()" />
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		<security:form-login login-page="/login" authentication-failure-url="/login-error" default-target-url="/" />
+		<security:logout invalidate-session="true" logout-success-url="/login" logout-url="/logout" delete-cookies="true" />
+
+		<security:session-management>
+			<security:concurrency-control />
+		</security:session-management>
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+
+			<security:password-encoder hash="md5" />
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="select login as username, senha as password, ativo as enabled from usuario where login = ?"
+				authorities-by-username-query="select usu.login as username, ia.nome as authority from itemdeacesso ia join itemperfildeacesso ipa on ia.id = itemperfildeacesso_id join perfildeacesso_itemperfildeacesso pi on pi.itensperfildeacesso_id = ipa.id join usuario usu on usu.perfildeacesso_id = pi.perfildeacesso_id and usu.login = ?" />
+
+			<!--<security:user-service> <security:user name="adm" password="123" authorities="ROLE_USER"/> 
+				</security:user-service> -->
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>

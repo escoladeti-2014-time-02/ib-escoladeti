@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<property name="create_alunoaula_sequence"
+		value="CREATE SEQUENCE alunoaula_sequence INCREMENT BY 1 START 1" />
+
+	<changeSet id="Matcher-1050" author="Matcher">
+		<sql dbms="postgresql">
+			${create_alunoaula_sequence}
+		</sql>
+	</changeSet>
+
+
+	<changeSet id="Matcher-1080" author="Matcher">
+		<dropTable tableName="alunoaula" cascadeConstraints="true" />
+		<dropTable tableName="aula" cascadeConstraints="true" />
+
+		<createTable tableName="aula">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="disciplina_id" type="INT8">
+				<constraints foreignKeyName="fk_aula_disciplinaid"
+					referencedColumnNames="id" referencedTableName="disciplina" />
+			</column>
+			<column name="modulo_id" type="INT8">
+				<constraints foreignKeyName="fk_aula_moduloid"
+					referencedColumnNames="id" referencedTableName="modulo" />
+			</column>
+			<column name="turma_id" type="INT8">
+				<constraints foreignKeyName="fk_aula_turmaid"
+					referencedColumnNames="id" referencedTableName="turma" />
+			</column>
+			<column name="descricao" type="${descricaolonga}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="dataula" type="DATE">
+			</column>
+		</createTable>
+
+		<createTable tableName="alunoaula">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="presenca" type="BOOL">
+				<constraints nullable="false" />
+			</column>
+			<column name="aluno_id" type="INT8">
+				<constraints foreignKeyName="fk_alunoaula_alunoid"
+					referencedColumnNames="id" referencedTableName="aluno" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Matcher-1099" author="Eduardo">
+		<dropColumn tableName="aula" columnName="descricao" />
+
+		<addColumn tableName="aula">
+			<column name="descricao" type="${descricaoextralonga}"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="Matcher-1110" author="Eduardo">
+		<dropColumn tableName="aula" columnName="dataula" />
+		<addColumn tableName="aula">
+			<column name="dataaula" type="DATE"></column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="Matcher-1210" author="Matcher">
+		<addColumn tableName="aula">
+			<column name="colaborador_id" type="INT8">
+			<constraints foreignKeyName="fk_aula_colaboradorid"
+					referencedColumnNames="id" referencedTableName="colaborador" />
+			</column>
+		</addColumn>
+	</changeSet>
+		<changeSet id="Matcher-1810" author="Matcher">
+		<dropColumn tableName="dadossocioeconomicos" columnName="rendapropria" />
+		<addColumn tableName="dadossocioeconomicos">
+			<column name="rendafamiliar" type="FLOAT8"></column>
+		</addColumn>
+	</changeSet>	
+</databaseChangeLog>

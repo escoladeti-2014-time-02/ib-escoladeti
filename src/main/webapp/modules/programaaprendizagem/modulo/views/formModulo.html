@@ -1,0 +1,202 @@
+
+<!--Início do conteúdo do Form-->
+<h3>
+  Cadastro de Módulo 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <div class="panel panel-blue panel-form">
+      <div class="panel-heading panel-form-pessoais">
+        <h1 class="panel-title">
+          Módulo
+        </h1>
+      </div><!--/div panel-->       
+      <form name="formModulo" role="form">
+        <div class="panel-body">
+          <div class="col-md-12">
+            <div class="{{(formModulo.nomeInput.$invalid&&!formModulo.nomeInput.$pristine)&&'has-error'||(!formModulo.nomeInput.$pristine&&'has-success'||'')}}">
+              <label for="nomeInput" class="control-label">Nome <strong class=" form-obrigatorio">*</strong></label>
+              <input ng-model="modulo.nome" type="text" name="nomeInput" class="form-control" placeholder="Ex: Auxiliar administrativo"  ng-minlength="4" ng-maxlength="72" required="true" ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formModulo.nomeInput.$error.required&&!formModulo.nomeInput.$pristine" >O campo <strong>Nome do Módulo</strong> é obrigatório.</p>
+                <p ng-show="formModulo.nomeInput.$error.minlength"  >O <strong>Nome do Módulo</strong> informado deve ter mais de 3 caracteres.</p>
+                <p ng-show="formModulo.nomeInput.$error.maxlength"  >O <strong>Nome da Módulo</strong> informado deve ter menos que 72 caracteres.</p>
+              </div>
+            </div>
+          </div><!--/row-->
+          <div class="col-md-12">
+            <div class="form-group {{(formModulo.descricaoModulo.$invalid&&!formModulo.descricaoModulo.$pristine)&&'has-error'||(!formModulo.descricaoModulo.$pristine&&'has-success'||'')}}">
+              <label for="siglaInput" class="control-label">Descrição <strong class=" form-obrigatorio">*</strong></label>
+              <textarea ng-model="modulo.descricao" type="textArea" name="descricaoModulo" class="form-control" placeholder="Ex: description" required="true" ng-minlength="4" ng-maxlength="250"  ng-disabled="visualizar"></textarea>
+              <div class="help-error bg-danger">
+                <p ng-show="formModulo.descricaoModulo.$error.minlength"  >A <strong>Descrição</strong> informado deve ter mais de 3 caracteres.</p>
+                <p ng-show="formModulo.descricaoModulo.$error.maxlength"  >A <strong>Descrição</strong> informado deve ter menos que 250 caracteres.</p>
+              </div>
+            </div>
+          </div><!--/row-->
+        </div>
+      </form>
+    </div>
+    <!-- Disciplina -->
+    <div class="panel panel-deep-purple panel-form" ng-show="!gridDisciplina">
+      <div class="panel-heading panel-form-documentos">
+        <h1 class="panel-title">
+          Inserir Disciplina
+        </h1>
+      </div><!--/div panel-->
+      <div class="panel-body">
+        <form name="modalDisciplina" role="form">
+          <div class="row"> 
+            <div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+              <div class="form-group {{(modalDisciplina.disciplinaNome.$invalid&&!modalDisciplina.disciplinaNome.$pristine)&&'has-error'||(!modalDisciplina.disciplinaNome.$pristine&&'has-success'||'')}}">
+                <label for="descricaoDisciplina" class="control-label">Nome <strong class=" form-obrigatorio">*</strong></label>
+                <select ng-model="disciplinaAux.disciplina" ng-options="i.nome for i in selectDisciplina track by i.id" type="text" class="form-control" id="descricaoDisciplina" ng-required='true' name='disciplinaNome' ng-disabled="visualizar"></select>
+                <div class="help-error bg-danger error">
+                  <p ng-show="modalDisciplina.disciplinaNome.$error.required&&!modalDisciplina.disciplinaNome.$pristine" >O campo <strong>Nome do Módulo</strong> é obrigatório.</p>
+                </div> 
+              </div>
+            </div>
+            <div class="col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1">
+              <div class="form-group {{(modalDisciplina.cargaHoraria.$invalid&&!modalDisciplina.cargaHoraria.$pristine)&&'has-error'||(!modalDisciplina.cargaHoraria.$pristine&&'has-success'||'')}}">
+                <label for="nomeColaborador" class="control-label">Carga Horária<strong class=" form-obrigatorio">*</strong></label>
+                <input ng-model="disciplinaAux.cargaHoraria" id="nomeColaborador" name="cargaHoraria" class="form-control"  placeholder="Ex: 40.00" type="number" ng-required="true"  ng-disabled="visualizar">
+                <div class="help-error bg-danger">
+                  <p ng-show="modalDisciplina.cargaHoraria.$error.required&&!modalDisciplina.cargaHoraria.$pristine" class=" ">O campo <strong>Carga Horária</strong> é obrigatório</p>
+                </div> <!-- erros -->
+              </div>
+            </div>  
+          </div>
+        </form>
+        <form name="modalColaborador" role="form">
+          <div class="row" >
+            <div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+              <div class="form-group {{(modalColaborador.colaboradorNome.$invalid&&!modalColaborador.colaboradorNome.$pristine)&&'has-error'||(!modalColaborador.colaboradorNome.$pristine&&'has-success'||'')}}">
+                <label for="nomeColaborador" class="control-label">Nome do Colaborador<strong class=" form-obrigatorio">*</strong></label>
+                <select  ng-model="colaboradorAux" ng-options="i.pessoaFisica.nome for i in selectColaboradores track by i.id"  name="colaboradorNome" class="form-control" ng-required="true"  ng-disabled="visualizar"></select>
+                <div class="help-error bg-danger">
+                  <p ng-show="modalColaborador.colaboradorNome.$error.required&&!modalColaborador.colaboradorNome.$pristine" class=" ">O campo <strong>Nome do Colaborador</strong> é obrigatório</p>
+                </div> <!-- erros -->
+              </div>
+            </div>
+            <div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+              <div class="form-group">
+              <button class="btn btn-success" ng-click="adicionarColaborador(colaboradorAux)" ng-disabled="!colaboradorAux.id" style="margin-top : 25px">Adicionar Colaborador</button>
+                <button class="btn btn-info" ng-click="modalNovoColaborador()" ng-if='!visualizar' style="margin-top : 25px">Cadastrar novo Colaborador</button>     
+              </div>
+            </div>
+          </div><!--/row-->
+        </form>
+        <div class="row">
+          <div class="col-md-12 col-lg-10 col-lg-offset-1">
+            <div class="help-error" ng-show="!disciplinaAux.colaboradores[0]">              
+              <p class=" text-danger text-center"><strong>É obrigatório o cadastro de pelo menos um Colaborador.</strong></p>
+            </div>  
+          </div>    
+        </div><!--/row-->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive" ng-show="disciplinaAux.colaboradores[0]">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th width="150px"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="colaborador in disciplinaAux.colaboradores">
+                    <td>{{colaborador.pessoaFisica.nome}}</td>
+                    <td>
+                      <div class="pull-right">
+                        <a ng-click="removerColaborador(colaborador)"class="btn btn-sm btn-danger">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </div>                      
+                    </td>
+                  </tr>
+                </tbody>                
+              </table>
+            </div><!--/responsive-table-->
+          </div>
+        </div>
+        <div class="row"> 
+          <div class="col-md-12"> 
+            <hr>
+            <div class="pull-right"> 
+              <button class="btn btn-warning" ng-show="modulo.disciplinasModulo[0]" ng-click="gridDisciplina = true">Cancelar</button> 
+              <button class="btn btn-success" ng-disabled="modalDisciplina.$invalid||!disciplinaAux.colaboradores[0]" ng-click="salvarDisciplina(disciplinaAux)">Adicionar Disciplina</button>
+            </div> 
+          </div> 
+        </div> 
+      </div>
+    </div>     
+    <!-- Disciplinas do Modulo -->
+    <div class="panel panel-teal panel-form" ng-show='gridDisciplina'>
+      <div class="panel-heading panel-form-documentos">
+        <h1 class="panel-title">
+          Disciplinas
+        </h1>
+      </div><!--/div panel-->
+      <div class="panel-body">
+        <!-- //Grid Disciplina -->
+        <div class="row">
+          <div class="col-md-6 col-md-offset-6">
+            <div class="form-group">  
+              <div class="pull-right">
+                <button class="btn btn-info" ng-click="adicionarNovaDisciplina()" ng-if='!visualizar'>Cadastrar nova disciplina</button>     
+              </div>
+            </div>
+          </div>
+        </div><!--/row-->      
+        <div class="col-md-10 col-lg-10 col-lg-offset-1">
+          <div class="help-error" ng-show="disciplinaAux.colaboradores" ng-if='!disciplinaAux.colaboradores[0]'>
+            <p class=" text-danger"><strong>É obrigatório o cadastro de pelo menos uma disciplina.</strong></p>
+          </div>  
+        </div>            
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><a>Disciplina</a></th>
+                <th><a>Carga Horária</a></th>
+                <th width="150px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="moduloDisciplina in modulo.disciplinasModulo">
+                <td>{{moduloDisciplina.disciplina.nome}}</td>
+                <td>{{moduloDisciplina.cargaHoraria}}</td>
+                <td >
+                  <!-- <a   class="btn btn-sm btn-info" >
+                    <i class="fa fa-eye"></i>
+                  </a> -->
+                  <div class="pull-right">
+                    <a ng-click="editarDisciplina(moduloDisciplina)" class="btn btn-sm btn-warning" ng-if="!visualizar">
+                      <i class="fa fa-edit"></i>
+                    </a>
+                    <a ng-click="removerDisciplina(moduloDisciplina)"class="btn btn-sm btn-danger" ng-if="!visualizar">
+                      <i class="fa fa-times"></i>
+                    </a>  
+                  </div>
+                  
+                </td>
+              </tr>
+            </tbody>                
+          </table>
+        </div><!--/responsive-table-->
+      </div>    
+    </div><!--/panel-->
+    <div class="row pull-right">
+      <div class="col-md-12">
+        <a href="./#/programaaprendizagem/modulo" class="btn btn-info">
+          Voltar
+        </a>
+        <fe-resetform re-origem="objetoOrigem" re-reset="modulo" re-form="formModulo"></fe-resetform>
+        <button  ng-disabled="formModulo.$invalid||!modulo.disciplinasModulo[0]" ng-click="salvarModulo(modulo)" class="btn btn-success" ng-if="!visualizar">
+          Salvar Modulo
+        </button>         
+      </div>
+    </div><!--/row-->
+  </div>
+</div>

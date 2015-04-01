@@ -1,0 +1,101 @@
+<form name="formContrato">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Gerar Contrato</h3>
+				<hr/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label>Aluno</label>
+				<p>{{contrato.aluno.candidato.nome}}</p>
+			</div>
+			<div class="col-md-6">
+				<label>Empresa</label>
+				<p>{{contrato.aluno.empresa.fantasia}}</p>
+			</div>
+		</div>
+	    <div class="row">
+			<div class="col-md-6">
+				<div
+					class="form-group {{(formContrato.datePrevistaInicio.$invalid&&!formContrato.datePrevistaInicio.$pristine)&&'has-error'
+	                     ||(!formContrato.datePrevistaInicio.$pristine&&'has-success'||'')}}">
+					<label for="dataInicio" class="control-label"> Início
+						<strong class="text-danger form-obrigatorio">*</strong>
+					</label> <input id="dataInicio"
+						style="background: white; cursor: pointer;"
+						readonly="readonly" type="text" name="datePrevistaInicio"
+						datepicker-popup="dd/MM/yyyy" ng-model="contrato.dataInicio"
+						ng-disabled="visualizar" is-open="datePicker.opened[0]"
+						ng-click="datePicker.opened[0] = true"
+						datepicker-options="datePicker.config"
+						date-disabled="disabled(date, mode)" ng-required="true"
+						close-text="Fechar" current-text="Hoje" clear-text="Limpar"
+						placeholder="__/__/__" class="form-control" />
+				</div>
+				<div class="help-error bg-danger">
+					<p
+						ng-show="modalConfig.dataInicioInput.$error.required&&!modalConfig.dataInicioInput.$pristine"
+						class=" text-danger">
+						O campo <strong>Data Prevista Início</strong> é
+						obrigatório.
+					</p>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div
+					class="form-group {{(formContrato.datePrevistaEncerramento.$invalid&&!formContrato.datePrevistaEncerramento.$pristine)&&'has-error'
+	                     ||(!formContrato.datePrevistaEncerramento.$pristine&&'has-success'||'')}}">
+					<label for="dataEncerramento" class="control-label">
+						Encerramento <strong class="text-danger form-obrigatorio">*</strong>
+					</label> <input id="dataEncerramento"
+						style="background: white; cursor: pointer;"
+						readonly="readonly" type="text"
+						name="datePrevistaEncerramento" datepicker-popup="dd/MM/yyyy"
+						ng-model="contrato.dataTermino" ng-disabled="visualizar"
+						is-open="datePicker.opened[1]"
+						ng-click="datePicker.opened[1] = true"
+						datepicker-options="datePicker.config"
+						date-disabled="disabled(date, mode)" ng-required="true"
+						close-text="Fechar" current-text="Hoje" clear-text="Limpar"
+						placeholder="__/__/__" min-date="contrato.dataInicio"
+						class="form-control" />
+				</div>
+				<div class="help-error bg-danger">
+					<p
+						ng-show="modalConfig.dataPrevistaEncerramentoInput.$error.required&&!modalConfig.dataPrevistaEncerramentoInput.$pristine"
+						class=" text-danger">
+						O campo <strong>Data Prevista Início</strong> é
+						obrigatório.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+	    	<div class="col-md-6 form-group {{(formContrato.rendaPerCapitaInput.$invalid&&!formContrato.rendaPerCapitaInput.$pristine)&&'has-error'||(!formContrato.rendaPerCapitaInput.$pristine&&'has-success'||'')}}">
+	          <label for="valorBeneficioGovernamental" class="control-label">Sal&aacute;rio R$ <strong class="text-danger form-obrigatorio">*</strong></label>
+	          <input ng-model="contrato.salario" type="number" min="1" step="0.10" class="form-control" id="valorBeneficioGovernamental" placeholder="Ex: 800,00" name='rendaPerCapitaInput' ng-required='true' ng-disabled="visualizar">
+	          <div class="help-error bg-danger error">
+	            <p ng-show="formContrato.rendaPerCapitaInput.$error.number" >Este campo <strong>s&oacute;</strong> aceita <strong>n&uacute;meros</strong></p>
+	            <p ng-show="formContrato.rendaPerCapitaInput.$error.required&&!formContrato.rendaPerCapitaInput.$pristine" >Este campo &eacute; obrigat&oacute;rio.</p>
+	            <p ng-show="formContrato.rendaPerCapitaInput.$error.min&&!formContrato.rendaPerCapitaInput.$pristine" >O valor deve ser maior que 0.</p>
+	          </div> 
+	        </div>
+	    </div>
+	    <div class="row">
+	    	<div class="col-md-12">
+	    		<div class="pull-right">
+	    			<button ng-click="fecharModal()" class="btn btn-warning" ng-if="!visualizar">Fechar</button>
+	    			<button ng-click="salvarContrato(contrato)" class="btn btn-success"	ng-disabled="formContrato.$invalid" ng-if="!visualizar">Gerar Contrato</button>
+	    		</div>
+	    	</div>
+	    </div>	   
+	    <div class="row">
+	    	<div class="col-md-12">
+	    		&nbsp;
+	    	</div>
+	    </div> 
+	</div>
+</form>

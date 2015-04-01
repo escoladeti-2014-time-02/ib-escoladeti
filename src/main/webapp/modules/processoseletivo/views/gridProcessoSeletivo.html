@@ -1,0 +1,77 @@
+<!--Início do conteúdo da Grid-->
+<h3>
+  Processo Seletivo
+  <div class="pull-right">
+    <a href="./#/processoseletivo/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="panel panel-blue">
+           <div class="panel-heading">
+              <h1 class="panel-title">
+                Listagem de Processos Seletivos
+                 <div class="pull-right">
+                  <a href="rest/processoseletivo/imprimirRelatorio" title="Gerar relatório" target="_blank">              
+                    <em class="icon-printer"></em>             
+                  </a>
+                </div> 
+              </h1>
+           </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                    <input class="form-control" ng-model="busca" type="search" placeholder="Buscar" ng-change="buscar()">                  
+                </div>        
+              </div>
+              <div class="table-responsive" ng-show='processosSeletivos'>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Descrição</th>
+                      <th>Data Inicio</th>
+                      <th>Data Fim</th>
+                      <th width="165px"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="processoSeletivo in processosSeletivos" class="slide-top">
+                      <td>{{processoSeletivo.descricao}}</td>
+                      <td>{{processoSeletivo.dataInicio | date:'dd/MM/yyyy' }}</td>
+                      <td>{{processoSeletivo.dataFim | date:'dd/MM/yyyy' }}</td>
+                      <td >
+                        <div class="pull-right">
+                          <a href="rest/processoseletivo/relatorioProcessoSeletivo/{{processoSeletivo.id}}" class="btn btn-sm btn-info" target="_blank">
+                            <i class="fa fa-print"></i>
+                          </a>
+                          <a href="./#/processoseletivo/{{processoSeletivo.id}}" class="btn btn-sm btn-warning">
+                            <i class="fa fa-edit"></i>
+                          </a>
+                          <a ng-click="removerProcessoSeletivo(processoSeletivo)" class="btn btn-sm btn-danger">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>                        
+                      </td>
+                    </tr>
+                  </tbody>                
+                </table>
+              </div><!--/responsive-table-->
+            </div>
+            <div class="panel-footer" ng-show='processosSeletivos'>
+              <div class="row">
+                <div class="col-md-12">
+                  <fe-paginator page="page" load="load(pagina)">
+                  </fe-paginator>
+                </div>
+              </div>
+            </div>
+        </div>        
+      </div>    
+    </div><!--/row-->
+    
+  </div>
+</div><!--/row--> 
+<!--Fim do conteúdo da Grid-->

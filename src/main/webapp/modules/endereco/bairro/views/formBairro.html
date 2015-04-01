@@ -1,0 +1,66 @@
+<!--Início do conteúdo do Form-->
+<h3>
+  Cadastro de Bairro 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div class="row" >
+  <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+    <form name="formBairro" role="form">
+      <div class="panel panel-blue panel-form">
+        <div class="panel-heading panel-form-pessoais">
+          <h1 class="panel-title">
+            Bairro
+          </h1>
+        </div><!--/div panel-->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 form-group {{(formBairro.nomeInput.$invalid&&!formBairro.nomeInput.$pristine)&&'has-error'||(!formBairro.nomeInput.$pristine&&'has-success'||'')}}">
+              <label for="nomeInput" class="control-label">Nome do Bairro <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input ng-model="bairro.nome" type="text" name="nomeInput" class="form-control" placeholder="Ex: Centro" ng-minlength="5" ng-maxlength="72" required="true" ng-disabled="visualizar">
+                <div class="help-error bg-danger">
+                  <p ng-show="formBairro.nomeInput.$error.required&&!formBairro.nomeInput.$pristine">O campo <strong>Nome do Bairro</strong> é obrigatório.</p>
+                  <p ng-show="formBairro.nomeInput.$error.minlength" >O <strong>Nome do Bairro</strong> informado deve ter mais de 5 caracteres.</p>
+                  <p ng-show="formBairro.nomeInput.$error.maxlength" >O <strong>Nome do Bairro</strong> informado deve ter menos que 72 caracteres.</p>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6 form-group {{(formBairro.paisSelect.$invalid&&!formBairro.paisSelect.$pristine)&&'has-error'||(!formBairro.paisSelect.$pristine&&'has-success'||'')}}">
+                <label for="paisSelect" class="control-label">País <strong class="text-danger form-obrigatorio">*</strong></label>
+                <select ng-model="bairro.filtro.pais" name="paisSelect" ng-options="p.nome for p in paises track by p.id"class="form-control" required="true" ng-change="getUfs(bairro.filtro.pais.id)" ng-disabled="visualizar">
+                  <option value="">Selecione um País</option>
+                </select>
+              </div>
+              <div class="col-md-6 form-group {{(formBairro.estadoSelect.$invalid&&!formBairro.estadoSelect.$pristine)&&'has-error'||(!formBairro.estadoSelect.$pristine&&'has-success'||'')}}">
+                <label for="estadoSelect" class="control-label">Estado <strong class="text-danger form-obrigatorio">*</strong></label>
+                <select ng-model="bairro.filtro.unidadeFederativa" name="estadoSelect" ng-options="p.nome for p in ufs track by p.id" class="form-control" required="true" ng-change="getCidades(bairro.filtro.unidadeFederativa.id)" ng-disabled="visualizar || !ufs">
+                  <option value="">Selecione uma Uf</option>
+                </select>
+              </div>
+            </div><!--/row-->
+            <div class="row">
+              <div class="col-md-6 form-group {{(formBairro.cidadeSelect.$invalid&&!formBairro.cidadeSelect.$pristine)&&'has-error'||(!formBairro.cidadeSelect.$pristine&&'has-success'||'')}}">
+                <label for="cidadeSelect" class="control-label">Cidade <strong class="text-danger form-obrigatorio">*</strong></label>
+                <select ng-model="bairro.cidade" name="cidadeSelect" ng-options="p.nome for p in cidades track by p.id"class="form-control" required="true" ng-disabled="visualizar || !cidades">
+                  <option value="">Selecione uma Cidade</option>
+                </select>
+              </div>
+            </div><!--/row-->
+        </div>
+      </div>
+    
+      <div class="row pull-right">
+        <div class="col-md-12">
+          <a href="./#/endereco/bairro" class="btn btn-info">
+            Voltar
+          </a>
+          <fe-resetform re-origem="objetoOrigem" re-reset="bairro" re-form="formBairro"></fe-resetform>
+          <button ng-disabled="formBairro.$invalid" ng-click="salvarBairro(bairro)" class="btn btn-success" ng-if="!visualizar">
+              Salvar
+          </button>         
+        </div>
+      </div><!--/row-->
+    </form> 
+  </div>
+</div><!--/row-->
+<!--Fim do conteúdo do Form-->

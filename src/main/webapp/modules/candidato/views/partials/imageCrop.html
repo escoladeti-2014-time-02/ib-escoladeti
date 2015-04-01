@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Alterar Foto</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="candidatoModalFoto">
+        <image-crop
+         data-width="300"
+         data-height="300"
+         data-shape="circle"
+         data-result="$parent.base64"
+         data-step="foto"
+        ></image-crop>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center">
+        <button class="btn btn-warning" ng-click="fecharModal()">Fechar</button>
+        <button class="btn btn-success" ng-show="foto==3" ng-click="salvarFoto()">Salvar Imagem</button>  
+      </div>      
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-md-12">
+      &nbsp;
+    </div>
+  </div>
+</div>

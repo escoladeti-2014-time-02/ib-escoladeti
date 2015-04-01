@@ -1,0 +1,108 @@
+<!--Início do conteúdo da Grid-->
+<h3>
+  Aula
+  <div class="pull-right">
+    <a href="./#/programaaprendizagem/aula/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <div class="panel panel-blue">
+       <div class="panel-heading">
+          <h1 class="panel-title">
+            Listagem de Aulas
+             <div class="pull-right">
+              <a href="rest/aula/imprimirFrequenciaAlunos" title="Gerar relat�rio completo de Faltas de Todos Alunos" target="_blank">              
+                <em class="icon-printer"></em>             
+              </a>
+            </div>
+          </h1>
+       </div>
+       <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3 form-group">
+              <label>Data</label>
+              <input id="dataInicio" type="text" name="dataInicio" datepicker-popup="dd/MM/yyyy" ng-model="filtro.data" ng-disabled="visualizar" is-open="datePicker.opened" ng-click = "datePicker.opened = true" datepicker-options="datePicker.config" close-text="Fechar" current-text="Hoje" clear-text="Limpar" placeholder="__/__/__" class="form-control"/>
+            </div>
+            <div class="col-md-4 col-md-offset-5">
+              <div class="pull-right">
+                <a href="#" ng-if="filtro.disciplina" ng-click="filtrar(1)" class="btn btn-sm btn-info">
+                  Filtrar Novamente
+                </a>
+                <a href="#" ng-if="filtro.disciplina" ng-click="limparFiltro()" class="btn btn-sm btn-warning">
+                  Limpar Filtro
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <label for="selectTurma">Turma</label>
+              <select ng-model="filtro.turma" ng-options="t.nome for t in select.turmas track by t.id" ng-change="getModulos(filtro.turma)" ng-disabled="!filtro.data" name="selectTurma" class="form-control">
+                <option value="" selected="selected">Selecione uma turma</option>-->
+              </select>
+            </div>
+            <div class="col-md-4 form-group">
+              <label for="selectModulo" class="control-label">Modulo</label>
+              <select ng-model="filtro.modulo" ng-options="m.nome for m in  select.modulos track by m.id" ng-change="getDisciplinas(filtro.modulo)" ng-disabled="!filtro.turma" name="selectModulo" class="form-control">
+                <option value="" selected="selected">Selecione um modulo</option>-->
+              </select>
+            </div>
+            <div class="col-md-4 form-group">
+              <label for="selectDisciplina" class="control-label">Disciplina</label>
+              <select ng-model="filtro.disciplina" ng-options="m.nome for m in select.disciplinas track by m.id" ng-change="filtrar(1)"  ng-disabled="!filtro.modulo" name="selectDisciplina" class="form-control">
+                <option value="" selected="selected">Selecione uma disciplina</option>-->
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive" ng-show="aulas">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Turma</th>
+                  <th>Módulo</th>
+                  <th>Disciplina</th>
+                  <th width="165px"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="aula in aulas" class="slide-top">
+                  <td>{{aula.dataAula | date:'dd/MM/yyyy'}}</td>
+                  <td>{{aula.turma.nome}}</td>
+                  <td>{{aula.modulo.nome}}</td>
+                  <td>{{aula.disciplina.nome}}</td>
+                  <td >
+                    <div class="pull-right">
+		   		      <!-- <a href="rest/aula/imprimirRelatorioFaltasAula/{{aula.id}}" class="btn btn-sm btn-info" title="Gerar relat�rio de Faltas por Aula" target="_blank">
+                      	<i class="fa fa-print"></i>
+                      </a> -->
+                      <a href="#/programaaprendizagem/aula/visualizar/{{aula.id}}" class="btn btn-sm btn-info">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                      <a href="./#/programaaprendizagem/aula/editar/{{aula.id}}" class="btn btn-sm btn-warning">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a ng-click="removerAula(aula)" class="btn btn-sm btn-danger">
+                        <i class="fa fa-times"></i>
+                      </a>
+                    </div>                  
+                  </td>
+                </tr>
+              </tbody>                
+            </table>
+          </div><!--/responsive-table-->
+       </div>
+       <div class="panel-footer">
+         <div class="row" ng-show='aulas'>
+           <div class="col-md-12">
+             <fe-paginator page="page" load="load(pagina)">
+             </fe-paginator>
+           </div>
+         </div>
+       </div>
+    </div>    
+  </div>
+</div><!--/row--> 
+<!--Fim do conteúdo da Grid-->

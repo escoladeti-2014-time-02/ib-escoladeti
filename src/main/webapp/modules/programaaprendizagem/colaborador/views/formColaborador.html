@@ -1,0 +1,190 @@
+<!--Início do conteúdo do Form-->
+<h3>
+  Cadastro de Colaborador 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div id="viewForm" class="row" >
+    <div class="row" id="rowForm">
+      <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+        <form name="formCadastroColaborador" role="form">
+          <div class="panel panel-blue panel-form">
+
+            <div class="panel-heading panel-form-pessoais">
+              <h1 class="panel-title">
+                Dados Pessoais
+              </h1>
+            </div><!--/div panel-->
+
+            <div class="panel-body">
+
+              <div class="row">
+
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group {{(formCadastroColaborador.cpfInput.$invalid&&!formCadastroColaborador.cpfInput.$pristine)&&'has-error'
+                                         ||(!formCadastroColaborador.cpfInput.$pristine&&'has-success'||'')}}">
+                    <label for="cpfColaborador" class="control-label">CPF
+                      <strong class=" form-obrigatorio">*</strong>
+                    </label>
+                    <input ng-model="colaborador.pessoaFisica.documentos[0].numero" id="cpfColaborador" name="cpfInput" ng-change="getPessoa(colaborador.pessoaFisica.documentos[0].numero)"
+                           class="form-control"  type="text"   
+                           ng-disabled="visualizar" ng-cpf ui-mask="999.999.999-99">
+                    <div class="help-error bg-danger">
+                      	<p ng-show="formCadastroColaborador.cpfInput.$error.cpf&&!formCadastroColaborador.cpfInput.$pristine"  
+                         	class="">O <strong>CPF</strong> é inválido.</p>
+                      	<p ng-show="formCadastroColaborador.cpfInput.$error.required&&!formCadastroColaborador.cpfInput.$pristine"  
+                         	class="">O <strong>CPF</strong> é obrigatório.</p>
+                    </div><!-- erros -->
+                  </div>
+                </div><!--/div cpf  -->
+
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group {{(formCadastroColaborador.nomeInput.$invalid&&!formCadastroColaborador.nomeInput.$pristine)&&'has-error'
+                                         ||(!formCadastroColaborador.nomeInput.$pristine&&'has-success'||'')}}">
+                    <label for="nomeColaborador" class="control-label">Nome 
+                      <strong class=" form-obrigatorio">*</strong>
+                    </label>
+                    <input ng-model="colaborador.pessoaFisica.nome" id="nomeColaborador" name="nomeInput" 
+                           class="form-control"  placeholder="Ex: João de Oliveira" type="text"
+                           ng-minlength="5" ng-maxlength="72" ng-required="true"  ng-disabled="visualizar" ng-pattern="/^[A-zÀ-ú ]+$/">
+                    <div class="help-error bg-danger">
+                        <p ng-show="formCadastroColaborador.nomeInput.$error.required&&!formCadastroColaborador.nomeInput.$pristine" 
+                           class=" ">O campo <strong>Nome</strong> é obrigatório</p>
+                        <p ng-show="formCadastroColaborador.nomeInput.$error.minlength"  
+                           class="">O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+                           <p ng-show="formCadastroColaborador.nomeInput.$error.pattern"  >O <strong>Nome</strong> informado é invalido.</p>
+                        <p ng-show="formCadastroColaborador.nomeInput.$error.maxlength"  
+                           class="">O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+                    </div> <!-- erros -->
+                  </div>
+                </div><!--/div nome  -->
+
+                <div class="col-md-8 col-lg-8">
+                  <div class="form-group {{(formCadastroColaborador.emailInput.$invalid&&!formCadastroColaborador.emailInput.$pristine)&&'has-error'
+                                         ||(!formCadastroColaborador.emailInput.$pristine&&'has-success'||'')}}">
+                    <label for="email" class="control-label">E-mail</label>
+                    <input ng-model="colaborador.pessoaFisica.email" id="email" name='emailInput'
+                           type="email" class="form-control" placeholder="Ex: joaooliveira@gmail.com" 
+                           ng-disabled="visualizar">              
+                    <div class="help-error bg-danger">
+                      	<p ng-show="formCadastroColaborador.emailInput.$error.email&&!formCadastroColaborador.emailInput.$pristine"  
+                           class="">O <strong>E-mail</strong> é inválido.</p>
+                    </div>  
+                  </div>
+                </div><!--/div Email  -->
+
+                <div class="col-md-4 col-lg-4">
+                  <label for="radioAtivo" class="control-label">Ativo 
+                    <strong class=" form-obrigatorio">*</strong>
+                  </label>
+  		            <div id="radioAtivo text-center" class="checkbox">
+    					    <label>
+    					      <input ng-model="colaborador.pessoaFisica.ativo"
+    					      		 ng-disabled="visualizar" 
+    					      	     type="checkbox"> Ativo
+    					    </label>
+    					    </div>
+                </div><!--/div Ativo  -->
+
+              </div><!--/div row cpf nome email status -->  
+
+              <div class="row">
+
+                <div class="col-md-4 col-lg-4">
+                  <div class="form-group {{(formCadastroColaborador.dtNascumentoInput.$invalid&&!formCadastroColaborador.dtNascumentoInput.$pristine)&&'has-error'
+                                         ||(!formCadastroColaborador.dtNascumentoInput.$pristine&&'has-success'||'')}}">
+                    <label for="dataNascimento" class="control-label">Data de Nascimento 
+                      <strong class=" form-obrigatorio">*</strong>
+                    </label>
+                    <input ng-model="colaborador.pessoaFisica.documentos[3].dataNascimento" id="dataNascimento" name='dtNascumentoInput' 
+                    	   ng-disabled="visualizar"
+                           type="date" class="form-control">
+                  </div>
+                </div><!--/data nascimento -->
+
+                <div class="col-md-4 col-lg-4">
+                  <div class="form-group {{(formCadastroColaborador.estadoCivilInput.$invalid&&!formCadastroColaborador.estadoCivilInput.$pristine)&&'has-error'
+                                         ||(!formCadastroColaborador.estadoCivilInput.$pristine&&'has-success'||'')}}">
+                    <label for="EstadoCivil" class="control-label">Estado Civil</label>
+                    <select ng-model="colaborador.pessoaFisica.estadoCivil" name="estadoCivilInput" class="form-control"  ng-disabled="visualizar">
+                      <option value="" selected="selected"> Selecione um estado cvil</option>
+                      <option value="Casado">Casado</option>
+                      <option value="Solteiro">Solteiro</option>
+                      <option value="Divorciado">Divorciado</option>
+                      <option value="Separado">Separado</option>
+                      <option value="Viúvo">Viúvo</option>
+                    </select>
+                  </div>
+                </div><!--/estado civil -->
+
+                <div class="col-md-4 col-lg-4">  
+                  <label for="radioSexo" class="control-label">
+                    Sexo 
+                    <strong class=" form-obrigatorio">*</strong>
+                  </label>
+                  <div id="radioSexo text-center">
+                    <div class="radio-inline">
+                      <label class="control-label">
+                        <input ng-model="colaborador.pessoaFisica.sexo" name="sexoInput" value="Masculino" 
+                               type="radio" 
+                               ng-required='true' ng-disabled="visualizar" >
+                        Masculino
+                      </label>
+                    </div>
+                    <div class="radio-inline">
+                      <label class="control-label">
+                        <input ng-model="colaborador.pessoaFisica.sexo" name="sexoInput" value="Feminino" 
+                               type="radio"
+                               ng-required='true' ng-disabled="visualizar">
+                        Feminino
+                      </label>
+                    </div>
+                  </div>
+                </div>
+    
+              </div><!--/row data-nasicmento estado civil sexo-->
+
+            </div><!--/div panel-body -->
+          </div><!--/div panel-form-pessoais -->      
+
+          <div class="panel panel-teal panel-form">
+            <div class="panel-heading panel-form-telefones">
+              <h1 class="panel-title">
+                Telefones
+              </h1>
+            </div>
+            <div class="panel-body">
+              <fe-telefones telefones="colaborador.pessoaFisica.telefones" visualizar='visualizar'>
+              </fe-telefones>
+            </div>
+          </div><!-- /div telefones -->
+
+          <div class="panel panel-deep-purple panel-form">
+            <div class="panel-heading panel-form-enderecos">
+              <h1 class="panel-title">
+                Endereços
+              </h1>
+            </div>
+            <div class="panel-body">
+              <fe-enderecos enderecos="colaborador.pessoaFisica.enderecos"  visualizar='visualizar'>
+              </fe-enderecos>
+            </div>
+          </div><!-- /div enderecos -->
+
+          <div class="row  pull-right">
+            <div class="col-md-12">
+              <a href="./#/programaaprendizagem/colaborador" class="btn btn-info">
+                Voltar
+              </a>
+             <fe-resetform re-origem="objetoOrigem" re-reset="colaborador" re-form="formCadastroColaborador">
+             </fe-resetform>
+              <button ng-click="salvarColaborador(colaborador)" class="btn btn-success" ng-disabled="formCadastroColaborador.$invalid" ng-if="!visualizar">
+                Salvar
+              </button>       
+            </div>
+          </div><!-- /div Botões -->
+        </form>
+        
+      </div><!-- /col-md-12 -->
+    </div><!-- /rowForm -->
+  </div><!--/view form -->
+<!--Fim do conteúdo do Form-->

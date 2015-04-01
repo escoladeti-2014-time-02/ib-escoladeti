@@ -1,0 +1,74 @@
+<h3>
+  Paises
+  <div class="pull-right">
+    <a href="./#/endereco/pais/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2 col-md-12">
+		<div class="row">
+			<div class="col-md-12 ">
+				<div class="panel panel-blue">
+				   <div class="panel-heading">
+				      <h1 class="panel-title">
+				        Listagem de Paises
+				        <!-- <div class="pull-right">
+				          <a href="#" title="Gerar relatório">               
+				            <em class="icon-printer"></em>             
+				          </a>
+				        </div> -->
+				      </h1>
+				   </div>
+				   <div class="panel-body">
+				   		<div class="row">
+				   			<div class="col-md-6">
+				   				<input class="form-control" ng-model="busca" type="search" placeholder="Buscar" ng-change="buscar()">
+				   			</div>
+				   		</div>
+				   		<div class="table-responsive" ng-show="paises">
+				   			<table class="table table-striped">
+				   				<thead>
+				   					<tr>
+				   						<th>País</th>
+				   						<th>Sigla</th>
+				   						<th>DDI</th>
+				   						<th width="150px"></th>
+				   					</tr>
+				   				</thead>
+				   				<tbody>
+				   					<tr ng-repeat="pais in paises">
+				   						<td>{{pais.nome}}</td>
+				   						<td>{{pais.sigla}}</td>
+				   						<td>{{pais.ddi}}</td>
+				   						<td >
+				   							<div class="pull-right">
+				   								<a href="#/endereco/pais/visualizar/{{pais.id}}" class="btn btn-sm btn-info">
+				   									<i class="fa fa-eye"></i>
+				   								</a>
+				   								<a href="#/endereco/pais/editar/{{pais.id}}" class="btn btn-sm btn-warning">
+				   									<i class="fa fa-edit"></i>
+				   								</a>
+				   								<a ng-click="removerPais(pais)" class="btn btn-sm btn-danger">
+				   									<i class="fa fa-times"></i>
+				   								</a>
+				   							</div>
+				   						</td>
+				   					</tr>
+				   				</tbody>								
+				   			</table>
+				   		</div><!--/responsive-table-->
+				   </div>
+				   <div class="panel-footer" ng-show="paises">
+				   	<div class="row">
+				   		<div class="col-md-12">
+				   			<fe-paginator page="page" load="load(pagina)">
+				   			</fe-paginator>
+				   		</div>
+				   	</div>
+				   </div>
+				</div>
+				
+			</div>		
+		</div><!--/row-->
+	</div>
+</div><!--/row-->	

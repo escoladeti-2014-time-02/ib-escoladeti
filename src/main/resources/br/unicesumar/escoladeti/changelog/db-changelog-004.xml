@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<property name="create_cursomodulo_sequence"
+		value="CREATE SEQUENCE cursomodulo_sequence INCREMENT BY 1 START 1" />
+	<property name="create_disciplinamodulocolaborador_sequence"
+		value="CREATE SEQUENCE disciplinamodulocolaborador_sequence INCREMENT BY 1 START 1" />
+
+	<changeSet id="Gardin-106" author="Eduardo">
+		<sql dbms="postgresql">
+			${create_cursomodulo_sequence}
+		</sql>
+		<sql dbms="postgresql">
+			${create_disciplinamodulocolaborador_sequence}
+		</sql>
+	</changeSet>
+
+	<changeSet id="Gardin-108" author="Eduardo">
+		<createTable tableName="colaborador">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="pessoafisica_id" type="INT8">
+				<constraints foreignKeyName="fk_colaborador_pessoafisicaid"
+					referencedColumnNames="id" referencedTableName="pessoafisica" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-109" author="Eduardo">
+		<createTable tableName="curso">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="nome" type="${descricaoextralonga}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="descricao" type="${descricaoextralonga}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-1010" author="Eduardo">
+		<createTable tableName="modulo">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="nome" type="${descricaolonga}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="descricao" type="${descricaoextralonga}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-1011" author="Eduardo">
+		<createTable tableName="curso_modulo">
+			<column name="id" type="INT8">
+
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="curso_id" type="INT8">
+				<constraints foreignKeyName="fk_cursomodulo_cursoid"
+					referencedColumnNames="id" referencedTableName="curso" primaryKey="true" />
+			</column>
+
+			<column name="modulo_id" type="INT8">
+				<constraints foreignKeyName="fk_cursomodulo_moduloid"
+					referencedColumnNames="id" referencedTableName="modulo" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-1012" author="Eduardo">
+		<createTable tableName="disciplina">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+
+			<column name="nome" type="${descricaolonga}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="descricao" type="${descricaoextralonga}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-1013" author="Eduardo">
+		<createTable tableName="disciplinamodulo">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="modulo_id" type="INT8">
+				<constraints foreignKeyName="fk_modulo_id"
+					referencedColumnNames="id" referencedTableName="modulo" nullable="false" />
+			</column>
+
+			<column name="disciplina_id" type="INT8">
+				<constraints foreignKeyName="fk_disciplina_id"
+					referencedColumnNames="id" referencedTableName="disciplina"
+					nullable="false" />
+			</column>
+
+			<column name="cargahoraria" type="${decimal}" defaultValue="0.0" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-1014" author="Eduardo">
+		<createTable tableName="disciplinamodulo_colaborador">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="disciplinamodulo_id" type="INT8">
+				<constraints foreignKeyName="fk_disciplinamodulocolaborador_disciplinamoduloid"
+					referencedColumnNames="id" referencedTableName="disciplinamodulo"
+					nullable="false" />
+			</column>
+
+			<column name="colaborador_id" type="INT8">
+				<constraints foreignKeyName="fk_disciplinamodulocolaborador_colaboradorid"
+					referencedColumnNames="id" referencedTableName="colaborador"
+					nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-107" author="Eduardo">
+		<addDefaultValue columnName="id"
+			tableName="disciplinamodulo_colaborador" defaultValueSequenceNext="disciplinamodulocolaborador_sequence" />
+
+		<addDefaultValue columnName="id" tableName="curso_modulo"
+			defaultValueSequenceNext="cursomodulo_sequence" />
+	</changeSet>
+
+</databaseChangeLog>

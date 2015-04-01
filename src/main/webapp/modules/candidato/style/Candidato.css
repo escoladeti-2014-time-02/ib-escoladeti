@@ -1,0 +1,30 @@
+.fotoCandidato:hover {
+	cursor: pointer;
+}
+
+.fotoCandidato:hover span {
+	background-color: rgba(0,0,0,0.4);
+}
+
+.fotoCandidato span{
+	position: absolute;
+	display: block;
+	width: 140px;
+	height: 140px;
+	top: 0;
+	left: 50%;
+	margin-left: -70px;
+	background-color: rgba(0,0,0,0);
+	color: #ffffff;
+	text-align: center;
+	font-size: 42px;
+}
+
+.fotoCandidato span i {
+	margin-top: 50px;
+	display: none;
+}
+
+.fotoCandidato:hover span i {
+	display: block;
+}

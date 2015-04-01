@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="Gardin-3" author="Eduardo">
+		<createTable tableName="entrevista">
+			<column name="id" type="INT8">
+				<constraints primaryKey="true" />
+			</column>
+
+			<column name="descricao" type="${descricaolonga}">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="dataHora" type="${datatempo}" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="Gardin-4" author="Eduardo">
+		<addColumn tableName="candidatoprocessoseletivo">
+			<column name="entrevista_id" type="INT8">
+				<constraints referencedTableName="entrevista"
+					referencedColumnNames="id" foreignKeyName="fk_entrevista_id" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="Gardin-5" author="Eduardo">
+		<dropColumn tableName="entrevista" columnName="dataHora" />
+
+		<addColumn tableName="entrevista">
+			<column name="datahora" type="${datatempo}">
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="Gardin-6" author="Eduardo">
+		<dropColumn tableName="perfilcandidatoprocesso" columnName="distanciamaximaempresa" />
+		<dropColumn tableName="perfilcandidatoprocesso" columnName="distanciamaximainstituicao" />
+	</changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Cadastro de Dependentes</h3>
+    </div>
+  </div>
+  <ng-form name='form.filho' role='form'>
+    <div class="row">
+      <div class="col-md-8 form-group {{(form.filho.filhoInput.$invalid&&!form.filho.filhoInput.$pristine)&&'has-error'||(!form.filho.filhoInput.$pristine&&'has-success'||'')}}">
+        <label for="nomeFilho" class="control-label">Nome do Filho <strong class="text-danger form-obrigatorio">*</strong></label>
+        <input ng-model="modalFilho.nome" type="text" class="form-control" id="nomeFilho" placeholder="Nome" ng-required='true' name='filhoInput' ng-minlength="5" ng-maxlength="72">
+        <div class="help-error bg-danger">
+          <p ng-show="form.filho.filhoInput.$error.required&&!form.filho.filhoInput.$pristine">O campo <strong>Nome</strong> é obrigatório</p>
+          <p ng-show="form.filho.filhoInput.$error.minlength" >O <strong>Nome</strong> informado deve ter mais de 4 caracteres.</p>
+          <p ng-show="form.filho.filhoInput.$error.maxlength" >O <strong>Nome</strong> informado deve ter menos que 72 caracteres.</p>
+        </div>    
+      </div>
+      <div class="col-md-4 form-group {{(form.filho.dtNacsFilhoInput.$invalid&&!form.filho.dtNacsFilhoInput.$pristine)&&'has-error'||(!form.filho.dtNacsFilhoInput.$pristine&&'has-success'||'')}}">
+        <label for="dtNascimentoFilho" class="control-label">Data de nascimento</label>
+        <input ng-model="modalFilho.dataNascimento" type="date" class="form-control" id="dtNascimentoFilho" name='dtNacsFilhoInput'  ng-required='true'>
+        <div class="help-error bg-danger">
+          <p ng-show="form.filho.dtNacsFilhoInput.$error.required&&!form.filho.dtNacsFilhoInput.$pristine">O campo <strong>Data</strong> é obrigatório</p>
+          <p ng-show="form.filho.dtNacsFilhoInput.$error.date&&!form.filho.dtNacsFilhoInput.$pristine">O campo <strong>Data</strong> informado é invalido</p>
+        </div>
+      </div>
+    </div><!--/row -->
+    <div class="row">
+     <div class="col-md-6">
+      <label for="temFilhos" class="control-label">Mora junto?</label>
+      <div id="moraJunto">
+        <div class="radio-inline">
+          <label>
+            <input ng-model="modalFilho.moraJunto" type="radio" name="moraJunto" ng-value="true">
+            Sim
+          </label>
+        </div>
+        <div class="radio-inline">
+          <label>
+            <input ng-model="modalFilho.moraJunto" type="radio" name="moraJunto" ng-value="false">
+            Não
+          </label>
+        </div>
+      </div>  
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <hr/>
+        <div class="pull-right">
+          <a class="btn btn-warning"  data-dismiss="modal">Fechar</a>
+          <button ng-click="salvarFilho(modalFilho)" ng-disabled="form.filho.$invalid" class="btn btn-success">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        &nbsp;
+      </div>
+    </div>
+  </ng-form>
+</div>

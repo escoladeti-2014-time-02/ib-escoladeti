@@ -1,0 +1,125 @@
+<!--Início do conteúdo do Form-->
+<h3>
+  Cadastro de Empresa 
+  <small><p class="text-muted"><strong class="text-danger form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div id="viewForm" class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <form name="formEmpresa">
+      <div class="panel panel-blue panel-form">
+        <div class="panel-heading panel-form-pessoais">
+        	<h1 class="panel-title">
+        		Dados da Empresa
+        	</h1>
+        </div>
+        	<div class="panel-body">
+		       <div class="row">
+		       		<div class="col-md-12 form-group" title="Marque esta opção caso a empresa for uma filial">
+		             <input ng-model="empresa.isFilial" type="checkbox" id="cbEmpresa" ng-disabled="visualizar"></input>
+		        	  <label class="control-label">Filial</label>
+		        	  </div>
+		       </div>
+		       <div class="row" ng-show="empresa.isFilial">
+		          <div class="col-md-10 form-group">
+		            <label for="selectEmpresaMatriz" class="control-label">Empresa Matriz <strong class="text-danger form-obrigatorio">*</strong></label> 
+		            <select ng-model="empresa.empresa" name="selectEmpresaMatriz" ng-options="p.fantasia for p in matrizes track by p.id" class="form-control" ng-required="empresa.isFilial" ng-disabled="visualizar">
+		             <option value="">-- Selecione uma empresa --</option>
+		            </select>
+		          </div>
+		        </div><!--/row-->
+		       <div>
+		        <div class="row">
+		          <div class="col-md-12 form-group {{(formEmpresa.fantasiaInput.$invalid&&!formEmpresa.fantasiaInput.$pristine)&&'has-error'||(!formEmpresa.fantasiaInput.$pristine&&'has-success'||'')}}">
+		              <label class="control-label" for="fantasiaInput">Nome Fantasia<strong class="text-danger form-obrigatorio">&nbsp;*</strong></label>
+		              <input ng-model="empresa.fantasia" type="text" class="form-control" name="fantasiaInput" placeholder="Ex: Isis Bruder" ng-required="true" ng-disabled="visualizar">
+		              <div class="help-error bg-danger">
+		           		<p ng-show="formEmpresa.fantasiaInput.$error.required&&!formEmpresa.fantasiaInput.$pristine" class="">O campo <strong>Nome Fantasia</strong> é obrigatório.</p>
+		           		<p ng-show="formEmpresa.fantasiaInput.$error.minlength"  >O <strong>Nome Fantasia</strong> informado deve ter mais de 2 caracteres.</p>
+		           		<p ng-show="formEmpresa.fantasiaInput.$error.maxlength"  >O <strong>Nome Fantasia</strong> informado deve ter menos que 72 caracteres.</p>
+		              </div> 
+		          </div>
+		        </div>
+		      <div class="row">
+		        <div class="col-md-12 form-group {{(formEmpresa.razaoSocialInput.$invalid&&!formEmpresa.razaoSocialInput.$pristine)&&'has-error'||(!formEmpresa.razaoSocialInput.$pristine&&'has-success'||'')}}">
+		          <label class="control-label">Razão Social <strong class="text-danger form-obrigatorio">*&nbsp;&nbsp;</strong></label>
+		          <input ng-model="empresa.razaoSocial" type="text" name="razaoSocialInput" class="form-control" placeholder="Ex: Fundação Isis Bruder" ng-minlength="2" ng-maxlength="72" ng-required="true" ng-disabled="visualizar"  ng-required="pessoa.tipo=='juridica'">
+		          <div class="help-error bg-danger">
+		            <p ng-show="formEmpresa.razaoSocialInput.$error.required&&!formEmpresa.razaoSocialInput.$pristine" class="">O campo <strong>Razão Social</strong> é obrigatório.</p>
+		            <p ng-show="formEmpresa.razaoSocialInput.$error.minlength"  >O <strong>Razão Social</strong> informado deve ter mais de 2 caracteres.</p>
+		            <p ng-show="formEmpresa.razaoSocialInput.$error.maxlength"  >O <strong>Razão Social</strong> informado deve ter menos que 72 caracteres.</p>
+		          </div> 
+		        </div>
+		      </div><!--/row--> 
+		
+		      <div class="row">
+		          <div class="col-md-4 form-group {{(formEmpresa.cnpjInput.$invalid&&!formEmpresa.cnpjInput.$pristine)&&'has-error'||(!formEmpresa.cnpjInput.$pristine&&'has-success'||'')}}">
+		            <label for="cnpjInput" class="control-label" >CNPJ<strong class="text-danger form-obrigatorio">&nbsp;*</strong></label>
+		              <input ng-model="empresa.cnpj" type="text" class="form-control" name="cnpjInput" required="true" ng-disabled="visualizar" ng-cnpj ui-mask="99.999.999/9999-99">
+		    	      <div class="help-error bg-danger">
+		                <p ng-show="formEmpresa.cnpjInput.$error.required&&!formEmpresa.cnpjInput.$pristine" >O campo <strong>CNPJ</strong> é obrigatório.</p>                    
+		              </div>
+		          </div>
+			      <div class="col-md-4 form-group {{(formEmpresa.dataConstituicaoInput.$invalid&&!formEmpresa.dataConstituicaoInput.$pristine)&&'has-error'||(!formEmpresa.dataConstituicaoInput.$pristine&&'has-success'||'')}}">
+			          <label for="dataConstituicaoInput" class="control-label">Data de constituição <strong class="text-danger form-obrigatorio">*</strong></label>
+			          <input type="date" ng-model="empresa.dataConstituicao" name="dataConstituicaoInput" class="form-control" placeholder="__/__/____" required="true" ng-disabled="visualizar">
+			            <div class="help-error bg-danger">
+			                <p ng-show="formEmpresa.dataConstituicaoInput.$error.required&&!formEmpresa.dataConstituicaoInput.$pristine" >O campo <strong>Data de constituição</strong> é obrigatório.</p>                    
+			            </div>
+			       </div>
+			       		          <div class="col-md-4 {{(formEmpresa.ieInput.$invalid&&!formEmpresa.ieInput.$pristine)&&'has-error'||(!formEmpresa.ieInput.$pristine&&'has-success'||'')}}">
+		            <label for="ieInput">Inscrição Estadual<strong class="text-danger form-obrigatorio">&nbsp;*</strong></label>
+		              <input ng-model="empresa.inscricaoEstadual" type="text" class="form-control" name="ieInput" ui-mask="999.999.999.999" ng-required="empresa.inscricaoEstadual" ng-disabled="visualizar">
+		      	      <div class="help-error bg-danger">
+			              <p ng-show="formEmpresa.ieInput.$error.required&&!formEmpresa.ieInput.$pristine" >O campo <strong>Inscrição Estadual</strong> é obrigatório.</p>                    
+			          </div>
+		          </div>
+		       </div><!--/row--> 
+		      </div>
+		      <br>
+           </div>
+      </div>
+      <div class="panel panel-teal panel-form">
+	      <div class="panel-heading panel-form-telefones">
+	      	<h1 class="panel-title">
+	         Telefones&nbsp;<strong class="text-muted form-obrigatorio">*</strong>
+	        </h1>
+	       </div>
+	       <div class="panel-body">
+	         <fe-telefones telefones="empresa.telefones" visualizar='visualizar'>
+	         </fe-telefones>
+	       </div>
+       </div>
+       <div class="panel panel-deep-purple panel-form">
+	       <div class="panel-heading panel-form-enderecos">
+	       		<h1 class="panel-title">
+	         		Endereços&nbsp;<strong class="text-muted form-obrigatorio">*</strong>
+	         	</h1>
+	       </div>
+	       <div class="panel-body">
+	         <fe-enderecos enderecos="empresa.enderecos" visualizar='visualizar'>
+	         </fe-enderecos>
+	       </div>
+       </div>
+
+      <div class="row">
+        <div class="col-md-12">
+        	<div class="pull-right">
+        		<a href="./#/empresa" class="btn btn-info">
+        		  Voltar
+        		</a>
+        		<fe-resetform re-origem="objetoOrigem" re-reset="empresa" re-form="formEmpresa"></fe-resetform>
+        		<button ng-click="salvarEmpresa(empresa)" ng-disabled="formEmpresa.$invalid || empresa.telefones.length==0 || empresa.enderecos.length==0" type="button" class="btn btn-success" ng-if="!visualizar">
+        		  Salvar
+        		</button> 
+        	</div>                  
+        </div>
+      </div><!--/row-->
+      <div class="row">
+      	<div class="col-md-12">
+      		&nbsp;
+      	</div>
+      </div>
+    </form> 
+  </div>
+</div><!--/row-->
+<!--Fim do conteúdo do Form-->

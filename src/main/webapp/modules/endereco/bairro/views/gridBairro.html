@@ -1,0 +1,77 @@
+
+<!--Início do conteúdo da Grid-->
+<h3>
+  Bairros
+  <div class="pull-right">
+    <a href="./#/endereco/bairro/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12"> 
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="panel panel-blue">
+           <div class="panel-heading">
+              <h1 class="panel-title">
+                Listagem de Bairros
+                <!-- <div class="pull-right">
+                  <a href="#" title="Gerar relatório">               
+                    <em class="icon-printer"></em>             
+                  </a>
+                </div> -->
+              </h1>
+           </div>
+           <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <input class="form-control" ng-model="busca" type="search" placeholder="Buscar" ng-change="buscar()">
+                </div>
+              </div>
+              <div class="table-responsive" ng-show="bairros">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Nome do Bairro</th>
+                      <th>Cidade</th>
+                      <th>Estado</th>
+                      <th>País</th>
+                      <th width="150px"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="bairro in bairros">
+                      <td>{{bairro.nome}}</td>
+                      <td>{{bairro.cidade.nome}}</td>
+                      <td>{{bairro.cidade.unidadeFederativa.nome}}</td>
+                      <td>{{bairro.cidade.unidadeFederativa.pais.nome}}</td>
+                      <td >
+                        <a href="./#/endereco/bairro/visualizar/{{bairro.id}}" class="btn btn-sm btn-info">
+                          <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="./#/endereco/bairro/editar/{{bairro.id}}" class="btn btn-sm btn-warning">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                        <a ng-click="removerBairro(bairro)" class="btn btn-sm btn-danger">
+                          <i class="fa fa-times"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>                
+                </table>
+              </div><!--/responsive-table-->
+           </div>
+           <div class="panel-footer"  ng-show="bairros">
+              <div class="row">
+                <div class="col-md-12">
+                  <fe-paginator page="page" load="load(pagina)">
+                  </fe-paginator>  
+                </div>                
+              </div>
+           </div>
+        </div>        
+      </div>    
+    </div><!--/row-->
+   
+  </div>
+</div><!--/row--> 
+<!--Fim do conteúdo da Grid-->

@@ -1,0 +1,131 @@
+h3 Timeline
+
+// START timeline
+ul.timeline
+  li.timeline-separator(data-datetime="Now")
+  // START timeline item
+  li
+    .timeline-badge.primary
+      em.fa.fa-users
+    .timeline-date
+      time(datetime='2014-05-18 10:00')
+    .timeline-panel
+      .popover.left
+          .arrow
+          h3.popover-title Client Meeting
+          .popover-content
+            p Av 123 St - Floor 2
+              br
+              small Pellentesque ut diam velit, eget porttitor risus. Nullam posuere euismod volutpat. 
+  // END timeline item
+  // START timeline item
+  li.timeline-inverted
+    .timeline-badge.warning
+      em.fa.fa-phone
+    .timeline-date
+      time(datetime='2014-05-18 02:00')
+    .timeline-panel
+      .popover.right
+          .arrow
+          h3.popover-title Call
+          .popover-content
+            p Michael 
+              a(href="tel:+011654524578") (+011) 6545 24578 ext. 132
+              br
+              small Pellentesque ut diam velit, eget porttitor risus. Nullam posuere euismod volutpat. 
+  // END timeline item
+  // START timeline separator
+  li.timeline-separator(data-datetime="Yesterday")
+  // END timeline separator
+  // START timeline item
+  li
+    .timeline-badge.danger
+      em.fa.fa-video-camera
+    .timeline-date
+      time(datetime='2014-05-20 09:00')
+    .timeline-panel
+      .popover.left
+          .arrow
+          h3.popover-title Conference
+          .popover-content
+            p Join development group
+            small
+              a(href='skype:echo123?call') 
+                em.fa.fa-phone
+                |  Call the Skype Echo
+  // END timeline item
+  // START timeline item
+  li.timeline-inverted
+    .timeline-date
+      time(datetime='2014-05-20 07:00')
+    .timeline-panel
+      .popover.right
+          .arrow
+          h3.popover-title Appointment
+          .popover-content
+            p Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam.
+            .btn-group
+              a.dropdown-toggle(href="#", data-toggle='dropdown', data-play="fadeIn") 
+                em.fa.fa-paperclip
+              ul.dropdown-menu.text-left
+                li: a(href='#') 
+                  em.fa.fa-download
+                  |  Download
+                li: a(href='#') 
+                  em.fa.fa-share
+                  |  Send to
+                li.divider
+                li: a(href='#') 
+                  em.fa.fa-times
+                  |  Delete
+  // END timeline item
+  // START timeline item
+  li
+    .timeline-badge.info
+      em.fa.fa-plane
+    .timeline-date
+      time(datetime='2014-05-20 08:00')
+    .timeline-panel
+      .popover.left
+          .arrow
+          h3.popover-title Fly
+          .popover-content
+            p Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
+  // END timeline item
+  // START timeline item
+  li
+    .timeline-date
+      time(datetime='2014-05-21 23:00')
+    .timeline-panel
+      .popover.left
+          .arrow
+          h3.popover-title Appointment
+          .popover-content
+            p
+              | Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
+  // END timeline item
+  // START timeline separator
+  li.timeline-separator(data-datetime="2014-05-21")
+  // END timeline separator
+  // START timeline item
+  li.timeline-inverted
+    .timeline-badge.success
+      em.fa.fa-music
+    .timeline-date
+      time(datetime='2014-05-21 11:30')
+    .timeline-panel
+      .popover.right
+          .arrow
+          h3.popover-title Relax
+          .popover-content
+            p Listen some music
+  // END timeline item
+  // START timeline item
+  li.timeline-separator(data-datetime="Old Tasks")
+  // END timeline item
+  // START timeline item
+  li
+    a(href="#").timeline-badge
+      em.fa.fa-plus
+  // END timeline item
+// END timeline

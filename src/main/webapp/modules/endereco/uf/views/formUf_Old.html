@@ -1,0 +1,45 @@
+<!--Início do conteúdo do Form-->
+<div id="viewForm" class="row" >
+  <div class="col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="center">Cadastro de Unidade Federativa (UF)</h2>
+      </div>
+    </div><!--/row-->
+    <form name="formUf">
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label class="control-label">Nome da Unidade Federativa (UF)</label>
+          <input ng-model="uf.nome" type="text" placeholder="Ex: Paraná" name="nomeInput" class="form-control" required>
+        </div>
+      </div><!--/row--> 
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label class="control-label">Sigla</label>
+          <input ng-model="uf.sigla" type="text" name="siglaInput" placeholder="Ex: PR" class="form-control" maxlength="2" ng-pattern="/[A-Z]{2}/" required>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label class="control-label">País</label>
+          <select ng-model="uf.pais" ng-options="p.nome for p in paises track by p.idPais" class="form-control" required>
+            <option value="">Selecione um País</option>
+          </select>          
+        </div>
+      </div><!--/row-->      
+      <div class="row pull-right">
+        <div class="col-md-12">
+          <a href="./endereco/uf" class="btn btn-info">
+            Voltar
+          </a>
+          <button ng-click="uf = ''" class="btn btn-warning">
+            Limpar
+          </button>
+          <button  ng-disabled="formUf.$invalid" ng-click="salvarUf(uf)" class="btn btn-success">
+            Salvar
+          </button>         
+        </div>
+      </div><!--/row-->
+    </form> 
+  </div>
+</div><!--/row-->
+<!--Fim do conteúdo do Form-->

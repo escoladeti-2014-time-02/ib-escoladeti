@@ -1,0 +1,61 @@
+<h3>
+  Cadastro de Pais 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div class="row" >
+	<div class="col-lg-4 col-lg-offset-4 col-md-10 col-md-offset-1">		
+		<form name="formPais">
+			<div class="panel panel-blue panel-form">
+			  <div class="panel-heading panel-form-pessoais">
+			    <h1 class="panel-title">
+			      Pais
+			    </h1>
+			  </div><!--/div panel-->
+			  <div class="panel-body">
+			  	<div class="row">
+			  		<div class="col-md-12 form-group {{(formPais.nomeInput.$invalid&&!formPais.nomeInput.$pristine)&&'has-error'||(!formPais.nomeInput.$pristine&&'has-success'||'')}}">
+			  			<label class="control-label">Nome do País <strong class="text-danger form-obrigatorio">*</strong></label>
+			  			<input type="text" ng-model="pais.nome" name="nomeInput" class="form-control" placeholder="Ex: Brasil" ng-minlength="2" ng-maxlength="72" ng-required="true" ng-disabled="visualizar">
+			  			<div class="help-error bg-danger" >
+			  	        	<p ng-show="formPais.nomeInput.$error.required&&!formPais.nomeInput.$pristine">O campo <strong>Nome do País</strong> é obrigatório.</p>
+			  	        	<p ng-show="formPais.nomeInput.$error.minlength"  >O <strong>Nome do País</strong> informado deve ter mais de 2 caracteres.</p>
+			  	        	<p ng-show="formPais.nomeInput.$error.maxlength"  >O <strong>Nome do País</strong> informado deve ter menos que 72 caracteres.</p>
+			  	        </div> 
+			  		</div>
+			  	</div><!--/row-->	
+			  	<div class="row">
+			  		<div class="col-md-6 form-group {{(formPais.siglaInput.$invalid&&!formPais.siglaInput.$pristine)&&'has-error'||(!formPais.siglaInput.$pristine&&'has-success'||'')}}">
+			  			<label class="control-label">Sigla <strong class="text-danger form-obrigatorio">*</strong></label>
+			  			<input type="text" ng-model="pais.sigla" placeholder="Ex: BR" name="siglaInput" class="form-control" ng-maxlength="3"  ng-minlength="2" ng-pattern="/[A-Z]/" ng-required="true"  ng-disabled="visualizar">
+			  			<div class="help-error bg-danger">
+			  	        	<p ng-show="formPais.siglaInput.$error.required&&!formPais.siglaInput.$pristine">O campo <strong>Sigla</strong> é obrigatório.</p>
+			  	        	<p ng-show="formPais.siglaInput.$error.pattern"  >A <strong>Sigla</strong> informado deve ter caracteres entre A e Z.</p>
+			  	        	<p ng-show="formPais.siglaInput.$error.maxlength"  >A <strong>Sigla</strong> informado deve ter menos que 3 caracteres.</p>
+			  	        	<p ng-show="formPais.siglaInput.$error.minlength"  >A <strong>Sigla</strong> informado deve ter mais que 1 caracteres.</p>
+			  	        </div> 
+			  		</div>
+			  		<div class="col-md-6 form-group {{(formPais.ddiInput.$invalid&&!formPais.ddiInput.$pristine)&&'has-error'||(!formPais.ddiInput.$pristine&&'has-success'||'')}}">
+			  			<label class="control-label">DDI <strong class="text-danger form-obrigatorio">*</strong></label>
+			  			<input type="number" ng-model="pais.ddi" name="ddiInput" class="form-control" placeholder="Ex: 55"  ng-maxlength="4" ng-required="true"  ng-disabled="visualizar">
+			  			<div class="help-error bg-danger">
+			  	        	<p ng-show="formPais.ddiInput.$error.required&&!formPais.ddiInput.$pristine">O campo <strong>DDI</strong> é obrigatório.</p>
+			  	        	<p ng-show="formPais.ddiInput.$error.maxlength"  >O <strong>DDI</strong> informado deve ter menos que 4 caracteres.</p>
+			  	        </div> 
+			  		</div>
+			  	</div><!--/row-->
+			  </div>
+			</div>			
+			<div class="row pull-right">
+				<div class="col-md-12">
+					<a href="./#/endereco/pais" class="btn btn-info">
+						Voltar
+					</a>
+					<fe-resetform re-origem="objetoOrigem" re-reset="pais" re-form="formPais"></fe-resetform>
+					<button  ng-disabled="formPais.$invalid" ng-click="salvarPais(pais)" class="btn btn-success"  ng-if="!visualizar">
+						Salvar
+					</button>					
+				</div>
+			</div><!--/row-->
+		</form>	
+	</div>
+</div><!--/row-->

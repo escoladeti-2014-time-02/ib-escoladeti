@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="col-md-12">
+		<h2 class="center">Cadastro de País</h2>
+		<hr>
+	</div>
+</div>
+<div class="row" >
+	<div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+		
+		<form name="form">
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<label class="control-label">Nome do País</label>
+					<input type="text" ng-model="pais.nome" placeholder="Ex: Brasil" name="nomeInput" class="form-control" required>
+				</div>
+			</div><!--/row-->	
+			<div class="row">
+				<div class="col-md-6 form-group">
+					<label class="control-label">Sigla</label>
+					<input type="text" ng-model="pais.sigla" name="siglaInput" placeholder="Ex: BR" class="form-control" required>
+				</div>
+				<div class="col-md-6 form-group">
+					<label class="control-label">DDI</label>
+					<input type="text" ng-model="pais.ddi" name="ddiInput" class="form-control" placeholder="Ex: +55" ng-pattern="/^(\+\d(1)*)/" required>
+				</div>
+			</div><!--/row-->
+			<div class="row pull-right">
+				<div class="col-md-12">
+					<a href="./endereco/pais" class="btn btn-info">
+						Voltar
+					</a>
+					<a ng-disabled="form.$dirty" ng-click="pais = {}" class="btn btn-warning">
+						Limpar
+					</a>
+					<button  ng-disabled="form.$invalid" ng-click="salvarPais()" class="btn btn-success">
+						Salvar
+					</button>					
+				</div>
+			</div><!--/row-->
+		</form>
+		
+	</div>
+</div><!--/row-->

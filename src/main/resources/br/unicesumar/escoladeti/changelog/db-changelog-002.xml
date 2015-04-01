@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        <changeSet id="Gardin-1" author="Eduardo">
+        	<dropTable tableName="processoseletivo_candidatoprocessoseletivo" cascadeConstraints="true"/>
+
+        	<addColumn tableName="candidatoprocessoseletivo">
+        		<column name="processoseletivo_id" type="INT8">
+        			<constraints referencedTableName="processoseletivo" referencedColumnNames="id" foreignKeyName="fk_processoseletivo_id"/>
+        		</column>
+        	</addColumn>
+        </changeSet>
+        
+</databaseChangeLog>

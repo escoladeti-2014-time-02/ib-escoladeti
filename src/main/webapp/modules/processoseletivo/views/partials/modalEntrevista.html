@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Cadastro de Entrevista</h3>
+      <hr/>
+    </div>
+  </div>
+  <form name="modalEntrevista">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group  {{(modalEntrevista.dataInicioInput.$invalid&&!modalEntrevista.dataInicioInput.$pristine)&&'has-error'||(!modalEntrevista.dataInicioInput.$pristine&&'has-success'||'')}}">  
+          <label class="control-label">Data da entrevista<strong class=" form-obrigatorio">*</strong></label>
+          <div class="input-group">
+            <input 
+              type="text" 
+              name="dataInicioInput" 
+              class="form-control" 
+              datepicker-popup="dd/MM/yyyy" 
+              ng-model="entrevistaModal.entrevista.datahora" 
+              is-open="datePicker.opened[2]" 
+              ng-click = "datePicker.opened[2] = true" 
+              datepicker-options="datePicker.config" 
+              date-disabled="disabled(date, mode)" 
+              ng-required="true" 
+              close-text="Fechar" 
+              current-text="Hoje"
+              clear-text="Limpar"
+              placeholder="__/__/__"
+            />
+          </div>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalEntrevista.dataInicioInput.$error.required&&!modalEntrevista.dataInicioInput.$pristine" class=" ">O campo <strong>Data Inicio</strong> é obrigatório.</p>
+        </div> 
+      </div>
+      <!-- <div class="col-md-8">
+        <div class="form-group  {{(modalEntrevista.localInput.$invalid&&!modalEntrevista.localInput.$pristine)&&'has-error'||(!modalEntrevista.localInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Local <strong class=" form-obrigatorio">*</strong></label>
+            <input name="localInput" type="text" class="form-control" ng-model="entrevistaModal.entrevista.local" ng-minlength="3" ng-maxlength="72" ng-required="true"/>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalEntrevista.localInput.$error.required&&!modalEntrevista.localInput.$pristine" class=" ">O campo <strong>Local</strong> é obrigatório.</p>
+            <p ng-show="modalEntrevista.localInput.$error.minlength"  class="">O <strong>Local</strong> informado deve ter mais de 2 caracteres.</p>
+            <p ng-show="modalEntrevista.localInput.$error.maxlength"  class="">O <strong>Local</strong> informado deve ter menos que 72 caracteres.</p>
+        </div> 
+      </div> -->
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group  {{(modalEntrevista.descricaoInput.$invalid&&!modalEntrevista.descricaoInput.$pristine)&&'has-error'||(!modalEntrevista.descricaoInput.$pristine&&'has-success'||'')}}">
+            <label class="control-label">Descrição <strong class=" form-obrigatorio">*</strong></label>
+            <textarea name="descricaoInput" type="text" class="form-control" ng-model="entrevistaModal.entrevista.descricao" ng-minlength="3" ng-maxlength="500" ng-required="true"/>
+            </textarea>
+        </div>
+        <div class="help-error bg-danger" >
+            <p ng-show="modalEntrevista.descricaoInput.$error.required&&!modalEntrevista.descricaoInput.$pristine" class=" ">O campo <strong>Descrição</strong> é obrigatório.</p>
+            <p ng-show="modalEntrevista.descricaoInput.$error.minlength"  class="">O <strong>Descrição</strong> informado deve ter mais de 2 caracteres.</p>
+            <p ng-show="modalEntrevista.descricaoInput.$error.maxlength"  class="">O <strong>Descrição</strong> informado deve ter menos que 500 caracteres.</p>
+        </div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <button class="btn btn-warning" ng-click="fecharModal()">Cancelar</button>
+          <button class="btn btn-danger" ng-if="entrevistaModal.entrevista.id" ng-click="entrevistaModal.entrevista = null; deletarEntrevista(entrevistaModal)">Excluir</button>
+          <button ng-disabled="modalEntrevista.$invalid" ng-click="salvarEntrevista(entrevistaModal)" class="btn btn-success">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </form> 
+  <div class="row">
+    <div class="col-md-12">
+      &nbsp;
+    </div>
+  </div>      
+</div>

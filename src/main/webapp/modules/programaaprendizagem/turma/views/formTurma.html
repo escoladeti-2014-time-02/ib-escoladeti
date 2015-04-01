@@ -1,0 +1,454 @@
+ <h3>
+  Cadastro de Turma 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div id="viewForm" class="row" >
+     <div class="row" id="rowForm">
+      <div class="col-lg-8 col-lg-offset-2 col-md-12">
+        <form name="formCadastroTurma" role="form">
+          <div class="panel panel-blue panel-form">
+
+            <div class="panel-heading panel-form-pessoais">
+              <h1 class="panel-title">
+                Turma
+              </h1>
+            </div><!--/div panel-->
+            <div class="panel-body">
+              
+              <div class="row">
+                <div class="col-md-12 col-lg-12">
+                  <div class="form-group {{(formCadastroTurma.nomeInput.$invalid&&!formCadastroTurma.nomeInput.$pristine)&&'has-error'
+                                         ||(!formCadastroTurma.nomeInput.$pristine&&'has-success'||'')}}">
+                    <label for="nomeTurma" class="control-label">
+                    	Nome
+                      <strong class="text-danger form-obrigatorio">*</strong>
+                    </label>
+                    <input ng-model="turma.nome" id="nomeTurma" name="nomeInput"
+                           class="form-control"  type="text"   
+                           ng-disabled="visualizar"
+                           ng-required="true"
+                           placeholder="Análise e Desenvolvimento de Sistemas 3º">
+                    <div class="help-error bg-danger">
+                    	<p ng-show="formCadastroTurma.nomeInput.$error.required&&!formCadastroTurma.nomeInput.$pristine" 
+  			           			>O campo <strong>Nome da turma</strong> é obrigatório.</p>
+  				            <p ng-show="formCadastroTurma.nomeInput.$error.minlength"  
+  				              >O <strong>Nome da Turma</strong> informado deve ter mais de 3 caracteres.</p>
+  			           		<p ng-show="formCadastroTurma.nomeInput.$error.maxlength"  
+  			           		  >O <strong>Nome da Turma</strong> informado deve ter menos que 72 caracteres.</p>
+                    </div><!-- erros -->
+                  </div>
+                </div><!--/div nome  -->
+
+                <div class="col-md-12 col-lg-12">
+        					<div class="form-group {{(formCadastroTurma.descricaoInput.$invalid&&!formCadastroTurma.descricaoInput.$pristine)&&'has-error'
+        																 ||(!formCadastroTurma.descricaoInput.$pristine&&'has-success'||'')}}">
+        						<label for="descricaoInput" class="control-label">
+        							Descrição 
+        						</label>
+        						<textarea ng-model="turma.observacao" name="descricaoInput" id="descricaoInput"
+        											class="form-control"  
+        											rows="3"  placeholder="..." ng-minlength="10" ng-maxlength="400"  ng-disabled="visualizar"></textarea>
+        						<div class="help-error bg-danger" >
+        			      	<p ng-show="formCadastroTurma.descricaoInput.$error.required&&!formCadastroTurma.descricaoInput.$pristine" 
+        			      		class=" text-danger">O campo <strong>Descrição da turma</strong> é obrigatório.</p>
+        			      	<p ng-show="formCadastroTurma.descricaoInput.$error.minlength"  
+        			      		>O <strong>Descrição do Turma</strong> informada deve ter mais de 10 caracteres.</p>
+        			       	<p ng-show="formCadastroTurma.descricaoInput.$error.maxlength"  
+        			       		>O <strong>Descrição do Turma</strong> informada deve ter menos que 400 caracteres.</p>
+        					  </div> 
+        					</div>
+        				</div><!--col-md-->
+              </div><!--row-->
+
+              <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                  <div class="form-group {{(formCadastroTurma.selectCurso.$invalid&&!formCadastroTurma.selectCurso.$pristine)&&'has-error'
+                                         ||(!formCadastroTurma.selectCurso.$pristine&&'has-success'||'')}}">
+                    <label for="selectCurso" class="control-label">
+                    	Curso
+                      <strong class="text-danger form-obrigatorio">*</strong>
+                    </label>
+                    <select ng-model="turma.curso" ng-options="c.nome for c in cursos track by c.id"
+                            name="selectCurso" id="selectCurso" class="form-control"  
+                            ng-disabled="visualizar" ng-required="true">
+                      <option value="" selected="selected">Selecione um curso</option>-->
+                    </select>
+                  </div>
+                </div><!--/estado civil -->
+               
+                <!-- <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                  <div class="form-group">
+                    <div class="">
+                      <label>&nbsp;</label>
+                      <button ng-if="!visualizar" ng-click="modalNovoCurso()" 
+                              ng-disabled="visualizar"
+                              class="btn btn-info">
+                        Cadastrar novo Curso
+                      </button>
+                    </div>
+                  </div>              
+                </div> -->
+                <div class="col-md-3 col-lg-3 col-sm-3">
+                  <div class="form-group {{(formCadastroTurma.datePrevistaInicio.$invalid&&!formCadastroTurma.datePrevistaInicio.$pristine)&&'has-error'
+                                         ||(!formCadastroTurma.datePrevistaInicio.$pristine&&'has-success'||'')}}">
+                    <label for="dataInicio" class="control-label">
+                    	Início
+                      <strong class="text-danger form-obrigatorio">*</strong>
+                    </label>
+	                  <input
+                      id="dataInicio" 
+                      style="background:white; cursor: pointer;"
+                      readonly="readonly"
+                      type="text" 
+                      name="datePrevistaInicio" 
+                      datepicker-popup="dd/MM/yyyy" 
+                      ng-model="turma.dataInicio"
+                      ng-disabled="visualizar" 
+                      is-open="datePicker.opened[0]" 
+                      ng-click = "datePicker.opened[0] = true" 
+                      datepicker-options="datePicker.config" 
+                      date-disabled="disabled(date, mode)" 
+                      ng-required="true" 
+                      close-text="Fechar" 
+                      current-text="Hoje"
+                      clear-text="Limpar"
+                      placeholder="__/__/__"
+                      class="form-control"
+                    /> 
+                  </div>
+                  <div class="help-error bg-danger" >
+                      <p ng-show="modalConfig.dataInicioInput.$error.required&&!modalConfig.dataInicioInput.$pristine" 
+                         class=" text-danger">
+                         O campo <strong>Data Prevista Início</strong> é obrigatório.
+                       </p>
+                  </div> 
+                </div> 
+
+                <div class="col-md-3 col-lg-3 col-sm-3">
+                  <div class="form-group {{(formCadastroTurma.datePrevistaEncerramento.$invalid&&!formCadastroTurma.datePrevistaEncerramento.$pristine)&&'has-error'
+                                         ||(!formCadastroTurma.datePrevistaEncerramento.$pristine&&'has-success'||'')}}">
+                    <label for="dataEncerramento" class="control-label">
+                      Encerramento
+                      <strong class="text-danger form-obrigatorio">*</strong>
+                    </label>
+                    <input
+                      id="dataEncerramento"
+                      style="background:white; cursor: pointer;"
+                      readonly="readonly" 
+                      type="text" 
+                      name="datePrevistaEncerramento" 
+                      datepicker-popup="dd/MM/yyyy" 
+                      ng-model="turma.dataEncerramento"
+                      ng-disabled="visualizar" 
+                      is-open="datePicker.opened[1]" 
+                      ng-click = "datePicker.opened[1] = true" 
+                      datepicker-options="datePicker.config" 
+                      date-disabled="disabled(date, mode)" 
+                      ng-required="true" 
+                      close-text="Fechar" 
+                      current-text="Hoje"
+                      clear-text="Limpar"
+                      placeholder="__/__/__"
+                      min-date="turma.dataInicio"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="help-error bg-danger" >
+                      <p ng-show="modalConfig.dataPrevistaEncerramentoInput.$error.required&&!modalConfig.dataPrevistaEncerramentoInput.$pristine" 
+                         class=" text-danger">
+                        O campo <strong>Data Prevista Início</strong> é obrigatório.
+                      </p>
+                  </div> 
+                </div> 
+              </div><!--row-->
+            </div>
+          </div>
+        </form>
+        <form name="formEmpresas">
+          <div class="panel panel-teal panel-form">
+            <div class="panel-heading panel-form-filiacao">
+              <h1 class="panel-title">
+                Empresas
+              </h1>
+            </div><!--/div panel-->
+            <div class="panel-body">
+              <div class="row align-bottom">
+                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                  <div class="form-group {{(formEmpresas.selectEmpresa.$invalid&&!formEmpresas.selectEmpresa.$pristine)&&'has-error'
+                                         ||(!formEmpresas.selectEmpresa.$pristine&&'has-success'||'')}}">
+                    <label for="selectEmpresa" class="control-label">
+                      Empresa
+                    </label>
+                    <select ng-model="empresaSelecionada.empresa" ng-options="c.razaoSocial for c in empresasSelect track by c.id"
+                            name="selectEmpresa" id="selectEmpresa" class="form-control"  
+                            ng-disabled="visualizar" ng-required="true">
+                      <option value="">Selecione uma empresa</option>
+                    </select>
+                  </div>
+                </div><!--localizar -->
+
+                <div class="col-md-4 col-lg-4 col-sm-5 col-xs-5">
+                  <div class="form-group {{(formEmpresas.vagas.$invalid&&!formEmpresas.vagas.$pristine)&&'has-error'
+                                         ||(!formEmpresas.vagas.$pristine&&'has-success'||'')}}">
+                    <label for="quantidadeVagas" class="control-label">
+                      Quantidade de Vagas
+                    </label>
+                    <input ng-model="empresaSelecionada.vagas" id="quantidadeVagas" name="vagas"
+                           class="form-control"  type="number"   
+                           ng-disabled="visualizar"
+                           ng-required="true"
+                           min="1">
+                    <div class="help-error bg-danger">
+                      <p ng-show="formEmpresas.vagas.$error.required&&!formEmpresas.vagas.$pristine" 
+                        >O campo <strong>Quantidade de vagas</strong> é obrigatório.</p>
+                      <p ng-show="formEmpresas.vagas.$error.min&&!formEmpresas.vagas.$pristine" >O valor deve ser maior que 0.</p>
+                    </div><!-- erros -->
+                  </div>
+                </div><!--/quantidade de vagas -->
+
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                  <div class="form-group">
+                    <div>
+                      <button id="adicionar" type="button" class="btn btn-info" 
+                              ng-click="addTurmaEmpresa(empresaSelecionada)"
+                              ng-disabled="formEmpresas.$invalid">
+                        Adicionar Empresa
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div><!--row-->
+        </form>      
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="table-responsive" ng-show="turma.empresaTurma[0]">
+                    <table class="table  table-striped">
+                      <thead>
+                        <tr>
+                          <th>Razao Social</th>
+                          <th>Quantidade de Vagas</th>
+                          <th>Quantidade de Disponíveis</th>
+                          <th ng-if="!visualizar"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="turmaEmpresa in turma.empresaTurma">
+                          <td>{{turmaEmpresa.empresa.razaoSocial}}</td>
+                          <td>{{turmaEmpresa.vagas}}</td>
+                          <td>{{getQuantidadeVagasDisponiveis(turmaEmpresa)}}</td>                      
+                          <td ng-if="!visualizar">
+                            <a ng-click="removeTurmaEmpresa(turmaEmpresa)" class="btn btn-sm btn-danger pull-right">
+                            <i class="fa fa-times"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div> <!-- table aluno -->
+                  <div class="help-error" ng-show="!turma.empresaTurma[0]">
+                    <p class="text-center text-warning"><strong>N&atilde;o existe nenhuma empresa cadastrado.</strong></p>
+                  </div>
+                </div>
+              </div>     
+            </div><!-- body -->
+          </div><!-- panel--> 
+        <form name="formAlunos">        
+          <div class="panel panel-indigo panel-turma">
+            <div class="panel-heading">
+              <h1 class="panel-title">
+                Alunos
+              </h1>
+              
+            </div><!--/div panel-->
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="pull-right">
+                    <a href="" class="btn btn-info" ng-disabled="visualizar||!turma.empresaTurma[0]" ng-click="importarProcesso()">Importar Processo Seletivo</a>    
+                  </div>
+                </div>
+              </div>
+              <div ng-show="turma.empresaTurma[0]">                        
+                <div class="row">
+                  <div class="col-lg-7 col-md-7">
+                    <div class="form-group">
+                      <label for="localizar" class="control-label">
+                          Candidato
+                      </label>
+                      <input ng-model="candidatoSelecionado.aluno"
+                             ng-disabled="visualizar" 
+                             typeahead="candidato as candidato.nome for candidato in getCandidatos($viewValue) | filter:{nome:$viewValue}" 
+                             typeahead-loading="loadingCandidatos"
+                             class="form-control"
+                             ng-required="true">
+                      <i ng-show="loadingCandidatos" class="glyphicon glyphicon-refresh"></i>
+                    </div>
+                  </div><!--localizar -->
+
+                  <div class="col-md-5 col-lg-5">
+                    <div class="form-group {{(formAlunos.selectAlunoEmpresa.$invalid&&!formAlunos.selectAlunoEmpresa.$pristine)&&'has-error'
+                                           ||(!formAlunos.selectAlunoEmpresa.$pristine&&'has-success'||'')}}">
+                      <label for="selectAlunoEmpresa" class="control-label">
+                        Empresa
+                      </label>
+                      <select ng-model="candidatoSelecionado.empresa" data-ng-options="emp as emp.razaoSocial for emp in getTurmaEmpresas() track by emp.id"
+                              name="selectAlunoEmpresa" class="form-control"  
+                              ng-disabled="visualizar"
+                              ng-required="true">
+                        <option value="">Selecione uma empresa</option>
+                      </select>
+                    </div>
+                  </div><!--/estado civil -->
+                </div>
+                <div class="row  align-bottom"> 
+                  <div class="col-md-4 col-lg-3 col-sm-6">
+                    <div class="form-group {{(formAlunos.inicioVigencia.$invalid&&!formAlunos.inicioVigencia.$pristine)&&'has-error'
+                                           ||(!formAlunos.inicioVigencia.$pristine&&'has-success'||'')}}">
+                      <label for="dataInicio" class="control-label">
+                        Início Vigência
+                      </label>
+                      <input
+                        id="dataInicio" 
+                        type="text" 
+                        style="background:white; cursor: pointer;"
+                        readonly="readonly" 
+                        name="inicioVigencia" 
+                        datepicker-popup="dd/MM/yyyy" 
+                        ng-model="candidatoSelecionado.inicioVigencia"
+                        ng-disabled="visualizar" 
+                        is-open="datePicker.opened[2]" 
+                        ng-click = "datePicker.opened[2] = true" 
+                        datepicker-options="datePicker.config" 
+                        date-disabled="disabled(date, mode)" 
+                        close-text="Fechar" 
+                        current-text="Hoje"
+                        clear-text="Limpar"
+                        placeholder="__/__/__"
+                        class="form-control"
+                        ng-required="true"
+                      />
+                    </div>
+                    <div class="help-error bg-danger" >
+                        <p ng-show="modalConfig.dataInicioInput.$error.required&&!modalConfig.dataInicioInput.$pristine" 
+                           class=" text-danger">
+                           O campo <strong>Início Vigência</strong> é obrigatório.
+                         </p>
+                    </div> 
+                  </div>
+
+                  <div class="col-md-4 col-lg-3 col-sm-6">
+                    <div class="form-group {{(formAlunos.fimVigencia.$invalid&&!formAlunos.fimVigencia.$pristine)&&'has-error'
+                                           ||(!formAlunos.fimVigencia.$pristine&&'has-success'||'')}}">
+                      <label for="dataInicio" class="control-label">
+                        Fim Vigência
+                      </label>
+                        <input
+                          id="dataInicio" 
+                          type="text" 
+                          style="background:white; cursor: pointer;"
+                          min-date="candidatoSelecionado.inicioVigencia"
+                          readonly="readonly" 
+                          name="fimVigencia" 
+                          datepicker-popup="dd/MM/yyyy" 
+                          ng-model="candidatoSelecionado.fimVigencia"
+                          ng-disabled="visualizar" 
+                          is-open="datePicker.opened[3]" 
+                          ng-click = "datePicker.opened[3] = true" 
+                          datepicker-options="datePicker.config" 
+                          date-disabled="disabled(date, mode)" 
+                          close-text="Fechar" 
+                          current-text="Hoje"
+                          clear-text="Limpar"
+                          placeholder="__/__/__"
+                          class="form-control"
+                          ng-required="true"
+                        />
+                    </div>
+                    <div class="help-error bg-danger" >
+                        <p ng-show="modalConfig.dataInicioInput.$error.required&&!modalConfig.dataInicioInput.$pristine" 
+                           class=" text-danger">
+                           O campo <strong>Fim Vigencia</strong> é obrigatório.
+                         </p>
+                    </div> 
+                  </div>
+
+                  <div class="col-lg-2 col-md-1 ">
+                    <div class="form-group">
+                      <div class="">
+                        <label>&nbsp;</label>
+                        <button id="adicionar" type="button" ng-if="!visualizar" ng-disabled="formAlunos.$invalid" class="btn btn-info" ng-click="addAluno(candidatoSelecionado)">
+                          Adicionar Candidato
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+            </form>
+            </div>
+            <div class="row"> 
+                  <div class="col-md-12">
+                    <div class="table-responsive" ng-show="turma.aluno[0]">
+                      <table class="table  table-striped">
+                        <thead>
+                          <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Empresa</th>
+                            <th>Início Vigência</th>
+                            <th>Fim Vigência</th>
+                            <th ng-if="!visualizar"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="aluno in turma.aluno">
+                            <td>{{aluno.candidato.nome}}</td>
+                            <td>{{aluno.candidato.email}}</td>
+                            <td>{{aluno.empresa.razaoSocial}}</td>
+                            <td>{{aluno.inicioVigencia| date:'dd/MM/yyyy'}}</td>
+                            <td>{{aluno.fimVigencia| date:'dd/MM/yyyy'}}</td>  
+                            <td >
+                              <div class="pull-right">
+                                <a ng-click="gerarContrato(aluno)" ng-if="isGerarContrato" class="btn btn-sm btn-info">
+                                  <i class="icon-doc"></i>
+                                </a>                              
+                                <a ng-if="!visualizar" ng-click="removeAluno(aluno)" class="btn btn-sm btn-danger">
+                                  <i class="fa fa-times"></i>
+                                </a>
+                              </div>                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div> <!-- table aluno -->
+                    <div class="help-error" ng-show="!turma.aluno[0]">
+                      <p class="text-center text-warning"><strong>N&atilde;o existe nenhum aluno cadastrada.</strong></p>
+                    </div>
+                  </div>
+                </div><!-- turma visible -->
+                
+              </div>
+              <div class="col-md-12 col-lg-12 col-sm-12">
+                  <div class="help-error" ng-show="turma.empresaTurma.length<1">
+                    <p class="text-center text-warning"><strong>N&atilde;o existe nenhuma empresa cadastrada. Cadastre uma empresa para cadastrar um aluno.</strong></p>
+                  </div>
+                </div> 
+            </div><!-- panel body-->
+          </div>
+          
+        <div class="row  pull-right">
+          <div class="col-md-12">
+            <a href="./#/programaaprendizagem/turma" class="btn btn-info">
+              Voltar
+            </a>
+           <!-- <fe-resetform re-origem="objetoOrigem" re-reset="turma" re-form="formCadastroTurma"></fe-resetform> -->
+            <button ng-click="salvarTurma(turma)" class="btn btn-success" ng-disabled="formCadastroTurma.$invalid" ng-if="!visualizar">
+              Salvar
+            </button>       
+          </div>
+        </div><!-- /div Botões -->
+      <br>
+      <br>
+      <br> 
+      </div><!-- /col-md-12 -->
+    </div><!-- /rowForm -->
+  </div><!--/view form -->
+<!--Fim do conteúdo do Form-->

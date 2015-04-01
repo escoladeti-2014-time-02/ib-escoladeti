@@ -1,0 +1,114 @@
+<h3>
+  Cadastro de Curso 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div class="row" >
+	<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+		<form name="formCurso" role="form">
+		    <div class="panel panel-blue panel-form">
+	    	<div class="panel-heading panel-form-pessoais">
+	    		<h1 class="panel-title">
+	    			Curso
+	    		</h1>
+	    	</div><!--/div panel-->
+	        <div class="panel-body">
+
+		       	<div class="col-md-12 col-lg-12">
+		          	<div class="form-group {{(formCurso.nomeInput.$invalid&&!formCurso.nomeInput.$pristine)&&'has-error'||(!formCurso.nomeInput.$pristine&&'has-success'||'')}}">
+		          		<label for="nomeInput" class="control-label">Nome do Curso <strong class=" form-obrigatorio">*</strong></label>
+		          		<input ng-model="curso.nome" type="text" name="nomeInput" class="form-control" placeholder="Ex: Técnico em Administração"  ng-minlength="4" ng-maxlength="72" required="true" ng-disabled="visualizar">
+			           	<div class="help-error bg-danger">
+			           		<p ng-show="formCurso.nomeInput.$error.required&&!formCurso.nomeInput.$pristine">O campo <strong>Nome do curso</strong> é obrigatório.</p>
+				            <p ng-show="formCurso.nomeInput.$error.minlength" >O <strong>Nome do Curso</strong> informado deve ter mais de 3 caracteres.</p>
+			           		<p ng-show="formCurso.nomeInput.$error.maxlength" >O <strong>Nome do Curso</strong> informado deve ter menos que 72 caracteres.</p>
+			           	</div>
+		            </div>
+		        
+					<div class="form-group {{(formCurso.descricaoInput.$invalid&&!formCurso.descricaoInput.$pristine)&&'has-error'||(!formCurso.descricaoInput.$pristine&&'has-success'||'')}}">
+						<label for="descricaoInput" class="control-label">Descrição da Curso <strong class=" form-obrigatorio">*</strong></label>
+						<textarea class="form-control" name="descricaoInput" rows="3" ng-model="curso.descricao" placeholder="..." ng-minlength="4" ng-maxlength="200" required="true" ng-disabled="visualizar"></textarea>
+						<div class="help-error bg-danger" >
+					      	<p ng-show="formCurso.descricaoInput.$error.required&&!formCurso.descricaoInput.$pristine" class=" ">O campo <strong>Descrição da curso</strong> é obrigatório.</p>
+					      	<p ng-show="formCurso.descricaoInput.$error.minlength" >O <strong>Descrição do Curso</strong> informado deve ter mais de 2 caracteres.</p>
+					       	<p ng-show="formCurso.descricaoInput.$error.maxlength" >O <strong>Descrição do Curso</strong> informado deve ter menos que 200 caracteres.</p>
+					    </div> 
+					</div>
+				</div><!--/col-->
+
+	   	    </div>
+		    </div>
+		</form>
+
+		<form name="formModulo" role="form">
+	      <div class="panel panel-teal panel-form">
+	        <div class="panel-heading panel-form-documentos">
+	        	<h1 class="panel-title">
+	        		Módulos
+	        	</h1>
+	        </div><!--/div panel-->
+	        <div class="panel-body">
+	          <div class="row">
+	          	<div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">            
+	          	  <div class="form-group {{(formModulo.nomeModulo.$invalid&&!formModulo.nomeModulo.$pristine)&&'has-error'||(!formModulo.nomeModulo.$pristine&&'has-success'||'')}}">
+	          	    <label for="nomeModulo" class="control-label">Nome <strong class=" form-obrigatorio">*</strong></label>
+	          	    <select ng-model="auxModulo"  name="nomeModulo" ng-options="m.nome for m in selectModulos track by m.id"  class="form-control" required="true" ng-change="getCursoModulo(modulo.nome)" ng-disabled="visualizar">
+	          	      <div class="help-error bg-danger">
+	          	          <p ng-show="formModulo.nomeModulo.$error.required&&!formModulo.nomeModulo.$pristine">O campo <strong>Nome</strong> é obrigatório.</p>                    
+	          	      </div>
+	          	    </select>
+	          	  </div>
+	          	</div>
+	   	      </form>
+	          	<div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+	          	      <button class="btn btn-success" ng-click="adicionarModulo(auxModulo); auxModulo = {};" ng-disabled="!auxModulo.id" style="margin-top : 25px">Adicionar</button>
+	          		  <!-- <button class="btn btn-info" ng-click="modalNovoModulo()" ng-if='!visualizar' style="margin-top : 25px">Cadastrar novo Modulo</button> -->
+	          	</div><!--col-->
+	          </div>
+	         
+	          <!-- //Grid Módulo -->
+	          <div class="row">
+	            <div class="col-md-12 col-lg-10 col-lg-offset-1">
+	              <div class="help-error bg-danger" ng-show="!curso.modulos[0]">
+	                <p class=" text-center">É obrigatório o cadastro de pelo menos um módulo.</p>
+	              </div>  
+	              <div class="table-responsive" ng-show="curso.modulos[0]">
+	                <table class="table table-striped">
+	                  <thead>
+	                    <tr>
+	                      <th><a>Módulo</a></th>
+	                      <th width="150px"></th>
+	                    </tr>
+	                  </thead>
+	                  <tbody>
+	                    <tr ng-repeat="modulo in curso.modulos">
+	                      <td>{{modulo.nome}}</td>
+	                      <td >
+	                      	<div class="pull-right">
+	                      		<a ng-click="removerModulo(modulo)"class="btn btn-sm btn-danger"  ng-if="!visualizar">
+	                      		  <i class="fa fa-times"></i>
+	                      		</a>	
+	                      	</div>	                        
+	                      </td>
+	                    </tr>
+	                  </tbody>                
+	                </table>
+	              </div><!--/responsive-table-->
+	            </div> <!--col-->   
+	          </div><!--/row-->
+	        </div><!--/panel-body-->
+	      </div><!--/panel-form-->
+	    <div class="row">
+	     <div class="col-md-12">
+	     <div class="pull-right">
+	       <a href="./#/programaaprendizagem/curso" class="btn btn-info">
+	         Voltar
+	       </a>
+	      <fe-resetform re-origem="objetoOrigem" re-reset="curso" re-form="formCurso"></fe-resetform>
+	       <button ng-click="salvarCurso(curso)" class="btn btn-success" ng-disabled="formCurso.$invalid||!curso.modulos[0]" ng-if="!visualizar">
+	         Salvar
+	       </button>
+	       </div>       
+	     </div>
+	    </div><!-- buttons row -->
+	</div>
+</div><!--/row-->

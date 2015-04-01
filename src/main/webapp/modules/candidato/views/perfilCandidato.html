@@ -1,0 +1,320 @@
+<link rel="stylesheet" type="text/css" href="./resources/css/perfilCandidato.css">
+<h3>
+  Perfil do Candidato
+</h3>
+<div class="row">
+    <div class="col-lg-12">
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row container_perfil">
+    <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                <h1 class="panel-title">Perfil do Candidato</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <a href="./#/candidato/visualizar/{{candidato.id}}" class="btn btn-info">Visualizar Candidato</a>    
+                            <a href="./#/candidato/editar/simplificado/{{candidato.id}}" class="btn btn-warning">Editar Candidato</a>    
+                        </div>                                
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="nome_candidato">
+                            <img ng-src="{{candidato.foto.base64 ? candidato.foto.base64 : './resources/img/user-image.png'}}" class="img-circle" style="width:140px;" alt="{{candidato.nome}}">
+                            <h1>{{candidato.nome}}</h1>      
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="informacoes">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <tabset>
+                                        <tab heading="Pessoais" class="tab-pessoais float" select="changeTabPanel()" >
+                                            <div class="tab-content-pessoais">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h4>E-mail</h4>
+                                                        <p>{{candidato.email }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h4>Estado Civil</h4>
+                                                        <p>{{candidato.estadoCivil}}</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h4>Sexo</h4>
+                                                        <p>{{candidato.sexo}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h4>Habilidade Manual</h4>
+                                                        <p>{{candidato.habilidadeManual}}</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h4>Etnia</h4>
+                                                        <p>{{candidato.etnia}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h4>Data de Nascimento</h4>
+                                                        <p>{{candidato.documentos[3].dataNascimento | date:'dd/MM/yyyy' }}</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h4>Idade</h4>
+                                                        <p>{{candidato.idade}} anos</p>
+                                                    </div>
+                                                </div>    
+                                            </div>                                        
+                                        </tab>
+                                        <tab heading="Documentos" class="tab-documentos  float" select="changeTabPanel()">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>CPF</h4>
+                                                    <p>{{candidato.documentos[0].numero | cpf }}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>RG</h4>
+                                                    <p>{{candidato.documentos[1].numero }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Carteira profissional(CTPS) NIS</h4>
+                                                    <p>{{candidato.documentos[2].numero}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>PIS</h4>
+                                                    <p>{{candidato.documentos[2].pis }}</p>
+                                                </div>
+                                            </div>
+                                        </tab>
+                                        <tab heading="Escolares" class="tab-escolares  float" select="changeTabPanel()">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4>Escola / Colégio</h4>
+                                                    <p>{{candidato.instituicaoEnsino.nome}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Série</h4>
+                                                    <p>{{candidato.serieEscolar}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>Turno</h4>
+                                                    <p>{{candidato.turno}}</p>
+                                                </div>
+                                            </div>
+                                        </tab>
+                                        <tab heading="Sócio-Econômicos" class="tab-socioEconomicos  float" select="changeTabPanel()">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4>Mora com a mãe ou outro responsável?</h4>
+                                                    <p>{{candidato.dadosSocioEconomicos.moraComResponsavel ? 'Sim' : 'Não'}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Quantas pessoas residem na sua casa?</h4>
+                                                    <p>{{candidato.dadosSocioEconomicos.numeroResidentesNaCasa}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>Quantas dessas trabalham?</h4>
+                                                    <p>{{candidato.dadosSocioEconomicos.quantasPessoasTrabalham}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4>Alguém da família recebe algum axílio do governo?</h4>
+                                                    <p>{{candidato.dadosSocioEconomicos.auxilioGovernamental ? 'Sim' : 'Não'}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Qual?</h4>
+                                                    <p>{{candidato.dadosSocioEconomicos.beneficioSocial}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>Valor do beneficio</h4>
+                                                    <p>R$ {{candidato.dadosSocioEconomicos.valorBeneficio}}</p>
+                                                </div>
+                                            </div>
+                                        </tab>
+                                        <!-- <tab heading="Filiação">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Mãe</h4>
+                                                    <p>{{candidato.mae.nome}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>Profissão</h4>
+                                                    <p>{{candidato.mae.profissao}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Pai</h4>
+                                                    <p>{{candidato.pai.nome}}</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>Profissão</h4>
+                                                    <p>{{candidato.pai.profissao}}</p>
+                                                </div>
+                                            </div>
+                                        </tab> -->
+                                        <tab heading="Telefones" class="tab-telefones float" select="changeTabPanel()">
+                                            <table class="table  table-hover">
+                                              <thead>
+                                                <tr>
+                                                  <th>Tipo do telefone</th>
+                                                  <th>Número</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr ng-repeat="telefone in candidato.telefones">
+                                                  <td>{{telefone.tipoTelefone.descricaoTipo}}</td>
+                                                  <td>{{telefone.numero | tel}}</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                        </tab>
+                                        <tab heading="Endereços" class="tab-enderecos float" select="changeTabPanel()">
+                                            <table class="table  table-hover">
+                                              <thead>
+                                                <tr>
+                                                  <th>Cidade</th>
+                                                  <th>Bairro</th>
+                                                  <th>Logradouro</th>
+                                                  <th>CEP</th>
+                                                  <th>Número</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr ng-repeat="endereco in candidato.enderecos">
+                                                  <td>{{endereco.bairro.cidade.nome}}</td>             
+                                                  <td>{{endereco.bairro.nome}}</td>
+                                                  <td>{{endereco.logradouro.tipoLogradouro.nome}} {{endereco.logradouro.nome}}</td>
+                                                  <td>{{endereco.logradouro.faixasDeCep[0].cep | cep}}</td>
+                                                  <td>{{endereco.numero}}</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                        </tab>
+                                        <!-- <tab heading="Dependentes">
+                                            <table class="table  table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th>Nome</th>
+                                                  <th>Data de nascimento</th>
+                                                  <th>Mora junto</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr ng-repeat="filho in candidato.filhos">
+                                                  <td>{{filho.nome}}</td>
+                                                  <td>{{filho.dataNascimento | date:'dd/MM/yyyy' }}</td>
+                                                  <td>{{filho.moraJunto && 'Sim' || 'Não'}}</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                        </tab> -->
+                                    </tabset>
+                                </div>
+                            </div>    
+                        </div>
+                        
+                    </div>           
+                </div>
+            </div><!--/panelbody-->
+        </div><!--panel default-->
+    </div><!--/col-->                
+</div><!--row-->
+
+
+<div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+        <!-- /.panel -->
+        <div class="panel panel-teal historico-candidato">
+            <div class="panel-heading">
+                <h1 class="panel-title">
+                <i class="fa fa-clock-o fa-fw"></i> Histórico do Candidato
+                               
+                </h1>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <a href="" class="btn btn-info" ng-click="openEventoModal()"> Cadastrar Evento</a>    
+                        </div> 
+                    </div>
+                </div>
+                <div class="perfil-legends text-center">           
+                    <span ng-repeat="(indice, tipoEvento) in tiposEvento" tooltip="{{tipoEvento.descricao}}" ng-style="setColorLegend(tipoEvento)" ng-click="eventoHide[tipoEvento.id] = !eventoHide[tipoEvento.id]" class="grow perfil-legend">
+                        <a><i class="fa {{tipoEvento.icone}}"></i></a>                        
+                    </span> 
+                </div>
+                <ul class="timeline">
+                    <li ng-repeat="evento in eventos | orderBy : '-dataEvento'" ng-hide="eventoHide[evento.tipoEvento.id]"  ng-class="$odd ? 'timeline-inverted' : ''">
+                        <div class="timeline-badge pulse-grow" tooltip="{{evento.tipoEvento.descricao}}" ui-options="{placement:$odd ? 'left' : 'right'}" ng-style="{'background-color': '{{evento.tipoEvento.cor}}'}"><i class="fa {{evento.tipoEvento.icone}}"></i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="popover" ng-class="$odd ? 'right' : 'left'">
+                                <div class="popover-title">
+                                    <h4 class="timeline-title">
+                                        {{evento.titulo}}  
+                                    </h4>
+                                </div>
+                                <div class="arrow"></div>
+                                <div class="popover-content">
+                                    <p class="text-right">
+                                        
+                                            <small class="text-muted"><i class="fa fa-time"></i>{{evento.dataEvento | date:'dd/MM/yyyy' }}</small>
+                                        
+                                    </p>
+                                    <p>{{evento.descricaoEvento}}</p>
+                                    <div class="timeline-footer text-right">
+                                        <a href="" ng-click="openEditarEventoModal(evento)"><i class="fa fa-pencil grow"></i></a>  
+                                        <a href="" ng-click="removerEvento(evento)"><i class="fa fa-times grow"></i></a>                                       
+                                    </div>                                    
+                                     
+                                </div>
+                            </div>                            
+                        </div>
+                    </li>         
+                </ul>
+            </div>
+         <!-- /.panel-body -->
+        </div>
+     <!-- /.panel -->
+    </div>
+<!-- <div class="row">
+    <div class="col-md-12">
+        <pre>
+            {{candidato}}
+        </pre>
+    </div>
+</div>   -->                
+</div>
+<!-- /.row -->

@@ -1,0 +1,80 @@
+<!--Início do conteúdo da Grid-->
+<h3>
+  Unidades Federativas
+  <div class="pull-right">
+    <a href="./#/endereco/uf/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    
+  </div>
+</div><!--/row-->
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <div class="row" >
+      <div class="col-md-12 ">
+        <div class="panel panel-blue">
+           <div class="panel-heading">
+              <h1 class="panel-title">
+                Listagem de Unidades Federativas
+                <!-- <div class="pull-right">
+                  <a href="#" title="Gerar relatório">               
+                    <em class="icon-printer"></em>             
+                  </a>
+                </div> -->
+              </h1>
+           </div>
+           <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <input class="form-control" ng-model="busca" type="search" placeholder="Buscar" ng-change="buscar()">
+                </div>
+              </div>
+              <div class="table-responsive" ng-show="ufs">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Sigla</th>           
+                      <th>País</th>
+                      <th width="150px"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="uf in ufs">
+                      <td>{{uf.nome}}</td>
+                      <td>{{uf.sigla}}</td>
+                      <td>{{uf.pais.nome}}</td>
+                      <td >
+                        <div class="pull-right">
+                          <a href="#/endereco/uf/visualizar/{{uf.id}}" class="btn btn-sm btn-info">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                          <a href="./#/endereco/uf/editar/{{uf.id}}" class="btn btn-sm btn-warning">
+                            <i class="fa fa-edit"></i>
+                          </a>
+                          <a ng-click="removerUf(uf)"class="btn btn-sm btn-danger">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>                
+                </table>
+              </div><!--/responsive-table-->
+           </div>
+           <div class="panel-footer" ng-show="ufs">
+             <div class="row">
+               <div class="col-md-12">
+                 <fe-paginator page="page" load="load(pagina)">
+                 </fe-paginator>
+               </div>
+             </div>
+           </div>
+        </div>
+      </div>    
+    </div><!--/row-->    
+  </div>
+</div><!--/row--> 
+<!--Fim do conteúdo da Grid-->

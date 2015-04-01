@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <button class="btn btn-info" ng-click="novoTelefone()"  ng-if='!visualizar'>
+        Cadastrar Telefone
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="help-error " ng-show="!telefones[0]">
+      <p class="text-center text-danger" ng-if='!visualizar'><strong>É obrigatório o cadastro de pelo menos um telefone.</strong></p>
+    </div>  
+    <div class="table-responsive" ng-show="telefones[0]">
+      <table class="table  table-striped">
+        <thead>
+          <tr>
+            <th>Tipo do telefone</th>
+            <th>Número</th>
+            <th ng-if="!visualizar"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="telefone in telefones">
+            <td>{{telefone.tipoTelefone.descricaoTipo}}</td>
+            <td>{{telefone.numero | tel}}</td>
+            <td ng-if="!visualizar">
+              <div class="pull-right">
+                <button ng-click="editarTelefone(telefone)" class="btn btn-sm btn-warning">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <a ng-click="removerTelefone(telefone)" class="btn btn-sm btn-danger">
+                  <i class="fa fa-times"></i>
+                </a>
+              </div>              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+/* ========================================================================
+   Component: datepicker.less
+ ========================================================================== */
+ 
+//
+// Datetimepicker for Bootstrap v3
+// Custom DateTimepicker styles 
+//
+
+.bootstrap-datetimepicker-widget
+{
+
+  .btn {
+    padding:6px;
+    box-shadow: 0 0 0 #000;
+    border: 0;
+  }
+
+  td
+  {
+    &.day:hover,
+    &.hour:hover,
+    &.minute:hover,
+    &.second:hover
+    {
+        background: @gray-lighter;
+    }
+
+    &.old,
+    &.new
+    {
+      color: @gray-light;
+    }
+
+    &.active,
+    &.active:hover
+    {
+      background-color: @btn-primary-bg;
+      color: #fff;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    }
+
+    &.disabled,
+    &.disabled:hover
+    {
+      color: @gray-light;
+    }
+
+    span
+    {
+      &:hover
+      {
+        background: @gray-lighter;
+      }
+
+      &.active
+      {
+        background-color: @btn-primary-bg;
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+      }
+
+      &.old
+      {
+        color: @gray-light;
+      }
+
+      &.disabled,
+      &.disabled:hover
+      {
+        background: none;
+        color: @gray-light;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  th
+  {
+    &.disabled,
+    &.disabled:hover
+    {
+      color: @gray-light;
+    }
+  }
+
+  thead tr:first-child th
+  {
+    &:hover
+    {
+      background: @gray-lighter;
+    }
+  }
+}

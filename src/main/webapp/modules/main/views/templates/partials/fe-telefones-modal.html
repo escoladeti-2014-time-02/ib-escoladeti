@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Cadastro de Telefone</h3>
+    </div>
+  </div>
+  <ng-form name="formTelefone">
+    <div class="row">
+      <div class="col-md-6 form-group  {{(formTelefone.tipoTelefoneInput.$invalid&&!formTelefone.tipoTelefoneInput.$pristine)&&'has-error'||(!formTelefone.tipoTelefoneInput.$pristine&&'has-success'||'')}}">
+        <label class="control-label" class="control-label">Tipo do telefone</label>
+        <select ng-model="modalTelefone.tipoTelefone" ng-options="t.descricaoTipo for t in tiposTelefone track by t.id" class="form-control" required='' ng-disabled="visualizar" name="tipoTelefoneInput">
+          <option value="">-- Selecione um Tipo --</option>
+        </select>          
+      </div>
+      <div class="col-md-6 form-group {{(formTelefone.telefoneInput.$invalid&&!formTelefone.telefoneInput.$pristine)&&'has-error'||(!formTelefone.telefoneInput.$pristine&&'has-success'||'')}}">
+        <label class="control-label">Telefone <strong class="text-danger form-obrigatorio">*</strong></label>
+        <input ng-model="modalTelefone.numero" type="text" ui-mask="(99) 9999-9999" name="telefoneInput" class="form-control" required='' ng-disabled="visualizar">
+        <div class="help-error bg-danger">
+          <p ng-show="formTelefone.telefoneInput.$error.required&&!formTelefone.telefoneInput.$pristine">O campo <strong>Telefone</strong> é obrigatório.</p>
+        </div> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <hr/>
+        <div class="pull-right">
+          <a class="btn btn-warning"  ng-click="fecharModal()">Fechar</a>
+          <button ng-click="salvarTelefone(modalTelefone)" class="btn btn-success" ng-disabled="formTelefone.$invalid">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-form>
+  <div class="row">
+    <div class="col-md-12">
+      &nbsp;
+    </div>
+  </div>
+</div>

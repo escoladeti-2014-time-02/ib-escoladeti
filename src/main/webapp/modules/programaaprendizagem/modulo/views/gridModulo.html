@@ -1,0 +1,76 @@
+<!--Início do conteúdo da Grid-->
+<h3>
+  Módulos
+  <div class="pull-right">
+    <a href="./#/programaaprendizagem/modulo/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="panel panel-blue">
+           <div class="panel-heading">
+              <h1 class="panel-title">
+                Listagem de Módulos
+                <div class="pull-right">
+                  <a href="rest/modulo/imprimirRelatorio" title="Gerar relatório" target="_blank">               
+                    <em class="icon-printer"></em>             
+                  </a>
+                </div>
+              </h1>
+           </div>
+           <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <input class="form-control" ng-model="busca" type="search" placeholder="Buscar" ng-change="buscar()">
+                </div>
+              </div>
+              <div class="table-responsive" ng-show="modulos">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Módulo</th>
+                      <th>Descrição</th>
+                      <th width="175px"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="modulo in modulos">
+                      <td>{{modulo.nome}}</td>
+                      <td>{{modulo.descricao | limitTo: 50}}</td>
+                      <td >
+                        <div class="pull-right">
+                          <a href="rest/modulo/imprimirRelatorioFaltasModulo/{{modulo.id}}" class="btn btn-sm btn-info" title="Gerar relat�rio de Faltas por Modulo" target="_blank">
+                      	    <i class="fa fa-print"></i>
+                          </a>
+                          <a href="./#/programaaprendizagem/modulo/visualizar/{{modulo.id}}" class="btn btn-sm btn-info">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                          <a href="./#/programaaprendizagem/modulo/editar/{{modulo.id}}" class="btn btn-sm btn-warning">
+                            <i class="fa fa-edit"></i>
+                          </a>
+                          <a  ng-disabled="formModulo.$invalid" ng-click="removerModulo(modulo)" class="btn btn-sm btn-danger">
+                            <i class="fa fa-times"></i>
+                          </a>
+                        </div>                        
+                      </td>
+                    </tr>
+                  </tbody>                
+                </table>
+              </div><!--/responsive-table-->
+           </div>
+           <div class="panel-footer" ng-show="modulos">
+             <div class="row">
+               <div class="col-md-12">
+                 <fe-paginator page="page" load="load(pagina)">
+                 </fe-paginator>
+               </div>
+             </div>
+           </div>
+        </div>
+      </div>    
+    </div><!--/row-->    
+  </div>
+</div><!--/row--> 
+<!--Fim do conteúdo da Grid-->

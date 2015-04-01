@@ -1,0 +1,168 @@
+<h3>
+  Cadastro de Logradouro 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div id="viewForm" class="row" >
+  <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 ">
+    <form name="formLogradouro" role="form">
+        <div class="panel panel-blue panel-form">
+            <div class="panel-heading panel-form-pessoais">
+              <h1 class="panel-title">
+                Logradouro
+              </h1>
+            </div><!--/div panel-->
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="tipoLogradouroSelect">Tipo do Logradouro</label>
+                    <select ng-disabled="visualizar" ng-model="logradouro.tipoLogradouro" name="tipoLogradouroSelect" ng-options="tl.nome for tl in tiposLogradouro track by tl.id" class="form-control">
+                      <option value="">Selecione um Tipo de Logradouro</option>
+                    </select>
+                </div>
+                <div class="col-md-8 form-group {{(formLogradouro.nomeInput.$invalid&&!formLogradouro.nomeInput.$pristine)&&'has-error'||(!formLogradouro.nomeInput.$pristine&&'has-success'||'')}}">   
+                  <label for="nomeInput" class="control-label">Nome do Logradouro <strong class="text-danger form-obrigatorio">*</strong></label>
+                  <input ng-model="logradouro.nome" type="text" class="form-control" name="nomeInput" placeholder="Ex: Avenida Brasil" ng-maxlength="72" ng-required="true" ng-disabled="visualizar||!logradouro.tipoLogradouro">
+                    <div class="help-error bg-danger">
+                        <p ng-show="formLogradouro.nomeInput.$error.required&&!formLogradouro.nomeInput.$pristine">O campo <strong>Nome do Logradouro</strong> é obrigatório.</p>
+                        <p ng-show="formLogradouro.nomeInput.$error.maxlength" >O <strong>Nome do Logradouro</strong> informado deve ter menos que 72 caracteres.</p>
+                    </div>  
+                </div>
+              </div><!--/row--> 
+              <div class="row">
+                <div class="col-md-6 form-group {{(formLogradouro.paisSelect.$invalid&&!formLogradouro.paisSelect.$pristine)&&'has-error'||(!formLogradouro.paisSelect.$pristine&&'has-success'||'')}}">
+                  <label for="paisSelect" class="control-label">País <strong class="text-danger form-obrigatorio">*</strong></label>
+                  <select ng-model="logradouro.filtro.pais" name="paisSelect" ng-options="p.nome for p in paises track by p.id" class="form-control" ng-required="true" ng-disabled="visualizar" ng-change="getUfs(logradouro.filtro.pais.id)">
+                    <option value="">Selecione um País</option>
+                  </select>  
+                </div>
+                <div class="col-md-6 form-group {{(formLogradouro.ufSelect.$invalid&&!formLogradouro.ufSelect.$pristine)&&'has-error'||(!formLogradouro.ufSelect.$pristine&&'has-success'||'')}}">
+                  <label for="ufSelect" class="control-label">Unidade Federativa <strong class="text-danger form-obrigatorio">*</strong></label>
+                    <select ng-model="logradouro.filtro.unidadeFederativa" name="ufSelect" ng-options="u.nome for u in ufs track by u.id" class="form-control" ng-required="true" ng-disabled="visualizar||!logradouro.filtro.pais" ng-change="getCidades(logradouro.filtro.unidadeFederativa.id)">
+                      <option value="">Selecione uma Uf</option>
+                    </select>  
+                </div>
+              </div><!--/row-->
+              <div class="row">
+                <div class="col-md-6 form-group {{(formLogradouro.cidadeSelect.$invalid&&!formLogradouro.cidadeSelect.$pristine)&&'has-error'||(!formLogradouro.cidadeSelect.$pristine&&'has-success'||'')}}">
+                  <label for="cidadeSelect" class="control-label">Cidade <strong class="text-danger form-obrigatorio">*</strong></label>
+                  <select ng-model="logradouro.filtro.cidade" name="cidadeSelect" ng-options="c.nome for c in cidades track by c.id" class="form-control" ng-required="true" ng-disabled="visualizar||!logradouro.filtro.unidadeFederativa" ng-change="getBairros(logradouro.filtro.cidade.id)">
+                    <option value="">Selecione uma Cidade</option>
+                  </select>  
+                </div>
+              <!-- </div><!--/row-->
+              <!-- <div class="row"> -->
+              </div><!--/row-->
+            </div>
+        </div>
+        <div class="panel panel-teal panel-form">
+            <div class="panel-heading panel-form-pessoais">
+              <h1 class="panel-title">
+                Faixas de CEP
+              </h1>
+            </div><!--/div panel-->
+            <div class="panel-body">  
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="pull-right">
+                    <button class="btn btn-info" ng-click="novaFaixaDeCep()">
+                      Cadastrar Faixa de CEP
+                    </button>
+                  </div>
+                </div>
+              </div><!--/row-->
+              <div class="row">
+                <div class="col-md-12">
+                  <hr/>
+                </div>
+              </div><!--/row-->
+              <div class="row" ng-if="logradouro.faixasDeCep.length >= 1">
+                <div class="col-md-12">
+                  <div class="table-responsive">
+                    <table class="table  table-striped">
+                      <thead>
+                        <tr>
+                          <th>CEP</th>
+                          <th>Número Inicial</th>
+                          <th>Número Final</th>
+                          <th>Bairro</th>
+                          <th ng-if="!visualizar"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="faixaDeCep in logradouro.faixasDeCep">
+                          <td>{{faixaDeCep.cep}}</td>
+                          <td>{{faixaDeCep.numeroInferior}}</td>
+                          <td>{{faixaDeCep.numeroSuperior}}</td>
+                          <td>{{faixaDeCep.bairro.nome}}</td>
+                          <td ng-if="!visualizar">
+                            <div class="pull-right">
+                              <button ng-click="editarFaixaDeCep(faixaDeCep)" class="btn btn-sm btn-warning">
+                                <i class="fa fa-edit"></i>
+                              </button>
+                              <a ng-click="removerFaixaDeCep(faixaDeCep)" class="btn btn-sm btn-danger">
+                                <i class="fa fa-times"></i>
+                              </a>  
+                            </div>                            
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                </div>
+              </div><!--/row-->
+            </div>
+        </div>    
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <a href="./#/endereco/logradouro" class="btn btn-info" >
+              Voltar
+            </a>
+            <fe-resetform re-origem="objetoOrigem" re-reset="logradouro" re-form="formLogradouro"></fe-resetform>
+            <button  ng-disabled="formLogradouro.$invalid||!logradouro.faixasDeCep[0].bairro" ng-click="salvarLogradouro(logradouro)" type="button" class="btn btn-success" ng-if="!visualizar">
+              Salvar
+            </button>
+          </div>
+        </div>
+      </div><!--/row-->
+    </form> 
+  </div>
+</div><!--/row-->
+
+<!-- Modal -->
+<fe-dialog id-modal="modalFaixaDeCep" titulo="Cadastrar Faixa de CEP">
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <label>CEP <strong class="text-danger form-obrigatorio">*</strong></label>
+      <input class="form-control" type="text" ng-model="modalFc.cep" ng-required="true" ui-mask="99999-999" />
+    </div>
+    <div class="col-md-3 form-group">
+      <label>Número Inicial <strong class="text-danger form-obrigatorio">*</strong></label>
+      <input class="form-control" type="number" ng-model="modalFc.numeroInferior" ng-required="true" />
+    </div>
+    <div class="col-md-3 form-group">
+      <label>Número Final <strong class="text-danger form-obrigatorio">*</strong></label>
+      <input class="form-control" type="number" ng-model="modalFc.numeroSuperior" ng-required="true"/>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <label for="bairroSelect" class="control-label">Bairro <strong class="text-danger form-obrigatorio">*</strong></label>
+      <select ng-model="modalFc.bairro" ng-options="b.nome for b in bairros track by b.id" class="form-control" required ng-required="true" ng-disabled="visualizar||!logradouro.filtro.unidadeFederativa">
+        <option value="">Selecione um Bairro</option>
+      </select>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <hr/>
+      <div class="pull-right">
+        <button ng-click="salvarFaixaDeCep(modalFc)" class="btn btn-success" ng-disabled="visualizar||!modalFc.bairro">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+</fe-dialog>
+<!--Fim do conteúdo do Form-->

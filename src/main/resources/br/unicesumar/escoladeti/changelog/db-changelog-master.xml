@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+     
+    <property name="arquivo" value="blob" dbms="oracle"/>
+    <property name="arquivo" value="oid" dbms="postgresql"/>
+    <property name="texto" value="clob" dbms="oracle"/>
+    <property name="texto" value="oid" dbms="postgresql"/>
+
+    <property name="monetario" value="java.sql.Types.NUMBER(24,4)" dbms="oracle"/>
+    <property name="monetario" value="java.sql.Types.NUMERIC(24,4)" dbms="postgresql"/>
+    <property name="ufm" value="java.sql.Types.NUMBER(14,4)" dbms="oracle"/>
+    <property name="ufm" value="java.sql.Types.NUMERIC(14,4)" dbms="postgresql"/>
+    <property name="decimal" value="java.sql.Types.NUMBER(19,2)" dbms="oracle"/>
+    <property name="decimal" value="java.sql.Types.NUMERIC(19,2)" dbms="postgresql"/>
+    <property name="decimallongo" value="java.sql.Types.NUMBER(24,8)" dbms="oracle"/>
+    <property name="decimallongo" value="java.sql.Types.NUMERIC(24,8)" dbms="postgresql"/>
+    <property name="numero" value="java.sql.Types.NUMBER(19,0)" dbms="oracle"/>
+    <property name="numero" value="java.sql.Types.NUMERIC(19,0)" dbms="postgresql"/>
+    <property name="inteiro" value="java.sql.Types.BIGINT" dbms="oracle"/>
+    <property name="inteiro" value="java.sql.Types.BIGINT" dbms="postgresql"/>
+    <property name="inteiromenor" value="java.sql.Types.NUMBER(5,0)" dbms="oracle"/>
+    <property name="inteiromenor" value="java.sql.Types.INTEGER" dbms="postgresql"/>
+
+    <property name="tempo" value="java.sql.Types.TIME" dbms="oracle"/>
+    <property name="tempo" value="java.sql.Types.TIME" dbms="postgresql"/>
+    <property name="data" value="java.sql.Types.DATE" dbms="oracle"/>
+    <property name="data" value="java.sql.Types.DATE" dbms="postgresql"/>
+    <property name="datatempo" value="java.sql.Types.TIMESTAMP" dbms="oracle"/>
+    <property name="datatempo" value="java.sql.Types.TIMESTAMP" dbms="postgresql"/>
+
+    <property name="discriminador" value="java.sql.Types.CHAR(1)" dbms="oracle"/>
+    <property name="discriminador" value="java.sql.Types.CHAR(1)" dbms="postgresql"/>
+
+    <property name="descricaocurta" value="java.sql.Types.VARCHAR(20)" dbms="oracle"/>
+    <property name="descricaocurta" value="java.sql.Types.VARCHAR(20)" dbms="postgresql"/>
+    <property name="descricaomedia" value="java.sql.Types.VARCHAR(70)" dbms="oracle"/>
+    <property name="descricaomedia" value="java.sql.Types.VARCHAR(70)" dbms="postgresql"/>
+    <property name="descricaolonga" value="java.sql.Types.VARCHAR(255)" dbms="oracle"/>
+    <property name="descricaolonga" value="java.sql.Types.VARCHAR(255)" dbms="postgresql"/>
+    <property name="descricaoextralonga" value="java.sql.Types.VARCHAR(3000)" dbms="oracle"/>
+    <property name="descricaoextralonga" value="java.sql.Types.VARCHAR(3000)" dbms="postgresql"/>
+
+    <property name="logico" value="java.sql.Types.BOOLEAN" dbms="oracle"/>
+    <property name="logico" value="java.sql.Types.BOOLEAN" dbms="postgresql"/>
+
+	<property name="hibernate_sequence" value="hibernate_sequence"></property>
+    <property name="CREATE_HIBERNATE_SEQUENCE" value="CREATE SEQUENCE hibernate_sequence INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START 1 CACHE 10 NO CYCLE" dbms="oracle"/>
+    <property name="CREATE_HIBERNATE_SEQUENCE" value="CREATE SEQUENCE hibernate_sequence INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START 1 CACHE 10 NO CYCLE" dbms="postgresql"/>
+
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-001.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-002.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-003.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-004.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-005.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-006.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-007.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-009.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-basic-database.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-itemdeacesso.xml" />
+	
+</databaseChangeLog> 

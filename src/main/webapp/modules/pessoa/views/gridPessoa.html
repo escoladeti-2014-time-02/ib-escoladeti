@@ -1,0 +1,57 @@
+<!--Início do conteúdo da Grid-->
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="center">Lista de Pessoas</h2>
+    <hr/>
+  </div>
+</div><!--/row-->
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <div class="row">
+      <div class="col-md-5 col-md-offset-2 form-group">
+        <input class="form-control" ng-model="app.busca" type="search" placeholder="Buscar">
+      </div>          
+      <div class="col-md-2">
+        <a href="./#/pessoa/cadastrar" class="btn btn-info">Cadastrar uma Pessoa</a>
+      </div>
+    </div><!--/row-->
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><a>Id</a></th>
+                <th><a>Nome</a></th>
+                <th><a>Ativo</a></th>
+                <th><a>CPF / CNPJ</a></th>
+                <th><a>RG / IE</a></th>
+                <th><a>Sexo</a></th>
+                <th width="100px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="pessoa in pessoas | filter:filtro">
+                <td>{{pessoa.idPessoa}}</td>
+                <td>{{pessoa.fisica.nome && pessoa.fisica.nome || pessoa.juridica.fantasia}}</td>
+                <td>{{pessoa.ativo && 'Sim' || 'Não'}}</td>
+                <td>{{pessoa.fisica.cpf && pessoa.fisica.cpf || pessoa.juridica.cnpj}}</td>
+                <td>{{pessoa.fisica.rg && pessoa.fisica.rg || pessoa.juridica.ie}}</td>
+                <td>{{pessoa.fisica.sexo}}</td>
+                <td >
+                  <a href="./pessoa/editar/{{pessoa.idPessoa}}" class="btn btn-sm btn-warning">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                  </a>
+                  <a ng-click="removerPessoa(pessoa)" class="btn btn-sm btn-danger">
+                    <i class="glyphicon glyphicon-remove"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>                
+          </table>
+        </div><!--/responsive-table-->
+      </div>    
+    </div><!--/row-->
+  </div>
+</div><!--/row--> 
+<!--Fim do conteúdo da Grid-->

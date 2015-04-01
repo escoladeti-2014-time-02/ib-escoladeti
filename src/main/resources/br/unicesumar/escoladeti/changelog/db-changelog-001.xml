@@ -1,0 +1,1628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet author="Heidi" id="1410485824080-1">
+		<createSequence sequenceName="hibernate_sequence" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-2">
+		<createTable tableName="aluno">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="candidato_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-3">
+		<createTable tableName="alunoaula">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="idaluno" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="idaula" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="presenca" type="BOOL">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-4">
+		<createTable tableName="aula">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="dataaula" type="date" />
+			<column name="descricao" type="VARCHAR(255)" />
+			<column name="disciplina_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-5">
+		<createTable tableName="avaliacao">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="dataavaliacao" type="TIMESTAMP WITH TIME ZONE" />
+			<column name="datarealizacao" type="TIMESTAMP WITH TIME ZONE" />
+			<column name="local" type="VARCHAR(255)" />
+			<column name="nota" type="numeric(19, 2)" />
+			<column name="candidato_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-6">
+		<createTable tableName="bairro">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="cidade_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-7">
+		<createTable tableName="calendario">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-8">
+		<createTable tableName="calendario_aula">
+			<column name="calendario_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="aulas_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-9">
+		<createTable tableName="candidato">
+			<column name="arearesidencia" type="INT4" />
+			<column name="basicoeminformatica" type="BOOL" />
+			<column name="deficiencia" type="VARCHAR(255)" />
+			<column name="dificuldadelocomocao" type="BOOL" />
+			<column name="etnia" type="INT4" />
+			<column name="formacao" type="INT4" />
+			<column name="habilidademanual" type="INT4" />
+			<column name="jatrabalhou" type="BOOL" />
+			<column name="medidasocioeducativa" type="INT4" />
+			<column name="primeirapretensaoprofissional" type="VARCHAR(255)" />
+			<column name="segundapretensaoprofissional" type="VARCHAR(255)" />
+			<column name="serieescolar" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="terceirapretensaoprofissional" type="VARCHAR(255)" />
+			<column name="trabalhocomctps" type="BOOL" />
+			<column name="trabalhoremunerado" type="BOOL" />
+			<column name="trabalhovoluntario" type="BOOL" />
+			<column name="turno" type="INT4" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="dadossocioeconomicos_id" type="INT8" />
+			<column name="instituicaoensino_id" type="INT8" />
+			<column name="mae_id" type="INT8" />
+			<column name="pai_id" type="INT8" />
+			<column name="foto_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-10">
+		<createTable tableName="candidato_filho">
+			<column name="candidato_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="filhos_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-11">
+		<createTable tableName="candidato_idioma">
+			<column name="candidato_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="idiomas_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-12">
+		<createTable tableName="candidatoprocessoseletivo">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nivelcandidatoprocesso" type="INT4" />
+			<column name="avaliacao_id" type="INT8" />
+			<column name="candidato_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-13">
+		<createTable tableName="candidatoprocessoseletivo_notificacao">
+			<column name="candidatoprocessoseletivo_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="notificacoes_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-14">
+		<createTable tableName="carteirahabilitacao">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-15">
+		<createTable tableName="carteirahabilitacao_categoriashabilitacao">
+			<column name="carteirahabilitacao_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="categoriashabilitacao" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-16">
+		<createTable tableName="carteiratrabalho">
+			<column name="nis" type="VARCHAR(255)" />
+			<column name="pis" type="VARCHAR(255)" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-17">
+		<createTable tableName="certidaonascimento">
+			<column name="cartorio" type="VARCHAR(255)" />
+			<column name="datanascimento" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="folha" type="VARCHAR(255)" />
+			<column name="livro" type="VARCHAR(255)" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="origem_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-18">
+		<createTable tableName="cidade">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="datafundacao" type="date" />
+			<column name="ddd" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="sigla" type="VARCHAR(255)" />
+			<column name="unidadefederativa_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-20">
+		<createTable tableName="contrato">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="aprendiz" type="BYTEA">
+				<constraints nullable="false" />
+			</column>
+			<column name="dataadmissao" type="TIMESTAMP WITH TIME ZONE" />
+			<column name="empresa" type="BYTEA">
+				<constraints nullable="false" />
+			</column>
+			<column name="horariofinal" type="TIMESTAMP WITH TIME ZONE" />
+			<column name="horarioinicio" type="TIMESTAMP WITH TIME ZONE" />
+			<column name="rescisaocontrato" type="TIMESTAMP WITH TIME ZONE" />
+			<column name="salario" type="FLOAT8" />
+			<column name="terminocontrato" type="TIMESTAMP WITH TIME ZONE" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-21">
+		<createTable tableName="contrato_diasaulateorica">
+			<column name="contrato_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="diasaulateorica" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-22">
+		<createTable tableName="cpf">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-26">
+		<createTable tableName="dadossocioeconomicos">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="auxiliogovernamental" type="BOOL">
+				<constraints nullable="false" />
+			</column>
+			<column name="beneficiosocial" type="VARCHAR(255)" />
+			<column name="escolaridaderesponsavel" type="INT4" />
+			<column name="moracomresponsavel" type="BOOL">
+				<constraints nullable="false" />
+			</column>
+			<column name="numeroresidentesnacasa" type="INT4" />
+			<column name="programadigitandofuturo" type="BOOL" />
+			<column name="quantaspessoastrabalham" type="INT4" />
+			<column name="rendapropria" type="FLOAT8" />
+			<column name="responsavelcartaobeneficio" type="BOOL" />
+			<column name="responsavelpelosustento" type="BOOL" />
+			<column name="serieescolarresponsavel" type="VARCHAR(255)" />
+			<column name="valorbeneficio" type="FLOAT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-30">
+		<createTable tableName="distrito">
+			<column name="fimvigencia" type="date" />
+			<column name="iniciovigencia" type="date" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="cidade_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-31">
+		<createTable tableName="documento">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="numero" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-32">
+		<createTable tableName="empresa">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-33">
+		<createTable tableName="empresaprocessoseletivo">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="quantidadevagas" type="INT4" />
+			<column name="empresa_id" type="INT8" />
+			<column name="processoseletivo_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-34">
+		<createTable tableName="endereco">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="complemento" type="VARCHAR(255)" />
+			<column name="numero" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="tipoendereco" type="INT4" />
+			<column name="bairro_id" type="INT8" />
+			<column name="logradouro_id" type="INT8" />
+			<column name="geolocalizacao_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-35">
+		<createTable tableName="evento">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="dataevento" type="TIMESTAMP WITH TIME ZONE">
+				<constraints nullable="false" />
+			</column>
+			<column name="descricaoevento" type="VARCHAR(255)" />
+			<column name="titulo" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="candidato_id" type="INT8" />
+			<column name="tipoevento_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-36">
+		<createTable tableName="faixadecep">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="cep" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="numeroinferior" type="INT4">
+				<constraints nullable="false" />
+			</column>
+			<column name="numerosuperior" type="INT4">
+				<constraints nullable="false" />
+			</column>
+			<column name="bairro_id" type="INT8" />
+			<column name="logradouro_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-37">
+		<createTable tableName="filho">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="datanascimento" type="date" />
+			<column name="morajunto" type="BOOL">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-38">
+		<createTable tableName="filial">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="empresa_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-39">
+		<createTable tableName="geolocalizacao">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="latitude" type="FLOAT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="longitude" type="FLOAT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-40">
+		<createTable tableName="idioma">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="descricao" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-41">
+		<createTable tableName="idioma_fluenciaidioma">
+			<column name="idioma_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fluenciaidioma" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-42">
+		<createTable tableName="imagem">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="data" type="BYTEA">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-43">
+		<createTable tableName="instituicaoensino">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-44">
+		<createTable tableName="instituicaoensino_endereco">
+			<column name="instituicaoensino_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="enderecos_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-45">
+		<createTable tableName="instituicaoensino_telefone">
+			<column name="instituicaoensino_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="telefones_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-46">
+		<createTable tableName="itemdeacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-47">
+		<createTable tableName="itemdeacesso_itemperfildeacesso">
+			<column name="itemdeacesso_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="itensperfildeacesso_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-48">
+		<createTable tableName="itemdeacessousuario">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimvigencia" type="date" />
+			<column name="iniciovigencia" type="date" />
+			<column name="itemdeacesso_id" type="INT8" />
+			<column name="usuario_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-49">
+		<createTable tableName="itemperfildeacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="itemperfildeacesso_id" type="INT8" />
+			<column name="perfildeacesso_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-50">
+		<createTable tableName="itemperfildeacesso_niveldeacesso">
+			<column name="itemperfildeacesso_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="niveisdeacesso_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-51">
+		<createTable tableName="logradouro">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="tipologradouro_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-54">
+		<createTable tableName="niveldeacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nivel" type="VARCHAR(255)" />
+			<column name="selected" type="BOOL" />
+			<column name="itemperfildeacesso_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-55">
+		<createTable tableName="notificacao">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="datahora" type="TIMESTAMP WITH TIME ZONE" />
+			<column name="observacao" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-56">
+		<createTable tableName="pais">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="ddi" type="INT4">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="sigla" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-57">
+		<createTable tableName="perfilcandidatoprocesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="distanciamaximaempresa" type="FLOAT8" />
+			<column name="distanciamaximainstituicao" type="FLOAT8" />
+			<column name="idademaxima" type="INT4" />
+			<column name="idademinima" type="INT4" />
+			<column name="rendamaxima" type="FLOAT8" />
+			<column name="rendaminima" type="FLOAT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-58">
+		<createTable tableName="perfildeacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-59">
+		<createTable tableName="perfildeacesso_itemperfildeacesso">
+			<column name="perfildeacesso_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="itensperfildeacesso_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-60">
+		<createTable tableName="pessoa">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="ativo" type="BOOL">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="VARCHAR(255)" />
+			<column name="nome" type="VARCHAR(72)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-61">
+		<createTable tableName="pessoa_documento">
+			<column name="pessoa_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="documentos_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-62">
+		<createTable tableName="pessoa_endereco">
+			<column name="pessoa_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="enderecos_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-63">
+		<createTable tableName="pessoa_telefone">
+			<column name="pessoa_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="telefones_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-64">
+		<createTable tableName="pessoaendereco">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimvigencia" type="date" />
+			<column name="iniciovigencia" type="date" />
+			<column name="endereco_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-65">
+		<createTable tableName="pessoafisica">
+			<column name="estadocivil" type="INT4" />
+			<column name="profissao" type="VARCHAR(72)" />
+			<column name="sexo" type="INT4" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-66">
+		<createTable tableName="pessoajuridica">
+			<column name="cnpj" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="dataconstituicao" type="date" />
+			<column name="inscricaoestadual" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fantasia" type="VARCHAR(255)" />
+			<column name="razaosocial" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-67">
+		<createTable tableName="processoseletivo">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)" />
+			<column name="datafim" type="date" />
+			<column name="datainicio" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="perfilcandidato_id" type="INT8" />
+			<column name="statusprocessoseletivo" type="INT4" />
+			<column name="descricao" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-68">
+		<createTable tableName="processoseletivo_candidatoprocessoseletivo">
+			<column name="processoseletivo_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="candidatosprocessoseletivo_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-69">
+		<createTable tableName="processoseletivo_empresa">
+			<column name="processoseletivo_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="empresasparticipantes_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-70">
+		<createTable tableName="registronacional">
+			<column name="nacionalidade" type="VARCHAR(255)" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-71">
+		<createTable tableName="reservista">
+			<column name="situacaoreservista" type="VARCHAR(255)" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-72">
+		<createTable tableName="rg">
+			<column name="orgaoexpedidor" type="VARCHAR(255)" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-73">
+		<createTable tableName="telefone">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="numero" type="VARCHAR(255)" />
+			<column name="tipotelefone_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-74">
+		<createTable tableName="tipoevento">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="cor" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="descricao" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="icone" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-75">
+		<createTable tableName="tipologradouro">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-76">
+		<createTable tableName="tipotelefone">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="descricaotipo" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-77">
+		<createTable tableName="tituloeleitor">
+			<column name="secao" type="VARCHAR(255)" />
+			<column name="zona" type="VARCHAR(255)" />
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-78">
+		<createTable tableName="turma">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="descricao" type="VARCHAR(255)" />
+			<column name="curso_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="vagasmaximo" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="previsaoinicio" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="previsaoencerramento" type="date">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-79">
+		<createTable tableName="turma_aluno">
+			<column name="turma_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="alunos_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-80">
+		<createTable tableName="unidadefederativa">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="nome" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="sigla" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="pais_id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-81">
+		<createTable tableName="usuario">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="ativo" type="BOOL" />
+			<column name="datacadastro" type="date" />
+			<column name="login" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="senha" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="perfildeacesso_id" type="INT8" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-82">
+		<createTable tableName="usuarioperfilacesso">
+			<column name="id" type="INT8">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimvigencia" type="date" />
+			<column name="iniciovigencia" type="date" />
+		</createTable>
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-83">
+		<addPrimaryKey columnNames="id" constraintName="aluno_pkey"
+			tableName="aluno" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-84">
+		<addPrimaryKey columnNames="id" constraintName="alunoaula_pkey"
+			tableName="alunoaula" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-85">
+		<addPrimaryKey columnNames="id" constraintName="aula_pkey"
+			tableName="aula" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-86">
+		<addPrimaryKey columnNames="id" constraintName="avaliacao_pkey"
+			tableName="avaliacao" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-87">
+		<addPrimaryKey columnNames="id" constraintName="bairro_pkey"
+			tableName="bairro" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-88">
+		<addPrimaryKey columnNames="id" constraintName="calendario_pkey"
+			tableName="calendario" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-89">
+		<addPrimaryKey columnNames="id" constraintName="candidato_pkey"
+			tableName="candidato" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-90">
+		<addPrimaryKey columnNames="id"
+			constraintName="candidatoprocessoseletivo_pkey" tableName="candidatoprocessoseletivo" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-91">
+		<addPrimaryKey columnNames="id" constraintName="carteirahabilitacao_pkey"
+			tableName="carteirahabilitacao" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-92">
+		<addPrimaryKey columnNames="id" constraintName="carteiratrabalho_pkey"
+			tableName="carteiratrabalho" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-93">
+		<addPrimaryKey columnNames="id" constraintName="certidaonascimento_pkey"
+			tableName="certidaonascimento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-94">
+		<addPrimaryKey columnNames="id" constraintName="cidade_pkey"
+			tableName="cidade" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-96">
+		<addPrimaryKey columnNames="id" constraintName="contrato_pkey"
+			tableName="contrato" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-97">
+		<addPrimaryKey columnNames="id" constraintName="cpf_pkey"
+			tableName="cpf" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-99">
+		<addPrimaryKey columnNames="id" constraintName="dadossocioeconomicos_pkey"
+			tableName="dadossocioeconomicos" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-101">
+		<addPrimaryKey columnNames="id" constraintName="distrito_pkey"
+			tableName="distrito" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-102">
+		<addPrimaryKey columnNames="id" constraintName="documento_pkey"
+			tableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-103">
+		<addPrimaryKey columnNames="id" constraintName="empresa_pkey"
+			tableName="empresa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-104">
+		<addPrimaryKey columnNames="id"
+			constraintName="empresaprocessoseletivo_pkey" tableName="empresaprocessoseletivo" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-105">
+		<addPrimaryKey columnNames="id" constraintName="endereco_pkey"
+			tableName="endereco" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-106">
+		<addPrimaryKey columnNames="id" constraintName="evento_pkey"
+			tableName="evento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-107">
+		<addPrimaryKey columnNames="id" constraintName="faixadecep_pkey"
+			tableName="faixadecep" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-108">
+		<addPrimaryKey columnNames="id" constraintName="filho_pkey"
+			tableName="filho" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-109">
+		<addPrimaryKey columnNames="id" constraintName="filial_pkey"
+			tableName="filial" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-110">
+		<addPrimaryKey columnNames="id" constraintName="geolocalizacao_pkey"
+			tableName="geolocalizacao" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-111">
+		<addPrimaryKey columnNames="id" constraintName="idioma_pkey"
+			tableName="idioma" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-112">
+		<addPrimaryKey columnNames="id" constraintName="imagem_pkey"
+			tableName="imagem" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-113">
+		<addPrimaryKey columnNames="id" constraintName="instituicaoensino_pkey"
+			tableName="instituicaoensino" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-114">
+		<addPrimaryKey columnNames="id" constraintName="itemdeacesso_pkey"
+			tableName="itemdeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-115">
+		<addPrimaryKey columnNames="id" constraintName="itemdeacessousuario_pkey"
+			tableName="itemdeacessousuario" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-116">
+		<addPrimaryKey columnNames="id" constraintName="itemperfildeacesso_pkey"
+			tableName="itemperfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-117">
+		<addPrimaryKey columnNames="id" constraintName="logradouro_pkey"
+			tableName="logradouro" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-119">
+		<addPrimaryKey columnNames="id" constraintName="niveldeacesso_pkey"
+			tableName="niveldeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-120">
+		<addPrimaryKey columnNames="id" constraintName="notificacao_pkey"
+			tableName="notificacao" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-121">
+		<addPrimaryKey columnNames="id" constraintName="pais_pkey"
+			tableName="pais" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-122">
+		<addPrimaryKey columnNames="id"
+			constraintName="perfilcandidatoprocesso_pkey" tableName="perfilcandidatoprocesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-123">
+		<addPrimaryKey columnNames="perfildeacesso_id, itensperfildeacesso_id"
+			constraintName="perfildeacesso_itemperfildeacesso_pkey" tableName="perfildeacesso_itemperfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-124">
+		<addPrimaryKey columnNames="id" constraintName="perfildeacesso_pkey"
+			tableName="perfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-125">
+		<addPrimaryKey columnNames="id" constraintName="pessoa_pkey"
+			tableName="pessoa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-126">
+		<addPrimaryKey columnNames="id" constraintName="pessoaendereco_pkey"
+			tableName="pessoaendereco" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-127">
+		<addPrimaryKey columnNames="id" constraintName="pessoafisica_pkey"
+			tableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-128">
+		<addPrimaryKey columnNames="id" constraintName="pessoajuridica_pkey"
+			tableName="pessoajuridica" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-129">
+		<addPrimaryKey columnNames="id" constraintName="processoseletivo_pkey"
+			tableName="processoseletivo" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-130">
+		<addPrimaryKey columnNames="id" constraintName="registronacional_pkey"
+			tableName="registronacional" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-131">
+		<addPrimaryKey columnNames="id" constraintName="reservista_pkey"
+			tableName="reservista" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-132">
+		<addPrimaryKey columnNames="id" constraintName="rg_pkey"
+			tableName="rg" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-133">
+		<addPrimaryKey columnNames="id" constraintName="telefone_pkey"
+			tableName="telefone" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-134">
+		<addPrimaryKey columnNames="id" constraintName="tipoevento_pkey"
+			tableName="tipoevento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-135">
+		<addPrimaryKey columnNames="id" constraintName="tipologradouro_pkey"
+			tableName="tipologradouro" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-136">
+		<addPrimaryKey columnNames="id" constraintName="tipotelefone_pkey"
+			tableName="tipotelefone" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-137">
+		<addPrimaryKey columnNames="id" constraintName="tituloeleitor_pkey"
+			tableName="tituloeleitor" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-138">
+		<addPrimaryKey columnNames="id" constraintName="turma_pkey"
+			tableName="turma" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-139">
+		<addPrimaryKey columnNames="id" constraintName="unidadefederativa_pkey"
+			tableName="unidadefederativa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-140">
+		<addPrimaryKey columnNames="id" constraintName="usuario_pkey"
+			tableName="usuario" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-141">
+		<addPrimaryKey columnNames="id" constraintName="usuarioperfilacesso_pkey"
+			tableName="usuarioperfilacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-142">
+		<addUniqueConstraint columnNames="candidatosprocessoseletivo_id"
+			constraintName="uk_21esvbpamfbfdrc3dy92ge4xc" deferrable="false"
+			disabled="false" initiallyDeferred="false"
+			tableName="processoseletivo_candidatoprocessoseletivo" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-143">
+		<addUniqueConstraint columnNames="cnpj"
+			constraintName="uk_2xclbh1scxkxx5e7vv48bqaq" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-145">
+		<addUniqueConstraint columnNames="idiomas_id"
+			constraintName="uk_7luim33wn95kla93fb8w6kw6w" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="candidato_idioma" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-146">
+		<addUniqueConstraint columnNames="inscricaoestadual"
+			constraintName="uk_8ncbf29ly0ca3nepsptgevtgd" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="pessoajuridica" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-147">
+		<addUniqueConstraint columnNames="niveisdeacesso_id"
+			constraintName="uk_9tgc6mce5qaoklihdc62d8ko6" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="itemperfildeacesso_niveldeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-148">
+		<addUniqueConstraint columnNames="telefones_id"
+			constraintName="uk_asrhns9ac9pkdilhvqtrrf5fn" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="instituicaoensino_telefone" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-150">
+		<addUniqueConstraint columnNames="enderecos_id"
+			constraintName="uk_btm06xxtw0qcc3h0etrmdyiuq" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="pessoa_endereco" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-151">
+		<addUniqueConstraint columnNames="itensperfildeacesso_id"
+			constraintName="uk_c8199p5tkx47djkocos7wecnd" deferrable="false"
+			disabled="false" initiallyDeferred="false"
+			tableName="perfildeacesso_itemperfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-152">
+		<addUniqueConstraint columnNames="documentos_id"
+			constraintName="uk_e64w9rnlp4lav9fprrqvf070j" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="pessoa_documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-153">
+		<addUniqueConstraint columnNames="itensperfildeacesso_id"
+			constraintName="uk_kwerl78nrcwbo4r2tes14nx91" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="itemdeacesso_itemperfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-154">
+		<addUniqueConstraint columnNames="enderecos_id"
+			constraintName="uk_lst3tjx44uedjwfdr21ptm7o5" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="instituicaoensino_endereco" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-156">
+		<addUniqueConstraint columnNames="telefones_id"
+			constraintName="uk_q0jd262iy1lgip6p5280bb75l" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="pessoa_telefone" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-157">
+		<addUniqueConstraint columnNames="aulas_id"
+			constraintName="uk_qe4ywnbijauw1u2oa2isc1w7a" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="calendario_aula" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-158">
+		<addUniqueConstraint columnNames="filhos_id"
+			constraintName="uk_s3n99kwxe4i8u4arvykrpf2w5" deferrable="false"
+			disabled="false" initiallyDeferred="false" tableName="candidato_filho" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-159">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="pessoajuridica" constraintName="fk_12u2ai1x9gwnrxbngiu1s2vlf"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-161">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="candidato" constraintName="fk_18v6umhl6up9wdd4p4m28xvbu"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-162">
+		<addForeignKeyConstraint baseColumnNames="empresa_id"
+			baseTableName="filial" constraintName="fk_1faonifqsh4rph9gomc1abo02"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="empresa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-163">
+		<addForeignKeyConstraint baseColumnNames="perfildeacesso_id"
+			baseTableName="usuario" constraintName="fk_1n1tqouwqlvka25g5nqkv79r2"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-164">
+		<addForeignKeyConstraint baseColumnNames="candidatosprocessoseletivo_id"
+			baseTableName="processoseletivo_candidatoprocessoseletivo"
+			constraintName="fk_21esvbpamfbfdrc3dy92ge4xc" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="candidatoprocessoseletivo" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-165">
+		<addForeignKeyConstraint baseColumnNames="notificacoes_id"
+			baseTableName="candidatoprocessoseletivo_notificacao" constraintName="fk_2602y7hvwauwqhjf61cmt314i"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="notificacao" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-167">
+		<addForeignKeyConstraint baseColumnNames="pai_id"
+			baseTableName="candidato" constraintName="fk_2dxp84r93ailtycnn9yuqte4o"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-168">
+		<addForeignKeyConstraint baseColumnNames="instituicaoensino_id"
+			baseTableName="instituicaoensino_telefone" constraintName="fk_3ly7efnix9j9nxhnl84uficb3"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="instituicaoensino" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-170">
+		<addForeignKeyConstraint baseColumnNames="perfildeacesso_id"
+			baseTableName="itemperfildeacesso" constraintName="fk_3ux6jsbmhxdrgadsky8j0ggqt"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-171">
+		<addForeignKeyConstraint baseColumnNames="empresasparticipantes_id"
+			baseTableName="processoseletivo_empresa" constraintName="fk_431srwqdvct9skmh7wvjoaquu"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="empresa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-172">
+		<addForeignKeyConstraint baseColumnNames="candidato_id"
+			baseTableName="candidatoprocessoseletivo" constraintName="fk_45tjhrwrlywlububxnmjag6m7"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="candidato" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-173">
+		<addForeignKeyConstraint baseColumnNames="candidato_id"
+			baseTableName="candidato_filho" constraintName="fk_4b23sxf4j91bp0toe0fxurri0"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="candidato" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-174">
+		<addForeignKeyConstraint baseColumnNames="itemdeacesso_id"
+			baseTableName="itemdeacesso_itemperfildeacesso" constraintName="fk_4mn4bqk4ybrjbxmjlml64geme"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemdeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-176">
+		<addForeignKeyConstraint baseColumnNames="foto_id"
+			baseTableName="candidato" constraintName="fk_51v9l8oiii46qc2usxag95l98"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="imagem" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-177">
+		<addForeignKeyConstraint baseColumnNames="mae_id"
+			baseTableName="candidato" constraintName="fk_5hr4sxlfnfrqol4c4wo2k2jiu"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoafisica" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-178">
+		<addForeignKeyConstraint baseColumnNames="tipotelefone_id"
+			baseTableName="telefone" constraintName="fk_5iy7v508lcrp7ttutfytfthru"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tipotelefone" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-179">
+		<addForeignKeyConstraint baseColumnNames="logradouro_id"
+			baseTableName="faixadecep" constraintName="fk_616jrdax5odqoi22s91lfi5eh"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="logradouro" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-180">
+		<addForeignKeyConstraint baseColumnNames="itemdeacesso_id"
+			baseTableName="itemdeacessousuario" constraintName="fk_6fbp4dygiyujxk1l5breho7w6"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemdeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-181">
+		<addForeignKeyConstraint baseColumnNames="usuario_id"
+			baseTableName="itemdeacessousuario" constraintName="fk_6ie1xoqksoe6006a079h7em8d"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="usuario" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-182">
+		<addForeignKeyConstraint baseColumnNames="alunos_id"
+			baseTableName="turma_aluno" constraintName="fk_6ui02pfufvota5lfouwtbxrfx"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="aluno" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-183">
+		<addForeignKeyConstraint baseColumnNames="cidade_id"
+			baseTableName="distrito" constraintName="fk_7kd1v7ceg3ysjwr0okkhibhk2"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-184">
+		<addForeignKeyConstraint baseColumnNames="idiomas_id"
+			baseTableName="candidato_idioma" constraintName="fk_7luim33wn95kla93fb8w6kw6w"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="idioma" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-186">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="carteiratrabalho" constraintName="fk_849r6x9w6ltd14qn68qs22f7l"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-187">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="filial" constraintName="fk_93jj4eq1de07cycj65fraoa6p"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="empresa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-188">
+		<addForeignKeyConstraint baseColumnNames="processoseletivo_id"
+			baseTableName="processoseletivo_candidatoprocessoseletivo"
+			constraintName="fk_9cpn68ji10o4ppyx6kbvjffiy" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="processoseletivo" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-189">
+		<addForeignKeyConstraint baseColumnNames="niveisdeacesso_id"
+			baseTableName="itemperfildeacesso_niveldeacesso" constraintName="fk_9tgc6mce5qaoklihdc62d8ko6"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="niveldeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-190">
+		<addForeignKeyConstraint baseColumnNames="itemperfildeacesso_id"
+			baseTableName="niveldeacesso" constraintName="fk_aq5nqr5ilym98u8miw84rs47n"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemperfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-191">
+		<addForeignKeyConstraint baseColumnNames="telefones_id"
+			baseTableName="instituicaoensino_telefone" constraintName="fk_asrhns9ac9pkdilhvqtrrf5fn"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="telefone" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-193">
+		<addForeignKeyConstraint baseColumnNames="processoseletivo_id"
+			baseTableName="processoseletivo_empresa" constraintName="fk_b645k6difvks888r0yidmj31d"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="processoseletivo" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-194">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="distrito" constraintName="fk_brtqpdkfn34mytuwyl86o8cb6"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-195">
+		<addForeignKeyConstraint baseColumnNames="enderecos_id"
+			baseTableName="pessoa_endereco" constraintName="fk_btm06xxtw0qcc3h0etrmdyiuq"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-196">
+		<addForeignKeyConstraint baseColumnNames="itensperfildeacesso_id"
+			baseTableName="perfildeacesso_itemperfildeacesso" constraintName="fk_c8199p5tkx47djkocos7wecnd"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemperfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-197">
+		<addForeignKeyConstraint baseColumnNames="carteirahabilitacao_id"
+			baseTableName="carteirahabilitacao_categoriashabilitacao"
+			constraintName="fk_cak7qns31vb2waawumvoxamb9" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="carteirahabilitacao" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-198">
+		<addForeignKeyConstraint baseColumnNames="idioma_id"
+			baseTableName="idioma_fluenciaidioma" constraintName="fk_chtk59t2odqnl8q6mx1368own"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="idioma" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-199">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="registronacional" constraintName="fk_cx8albpcb5chg5odsxpf7wni0"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-200">
+		<addForeignKeyConstraint baseColumnNames="pessoa_id"
+			baseTableName="pessoa_telefone" constraintName="fk_dj5t8dgqw2gvbuogf99dhy3ol"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-201">
+		<addForeignKeyConstraint baseColumnNames="candidato_id"
+			baseTableName="evento" constraintName="fk_e0nfthiawd1xmmxy4wgsbllco"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="candidato" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-202">
+		<addForeignKeyConstraint baseColumnNames="documentos_id"
+			baseTableName="pessoa_documento" constraintName="fk_e64w9rnlp4lav9fprrqvf070j"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-203">
+		<addForeignKeyConstraint baseColumnNames="unidadefederativa_id"
+			baseTableName="cidade" constraintName="fk_eaqikr2831a8b1g70sv84role"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="unidadefederativa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-204">
+		<addForeignKeyConstraint baseColumnNames="empresa_id"
+			baseTableName="empresaprocessoseletivo" constraintName="fk_efjdwt2mkpox7mlxy0fpoiot4"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="empresa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-205">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="empresa" constraintName="fk_eg477mv2yqmlrfnj2svapcprm"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoajuridica" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-206">
+		<addForeignKeyConstraint baseColumnNames="pessoa_id"
+			baseTableName="pessoa_endereco" constraintName="fk_f1hupbxgrmehyb79jej1f215y"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-207">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="tituloeleitor" constraintName="fk_fs1gummlmeola84qpohbpp2y5"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-208">
+		<addForeignKeyConstraint baseColumnNames="pessoa_id"
+			baseTableName="pessoa_documento" constraintName="fk_ge7xn79dqiu5270oymr1duyi6"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-209">
+		<addForeignKeyConstraint baseColumnNames="tipologradouro_id"
+			baseTableName="logradouro" constraintName="fk_gpmtapr2ks2h2idk2i7x1wm4s"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tipologradouro" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-210">
+		<addForeignKeyConstraint baseColumnNames="candidatoprocessoseletivo_id"
+			baseTableName="candidatoprocessoseletivo_notificacao" constraintName="fk_h3ad6xg5lna02sek00s3uyky0"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id"
+			referencedTableName="candidatoprocessoseletivo" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-211">
+		<addForeignKeyConstraint baseColumnNames="candidato_id"
+			baseTableName="candidato_idioma" constraintName="fk_hcmx7ijsbrp0abdsd09ti2hml"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="candidato" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-212">
+		<addForeignKeyConstraint baseColumnNames="perfildeacesso_id"
+			baseTableName="perfildeacesso_itemperfildeacesso" constraintName="fk_hsuk6x08ie8bh41i2whs7sl3n"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-213">
+		<addForeignKeyConstraint baseColumnNames="pais_id"
+			baseTableName="unidadefederativa" constraintName="fk_i7fb3cp6jlq74u8tnehsvtgy2"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pais" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-214">
+		<addForeignKeyConstraint baseColumnNames="itemperfildeacesso_id"
+			baseTableName="itemperfildeacesso" constraintName="fk_il8418xdusak36x6hh5b6r8i1"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemdeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-215">
+		<addForeignKeyConstraint baseColumnNames="bairro_id"
+			baseTableName="faixadecep" constraintName="fk_iuhd31mpk4x163yk5issdiyx8"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="bairro" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-216">
+		<addForeignKeyConstraint baseColumnNames="avaliacao_id"
+			baseTableName="candidatoprocessoseletivo" constraintName="fk_jy3c5eq9jqmqxbn7wswfqkvtm"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="avaliacao" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-217">
+		<addForeignKeyConstraint baseColumnNames="tipoevento_id"
+			baseTableName="evento" constraintName="fk_jyxopc2x3ioyflh0kob35gwyr"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="tipoevento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-218">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="cpf" constraintName="fk_k2egjh37tpdugiv8r6rj5jdn0"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-219">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="pessoafisica" constraintName="fk_khllj98ham1jkopj1qxetfgud"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="pessoa" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-220">
+		<addForeignKeyConstraint baseColumnNames="instituicaoensino_id"
+			baseTableName="instituicaoensino_endereco" constraintName="fk_kl2q1gy3c655ktkgwxnayrj53"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="instituicaoensino" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-221">
+		<addForeignKeyConstraint baseColumnNames="instituicaoensino_id"
+			baseTableName="candidato" constraintName="fk_kq0doel3pr6brg7phdmi20ip7"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="instituicaoensino" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-222">
+		<addForeignKeyConstraint baseColumnNames="perfilcandidato_id"
+			baseTableName="processoseletivo" constraintName="fk_ktnkfolsbbgjgmld9p6hlv574"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="perfilcandidatoprocesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-223">
+		<addForeignKeyConstraint baseColumnNames="itensperfildeacesso_id"
+			baseTableName="itemdeacesso_itemperfildeacesso" constraintName="fk_kwerl78nrcwbo4r2tes14nx91"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemperfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-224">
+		<addForeignKeyConstraint baseColumnNames="contrato_id"
+			baseTableName="contrato_diasaulateorica" constraintName="fk_lh2alp4e2a0rkugnx9df7bxda"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="contrato" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-225">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="reservista" constraintName="fk_likar6a7rqe57hpx4awidnfil"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-226">
+		<addForeignKeyConstraint baseColumnNames="geolocalizacao_id"
+			baseTableName="endereco" constraintName="fk_lk3g8fmb0n1pylpjls83mohob"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="geolocalizacao" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-227">
+		<addForeignKeyConstraint baseColumnNames="enderecos_id"
+			baseTableName="instituicaoensino_endereco" constraintName="fk_lst3tjx44uedjwfdr21ptm7o5"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-228">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="carteirahabilitacao" constraintName="fk_mgrc76nk6y8qg9ib9xusem48j"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-229">
+		<addForeignKeyConstraint baseColumnNames="candidato_id"
+			baseTableName="avaliacao" constraintName="fk_mnxbbtts1pgcy6whxu4nitdmw"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="candidato" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-230">
+		<addForeignKeyConstraint baseColumnNames="cidade_id"
+			baseTableName="bairro" constraintName="fk_n3yr0u4ccuo0jchfu0odoh6qg"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-231">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="certidaonascimento" constraintName="fk_nngfuivau3umsx1vem9sbk8wu"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-232">
+		<addForeignKeyConstraint baseColumnNames="turma_id"
+			baseTableName="turma_aluno" constraintName="fk_o6kll0x3n7biikaahd1tkedhg"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="turma" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-235">
+		<addForeignKeyConstraint baseColumnNames="logradouro_id"
+			baseTableName="endereco" constraintName="fk_osry7roeeus3a7b6qucews80d"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="logradouro" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-237">
+		<addForeignKeyConstraint baseColumnNames="itemperfildeacesso_id"
+			baseTableName="itemperfildeacesso_niveldeacesso" constraintName="fk_p11v5nqv417v4fshgxdcydlvi"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itemperfildeacesso" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-238">
+		<addForeignKeyConstraint baseColumnNames="id"
+			baseTableName="rg" constraintName="fk_pebxycp55vta6ipixj49frk3f"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="documento" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-239">
+		<addForeignKeyConstraint baseColumnNames="origem_id"
+			baseTableName="certidaonascimento" constraintName="fk_pmqjkao8nxlj5gs18sm53yvad"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cidade" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-240">
+		<addForeignKeyConstraint baseColumnNames="calendario_id"
+			baseTableName="calendario_aula" constraintName="fk_pwi4c36xu2dxjq5ldf6go1a5c"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="calendario" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-241">
+		<addForeignKeyConstraint baseColumnNames="telefones_id"
+			baseTableName="pessoa_telefone" constraintName="fk_q0jd262iy1lgip6p5280bb75l"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="telefone" />
+	</changeSet>
+	<!--<changeSet author="Heidi" id="1410485824080-242"> <addForeignKeyConstraint 
+		baseColumnNames="id" baseTableName="aluno" constraintName="fk_q1orauc98okm9teb4e1tbp9pi" 
+		deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO 
+		ACTION" referencedColumnNames="id" referencedTableName="candidato"/> </changeSet> -->
+	<changeSet author="Heidi" id="1410485824080-243">
+		<addForeignKeyConstraint baseColumnNames="bairro_id"
+			baseTableName="endereco" constraintName="fk_q4shbwcvisn23ukdcnpks3pth"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="bairro" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-245">
+		<addForeignKeyConstraint baseColumnNames="aulas_id"
+			baseTableName="calendario_aula" constraintName="fk_qe4ywnbijauw1u2oa2isc1w7a"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="aula" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-246">
+		<addForeignKeyConstraint baseColumnNames="dadossocioeconomicos_id"
+			baseTableName="candidato" constraintName="fk_qx5upnd68vwyk5v2fcj285bb4"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="dadossocioeconomicos" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-248">
+		<addForeignKeyConstraint baseColumnNames="endereco_id"
+			baseTableName="pessoaendereco" constraintName="fk_rniq3f662vwastrnxk4mm8khm"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="endereco" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-249">
+		<addForeignKeyConstraint baseColumnNames="filhos_id"
+			baseTableName="candidato_filho" constraintName="fk_s3n99kwxe4i8u4arvykrpf2w5"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="filho" />
+	</changeSet>
+	<changeSet author="Heidi" id="1410485824080-250">
+		<addForeignKeyConstraint baseColumnNames="processoseletivo_id"
+			baseTableName="empresaprocessoseletivo" constraintName="fk_sucn25dyso1aq697v3pbphyxv"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="processoseletivo" />
+	</changeSet>
+	<changeSet author="Luiz" id="1410485824080-253">
+		<addForeignKeyConstraint baseColumnNames="candidato_id"
+			baseTableName="aluno" constraintName="fk_aluno_candidato" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="candidato" />
+	</changeSet>
+</databaseChangeLog>

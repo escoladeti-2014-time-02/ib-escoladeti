@@ -1,0 +1,840 @@
+﻿<link rel="stylesheet" type="text/css" href="./resources/css/processoSeletivo.css">
+<h3>Processo Seletivo</h3>
+<div class="row">
+  <div class="col-md-12">
+    <div id="fixed-bar">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="fixed-links">
+            <a href="#" ng-click="scrollTop()"><i class="fa fa-arrow-up"></i></a>
+            <a href="#" ng-click="scrollNaoSelecionados()">Candidatos Não Selecionado</a>
+            <a href="#" ng-click="scrollSelecionados()">Candidatos Selecionados</a>
+            <a href="#" ng-click="scrollMapa(true)">Mapa</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stepwizard step-fixed" ng-init="getProcessoClasseStatus(processoSeletivo.statusProcessoSeletivo)">
+              <div class="stepwizard-row">
+                  <div class="stepwizard-step">
+                      <button type="button"  class="btn btn-circle statusPreSelecao" ng-click="atualizarNivelProcesso(processoSeletivo, 1); getProcessoClasseStatus(1)">1</button>
+                  </div>
+                  <div class="stepwizard-step">
+                      <button type="button" class="btn btn-circle statusSelecao" ng-click="atualizarNivelProcesso(processoSeletivo, 2); getProcessoClasseStatus(2)" ng-disabled="!candidatosSelecionados[0]&&processoSeletivo.statusProcessoSeletivo<2">2</button>
+                  </div>
+                  <div class="stepwizard-step">
+                      <button type="button" class="btn btn-circle statusAvaliacao" ng-click="atualizarNivelProcesso(processoSeletivo, 3); getProcessoClasseStatus(3)" ng-disabled="!candidatosSelecionados[0]&&processoSeletivo.statusProcessoSeletivo<3">3</button>
+                  </div> 
+              </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<div class="container_processoSeletivo" ng-if="processoSeletivo">  
+  <div class="row cointainer_processoSeletivo">
+    <div class="col-sm-12 col-lg-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-blue panel-form" id="panelProcessoSeletivo">
+                <div class="panel-heading panel-form-processo-seletivo"><h1 class="panel-title">Processo Seletivo</h1></div>
+                <div class="panel-body">
+                  <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-7">
+                      <div class="row">
+                        <div class="col-md-12">
+                            <h4>Descrição</h4>
+                            <p class="texto-processo">{{processoSeletivo.descricao}}</p>
+                        </div>                        
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h4>Data Inicio</h4>
+                          <p class="texto-processo">{{processoSeletivo.dataInicio | date:'dd/MM/yyyy' }}</p>
+                        </div>
+                        <div class="col-md-6">
+                          <h4>Data Fim</h4>
+                          <p class="texto-processo">{{processoSeletivo.dataFim | date:'dd/MM/yyyy' }} </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="pull-right">
+                            <button class="btn btn-info" data-toggle="modal" data-target="#configuracoesProcessoSeletivo" ng-click="configModal = processoSeletivo; abrirModalConfig(modalConfig)">
+                              Configurações
+                            </button>  
+                          </div>                    
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="stepwizard step-principal" ng-init="getProcessoClasseStatus(processoSeletivo.statusProcessoSeletivo)">
+                              <div class="stepwizard-row">
+                                  <div class="stepwizard-step">
+                                      <button type="button"  class="btn btn-circle statusPreSelecao" ng-click="atualizarNivelProcesso(processoSeletivo, 1); getProcessoClasseStatus(1)">1</button>
+                                      <p class="texto-processo"><strong>Pré-Seleção</strong></p>
+                                  </div>
+                                  <div class="stepwizard-step">
+                                      <button type="button"  ng-disabled="!candidatosSelecionados[0]&&processoSeletivo.statusProcessoSeletivo<2"  class="btn btn-circle statusSelecao" ng-click="atualizarNivelProcesso(processoSeletivo, 2); getProcessoClasseStatus(2)">2</button>
+                                      <p class="texto-processo"><strong>Seleção</strong></p>
+                                  </div>
+                                  <div class="stepwizard-step">
+                                      <button type="button"  ng-disabled="!candidatosSelecionados[0]&&processoSeletivo.statusProcessoSeletivo<3" class="btn btn-circle statusAvaliacao" ng-click="atualizarNivelProcesso(processoSeletivo, 3); getProcessoClasseStatus(3)">3</button>
+                                      <p class="texto-processo"><strong>Avaliação</strong></p>
+                                  </div> 
+                              </div>
+                          </div>           
+                        </div>
+                      </div>
+                    </div>
+                  </div>                  
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3>Empresas</h3>
+                      <hr>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <form name="empresaInput">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <select name="empresaSelect" ng-model="empresaProcessoSeletivo.empresa"  ng-options="e.fantasia for e in empresas track by e.id" type="text" class="form-control" ng-required="true" >               
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <input name="vagaInput" type="text" class="form-control" placeholder="Vagas" ng-model="empresaProcessoSeletivo.quantidadeVagas" ng-required="true">    
+                        </div>                      
+                      </div>
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label></label>
+                          <button class="btn btn-success" ng-click="adicionarEmpresa(empresaProcessoSeletivo); empresaProcessoSeletivo = {};"  ng-disabled="empresaInput.$invalid">Adicionar</button>
+                          <div class="pull-right">
+                            <button class="btn btn-info" ng-click="cadastrarEmpresa()" >Cadastrar Nova Empresa</button>     
+                          </div>
+                          
+                        </div>                      
+                      </div>
+                    </form>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="col-md-12">
+                        <div class="help-error" ng-show="empresasProcesso.length<=0">
+                          <p class=" text-center text-warning"><strong>Ainda não foi selecionada nenhuma empresa para participar do processo seletivo.</strong></p>
+                        </div>
+                      </div>
+                      <div class="table-responsive" ng-show="empresasProcesso.length>0">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Nome Fantasia</th>
+                              <th>Vagas</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="ep in empresasProcesso">
+                              <td>{{ep.empresa.fantasia}}</td>
+                              <td>{{ep.quantidadeVagas}}</td>
+                              <td>
+                                <div class="pull-right">
+                                  <a ng-click="editarEmpresa(ep, ep.quantidadeVagas)" class="btn btn-sm btn-warning">
+                                    <i class="fa fa-edit"></i>
+                                  </a>
+                                  <a ng-click="removerEmpresa(ep)" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-times"></i>
+                                  </a>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>                
+                        </table>
+                      </div><!--/responsive-table-->
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" id="panelNaoSelecionados">
+              <div class="panel panel-deep-orange panel-form">
+                <div class="panel-heading panel-form-processo-nao-selecionado" id="panel-candidatos-nao-selecionados"><h1 class="panel-title">Candidatos Não Selecionados</h1></div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Candidato <strong class=" form-obrigatorio">*</strong></label>
+                        <input type="text" class="form-control" ng-model="addNaoCandidato"
+                        typeahead="candidato as candidato.nome for candidato in getCanidatoAdd($viewValue)  | filter:{nome:$viewValue}"/>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <button class=" btn btn-info" style="margin-top:26px;"  ng-click="adicionarCandidato(addNaoCandidato, processoSeletivo.statusProcessoSeletivo); addNaoCandidato = null;">
+                          Adicionar
+                        </button>  
+                      </div>                        
+                    </div>
+                    <div class="col-md-3">
+                      <div class="pull-right">
+                        <button class=" btn btn-success"  ng-click="selecionarTodosCandidatos()">
+                          Selecionar todos Candidatos
+                        </button> 
+                      </div>                        
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="help-error" ng-show="!candidatosNaoSelecionados[0]">
+                        <p class=" text-center text-warning"><strong>Não existem mais candidatos que se encaixem no perfil configurado para ser selecionados.</strong></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <tabset ng-show="candidatosNaoSelecionados[0]">
+                        <tab heading="Pessoais" class="tab-pessoais float" select="changeTabPanel('#panel-candidatos-nao-selecionados')" >
+                          <div class="table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Nome</th>
+                                  <th>Idade</th>
+                                  <th>Estado Civil</th>
+                                  <th>Sexo</th>
+                                  <th>Etnia</th>
+                                  <!-- <th>Idade</th> -->
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="candidatoNaoSelecionado in candidatosNaoSelecionados">
+                                  <td>{{candidatoNaoSelecionado.candidato.nome}}</td>
+                                  <td>{{calcularIdade(candidatoNaoSelecionado.candidato.documentos[3].dataNascimento)}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.estadoCivil}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.sexo}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.etnia}}</td>
+                                  <!-- <td>{{candidatoNaoSelecionado.candidato.dataNascimento}}</td> //Mostrar idade-->
+                                  <td>
+                                    <div ng-include="'/botaoCandidatoNaoSelecionado.html'"></div>
+                                  </td>
+                                </tr>
+                              </tbody>                
+                            </table>
+                          </div><!--/responsive-table-->
+                        </tab>
+                        <tab heading="Documentos" class="tab-documentos float" select="changeTabPanel('#panel-candidatos-nao-selecionados')" >
+                          <div class="table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Nome</th>
+                                  <th>CPF</th>
+                                  <th>RG</th>
+                                  <th>Orgão Expedidor</th>
+                                  <th>CTPS/ NIS</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="candidatoNaoSelecionado in candidatosNaoSelecionados">
+                                  <td>{{candidatoNaoSelecionado.candidato.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.documentos[0].numero}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.documentos[1].numero}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.documentos[1].orgaoExpedidor}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.documentos[2].numero}}</td>
+                                  <td>
+                                    <div ng-include="'/botaoCandidatoNaoSelecionado.html'"></div>
+                                  </td>
+                                </tr>
+                              </tbody>                
+                            </table>
+                          </div><!--/responsive-table-->
+                        </tab>
+                        <tab heading="Escolares" class="tab-escolares float" select="changeTabPanel()" >
+                          <div class="table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Nome</th>
+                                  <th>Escola</th>
+                                  <th>Ano</th>
+                                  <th>Periodo</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="candidatoNaoSelecionado in candidatosNaoSelecionados">
+                                  <td>{{candidatoNaoSelecionado.candidato.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.instituicaoEnsino.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.serieEscolar}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.turno}}</td>
+                                  <td>
+                                    <div ng-include="'/botaoCandidatoNaoSelecionado.html'"></div>
+                                  </td>
+                                </tr>
+                              </tbody>                
+                            </table>
+                          </div><!--/responsive-table-->
+                        </tab>
+                        <tab heading="Sócio-Econômicos" class="tab-socioEconomicos float" select="changeTabPanel()" >
+                          <div class="table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Nome</th>
+                                  <th>Renda per Capita R$</th>
+                                  <th>Mora com a Mãe</th>
+                                  <th>Auxilio</th>
+                                  <th>Qual</th>
+                                  <th>Valor R$</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="candidatoNaoSelecionado in candidatosNaoSelecionados">
+                                  <td>{{candidatoNaoSelecionado.candidato.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.dadosSocioEconomicos.rendaPerCapita | number: 2}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.dadosSocioEconomicos.moraComResponsavel?'Sim':'Não'}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.dadosSocioEconomicos.auxilioGovernamental?'Sim':'Não'}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.dadosSocioEconomicos.beneficioSocial}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.dadosSocioEconomicos.valorBeneficio | number: 2}}</td>
+                                  <td>
+                                    <div ng-include="'/botaoCandidatoNaoSelecionado.html'"></div>
+                                  </td>
+                                </tr>
+                              </tbody>                
+                            </table>
+                          </div><!--/responsive-table-->
+                        </tab>
+                        <tab heading="Telefones" class="tab-telefones float" select="changeTabPanel()" >
+                          <div class="table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Nome</th>
+                                  <th>Tipo do Telefone</th>
+                                  <th>Telefone</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="candidatoNaoSelecionado in candidatosNaoSelecionados">
+                                  <td>{{candidatoNaoSelecionado.candidato.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.telefones[0].tipoTelefone.descricaoTipo}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.telefones[0].numero}}</td>
+                                  <td>
+                                    <div ng-include="'/botaoCandidatoNaoSelecionado.html'"></div>
+                                  </td>
+                                </tr>
+                              </tbody>                
+                            </table>
+                          </div><!--/responsive-table-->
+                        </tab>
+                        <tab heading="Endereços" class="tab-enderecos float" select="changeTabPanel()" >
+                          <div class="table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Nome</th>
+                                  <th>Cidade</th>
+                                  <th>Bairro</th>
+                                  <th>Logradouro</th>
+                                  <th>Cep</th>
+                                  <th>Número</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="candidatoNaoSelecionado in candidatosNaoSelecionados">
+                                  <td>{{candidatoNaoSelecionado.candidato.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.enderecos[0].bairro.cidade.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.enderecos[0].bairro.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.enderecos[0].logradouro.tipoLogradouro.nome}} {{candidatoNaoSelecionado.candidato.enderecos[0].logradouro.nome}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.enderecos[0].logradouro.faixasDeCep[0].cep | cep}}</td>
+                                  <td>{{candidatoNaoSelecionado.candidato.enderecos[0].numero}}</td>
+                                  <td>
+                                    <div ng-include="'/botaoCandidatoNaoSelecionado.html'"></div>
+                                  </td>
+                                </tr>
+                              </tbody>                
+                            </table>
+                          </div><!--/responsive-table-->
+                        </tab>
+                      </tabset>
+                    </div>
+                  </div>         
+                </div>
+                <div class="panel-footer">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row" ng-show='candidatosNaoSelecionados[0]'>
+                        <div class="col-md-12">
+                          <fe-paginator page="pageNaoSelecionados" load="loadCandidatosNaoSelecionados(pagina)">
+                          </fe-paginator>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+               <div class="panel panel-dark-green panel-form" id="panelSelecionados">
+                  <div class="panel-heading panel-form-processo-selecionado"><h1 class="panel-title">Candidatos Selecionados</h1></div>
+                  <div class="panel-body">
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="control-label">Candidato <strong class=" form-obrigatorio">*</strong></label>
+                          <input type="text" class="form-control" ng-model="addCandidato"
+                          typeahead="candidato as candidato.nome for candidato in getCanidatoAdd($viewValue)  | filter:{nome:$viewValue}"/>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>&nbsp;</label>
+                          <button class="btn btn-info" style="margin-top:26px;" ng-click="adicionarCandidato(addCandidato, (processoSeletivo.statusProcessoSeletivo+1)); addCandidato = null; ">
+                            Adicionar
+                          </button>
+                        </div>                        
+                      </div>
+                      <div class="col-md-3">
+                        <div class="pull-right">
+                          <button class=" btn btn-warning"  ng-click="desselecionarTodosCandidatos()">
+                            Desmarcar todos Candidatos
+                          </button> 
+                        </div>                        
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="help-error" ng-show="!candidatosSelecionados[0]">
+                          <p class=" text-center text-warning">Ainda não foi selecionado nenhum candidato.</p>
+                        </div>
+                      </div>
+                    </div>                    
+                    <div class="row">
+                      <div class="col-md-12">
+                        <tabset ng-show="candidatosSelecionados[0]">
+                          <tab heading="Pessoais" class="tab-pessoais floa"t select="changeTabPanel()" >
+                            <div class="table-responsive" >
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Idade</th>
+                                    <th>Estado Civil</th>
+                                    <th>Sexo</th>
+                                    <th>Etnia</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="candidatoSelecionado in candidatosSelecionados">
+                                    <td>{{candidatoSelecionado.candidato.nome}}</td>
+                                    <td>{{calcularIdade(candidatoSelecionado.candidato.documentos[3].dataNascimento)}}</td>
+                                    <td>{{candidatoSelecionado.candidato.estadoCivil}}</td>
+                                    <td>{{candidatoSelecionado.candidato.sexo}}</td>
+                                    <td>{{candidatoSelecionado.candidato.etnia}}</td>
+                                    <td>
+                                      <div ng-include="'/botaoCandidatoSelecionado.html'"></div>
+                                    </td>
+                                  </tr>
+                                </tbody>                
+                              </table>
+                            </div><!--/responsive-table-->
+                          </tab>
+                          <tab heading="Documentos" class="tab-documentos float" select="changeTabPanel()" >
+                            <div class="table-responsive">
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>RG</th>
+                                    <th>Orgão Expedidor</th>
+                                    <th>CTPS/ NIS</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="candidatoSelecionado in candidatosSelecionados">
+                                    <td>{{candidatoSelecionado.candidato.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.documentos[0].numero}}</td>
+                                    <td>{{candidatoSelecionado.candidato.documentos[1].numero}}</td>
+                                    <td>{{candidatoSelecionado.candidato.documentos[1].orgaoExpedidor}}</td>
+                                    <td>{{candidatoSelecionado.candidato.documentos[2].numero}}</td>
+                                    <td>
+                                      <div ng-include="'/botaoCandidatoSelecionado.html'"></div>
+                                    </td>
+                                  </tr>
+                                </tbody>                
+                              </table>
+                            </div><!--/responsive-table-->
+                          </tab>
+                          <tab heading="Escolares" class="tab-escolares float" select="changeTabPanel()" >
+                            <div class="table-responsive">
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Escola</th>
+                                    <th>Ano</th>
+                                    <th>Periodo</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="candidatoSelecionado in candidatosSelecionados">
+                                    <td>{{candidatoSelecionado.candidato.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.instituicaoEnsino.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.serieEscolar}}</td>
+                                    <td>{{candidatoSelecionado.candidato.turno}}</td>
+                                    <td>
+                                      <div ng-include="'/botaoCandidatoSelecionado.html'"></div>
+                                    </td>
+                                  </tr>
+                                </tbody>                
+                              </table>
+                            </div><!--/responsive-table-->
+                          </tab>
+                          <tab heading="Sócio-Econômicos" class="tab-socioEconomicos float" select="changeTabPanel()" >
+                            <div class="table-responsive">
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Renda per Capita R$</th>
+                                    <th>Mora com a Mãe</th>
+                                    <th>Auxilio</th>
+                                    <th>Qual</th>
+                                    <th>Valor R$</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="candidatoSelecionado in candidatosSelecionados">
+                                    <td>{{candidatoSelecionado.candidato.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.dadosSocioEconomicos.rendaPerCapita | number: 2}}</td>
+                                    <td>{{candidatoSelecionado.candidato.dadosSocioEconomicos.moraComResponsavel?'Sim':'Não'}}</td>
+                                    <td>{{candidatoSelecionado.candidato.dadosSocioEconomicos.auxilioGovernamental?'Sim':'Não'}}</td>
+                                    <td>{{candidatoSelecionado.candidato.dadosSocioEconomicos.beneficioSocial}}</td>
+                                    <td>{{candidatoSelecionado.candidato.dadosSocioEconomicos.valorBeneficio | number: 2}}</td>
+                                    <td>
+                                      <div ng-include="'/botaoCandidatoSelecionado.html'"></div>
+                                    </td>
+                                  </tr>
+                                </tbody>                
+                              </table>
+                            </div><!--/responsive-table-->
+                          </tab>
+                          <tab heading="Telefones" class="tab-telefones float" select="changeTabPanel()" >
+                            <div class="table-responsive">
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Tipo do Telefone</th>
+                                    <th>Telefone</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="candidatoSelecionado in candidatosSelecionados">
+                                    <td>{{candidatoSelecionado.candidato.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.telefones[0].tipoTelefone.descricaoTipo}}</td>
+                                    <td>{{candidatoSelecionado.candidato.telefones[0].numero | tel}}</td>
+                                    <td>
+                                      <div ng-include="'/botaoCandidatoSelecionado.html'"></div>
+                                    </td>
+                                  </tr>
+                                </tbody>                
+                              </table>
+                            </div><!--/responsive-table-->
+                          </tab>
+                          <tab heading="Endereços" class="tab-enderecos float" select="changeTabPanel()" >
+                            <div class="table-responsive">
+                              <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Cidade</th>
+                                    <th>Bairro</th>
+                                    <th>Logradouro</th>
+                                    <th>Cep</th>
+                                    <th>Número</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="candidatoSelecionado in candidatosSelecionados">
+                                    <td>{{candidatoSelecionado.candidato.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.enderecos[0].bairro.cidade.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.enderecos[0].bairro.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.enderecos[0].logradouro.tipoLogradouro.nome}} {{candidatoSelecionado.candidato.enderecos[0].logradouro.nome}}</td>
+                                    <td>{{candidatoSelecionado.candidato.enderecos[0].logradouro.faixasDeCep[0].cep | cep}}</td>
+                                    <td>{{candidatoSelecionado.candidato.enderecos[0].numero}}</td>
+                                    <td>
+                                      <div ng-include="'/botaoCandidatoSelecionado.html'"></div>
+                                    </td>
+                                  </tr>
+                                </tbody>                
+                              </table>
+                            </div><!--/responsive-table-->
+                          </tab>
+                        </tabset>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel-footer">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row" ng-show='candidatosSelecionados[0]'>
+                          <div class="col-md-12">
+                            <fe-paginator page="pageSelecionados" load="loadCandidatosSelecionados(pagina)">
+                            </fe-paginator>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>          
+          <div class="row">
+            <div class="col-md-12">
+              <div ng-include="'./modules/processoseletivo/views/mapaProcessoSeletivo.html'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!--/row-->
+</div>
+
+<!-- <div class="row" ng-if="processoSeletivo">
+  <div class="col-md-12">
+    <pre>
+      <h4>processoSeletivo</h4>
+      {{processoSeletivo}}
+      <h4>empresaProcessoSeletivo</h4>
+      {{empresaProcessoSeletivo}}
+      <h4>empresasProcesso</h4>
+      {{empresasProcesso}}
+      <h4>candidatosNaoSelecionados</h4>
+      {{candidatosNaoSelecionados}}
+      
+    </pre>
+  </div>
+</div> -->
+
+<div class="modal fade" id="configuracoesProcessoSeletivo" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modalLabel">Configurações</h4>
+      </div>
+      <div class="modal-body">
+        <ng-form name="modalConfig" novalidation>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group  {{(modalConfig.descricaoInput.$invalid&&!modalConfig.descricaoInput.$pristine)&&'has-error'||(!modalConfig.descricaoInput.$pristine&&'has-success'||'')}}">
+                  <label class="control-label">Descrição <strong class=" form-obrigatorio">*</strong></label>
+                  <input name="descricaoInput" type="text" class="form-control" ng-model="configModal.descricao" ng-minlength="3" ng-maxlength="72" ng-required="true"/>
+              </div>
+              <div class="help-error bg-danger" >
+                  <p ng-show="modalConfig.descricaoInput.$error.required&&!modalConfig.descricaoInput.$pristine" class=" ">O campo <strong>Descrição</strong> é obrigatório.</p>
+                  <p ng-show="modalConfig.descricaoInput.$error.minlength"  class="">O <strong>Descrição</strong> informado deve ter mais de 2 caracteres.</p>
+                  <p ng-show="modalConfig.descricaoInput.$error.maxlength"  class="">O <strong>Descrição</strong> informado deve ter menos que 72 caracteres.</p>
+              </div> 
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group  {{(modalConfig.dataInicioInput.$invalid&&!modalConfig.dataInicioInput.$pristine)&&'has-error'||(!modalConfig.dataInicioInput.$pristine&&'has-success'||'')}}">  
+                <label class="control-label">Data Inicio<strong class=" form-obrigatorio">*</strong></label>
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    name="dataInicioInput" 
+                    class="form-control" 
+                    datepicker-popup="dd/MM/yyyy" 
+                    ng-model="configModal.dataInicio" 
+                    is-open="datePicker.opened[0]" 
+                    ng-click = "datePicker.opened[0] = true" 
+                    datepicker-options="datePicker.config" 
+                    date-disabled="disabled(date, mode)" 
+                    ng-required="true" 
+                    close-text="Fechar" 
+                    current-text="Hoje"
+                    clear-text="Limpar"
+                    placeholder="__/__/__"
+                  />
+                </div>
+              </div>
+              <div class="help-error bg-danger" >
+                  <p ng-show="modalConfig.dataInicioInput.$error.required&&!modalConfig.dataInicioInput.$pristine" class=" ">O campo <strong>Data Inicio</strong> é obrigatório.</p>
+              </div> 
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+              <div class="form-group  {{(modalConfig.dataTerminoInput.$invalid&&!modalConfig.dataTerminoInput.$pristine)&&'has-error'||(!modalConfig.dataTerminoInput.$pristine&&'has-success'||'')}}">  
+                <label class="control-label">Data Fim<strong class=" form-obrigatorio">*</strong></label>
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    name="dataTerminoInput" 
+                    class="form-control" 
+                    datepicker-popup="dd/MM/yyyy" 
+                    ng-model="configModal.dataFim" 
+                    is-open="datePicker.opened[1]" 
+                    ng-click = "datePicker.opened[1] = true" 
+                    datepicker-options="datePicker.config" 
+                    date-disabled="disabled(date, mode)" 
+                    ng-required="true" 
+                    close-text="Fechar" 
+                    current-text="Hoje"
+                    clear-text="Limpar"
+                    placeholder="__/__/__"
+                  />
+                </div>
+              </div>
+              <div class="help-error bg-danger" >
+                  <p ng-show="modalConfig.dataTerminoInput.$error.required&&!modalConfig.dataTerminoInput.$pristine" class=" ">O campo <strong>Data do Evento</strong> é obrigatório.</p>
+              </div> 
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Perfil do Candidato</h4>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group  {{(modalConfig.idadeMinInput.$invalid&&!modalConfig.idadeMinInput.$pristine)&&'has-error'||(!modalConfig.idadeMinInput.$pristine&&'has-success'||'')}}">
+                  <label class="control-label">Idade Mínima</label>
+                  <div class="input-group">
+                    <input name="idadeMinInput" type="number" class="form-control" ng-disabled="true" ng-model="configModal.perfilCandidato.idadeMinima" />
+                    <span class="input-group-addon">anos</span>              
+                  </div>
+              </div>      
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+              <div class="form-group  {{(modalConfig.idadeMaxInput.$invalid&&!modalConfig.idadeMaxInput.$pristine)&&'has-error'||(!modalConfig.idadeMaxInput.$pristine&&'has-success'||'')}}">
+                  <label class="control-label">Idade Máxima</label>
+                  <div class="input-group">
+                    <input name="idadeMaxInput" type="number" class="form-control" ng-disabled="true" ng-model="configModal.perfilCandidato.idadeMaxima" />
+                    <span class="input-group-addon">anos</span>
+                  </div>
+              </div>      
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group  {{(modalConfig.rendaMinInput.$invalid&&!modalConfig.rendaMinInput.$pristine)&&'has-error'||(!modalConfig.rendaMinInput.$pristine&&'has-success'||'')}}">
+                  <label class="control-label">Renda Mínima</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">R$</span>
+                    <input name="rendaMinInput" type="number" step="10" class="form-control" ng-disabled="true" ng-model="configModal.perfilCandidato.rendaMinima" />
+                  </div>            
+              </div>      
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+              <div class="form-group  {{(modalConfig.rendaMaxInput.$invalid&&!modalConfig.rendaMaxInput.$pristine)&&'has-error'||(!modalConfig.rendaMaxInput.$pristine&&'has-success'||'')}}">
+                  <label class="control-label">Renda Máxima</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">R$</span>
+                    <input name="rendaMaxInput" type="number" step="10" class="form-control" ng-disabled="true" ng-model="configModal.perfilCandidato.rendaMaxima" />
+                  </div>
+              </div>      
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-md-12">
+              <h4>Distancia máxima</h4>
+              <hr>
+            </div>
+          </div> -->
+          <!-- <div class="row">
+            <div class="col-md-4">
+              <div class="form-group  {{(modalConfig.distanciaEscolaInput.$invalid&&!modalConfig.distanciaEscolaInput.$pristine)&&'has-error'||(!modalConfig.distanciaEscolaInput.$pristine&&'has-success'||'')}}">
+                  <label class="control-label">Escola</label>
+                  <div class="input-group">
+                    <input name="distanciaEscolaInput" type="number" class="form-control" ng-model="configModal.perfilCandidato.distanciaMaximaInstituicao" />
+                    <span class="input-group-addon">km</span>
+                  </div>
+                  
+              </div>      
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+              <div class="form-group  {{(modalConfig.distanciaEmpresaInput.$invalid&&!modalConfig.distanciaEmpresaInput.$pristine)&&'has-error'||(!modalConfig.distanciaEmpresaInput.$pristine&&'has-success'||'')}}">
+                  <label class="control-label">Empresa</label>
+                  <div class="input-group">
+                    <input name="distanciaEmpresaInput" type="number" class="form-control" ng-model="configModal.perfilCandidato.distanciaMaximaEmpresa" />
+                    <span class="input-group-addon">km</span>
+                  </div>
+              </div>      
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-md-12">
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="pull-right">
+                <button class="btn btn-warning">Limpar</button>
+                <button class="btn btn-success" ng-disabled="modalConfig.$invalid" ng-click="salvarProcessoSeletivo(configModal)">Salvar</button>
+              </div>
+            </div>
+          </div>    
+        </ng-form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/ng-template" id="/botaoCandidatoSelecionado.html">
+  <div class="pull-right">
+    <a class="btn btn-sm btn-entrevista" ng-click="abrirModalEntrevista(candidatoSelecionado)" ng-if="processoSeletivo.statusProcessoSeletivo>1">
+      <i class="fa fa-video-camera"></i>
+    </a>
+    <a class="btn btn-sm btn-avaliacao" ng-click="abrirModalAvaliacao(candidatoSelecionado)" ng-if="processoSeletivo.statusProcessoSeletivo>1">
+      <i class="fa fa-pencil-square-o "></i>
+    </a>                                        
+    <a ng-click="checkCandidatoDownGrid(candidatoSelecionado)" class="btn btn-sm btn-warning">
+      <i class="fa fa-arrow-up"></i>
+    </a>
+  </div>
+</script>
+<script type="text/ng-template" id="/botaoCandidatoNaoSelecionado.html">
+  <div class="pull-right">
+    <a class="btn btn-sm btn-entrevista" ng-click="abrirModalEntrevista(candidatoNaoSelecionado)"  ng-if="processoSeletivo.statusProcessoSeletivo>1">
+      <i class="fa fa-video-camera"></i>
+    </a>
+    <a class="btn btn-sm btn-avaliacao" ng-click="abrirModalAvaliacao(candidatoNaoSelecionado)"  ng-if="processoSeletivo.statusProcessoSeletivo>1">
+      <i class="fa fa-pencil-square-o "></i>
+    </a>
+    <a ng-click="checkCandidatoUpGrid(candidatoNaoSelecionado)" class="btn btn-sm btn-success">
+      <i class="fa fa-arrow-down"></i>
+    </a>
+  </div>
+</script>

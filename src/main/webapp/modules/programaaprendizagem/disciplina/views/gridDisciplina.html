@@ -1,0 +1,71 @@
+<h3>
+  Disciplinas
+  <div class="pull-right">
+    <a href="./#/programaaprendizagem/disciplina/cadastrar" class="btn btn-info">Cadastrar</a>
+  </div>
+</h3>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2 col-md-12">
+		<div class="panel panel-blue">
+		   <div class="panel-heading">
+		      <h1 class="panel-title">
+		        Listagem de Disciplinas
+		         <div class="pull-right">
+		          <a href="rest/disciplina/imprimirRelatorio" title="Gerar relatório" target="_blank">              
+		            <em class="icon-printer"></em>             
+		          </a>
+		        </div>
+		      </h1>
+		   </div>
+		   <div class="panel-body">
+		   		<div class="row">
+		   			<div class="col-md-6">
+		   				<input class="form-control" ng-model="busca" type="search" placeholder="Buscar" ng-change="buscar()">
+		   			</div>
+		   		</div>
+		   		<div class="table-responsive" ng-show="disciplinas">
+		   		  <table class="table table-striped">
+		   		    <thead>
+		   		      <tr>
+		   		        <th>Nome da disciplina</th>
+		   		        <th>Descrição da disciplina</th>
+		   		        <th width="165px"></th>
+		   		      </tr>
+		   		    </thead>
+		   		    <tbody>
+		   		      <tr ng-repeat="disciplina in disciplinas">
+		   		        <td>{{disciplina.nome}}</td>
+		   		        <td>{{disciplina.descricao | limitTo: 50}}</td>
+		   		        <td>
+		   		        	<div class="pull-right">
+		   		        		<a href="rest/disciplina/imprimirRelatorioFaltasDisciplina/{{disciplina.id}}" class="btn btn-sm btn-info" title="Gerar relat�rio de Faltas por Disciplina" target="_blank">
+                                  <i class="fa fa-print"></i>
+                                </a>
+		   		        		<a href="#/programaaprendizagem/disciplina/visualizar/{{disciplina.id}}" class="btn btn-sm btn-info">
+		   		        		  <i class="fa fa-eye"></i>
+		   		        		</a>
+		   		        		<a href="#/programaaprendizagem/disciplina/editar/{{disciplina.id}}" class="btn btn-sm btn-warning">
+		   		        		  <i class="fa fa-edit"></i>
+		   		        		</a>
+		   		        		<a ng-click="removerDisciplina(disciplina)"class="btn btn-sm btn-danger">
+		   		        		  <i class="fa fa-times"></i>
+		   		        		</a>	
+		   		        	</div>		   		          
+		   		        </td>
+		   		      </tr>
+		   		    </tbody>                
+		   		  </table>
+		   		</div><!--/responsive-table-->
+		   </div>
+		   <div class="panel-footer"  ng-show="disciplinas">
+		   		<div class="row">
+		   			<div class="col-md-12">
+		   				<fe-paginator page="page" load="load(pagina)">
+		   				</fe-paginator>
+		   			</div>
+		   		</div>
+		   </div>
+		</div>
+	</div>
+</div>
+	

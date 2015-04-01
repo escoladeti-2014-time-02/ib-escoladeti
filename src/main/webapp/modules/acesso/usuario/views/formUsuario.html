@@ -1,0 +1,62 @@
+<!--Início do conteúdo do Form-->
+<h3>
+  Cadastro de Usuário 
+  <small><p class="text-muted"><strong class=" form-obrigatorio">*</strong> Campos de preenchimento obrigatório</p></small>
+</h3>
+<div id="viewForm" class="row" >
+  <div class="col-lg-4 col-lg-offset-4 col-md-10 col-md-offset-1">
+    <form name="formUsuario">
+      <div class="panel panel-blue panel-form">
+        <div class="panel-heading panel-form-pessoais">
+          <h1 class="panel-title">
+            Usuário
+          </h1>
+        </div><!--/div panel-->
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 form-group {{(formUsuario.loginInput.$invalid&&!formUsuario.loginInput.$pristine)&&'has-error'||(!formUsuario.loginInput.$pristine&&'has-success'||'')}}">
+              <label class="control-label">Login <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input type="text" ng-model="usuario.login" name="loginInput" class="form-control" ng-maxlength="40" ng-minlength="4" ng-required="true" ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formUsuario.loginInput.$error.required&&!formUsuario.loginInput.$pristine">O campo <strong>Login</strong> é obrigatório</p>
+                <p ng-show="formUsuario.loginInput.$error.maxlength" >O <strong>Login</strong> informado deve ter menos que 40 caracteres.</p>
+                <p ng-show="formUsuario.loginInput.$error.minlength" >O <strong>Login</strong> informado deve ter mais que 3 caracteres.</p>
+              </div>  
+            </div>
+          </div><!--/row--> 
+          <div class="row">
+            <div class="col-md-12 form-group {{(formUsuario.senhaInput.$invalid&&!formUsuario.senhaInput.$pristine)&&'has-error'||(!formUsuario.senhaInput.$pristine&&'has-success'||'')}}">
+              <label class="control-label">Senha <strong class="text-danger form-obrigatorio">*</strong></label>
+              <input type="password" name="senhaInput" ng-model="usuario.senha" class="form-control"  ng-maxlength="40"  ng-minlength="6" ng-required="true" ng-disabled="visualizar">
+              <div class="help-error bg-danger">
+                <p ng-show="formUsuario.senhaInput.$error.required&&!formUsuario.senhaInput.$pristine">O campo <strong>Senha</strong> é obrigatório</p>
+                <p ng-show="formUsuario.senhaInput.$error.maxlength" >O <strong>Senha</strong> informado deve ter menos que 40 caracteres.</p>
+                <p ng-show="formUsuario.senhaInput.$error.minlength" >O <strong>Senha</strong> informado deve ter mais que 5 caracteres.</p>
+              </div> 
+            </div>
+          </div><!--/row-->
+          <div class="row">
+            <div class="col-md-12 form-group {{(formUsuario.perfilInput.$invalid&&!formUsuario.perfilInput.$pristine)&&'has-error'||(!formUsuario.perfilInput.$pristine&&'has-success'||'')}}">
+              <label class="control-label">Perfil de Acesso <strong class="text-danger form-obrigatorio">*</strong></label>
+              <select ng-model="usuario.perfilAcesso" ng-options="p.nome for p in perfisDeAcesso track by p.id" class="form-control" ng-required="true"  name="perfilInput" ng-disabled="visualizar">
+                <option value="">-- Selecione um Perfil de Acesso --</option>
+              </select>    
+            </div>
+          </div><!--/row-->
+        </div>
+      </div>      
+      <div class="row  pull-right">
+        <div class="col-md-12">
+          <a href="./#/acesso/usuario" class="btn btn-info">
+            Voltar
+          </a>
+         <fe-resetform re-origem="objetoOrigem" re-reset="usuario" re-form="formUsuario"></fe-resetform>
+          <button ng-click="salvarUsuario(usuario)" class="btn btn-success" ng-disabled="formUsuario.$invalid" ng-if="!visualizar">
+            Salvar
+          </button>       
+        </div>
+      </div><!--/row-->
+    </form> 
+  </div>
+</div><!--/row-->
+<!--Fim do conteúdo do Form-->

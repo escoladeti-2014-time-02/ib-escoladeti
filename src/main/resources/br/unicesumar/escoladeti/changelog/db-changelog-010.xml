@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="ajustesTabelaAluno" author="Arthur">
+        <addColumn tableName="aluno">
+            <column name="empresa_id" type="INT8"></column>
+        </addColumn>
+    </changeSet>
+    
+    <changeSet id="criarAula_AlunoAula" author="arthur">
+        <createTable tableName="aula_alunoaula">
+            <column name="aula_id" type="INT8"></column>
+            <column name="alunoaula_id" type="INT8"></column>            
+        </createTable>
+    </changeSet>
+        
+    <changeSet id="ajustesAvaliaçãoAddDataAvaliação" author="Arthur">
+        <modifyDataType tableName="avaliacao" columnName="dataavaliacao" newDataType="DATE"></modifyDataType>
+    </changeSet>
+    
+    <changeSet id="criarContrato" author="arthur">
+        <createTable tableName="contrato">
+            <column name="id" type="INT8"></column>
+            <column name="aluno_id" type="INT8"></column>            
+            <column name="datainicio" type="DATE"></column>            
+            <column name="datatermino" type="DATE"></column>                        
+            <column name="salario" type="FLOAT8"></column>
+        </createTable>
+        <addPrimaryKey tableName="contrato" columnNames="id"></addPrimaryKey>
+        <addForeignKeyConstraint baseTableName="contrato" baseColumnNames="aluno_id" constraintName="fk_contrato_aluno" referencedTableName="aluno" referencedColumnNames="id"></addForeignKeyConstraint>
+    </changeSet>
+    
+    <changeSet id="ajustesTabelaDadosSocioEconomicos" author="Arthur">
+        <addColumn tableName="dadossocioeconomicos">
+            <column name="rendapercapita" type="FLOAT8"></column>
+        </addColumn>
+    </changeSet>
+    
+    <changeSet id="ajusteTipoCargaHorariaDisciplinaModulo" author="Arthur">
+        <modifyDataType tableName="disciplinamodulo" columnName="cargahoraria" newDataType="FLOAT8"></modifyDataType>
+    </changeSet>
+</databaseChangeLog>

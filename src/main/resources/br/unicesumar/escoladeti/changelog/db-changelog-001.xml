@@ -14,6 +14,12 @@
 			<column name="candidato_id" type="INT8">
 				<constraints nullable="false" />
 			</column>
+			<column name="iniciovigencia" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="fimvigencia" type="DATE">
+				<constraints nullable="false" />
+			</column>
 		</createTable>
 	</changeSet>
 	<changeSet author="Heidi" id="1410485824080-3">

@@ -58,6 +58,7 @@
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-006.xml" />
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-007.xml" />
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-009.xml" />
+	<include file="br/unicesumar/escoladeti/changelog/db-changelog-010.xml" />
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-basic-database.xml" />
 	<include file="br/unicesumar/escoladeti/changelog/db-changelog-itemdeacesso.xml" />
 	

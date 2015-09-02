@@ -1,17 +1,11 @@
+![alt tag](https://travis-ci.org/escoladeti-2014-time-02/ib-escoladeti.svg?branch=master)
+
 # Projeto ISIS Bruder - Escola de TI 2014
 
-TODO: Descrição do projeto
+* Maven
+* Spring MVC
+* PostgreSQL
+* AngularJS
 
 # Membros TIME 02
-* Eduardo Gardin
-* André Sanchez
-* Luiz Fernando Dubiela
-* Lucas Vinicius
-* Alex Fenille
-* Mathes Henrique
-* Erik Piorneda
-* Ricardo Aleixo
-* Heidi Kussakawa
-* Sérgio Ribeiro
-* Melina Piancó
-* Bruno Julião
+![alt tag](https://cdn.rawgit.com/heidiks/ib-escoladeti/master/time02.jpg)

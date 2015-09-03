@@ -8,4 +8,4 @@
 * AngularJS
 
 # Membros TIME 02
-![alt tag](https://cdn.rawgit.com/heidiks/ib-escoladeti/master/time02.jpg)
+![alt tag](https://cdn.rawgit.com/escoladeti-2014-time-02/ib-escoladeti/master/time02.jpg)
